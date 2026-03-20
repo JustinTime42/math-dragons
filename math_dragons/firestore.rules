@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Users can only read/write their own data
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+
+      allow write: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.dragonEvolution is int
+        && request.resource.data.dragonEvolution >= 0
+        && request.resource.data.dragonEvolution <= 5
+        && request.resource.data.totalScales is int
+        && request.resource.data.totalScales >= 0;
+
+      match /factHistory/{factKey} {
+        allow read: if request.auth != null && request.auth.uid == uid;
+        allow write: if request.auth != null
+          && request.auth.uid == uid
+          && request.resource.data.factKey is string
+          && request.resource.data.timesPresented is int;
+      }
+
+      match /achievements/{achievementId} {
+        allow read: if request.auth != null && request.auth.uid == uid;
+        allow write: if request.auth != null
+          && request.auth.uid == uid
+          && request.resource.data.achievementId is string
+          && request.resource.data.unlockedAt is timestamp;
+      }
+
+      match /dailyChallenges/{dateKey} {
+        allow read: if request.auth != null && request.auth.uid == uid;
+        allow write: if request.auth != null
+          && request.auth.uid == uid
+          && request.resource.data.dateKey is string
+          && request.resource.data.dateKey.size() == 10;
+      }
+    }
+
+    // Deny all other access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

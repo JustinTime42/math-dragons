@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"C:\\\\Users\\\\justi\\\\Code\\\\AncBuckley.github.io\\\\math_dragons\\\\tools\"\" 2>/dev/null || echo \"Tools directory not found, checking what exists \")",
+      "Bash(python tools/asset_generator/cli.py:*)"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "asset-generator"
+  ],
+  "enableAllProjectMcpServers": true
+}

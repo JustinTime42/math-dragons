@@ -1,0 +1,634 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Math Dragons",
+  "@appTitle": { "description": "The app name shown in the title bar" },
+
+  "hubTitle": "Dragon's Lair",
+  "@hubTitle": { "description": "Title of the hub/home screen" },
+
+  "dragonRunes": "Dragon Runes",
+  "@dragonRunes": { "description": "Name of the Number Links game" },
+
+  "dragonRunesDescription": "Connect ancient runes to cast spells",
+  "@dragonRunesDescription": { "description": "Short description of Dragon Runes" },
+
+  "fireTrail": "Fire Trail",
+  "@fireTrail": { "description": "Name of the Math Snake game" },
+
+  "fireTrailDescription": "Blaze a trail of flame across the sky",
+  "@fireTrailDescription": { "description": "Short description of Fire Trail" },
+
+  "dragonEggs": "Dragon Eggs",
+  "@dragonEggs": { "description": "Name of the Bubble Pop game" },
+
+  "dragonEggsDescription": "Hatch dragon eggs with math equations",
+  "@dragonEggsDescription": { "description": "Short description of Dragon Eggs" },
+
+  "dragonsFeast": "Dragon's Feast",
+  "@dragonsFeast": { "description": "Name of the Muncher game" },
+
+  "dragonsFeastDescription": "Feast on treasures matching the right properties",
+  "@dragonsFeastDescription": { "description": "Short description of Dragon's Feast" },
+
+  "settings": "Settings",
+  "@settings": { "description": "Settings screen title" },
+
+  "sound": "Sound",
+  "@sound": { "description": "Sound effects toggle label" },
+
+  "music": "Music",
+  "@music": { "description": "Background music toggle label" },
+
+  "haptics": "Haptics",
+  "@haptics": { "description": "Vibration feedback toggle label" },
+
+  "backToHub": "Back to Hub",
+  "@backToHub": { "description": "Button text to return to hub" },
+
+  "play": "Play",
+  "@play": { "description": "Play button text" },
+
+  "level": "Level {number}",
+  "@level": {
+    "description": "Level indicator",
+    "placeholders": {
+      "number": { "type": "int" }
+    }
+  },
+
+  "scalesCount": "{count} Scales",
+  "@scalesCount": {
+    "description": "Dragon scales currency display",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "comingSoon": "Coming Soon",
+  "@comingSoon": { "description": "Placeholder text for upcoming features" },
+
+  "gamePlaceholder": "Game Coming Soon!\nThis game will be built in a future step.",
+  "@gamePlaceholder": { "description": "Placeholder text shown in stub game screens" },
+
+  "dragonNameLabel": "Dragon Name",
+  "@dragonNameLabel": { "description": "Label for dragon name input" },
+
+  "playTimeMinutes": "{count} min played",
+  "@playTimeMinutes": {
+    "description": "Total play time display",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "factsLearned": "{count} facts learned",
+  "@factsLearned": {
+    "description": "Number of math facts at familiar or mastered status",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "factsMastered": "{count} facts mastered",
+  "@factsMastered": {
+    "description": "Number of math facts at mastered status",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "totalCorrect": "{count} correct answers",
+  "@totalCorrect": {
+    "description": "Lifetime correct answer count",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "aboutTitle": "About Math Dragons",
+  "@aboutTitle": { "description": "About section heading in settings" },
+
+  "version": "Version {version}",
+  "@version": {
+    "description": "App version display",
+    "placeholders": { "version": { "type": "String" } }
+  },
+
+  "pause": "Pause",
+  "@pause": { "description": "Pause button tooltip" },
+
+  "paused": "Paused",
+  "@paused": { "description": "Pause overlay title" },
+
+  "resume": "Resume",
+  "@resume": { "description": "Resume button on pause overlay" },
+
+  "quitToHub": "Quit to Hub",
+  "@quitToHub": { "description": "Quit game and return to hub" },
+
+  "playAgain": "Play Again",
+  "@playAgain": { "description": "Play another round button on result screen" },
+
+  "levelComplete": "Level Complete!",
+  "@levelComplete": { "description": "Title on result screen after completing a level" },
+
+  "gameOver": "Game Over",
+  "@gameOver": { "description": "Title on result screen when game ends" },
+
+  "scoreLabel": "Score",
+  "@scoreLabel": { "description": "Label for score stat on result screen" },
+
+  "accuracyLabel": "Accuracy",
+  "@accuracyLabel": { "description": "Label for accuracy stat on result screen" },
+
+  "streakLabel": "Best Streak",
+  "@streakLabel": { "description": "Label for streak stat on result screen" },
+
+  "testResultScreen": "Test Result Screen",
+  "@testResultScreen": { "description": "Demo button text on placeholder game screens" },
+
+  "dailyChallengeTitle": "Today's Challenge",
+  "@dailyChallengeTitle": { "description": "Title on the daily challenge card" },
+
+  "dailyChallengeReward": "Reward: 25 scales",
+  "@dailyChallengeReward": { "description": "Reward text on daily challenge card" },
+
+  "dailyTaskExample1": "Score 200 in Dragon Runes",
+  "@dailyTaskExample1": { "description": "Example daily challenge task 1" },
+
+  "dailyTaskExample2": "Play Dragon Eggs",
+  "@dailyTaskExample2": { "description": "Example daily challenge task 2" },
+
+  "dailyTaskExample3": "Get a 5-streak in any game",
+  "@dailyTaskExample3": { "description": "Example daily challenge task 3" },
+
+  "dragonNameHint": "Name your dragon...",
+  "@dragonNameHint": { "description": "Placeholder text for dragon name input" },
+
+  "settingsSoundSection": "Sound & Haptics",
+  "@settingsSoundSection": { "description": "Section header for sound settings" },
+
+  "soundDescription": "Sound effects for game actions",
+  "@soundDescription": { "description": "Subtitle text for sound toggle" },
+
+  "musicDescription": "Background music in games and hub",
+  "@musicDescription": { "description": "Subtitle text for music toggle" },
+
+  "hapticsDescription": "Vibration feedback for answers and milestones",
+  "@hapticsDescription": { "description": "Subtitle text for haptics toggle" },
+
+  "aboutDescription": "Dragon-powered math games that are actually fun! Practice addition, subtraction, multiplication, and division through genuinely engaging gameplay.",
+  "@aboutDescription": { "description": "About section description text" },
+
+  "eggsHatched": "{count} eggs hatched",
+  "@eggsHatched": {
+    "description": "Counter showing total eggs hatched",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "comboMultiplier": "Combo x{count}",
+  "@comboMultiplier": {
+    "description": "Combo multiplier display",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "newFactBonus": "NEW FACT! +5",
+  "@newFactBonus": { "description": "New fact bonus notification" },
+
+  "nope": "Nope!",
+  "@nope": { "description": "Wrong answer feedback" },
+
+  "equalsButtonLabel": "=",
+  "@equalsButtonLabel": { "description": "Equals button in equation builder" },
+
+  "nestOfAddition": "Nest of Addition",
+  "@nestOfAddition": { "description": "Dragon Eggs World 1 name" },
+
+  "crackingSubtraction": "Cracking Subtraction",
+  "@crackingSubtraction": { "description": "Dragon Eggs World 2 name" },
+
+  "multiplicationRoost": "Multiplication Roost",
+  "@multiplicationRoost": { "description": "Dragon Eggs World 3 name" },
+
+  "divisionDen": "Division Den",
+  "@divisionDen": { "description": "Dragon Eggs World 4 name" },
+
+  "ancientHatchery": "Ancient Hatchery",
+  "@ancientHatchery": { "description": "Dragon Eggs World 5 name" },
+
+  "dangerWarning": "Eggs rising!",
+  "@dangerWarning": { "description": "Warning when eggs approach the danger line" },
+
+  "levelUp": "Level Up!",
+  "@levelUp": { "description": "Shown when auto-leveling to next tier" },
+
+  "highScore": "High Score",
+  "@highScore": { "description": "High score label" },
+
+  "newHighScore": "New High Score!",
+  "@newHighScore": { "description": "Shown when player beats their high score" },
+
+  "factsThisSession": "{count} facts practiced",
+  "@factsThisSession": {
+    "description": "Number of unique facts practiced in this session",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "fireTrailTitle": "Fire Trail",
+  "@fireTrailTitle": { "description": "Fire Trail game title" },
+
+  "flameIntensity": "Flame: {percent}%",
+  "@flameIntensity": {
+    "description": "Flame intensity meter label",
+    "placeholders": { "percent": { "type": "int" } }
+  },
+
+  "flameDanger": "Flame fading!",
+  "@flameDanger": { "description": "Warning when flame intensity is critically low" },
+
+  "flameExtinguished": "Flame extinguished!",
+  "@flameExtinguished": { "description": "Game over message when flame reaches 0" },
+
+  "selfCollision": "You hit your own trail!",
+  "@selfCollision": { "description": "Game over message on self-collision" },
+
+  "wallHit": "Ouch! The wall burns!",
+  "@wallHit": { "description": "Feedback on wall collision" },
+
+  "correctGem": "Correct!",
+  "@correctGem": { "description": "Feedback when correct answer gem is eaten" },
+
+  "wrongGem": "Not quite!",
+  "@wrongGem": { "description": "Feedback when wrong answer gem is eaten" },
+
+  "firstFlight": "First Flight",
+  "@firstFlight": { "description": "Fire Trail World 1 name" },
+
+  "thermalCurrents": "Thermal Currents",
+  "@thermalCurrents": { "description": "Fire Trail World 2 name" },
+
+  "firestorm": "Firestorm",
+  "@firestorm": { "description": "Fire Trail World 3 name" },
+
+  "inferno": "Inferno",
+  "@inferno": { "description": "Fire Trail World 4 name" },
+
+  "dragonMaster": "Dragon Master",
+  "@dragonMaster": { "description": "Fire Trail World 5 name" },
+
+  "countdownGo": "GO!",
+  "@countdownGo": { "description": "Countdown completion text" },
+
+  "wrapModeActive": "Wrap Mode Active",
+  "@wrapModeActive": { "description": "Indicator that wrap mode is on" },
+
+  "correctToAdvance": "{count} more to clear this level",
+  "@correctToAdvance": {
+    "description": "Remaining correct answers needed to complete level",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "levelCleared": "Level Cleared!",
+  "@levelCleared": { "description": "Shown when level target is reached" },
+
+  "dragToConnect": "Drag across runes to cast a spell",
+  "@dragToConnect": { "description": "Instruction text when no chain is active" },
+
+  "equationFound": "Spell cast!",
+  "@equationFound": { "description": "Feedback when a target equation is found" },
+
+  "equationInvalid": "Invalid spell!",
+  "@equationInvalid": { "description": "Feedback when an invalid equation is submitted" },
+
+  "equationAlreadyFound": "Already cast!",
+  "@equationAlreadyFound": { "description": "Feedback when an already-found equation is submitted" },
+
+  "equationBonus": "Bonus spell!",
+  "@equationBonus": { "description": "Feedback when a valid but non-target equation is submitted" },
+
+  "hintsRemaining": "{count} hints left",
+  "@hintsRemaining": {
+    "description": "Hint counter label",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "noHintsRemaining": "No hints left",
+  "@noHintsRemaining": { "description": "Hint button when all hints used" },
+
+  "targetsProgress": "{found} of {total} spells found",
+  "@targetsProgress": {
+    "description": "Progress indicator for target equations",
+    "placeholders": {
+      "found": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+
+  "allSpellsFound": "All spells found!",
+  "@allSpellsFound": { "description": "Shown when all target equations are solved" },
+
+  "streakBonusActive": "Streak bonus active!",
+  "@streakBonusActive": { "description": "Shown when streak >= 3" },
+
+  "emberEquations": "Ember Equations",
+  "@emberEquations": { "description": "Dragon Runes World 1 name" },
+
+  "flameFormulas": "Flame Formulas",
+  "@flameFormulas": { "description": "Dragon Runes World 2 name" },
+
+  "infernoAlgebra": "Inferno Algebra",
+  "@infernoAlgebra": { "description": "Dragon Runes World 3 name" },
+
+  "dragonsCalculus": "Dragon's Calculus",
+  "@dragonsCalculus": { "description": "Dragon Runes World 4 name" },
+
+  "elderRunes": "Elder Runes",
+  "@elderRunes": { "description": "Dragon Runes World 5 name" },
+
+  "dragonsFeastTitle": "Dragon's Feast",
+  "@dragonsFeastTitle": { "description": "Game title for hub and HUD" },
+
+  "correctEat": "Delicious!",
+  "@correctEat": { "description": "Feedback on eating a correct tile" },
+
+  "wrongEat": "Yuck!",
+  "@wrongEat": { "description": "Feedback on eating a wrong tile" },
+
+  "caughtByEnemy": "Caught!",
+  "@caughtByEnemy": { "description": "Feedback when caught by an enemy" },
+
+  "livesRemaining": "{count} lives left",
+  "@livesRemaining": {
+    "description": "Lives counter",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "freezeActivated": "Fire Breath! Enemies frozen!",
+  "@freezeActivated": { "description": "Freeze power-up activation" },
+
+  "wingsActivated": "Wings! Fly over enemies!",
+  "@wingsActivated": { "description": "Wings power-up activation" },
+
+  "shieldActivated": "Shield! Invulnerable!",
+  "@shieldActivated": { "description": "Shield power-up activation" },
+
+  "tilesEaten": "{count} tiles eaten",
+  "@tilesEaten": {
+    "description": "Total tiles eaten stat",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "levelsCleared": "{count} levels cleared",
+  "@levelsCleared": {
+    "description": "Levels cleared in session",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "easyPickings": "Easy Pickings",
+  "@easyPickings": { "description": "Dragon's Feast World 1 name" },
+
+  "growingAppetite": "Growing Appetite",
+  "@growingAppetite": { "description": "Dragon's Feast World 2 name" },
+
+  "refinedPalate": "Refined Palate",
+  "@refinedPalate": { "description": "Dragon's Feast World 3 name" },
+
+  "gourmetDragon": "Gourmet Dragon",
+  "@gourmetDragon": { "description": "Dragon's Feast World 4 name" },
+
+  "dragonKingsFeast": "Dragon King's Feast",
+  "@dragonKingsFeast": { "description": "Dragon's Feast World 5 name" },
+
+  "evenNumbers": "Even Numbers",
+  "@evenNumbers": { "description": "Category name" },
+
+  "oddNumbers": "Odd Numbers",
+  "@oddNumbers": { "description": "Category name" },
+
+  "multiplesOf": "Multiples of {n}",
+  "@multiplesOf": {
+    "description": "Multiples category name",
+    "placeholders": { "n": { "type": "int" } }
+  },
+
+  "primeNumbers": "Prime Numbers",
+  "@primeNumbers": { "description": "Category name" },
+
+  "compositeNumbers": "Composite Numbers",
+  "@compositeNumbers": { "description": "Category name" },
+
+  "perfectSquares": "Perfect Squares",
+  "@perfectSquares": { "description": "Category name" },
+
+  "factorsOf": "Factors of {n}",
+  "@factorsOf": {
+    "description": "Factors category name",
+    "placeholders": { "n": { "type": "int" } }
+  },
+
+  "greaterThan": "Greater than {n}",
+  "@greaterThan": {
+    "description": "Greater than category name",
+    "placeholders": { "n": { "type": "int" } }
+  },
+
+  "lessThan": "Less than {n}",
+  "@lessThan": {
+    "description": "Less than category name",
+    "placeholders": { "n": { "type": "int" } }
+  },
+
+  "betweenRange": "Between {lo} and {hi}",
+  "@betweenRange": {
+    "description": "Range category name",
+    "placeholders": {
+      "lo": { "type": "int" },
+      "hi": { "type": "int" }
+    }
+  },
+
+  "levelSelect": "Level Select",
+  "@levelSelect": { "description": "Level select screen title" },
+
+  "levelLocked": "Locked",
+  "@levelLocked": { "description": "Shown for locked levels" },
+
+  "starsEarned": "{count} stars",
+  "@starsEarned": {
+    "description": "Star count display",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "evolutionProgress": "{current} \u2192 {next}",
+  "@evolutionProgress": {
+    "description": "Evolution progress label",
+    "placeholders": {
+      "current": { "type": "String" },
+      "next": { "type": "String" }
+    }
+  },
+
+  "evolutionMaxed": "Elder Dragon \u2014 Maximum Evolution!",
+  "@evolutionMaxed": { "description": "Max evolution reached" },
+
+  "requirementMet": "Complete!",
+  "@requirementMet": { "description": "Shown when a requirement is met" },
+
+  "requirementProgress": "{current}/{required}",
+  "@requirementProgress": {
+    "description": "Requirement progress display",
+    "placeholders": {
+      "current": { "type": "int" },
+      "required": { "type": "int" }
+    }
+  },
+
+  "reachLevelInGames": "Reach level {level} in {count} games",
+  "@reachLevelInGames": {
+    "description": "Evolution requirement label",
+    "placeholders": {
+      "level": { "type": "int" },
+      "count": { "type": "int" }
+    }
+  },
+
+  "earnScales": "Earn {count} scales",
+  "@earnScales": {
+    "description": "Scales requirement label",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "threeStarLevels": "3-star {count} levels",
+  "@threeStarLevels": {
+    "description": "Three star requirement label",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "masterFacts": "Master {count} facts",
+  "@masterFacts": {
+    "description": "Mastered facts requirement label",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "trySuggestion": "Try {game} for bonus scales!",
+  "@trySuggestion": {
+    "description": "Game variety suggestion",
+    "placeholders": { "game": { "type": "String" } }
+  },
+
+  "achievementUnlocked": "Achievement Unlocked!",
+  "@achievementUnlocked": { "description": "Achievement unlock banner title" },
+
+  "achievements": "Achievements",
+  "@achievements": { "description": "Achievements screen title" },
+
+  "achievementsPerGame": "Per Game",
+  "@achievementsPerGame": { "description": "Per-game achievements tab" },
+
+  "achievementsCrossGame": "Cross Game",
+  "@achievementsCrossGame": { "description": "Cross-game achievements tab" },
+
+  "achievementsMilestones": "Milestones",
+  "@achievementsMilestones": { "description": "Milestone achievements tab" },
+
+  "achievementProgress": "{current}/{target}",
+  "@achievementProgress": {
+    "description": "Achievement progress display",
+    "placeholders": {
+      "current": { "type": "int" },
+      "target": { "type": "int" }
+    }
+  },
+
+  "achievementScalesReward": "+{count} scales",
+  "@achievementScalesReward": {
+    "description": "Achievement scales reward display",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "todaysChallenge": "Today's Challenge",
+  "@todaysChallenge": { "description": "Daily challenge card title" },
+
+  "todaysChallengeComplete": "Today's Challenge Complete!",
+  "@todaysChallengeComplete": { "description": "Daily challenge complete title" },
+
+  "dailyChallengeScalesReward": "Reward: {count} scales",
+  "@dailyChallengeScalesReward": {
+    "description": "Daily challenge scales reward display",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "dailyChallengeStreak": "{count} day streak",
+  "@dailyChallengeStreak": {
+    "description": "Daily challenge streak display",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "dailyChallengeStreakBonus": "+{count} streak bonus",
+  "@dailyChallengeStreakBonus": {
+    "description": "Daily challenge streak bonus display",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "dragonStore": "Dragon Store",
+  "@dragonStore": { "description": "Store screen title" },
+
+  "dragonColors": "Dragon Colors",
+  "@dragonColors": { "description": "Store section: dragon colors" },
+
+  "dragonAccessories": "Accessories",
+  "@dragonAccessories": { "description": "Store section: accessories" },
+
+  "customizeYourDragon": "Customize your dragon",
+  "@customizeYourDragon": { "description": "Dragon colors subtitle" },
+
+  "styleYourDragon": "Style your dragon",
+  "@styleYourDragon": { "description": "Accessories subtitle" },
+
+  "owned": "Owned",
+  "@owned": { "description": "Cosmetic ownership label" },
+
+  "equippedLabel": "Equipped",
+  "@equippedLabel": { "description": "Cosmetic equipped label" },
+
+  "purchase": "Purchase",
+  "@purchase": { "description": "Purchase button text" },
+
+  "insufficientScales": "Not enough scales",
+  "@insufficientScales": { "description": "Insufficient scales message" },
+
+  "premiumPacks": "Premium Packs",
+  "@premiumPacks": { "description": "Store section: premium packs" },
+
+  "soCloseHighScore": "So close to your high score! Just {points} more points.",
+  "@soCloseHighScore": {
+    "description": "Encouragement near high score",
+    "placeholders": { "points": { "type": "int" } }
+  },
+
+  "almostCleared": "Almost there! {count} more correct answers to clear this level.",
+  "@almostCleared": {
+    "description": "Encouragement near level clear",
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "soCloseThreeStars": "So close to 3 stars! A little more accuracy and you've got it!",
+  "@soCloseThreeStars": { "description": "Encouragement near 3 stars" },
+
+  "tryOtherGame": "Your dragon is hungry! Try {game} for bonus scales.",
+  "@tryOtherGame": {
+    "description": "Game variety suggestion on result screen",
+    "placeholders": { "game": { "type": "String" } }
+  },
+
+  "nextLevel": "Next Level",
+  "@nextLevel": { "description": "Button to advance to the next level on result screen" },
+
+  "customizeDragon": "Customize Dragon",
+  "@customizeDragon": { "description": "Title of the dragon customization screen" },
+
+  "visitStore": "Visit Store",
+  "@visitStore": { "description": "Button to navigate to the Dragon Store from customization screen" },
+
+  "emptyWardrobe": "Your wardrobe is empty!",
+  "@emptyWardrobe": { "description": "Empty state title when no cosmetics are owned" },
+
+  "emptyWardrobeHint": "Visit the Dragon Store to buy colors and accessories for your dragon.",
+  "@emptyWardrobeHint": { "description": "Empty state hint when no cosmetics are owned" },
+
+  "equipped": "Equipped",
+  "@equipped": { "description": "Label shown on equipped cosmetic items" }
+}
