@@ -7,7 +7,7 @@ void main() {
     test('World 1 level 1 has addition only', () {
       final config = FireTrailConfig.forLevel(1, 1);
       expect(config.allowedOperations, [MathOp.add]);
-      expect(config.wrapMode, isFalse);
+      expect(config.wrapMode, isTrue);
     });
 
     test('World 2 has addition and subtraction', () {
@@ -32,10 +32,10 @@ void main() {
       expect(config.wrapMode, isTrue);
     });
 
-    test('World 1-4 have wrap mode disabled', () {
-      for (int w = 1; w <= 4; w++) {
+    test('all worlds have wrap mode enabled', () {
+      for (int w = 1; w <= 5; w++) {
         final config = FireTrailConfig.forLevel(w, 1);
-        expect(config.wrapMode, isFalse, reason: 'World $w should not have wrap');
+        expect(config.wrapMode, isTrue, reason: 'World $w should have wrap');
       }
     });
 
