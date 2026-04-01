@@ -46,14 +46,27 @@ class LocalStorage {
     Hive.registerAdapter(UnlockedAchievementAdapter());
     Hive.registerAdapter(DailyChallengeStateAdapter());
 
-    // Open boxes
-    _profileBox = await Hive.openBox<PlayerProfile>(_profileBoxName);
-    _factsBox = await Hive.openBox<FactRecord>(_factsBoxName);
-    _metaBox = await Hive.openBox(_metaBoxName);
-    _achievementsBox =
-        await Hive.openBox<UnlockedAchievement>(_achievementsBoxName);
-    _dailyChallengeBox =
-        await Hive.openBox<DailyChallengeState>(_dailyChallengeBoxName);
+    // Open boxes — if corrupted, delete and recreate
+    try {
+      _profileBox = await Hive.openBox<PlayerProfile>(_profileBoxName);
+      _factsBox = await Hive.openBox<FactRecord>(_factsBoxName);
+      _metaBox = await Hive.openBox(_metaBoxName);
+      _achievementsBox =
+          await Hive.openBox<UnlockedAchievement>(_achievementsBoxName);
+      _dailyChallengeBox =
+          await Hive.openBox<DailyChallengeState>(_dailyChallengeBoxName);
+    } catch (e) {
+      debugPrint('LocalStorage: Hive boxes corrupted, resetting: $e');
+      await Hive.deleteFromDisk();
+      await Hive.initFlutter();
+      _profileBox = await Hive.openBox<PlayerProfile>(_profileBoxName);
+      _factsBox = await Hive.openBox<FactRecord>(_factsBoxName);
+      _metaBox = await Hive.openBox(_metaBoxName);
+      _achievementsBox =
+          await Hive.openBox<UnlockedAchievement>(_achievementsBoxName);
+      _dailyChallengeBox =
+          await Hive.openBox<DailyChallengeState>(_dailyChallengeBoxName);
+    }
 
     // Run migrations
     await MigrationRunner.run(this);

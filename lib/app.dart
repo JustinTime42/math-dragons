@@ -72,7 +72,10 @@ class _MathDragonsAppState extends State<MathDragonsApp>
     _sessionManager = SessionManager(storage: widget.storage);
     _hapticsService = HapticsService(storage: widget.storage);
     _audioService = AudioService(storage: widget.storage);
-    _audioService.preloadSfx();
+    // Preload audio in a post-frame callback so failures don't crash init
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _audioService.preloadSfx();
+    });
     _audioEventListener = AudioEventListener(
       audio: _audioService,
       eventBus: _eventBus,

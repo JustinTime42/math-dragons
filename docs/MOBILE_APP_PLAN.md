@@ -986,6 +986,26 @@ Assuming $4.99 one-time unlock:
 - Scale packs provide supplemental revenue from engaged players
 - No recurring costs (no subscription infrastructure)
 
+### Beta Tester Rewards — Lifetime Premium Access
+
+All beta testers (iOS TestFlight and Google Play) who help test before public
+launch will receive free lifetime access to all current and future premium
+features.
+
+**Primary method: RevenueCat promotional entitlements**
+- Once RevenueCat is integrated, grant each tester the premium entitlement
+  directly via the RevenueCat dashboard
+- Works cross-platform (iOS and Android) and persists across reinstalls
+- Testers are identified by their RevenueCat app user ID
+- Maintain a list of tester emails/IDs to ensure all are granted access
+
+**Fallback method: In-app promo code**
+- Build a hidden input in settings (behind the parental gate) that accepts a
+  promo code and unlocks premium permanently
+- Store the unlock flag in local storage (same as a regular purchase)
+- Useful for edge cases where RevenueCat entitlements aren't practical
+- Code can be shared directly with testers
+
 ### Why Not Subscriptions or Paid Upfront
 
 | Model | Rejected because |

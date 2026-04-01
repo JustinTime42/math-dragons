@@ -55,11 +55,13 @@ class MigrationRunner {
 
     final profile = storage.getProfile();
 
-    final newOwned = profile.ownedCosmetics
+    final newOwned = (profile.ownedCosmetics)
+        .where((id) => id.isNotEmpty)
         .map((id) => idRemap[id] ?? id)
         .toList();
 
-    final newEquipped = profile.equippedAccessories
+    final newEquipped = (profile.equippedAccessories)
+        .where((id) => id.isNotEmpty)
         .map((id) => idRemap[id] ?? id)
         .toList();
 
