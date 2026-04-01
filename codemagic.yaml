@@ -12,7 +12,6 @@ workflows:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.mathdragonsgame.mathDragons
-        integration: Codemagic  # Uses the App Store Connect integration for automatic signing
     triggering:
       events:
         - push
