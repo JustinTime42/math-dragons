@@ -3,12 +3,12 @@ workflows:
     name: iOS Release
     max_build_duration: 60
     instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: Codemagic  # Must match the integration name in Codemagic UI > Teams > Integrations
     environment:
       flutter: stable
       xcode: latest
       cocoapods: default
-      groups:
-        - app_store_credentials  # Configure in Codemagic UI: APP_STORE_CONNECT_KEY_IDENTIFIER, etc.
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.mathdragonsgame.mathDragons
