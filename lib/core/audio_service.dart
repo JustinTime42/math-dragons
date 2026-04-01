@@ -81,7 +81,10 @@ class AudioService {
     await _stopMusicInternal();
     _currentMusicTrack = 'music/victory.ogg';
     try {
-      FlameAudio.bgm.play('music/victory.ogg', volume: _musicVolume);
+      await FlameAudio.bgm.play('music/victory.ogg', volume: _musicVolume)
+          .timeout(const Duration(seconds: 5));
+    } on TimeoutException {
+      debugPrint('AudioService: Victory music load timed out — audio unavailable');
     } catch (e) {
       debugPrint('AudioService: Victory music failed: $e');
     }
@@ -244,7 +247,10 @@ class AudioService {
     await _stopMusicInternal();
     _currentMusicTrack = track;
     try {
-      FlameAudio.bgm.play(track, volume: _musicVolume);
+      await FlameAudio.bgm.play(track, volume: _musicVolume)
+          .timeout(const Duration(seconds: 5));
+    } on TimeoutException {
+      debugPrint('AudioService: Music load timed out for $track — audio unavailable');
     } catch (e) {
       debugPrint('AudioService: Music playback failed for $track: $e');
     }
