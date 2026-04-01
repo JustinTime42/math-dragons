@@ -1,17 +1,12 @@
 workflows:
-  ios-release:
-    name: iOS Release
-    max_build_duration: 60
+  ios-test:
+    name: iOS Test
+    max_build_duration: 30
     instance_type: mac_mini_m2
-    integrations:
-      app_store_connect: Developer Portal  # Must match the integration name in Codemagic UI > Teams > Integrations
     environment:
       flutter: stable
       xcode: latest
       cocoapods: default
-      ios_signing:
-        distribution_type: app_store
-        bundle_identifier: com.mathdragonsgame.mathDragons
     triggering:
       events:
         - push
@@ -49,22 +44,3 @@ workflows:
       - name: Run integration tests on iOS Simulator
         script: |
           flutter test integration_test/ -d "$SIMULATOR_UDID" --timeout 120s
-
-      - name: Build iOS release
-        script: |
-          flutter build ipa --release \
-            --build-name=$(grep 'version:' pubspec.yaml | sed 's/version: //' | sed 's/+.*//') \
-            --build-number=$PROJECT_BUILD_NUMBER \
-            --export-options-plist=/Users/builder/export_options.plist
-
-    artifacts:
-      - build/ios/ipa/*.ipa
-      - /tmp/xcodebuild_logs/*.log
-      - flutter_drive.log
-
-    publishing:
-      app_store_connect:
-        # API key must be configured in Codemagic UI under Teams > Settings
-        auth: integration
-        submit_to_testflight: true
-        expire_build_submitted_for_review: true
