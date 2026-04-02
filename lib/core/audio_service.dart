@@ -27,6 +27,8 @@ class AudioService {
 
   // ── Initialization ──
 
+  static const _audioTimeout = Duration(seconds: 5);
+
   Future<void> preloadSfx() async {
     if (_sfxPreloaded) return;
 
@@ -50,14 +52,16 @@ class AudioService {
         'sfx/hint.wav',
         'sfx/rune_connect.wav',
         'sfx/swipe.wav',
-      ]);
+      ]).timeout(_audioTimeout);
 
-      _correctPool = await FlameAudio.createPool('sfx/correct.wav', maxPlayers: 4);
-      _wrongPool = await FlameAudio.createPool('sfx/wrong.wav', maxPlayers: 3);
-      _buttonTapPool = await FlameAudio.createPool('sfx/button_tap.wav', maxPlayers: 3);
-      _munchPool = await FlameAudio.createPool('sfx/munch.wav', maxPlayers: 4);
+      _correctPool = await FlameAudio.createPool('sfx/correct.wav', maxPlayers: 4).timeout(_audioTimeout);
+      _wrongPool = await FlameAudio.createPool('sfx/wrong.wav', maxPlayers: 3).timeout(_audioTimeout);
+      _buttonTapPool = await FlameAudio.createPool('sfx/button_tap.wav', maxPlayers: 3).timeout(_audioTimeout);
+      _munchPool = await FlameAudio.createPool('sfx/munch.wav', maxPlayers: 4).timeout(_audioTimeout);
 
       _sfxPreloaded = true;
+    } on TimeoutException {
+      debugPrint('AudioService: SFX preload timed out — audio unavailable');
     } catch (e) {
       debugPrint('AudioService: SFX preload failed: $e');
     }
@@ -82,7 +86,7 @@ class AudioService {
     _currentMusicTrack = 'music/victory.ogg';
     try {
       await FlameAudio.bgm.play('music/victory.ogg', volume: _musicVolume)
-          .timeout(const Duration(seconds: 5));
+          .timeout(_audioTimeout);
     } on TimeoutException {
       debugPrint('AudioService: Victory music load timed out — audio unavailable');
     } catch (e) {
@@ -248,7 +252,7 @@ class AudioService {
     _currentMusicTrack = track;
     try {
       await FlameAudio.bgm.play(track, volume: _musicVolume)
-          .timeout(const Duration(seconds: 5));
+          .timeout(_audioTimeout);
     } on TimeoutException {
       debugPrint('AudioService: Music load timed out for $track — audio unavailable');
     } catch (e) {
