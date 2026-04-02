@@ -210,7 +210,9 @@ class LocalStorage {
 
   Future<void> close() async {
     _closed = true;
-    profileNotifier.dispose();
+    // profileNotifier is intentionally not disposed here — async writes
+    // in flight may still reference it after close(). It gets GC'd with
+    // the LocalStorage instance. Hive boxes need explicit close.
     await _profileBox.close();
     await _factsBox.close();
     await _metaBox.close();
