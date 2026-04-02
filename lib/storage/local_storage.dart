@@ -22,6 +22,7 @@ class LocalStorage {
   late Box<DailyChallengeState> _dailyChallengeBox;
 
   bool _initialized = false;
+  bool _closed = false;
 
   /// Callback fired after any data write. Used by CloudSync to schedule sync.
   void Function()? onDataChanged;
@@ -85,6 +86,7 @@ class LocalStorage {
 
   /// Save the player profile.
   Future<void> saveProfile(PlayerProfile profile) async {
+    if (_closed) return;
     await _profileBox.put(_profileKey, profile);
     profileNotifier.value = profile;
     onDataChanged?.call();
@@ -118,6 +120,7 @@ class LocalStorage {
 
   /// Save or update a fact record.
   Future<void> saveFact(FactRecord fact) async {
+    if (_closed) return;
     await _factsBox.put(fact.factKey, fact);
     onDataChanged?.call();
   }
@@ -148,6 +151,7 @@ class LocalStorage {
 
   /// Save an unlocked achievement.
   Future<void> saveUnlockedAchievement(UnlockedAchievement achievement) async {
+    if (_closed) return;
     await _achievementsBox.put(achievement.achievementId, achievement);
     onDataChanged?.call();
   }
@@ -166,6 +170,7 @@ class LocalStorage {
 
   /// Save daily challenge completion state for a specific date.
   Future<void> saveDailyChallengeState(DailyChallengeState state) async {
+    if (_closed) return;
     await _dailyChallengeBox.put(state.dateKey, state);
     onDataChanged?.call();
   }
@@ -188,6 +193,7 @@ class LocalStorage {
       _metaBox.get(_schemaVersionKey, defaultValue: 0) as int;
 
   Future<void> setSchemaVersion(int version) async {
+    if (_closed) return;
     await _metaBox.put(_schemaVersionKey, version);
   }
 
@@ -196,12 +202,14 @@ class LocalStorage {
 
   /// Set an arbitrary metadata value by key.
   Future<void> setMeta(String key, dynamic value) async {
+    if (_closed) return;
     await _metaBox.put(key, value);
   }
 
   // ---- Lifecycle ----
 
   Future<void> close() async {
+    _closed = true;
     profileNotifier.dispose();
     await _profileBox.close();
     await _factsBox.close();
