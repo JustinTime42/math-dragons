@@ -1,6 +1,6 @@
 workflows:
   ios-test:
-    name: iOS Test
+    name: iOS Test + BrowserStack
     max_build_duration: 30
     instance_type: mac_mini_m2
     environment:
@@ -26,7 +26,6 @@ workflows:
 
       - name: Boot iOS Simulator
         script: |
-          # Find first available iPhone simulator and boot it
           DEVICE_ID=$(xcrun simctl list devices available -j | \
             python3 -c "
           import sys, json
@@ -44,3 +43,72 @@ workflows:
       - name: Run integration tests on iOS Simulator
         script: |
           flutter test integration_test/ -d "$SIMULATOR_UDID" --timeout 120s
+
+      - name: Build unsigned release IPA
+        script: |
+          flutter build ios --release --no-codesign
+          cd build/ios/iphoneos
+          mkdir -p Payload
+          cp -R Runner.app Payload/
+          zip -qr Runner.ipa Payload
+          ls -la Runner.ipa
+
+      - name: Upload to BrowserStack App Live
+        script: |
+          RESPONSE=$(curl -s -u "$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESS_KEY" \
+            -X POST "https://api-cloud.browserstack.com/app-live/upload" \
+            -F "file=@build/ios/iphoneos/Runner.ipa")
+          echo "BrowserStack response: $RESPONSE"
+          APP_URL=$(echo "$RESPONSE" | python3 -c "import sys, json; print(json.load(sys.stdin).get('app_url', ''))")
+          if [ -z "$APP_URL" ]; then
+            echo "ERROR: BrowserStack upload failed"
+            exit 1
+          fi
+          echo "Uploaded to BrowserStack: $APP_URL"
+          echo "Open https://app-live.browserstack.com and your uploaded app will be available under 'Uploaded Apps'"
+
+    artifacts:
+      - build/ios/iphoneos/Runner.ipa
+
+  ios-release:
+    name: iOS Release (App Store)
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: Developer Portal
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.mathdragonsgame.mathDragons
+    # No triggering block = manual trigger only from Codemagic UI.
+    # Start this workflow only after validating the build in BrowserStack.
+    scripts:
+      - name: Get Flutter packages
+        script: flutter pub get
+
+      - name: Install CocoaPods
+        script: |
+          cd ios && pod install
+
+      - name: Run unit tests
+        script: flutter test
+
+      - name: Build signed iOS release
+        script: |
+          flutter build ipa --release \
+            --build-name=$(grep 'version:' pubspec.yaml | sed 's/version: //' | sed 's/+.*//') \
+            --build-number=$PROJECT_BUILD_NUMBER \
+            --export-options-plist=/Users/builder/export_options.plist
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        expire_build_submitted_for_review: true
