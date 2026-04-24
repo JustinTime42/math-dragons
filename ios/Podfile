@@ -37,16 +37,5 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
-
-    # integration_test is a dev-only Flutter framework, but flutter_install_all_ios_pods
-    # bundles it into Release archives regardless. Mark it as a static lib in Release
-    # so it is not embedded as a dynamic framework in the App Store IPA.
-    if target.name == 'integration_test'
-      target.build_configurations.each do |config|
-        if config.name == 'Release'
-          config.build_settings['MACH_O_TYPE'] = 'staticlib'
-        end
-      end
-    end
   end
 end
