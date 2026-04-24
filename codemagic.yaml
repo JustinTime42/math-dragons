@@ -82,9 +82,6 @@ workflows:
       flutter: 3.41.5
       xcode: latest
       cocoapods: default
-      ios_signing:
-        distribution_type: app_store
-        bundle_identifier: com.mathdragonsgame.mathDragons
     # No triggering block = manual trigger only from Codemagic UI.
     # Start this workflow only after validating the build in BrowserStack.
     scripts:
