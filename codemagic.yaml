@@ -82,6 +82,8 @@ workflows:
       flutter: 3.41.5
       xcode: latest
       cocoapods: default
+      groups:
+        - ios_signing  # must contain CERTIFICATE_PRIVATE_KEY (secure, PEM content)
     # No triggering block = manual trigger only from Codemagic UI.
     # Start this workflow only after validating the build in BrowserStack.
     scripts:
@@ -101,16 +103,14 @@ workflows:
       - name: Fetch or create signing files
         script: |
           set -e
-          echo "=== Listing existing certificates in Apple Developer account ==="
-          app-store-connect list-certificates --type IOS_DISTRIBUTION --json || true
-
-          echo "=== Listing existing profiles ==="
-          app-store-connect list-profiles --bundle-id "com.mathdragonsgame.mathDragons" --json || true
+          echo "=== Listing existing distribution certificates ==="
+          app-store-connect certificates list --type IOS_DISTRIBUTION --json || true
 
           echo "=== Fetching or creating App Store signing files ==="
           app-store-connect fetch-signing-files "com.mathdragonsgame.mathDragons" \
             --type IOS_APP_STORE \
             --create \
+            --certificate-key "@env:CERTIFICATE_PRIVATE_KEY" \
             --verbose
 
           echo "=== Installing certificates into keychain ==="
