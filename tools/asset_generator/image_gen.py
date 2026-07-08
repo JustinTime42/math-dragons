@@ -89,6 +89,9 @@ def generate_image(
                     image=ref_files,
                     prompt=style_prompt,
                     size=size,
+                    quality=quality,
+                    background="transparent" if transparent else "opaque",
+                    output_format="png",
                 )
 
                 image_bytes = base64.b64decode(result.data[0].b64_json)

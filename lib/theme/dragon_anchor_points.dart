@@ -1,3 +1,20 @@
+/// The artwork context a dragon is being rendered in.
+///
+/// Pose and skin/species are separate dimensions. A crimson dragon can use the
+/// same hub pose as a sapphire dragon, while still rendering different art.
+enum DragonRenderContext { portrait, hub }
+
+extension DragonRenderContextLabel on DragonRenderContext {
+  String get label {
+    switch (this) {
+      case DragonRenderContext.portrait:
+        return 'Portrait';
+      case DragonRenderContext.hub:
+        return 'Hub';
+    }
+  }
+}
+
 /// Positioning data for an accessory on a dragon image.
 /// All values are fractions of the dragon image size (0.0–1.0).
 class AccessoryAnchor {
@@ -16,12 +33,20 @@ class AccessoryAnchor {
   /// Rotation in radians (0 for most items).
   final double rotation;
 
+  /// 3D tilt around the horizontal axis in radians.
+  final double rotationX;
+
+  /// 3D tilt around the vertical axis in radians.
+  final double rotationY;
+
   const AccessoryAnchor({
     required this.dx,
     required this.dy,
     required this.scale,
     this.behind = false,
     this.rotation = 0,
+    this.rotationX = 0,
+    this.rotationY = 0,
   });
 }
 
@@ -87,15 +112,14 @@ class DragonAnchorPoints {
     },
   };
 
-  /// Color variant anchors (bust/head close-ups).
-  /// Only head and neck accessories are visible; chest/wings return null.
-  static const colorVariantAccessoryAnchors = <String, AccessoryAnchor>{
-    'acc_crown': AccessoryAnchor(dx: 0.42, dy: -0.02, scale: 0.28),
-    'acc_wizard_hat': AccessoryAnchor(dx: 0.40, dy: -0.18, scale: 0.44),
-    'acc_scarf': AccessoryAnchor(dx: 0.42, dy: 0.62, scale: 0.34),
-    'acc_necklace': AccessoryAnchor(dx: 0.42, dy: 0.72, scale: 0.26),
-    // Battle armor and wing decorations: not visible in bust close-up
-  };
+  /// Accessory anchors keyed by render context, pose, accessory, and stage.
+  ///
+  /// Shape: context -> pose ID -> accessory ID -> stage -> anchor.
+  static const accessoryAnchorsByContext =
+      <
+        DragonRenderContext,
+        Map<String, Map<String, Map<int, AccessoryAnchor>>>
+      >{};
 
   /// Get the anchor for a specific accessory on a specific dragon stage.
   /// Returns null for egg stage (0) or if the accessory has no anchor
@@ -103,10 +127,13 @@ class DragonAnchorPoints {
   static AccessoryAnchor? getAccessoryAnchor({
     required String accessoryId,
     required int evolutionStage,
-    required bool isColorVariant,
+    required DragonRenderContext context,
+    required String poseId,
   }) {
     if (evolutionStage == 0) return null;
-    if (isColorVariant) return colorVariantAccessoryAnchors[accessoryId];
-    return accessoryAnchors[accessoryId]?[evolutionStage.clamp(1, 5)];
+    final stage = evolutionStage.clamp(1, 5);
+    return accessoryAnchorsByContext[context]?[poseId]?[accessoryId]?[stage] ??
+        accessoryAnchorsByContext[context]?['default']?[accessoryId]?[stage] ??
+        accessoryAnchors[accessoryId]?[stage];
   }
 }

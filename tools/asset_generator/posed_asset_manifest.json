@@ -1,0 +1,148 @@
+{
+  "output_dir": "assets/images/dragons/posed/raw",
+  "canvas": "1024x1024",
+  "style_refs": [
+    "assets/style_bible/approved/01_style_anchor.png",
+    "assets/style_bible/approved/02_amethyst_dragon.png",
+    "assets/style_bible/approved/03_verdant_dragon.png",
+    "assets/style_bible/approved/07_amethyst_face.png",
+    "assets/style_bible/v2/style_reference_composite.png"
+  ],
+  "style_preamble": "Match the approved Math Dragons style bible: stylized semi-realistic fantasy digital painting for ages 7-14, Wings of Fire book-cover influence with Clash Royale readability, warm dramatic lighting, rich scale texture, clear readable silhouette, expressive amber eyes, polished mobile game asset. Avoid chibi proportions, plastic toy rendering, flat vector outlines, baby-cute nursery style, grimdark horror, classroom motifs, text, watermarks, and UI elements.",
+  "geometry_rule": "Preserve the exact pose family: same canvas size, crop, bounding box, body orientation, head angle, horn placement, skull plane, eye line, wing position, and accessory attachment landmarks. Small silhouette drift is acceptable; perspective drift is not.",
+  "contexts": [
+    {
+      "id": "hub",
+      "pose_id": "hub_front_3q_left",
+      "description": "Full-body standing dragon companion, front three-quarter view, facing slightly left. Full dragon visible, paws grounded, tail visible, wings folded enough to keep the body readable. Designed for hub companion, customize screen, shop preview, and accessory calibration."
+    },
+    {
+      "id": "portrait",
+      "pose_id": "portrait_front_3q_left",
+      "description": "Tighter portrait/bust dragon view, front three-quarter view, facing slightly left. Head, horns, neck, upper chest, and some wings visible. Designed for profile, celebration, and portrait-style game appearances."
+    }
+  ],
+  "stages": [
+    {
+      "id": 0,
+      "name": "egg",
+      "description": "A single large magical dragon egg with the species color expressed only in shell markings, shell material, cracks, and inner glow. The egg is the only subject. No dragon, no hatchling, no baby dragon, no creature, no face, no eyes, no limbs, no wings, no tail, no claws, no accessories, no nest characters. Centered and readable."
+    },
+    {
+      "id": 1,
+      "name": "hatchling",
+      "description": "A tiny hatchling dragon, alert and curious, small horns beginning to grow, stubby folded wings, readable skull top and neck attachment areas."
+    },
+    {
+      "id": 2,
+      "name": "fledgling",
+      "description": "A small fledgling dragon, more defined scales and horns, compact wings, confident but still young, readable head, neck, chest, and wing landmarks."
+    },
+    {
+      "id": 3,
+      "name": "young",
+      "description": "A young dragon in full recognizable dragon form, lean and heroic, folded wings, curved horns, clear skull, neck, chest, and wing attachment landmarks."
+    },
+    {
+      "id": 4,
+      "name": "adult",
+      "description": "A majestic adult dragon, powerful but readable silhouette, folded wings, elegant horns, clear accessory landmarks on skull, neck, chest, and wings."
+    },
+    {
+      "id": 5,
+      "name": "elder",
+      "description": "An ancient elder dragon, wise and powerful, crown-like natural horns allowed but skull accessory area must remain readable, subtle arcane markings, clear accessory landmarks."
+    }
+  ],
+  "skins": [
+    {
+      "id": "default",
+      "name": "Default Amethyst",
+      "description": "deep purple amethyst scales, warm gold underbelly, amber eyes, gold horn highlights, subtle emerald magical accents"
+    },
+    {
+      "id": "color_crimson",
+      "name": "Crimson",
+      "description": "crimson red scales, warm gold underbelly, amber eyes, subtle darker red scale pattern"
+    },
+    {
+      "id": "color_sapphire",
+      "name": "Sapphire",
+      "description": "sapphire blue scales, pale silver-blue underbelly, amber eyes, subtle darker blue scale pattern"
+    },
+    {
+      "id": "color_emerald",
+      "name": "Emerald",
+      "description": "emerald green scales, warm gold underbelly, amber eyes, subtle darker green scale pattern"
+    },
+    {
+      "id": "color_amethyst",
+      "name": "Amethyst",
+      "description": "violet amethyst scales, lavender-gold underbelly, amber eyes, subtle purple magical scale pattern"
+    },
+    {
+      "id": "color_gold",
+      "name": "Golden",
+      "description": "brilliant golden scales, warm cream underbelly, amber eyes, polished gold highlights, readable contrast"
+    },
+    {
+      "id": "color_obsidian",
+      "name": "Obsidian",
+      "description": "near-black obsidian scales with subtle dark reflections, deep red underbelly accents, amber eyes, strong rim lighting for readability"
+    },
+    {
+      "id": "color_frost",
+      "name": "Frost",
+      "description": "pale ice-blue frost scales, white and silver underbelly, amber eyes, subtle crystalline highlights"
+    },
+    {
+      "id": "color_sunset",
+      "name": "Sunset",
+      "description": "sunset orange-red scales transitioning to gold, warm gold underbelly, amber eyes, ember-like scale accents"
+    }
+  ],
+  "accessories": [
+    {
+      "id": "acc_crown",
+      "name": "Crown",
+      "slot": "headTop",
+      "description": "an ornate golden dragon crown with dragon-wing-shaped points and small amethyst gems, angled to sit on the skull between the horns with an elliptical rim matching the pose perspective"
+    },
+    {
+      "id": "acc_scarf",
+      "name": "Scarf",
+      "slot": "neck",
+      "description": "a cozy knitted scarf in deep purple and warm gold stripes, shaped to wrap around the dragon neck in the pose perspective, with a small trailing tail of fabric"
+    },
+    {
+      "id": "acc_wizard_hat",
+      "name": "Wizard Hat",
+      "slot": "headTop",
+      "description": "a pointed wizard hat for a dragon, deep purple fabric with gold star and moon embroidery, angled so the brim sits naturally on the skull between the horns"
+    },
+    {
+      "id": "acc_necklace",
+      "name": "Necklace",
+      "slot": "neck",
+      "description": "a fantasy dragon necklace with a golden chain and emerald pendant in a dragon-claw setting, shaped to hang from the neck and upper chest in the pose perspective"
+    },
+    {
+      "id": "acc_battle_armor",
+      "name": "Battle Armor",
+      "slot": "chest",
+      "description": "ornamental dragon battle armor for chest and shoulders, dark steel with warm gold trim and purple gemstone accents, perspective-matched to the torso"
+    },
+    {
+      "id": "acc_wing_decorations",
+      "name": "Wing Decorations",
+      "slot": "wings",
+      "description": "ornamental wing decorations with delicate golden chains, gemstones, and charms designed to drape along the visible folded wing edges"
+    }
+  ],
+  "themed_accessories": [
+    {
+      "id": "acc_crown",
+      "theme_rule": "Create a crown that harmonizes with the dragon skin/species color while remaining clearly royal and readable. Keep warm fantasy metal as the base but adapt gems, enamel, glow, and accent metal to the target dragon skin. Crimson uses ruby and ember accents; Sapphire uses blue sapphire and silver-blue accents; Emerald uses emerald and vine-gold accents; Amethyst uses amethyst and violet-gold accents; Golden uses polished gold, white-gold, and sunstone accents; Obsidian uses darkened gold, ruby, and smoky red accents with strong rim highlights; Frost uses white-gold, pale blue crystal, and icy silver accents; Sunset uses orange-gold, coral, and ember accents."
+    }
+  ]
+}

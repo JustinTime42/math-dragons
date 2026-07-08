@@ -6,6 +6,7 @@ import '../../core/difficulty_engine.dart';
 import '../../core/event_bus.dart';
 import '../../core/game_events.dart';
 import '../../storage/local_storage.dart';
+import '../../theme/dragon_anchor_points.dart';
 import '../../theme/dragon_assets.dart';
 import '../../theme/dragon_colors.dart';
 import '../../theme/dragon_spacing.dart';
@@ -75,9 +76,7 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
       final pool = FactPool.forLevel(
         numberMin: _config.numberMin,
         numberMax: _config.numberMax,
-        operations: _config.allowedOps
-            .map(_mapToEggOp)
-            .toList(),
+        operations: _config.allowedOps.map(_mapToEggOp).toList(),
       );
       if (pool.isNotEmpty) {
         final first = engine.selectNext(pool);
@@ -87,7 +86,10 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
       // Engine not available (e.g. in tests) — fallback to random
     }
 
-    _generatedLevel = generator.generate(_config, suggestedFacts: suggestedFacts);
+    _generatedLevel = generator.generate(
+      _config,
+      suggestedFacts: suggestedFacts,
+    );
     _solvedTargets.clear();
     _foundTargetDisplayTexts.clear();
     _foundBonusDisplayTexts.clear();
@@ -126,8 +128,9 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
   }
 
   void _onEquationValidated(EquationResult result, List<int> chainIndices) {
-    final responseTimeMs =
-        DateTime.now().difference(_lastAttemptTime).inMilliseconds;
+    final responseTimeMs = DateTime.now()
+        .difference(_lastAttemptTime)
+        .inMilliseconds;
     _lastAttemptTime = DateTime.now();
 
     _scoring.handleResult(result);
@@ -141,33 +144,39 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
           _feedbackMessage = 'Spell cast!';
 
           // Emit AnswerGiven
-          eventBus.emit(AnswerGiven(
-            gameId: 'dragon_runes',
-            problem: target.displayText,
-            playerAnswer: target.displayText,
-            correctAnswer: target.displayText,
-            correct: true,
-            responseTimeMs: responseTimeMs,
-          ));
+          eventBus.emit(
+            AnswerGiven(
+              gameId: 'dragon_runes',
+              problem: target.displayText,
+              playerAnswer: target.displayText,
+              correctAnswer: target.displayText,
+              correct: true,
+              responseTimeMs: responseTimeMs,
+            ),
+          );
 
           // Check streak milestones
           if (_scoring.streak > 0 && _scoring.streak % 5 == 0) {
-            eventBus.emit(StreakAchieved(
-              gameId: 'dragon_runes',
-              streakLength: _scoring.streak,
-            ));
+            eventBus.emit(
+              StreakAchieved(
+                gameId: 'dragon_runes',
+                streakLength: _scoring.streak,
+              ),
+            );
           }
 
         case InvalidEquation():
           _feedbackMessage = 'Invalid spell!';
-          eventBus.emit(AnswerGiven(
-            gameId: 'dragon_runes',
-            problem: 'invalid',
-            playerAnswer: 'invalid',
-            correctAnswer: 'unknown',
-            correct: false,
-            responseTimeMs: responseTimeMs,
-          ));
+          eventBus.emit(
+            AnswerGiven(
+              gameId: 'dragon_runes',
+              problem: 'invalid',
+              playerAnswer: 'invalid',
+              correctAnswer: 'unknown',
+              correct: false,
+              responseTimeMs: responseTimeMs,
+            ),
+          );
 
         case AlreadyFoundEquation():
           _feedbackMessage = 'Already cast!';
@@ -176,21 +185,25 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
           _foundBonusDisplayTexts.add(displayText);
           _feedbackMessage = 'Bonus spell! +50';
 
-          eventBus.emit(AnswerGiven(
-            gameId: 'dragon_runes',
-            problem: displayText,
-            playerAnswer: displayText,
-            correctAnswer: displayText,
-            correct: true,
-            responseTimeMs: responseTimeMs,
-          ));
+          eventBus.emit(
+            AnswerGiven(
+              gameId: 'dragon_runes',
+              problem: displayText,
+              playerAnswer: displayText,
+              correctAnswer: displayText,
+              correct: true,
+              responseTimeMs: responseTimeMs,
+            ),
+          );
 
           // Check streak milestones
           if (_scoring.streak > 0 && _scoring.streak % 5 == 0) {
-            eventBus.emit(StreakAchieved(
-              gameId: 'dragon_runes',
-              streakLength: _scoring.streak,
-            ));
+            eventBus.emit(
+              StreakAchieved(
+                gameId: 'dragon_runes',
+                streakLength: _scoring.streak,
+              ),
+            );
           }
       }
     });
@@ -214,13 +227,15 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
         : 0.0;
     final stars = _calculateStars(accuracy, 3 - _hintManager.remaining);
 
-    eventBus.emit(LevelCompleted(
-      gameId: 'dragon_runes',
-      levelNumber: _currentLevel,
-      score: _scoring.score,
-      stars: stars,
-      accuracy: accuracy,
-    ));
+    eventBus.emit(
+      LevelCompleted(
+        gameId: 'dragon_runes',
+        levelNumber: _currentLevel,
+        score: _scoring.score,
+        stars: stars,
+        accuracy: accuracy,
+      ),
+    );
 
     setState(() {
       _levelComplete = true;
@@ -251,7 +266,8 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
         ? _scoring.equationsFound / _scoring.totalAttempts
         : 0.0;
     final stars = _calculateStars(accuracy, 3 - _hintManager.remaining);
-    final scalesEarned = _scoring.equationsFound * 2 +
+    final scalesEarned =
+        _scoring.equationsFound * 2 +
         (_scoring.bestStreak >= 3 ? 5 : 0) +
         (_levelComplete ? 25 : 0);
 
@@ -285,11 +301,13 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
         },
         onBackToHub: () {
           final eventBus = context.read<EventBus>();
-          eventBus.emit(GameEnded(
-            gameId: 'dragon_runes',
-            finalScore: _scoring.score,
-            duration: DateTime.now().difference(_gameStartTime),
-          ));
+          eventBus.emit(
+            GameEnded(
+              gameId: 'dragon_runes',
+              finalScore: _scoring.score,
+              duration: DateTime.now().difference(_gameStartTime),
+            ),
+          );
           final navigator = Navigator.of(context);
           navigator.pop(); // dismiss sheet
           navigator.popUntil((route) => route.isFirst); // back to hub
@@ -326,12 +344,15 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
     final backgroundImage = DragonAssets.resolveRunesBackground(equippedColor);
 
     // Resolve dragon portrait: color variant if equipped, otherwise evolution portrait
-    final stage = profile.dragonEvolution
-        .clamp(0, DragonAssets.dragonPortraits.length - 1);
-    final dragonPortrait = equippedColor != null
-        ? (DragonAssets.colorVariantImages[equippedColor] ??
-            DragonAssets.dragonPortraits[stage])
-        : DragonAssets.dragonPortraits[stage];
+    final stage = profile.dragonEvolution.clamp(
+      0,
+      DragonAssets.dragonPortraits.length - 1,
+    );
+    final dragonPortrait = DragonAssets.resolveDragonImage(
+      evolutionStage: stage,
+      context: DragonRenderContext.portrait,
+      skinId: equippedColor,
+    );
 
     return GameShell(
       gameId: 'dragon_runes',
@@ -343,11 +364,7 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
         child: Center(
           child: Opacity(
             opacity: 0.10,
-            child: Image.asset(
-              dragonPortrait,
-              width: 250,
-              height: 250,
-            ),
+            child: Image.asset(dragonPortrait, width: 250, height: 250),
           ),
         ),
       ),
@@ -371,10 +388,7 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
           Expanded(
             child: Stack(
               children: [
-                GameWidget(
-                  key: _gameKey,
-                  game: _flameGame!,
-                ),
+                GameWidget(key: _gameKey, game: _flameGame!),
 
                 // Feedback message overlay
                 if (_feedbackMessage != null)
@@ -392,8 +406,9 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
                           color: DragonColors.deepVoid.withValues(alpha: 0.9),
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color:
-                                DragonColors.runesAccent.withValues(alpha: 0.5),
+                            color: DragonColors.runesAccent.withValues(
+                              alpha: 0.5,
+                            ),
                           ),
                         ),
                         child: Text(
@@ -417,8 +432,7 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
 
           // Chain display
           Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: DragonSpacing.sm),
+            padding: const EdgeInsets.symmetric(horizontal: DragonSpacing.sm),
             child: ChainDisplay(chainTokens: _chainTokens),
           ),
 
@@ -439,10 +453,7 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
                   ),
                 ),
                 const SizedBox(width: DragonSpacing.sm),
-                HintButton(
-                  remaining: _hintManager.remaining,
-                  onTap: _useHint,
-                ),
+                HintButton(remaining: _hintManager.remaining, onTap: _useHint),
               ],
             ),
           ),

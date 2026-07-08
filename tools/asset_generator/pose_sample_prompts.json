@@ -1,0 +1,51 @@
+{
+  "output_dir": "assets/images/dragons/pose_samples",
+  "pose_id": "hub_front_3q_left",
+  "canvas": "1024x1024",
+  "style_refs": [
+    "assets/style_bible/approved/01_style_anchor.png",
+    "assets/style_bible/approved/02_amethyst_dragon.png",
+    "assets/style_bible/approved/03_verdant_dragon.png",
+    "assets/style_bible/approved/07_amethyst_face.png",
+    "assets/style_bible/v2/style_reference_composite.png"
+  ],
+  "style_preamble": "Match the approved Math Dragons style bible: stylized semi-realistic fantasy digital painting for ages 7-14, Wings of Fire book-cover influence with Clash Royale readability, warm dramatic lighting, rich scale texture, clear readable silhouette, expressive amber eyes, deeper proportions than a toddler mascot, polished mobile game asset. Avoid chibi proportions, plastic toy rendering, flat vector outlines, baby-cute nursery style, grimdark horror, classroom motifs, text, watermarks, and UI elements.",
+  "notes": [
+    "Generate with a transparent background using PNG alpha. If true transparency fails, use flat #00ff00 chroma-key as a fallback.",
+    "Keep the dragon centered with the same bounding box and silhouette across skin variants.",
+    "Do not change pose, head angle, camera angle, crop, or scale between skin variants.",
+    "Accessories should be generated for the pose, not for a specific skin.",
+    "Use approved style bible references on every generation. Use the canonical pose template as a pose reference for variants and accessories once it exists."
+  ],
+  "samples": [
+    {
+      "asset_id": "dragon_stage3_pose_template_hub_front_3q_left",
+      "output": "assets/images/dragons/pose_samples/raw/dragon_stage3_pose_template_hub_front_3q_left.png",
+      "prompt": "Match the approved Math Dragons style bible: stylized semi-realistic fantasy digital painting for ages 7-14, Wings of Fire book-cover influence with Clash Royale readability, warm dramatic lighting, rich scale texture, clear readable silhouette, expressive amber eyes, deeper proportions than a toddler mascot, polished mobile game asset. Avoid chibi proportions, plastic toy rendering, flat vector outlines, baby-cute nursery style, grimdark horror, classroom motifs, text, watermarks, and UI elements. Create a canonical stage 3 dragon character asset for Math Dragons. Pose ID: hub_front_3q_left. The dragon is standing in a reusable front three-quarter view, facing slightly left, head raised, both horns visible, skull top unobstructed for a crown, neck and upper chest visible, wings folded, tail visible, paws grounded. Use a 1024x1024 square canvas, full body centered, generous padding, no crop. Use a transparent background with PNG alpha, no shadows, no gradients, and no floor plane. This is the master pose template; preserve silhouette, pose, head angle, bounding box, camera angle, horn placement, eye line, and attachment landmarks for all future variants."
+    },
+    {
+      "asset_id": "dragon_stage3_crimson_hub_front_3q_left",
+      "output": "assets/images/dragons/pose_samples/raw/dragon_stage3_crimson_hub_front_3q_left.png",
+      "refs": [
+        "assets/images/dragons/pose_samples/raw/dragon_stage3_pose_template_hub_front_3q_left.png"
+      ],
+      "prompt": "Match the approved Math Dragons style bible: stylized semi-realistic fantasy digital painting for ages 7-14, Wings of Fire book-cover influence with Clash Royale readability, warm dramatic lighting, rich scale texture, clear readable silhouette, expressive amber eyes, deeper proportions than a toddler mascot, polished mobile game asset. Avoid chibi proportions, plastic toy rendering, flat vector outlines, baby-cute nursery style, grimdark horror, classroom motifs, text, watermarks, and UI elements. Create a crimson skin variant from the provided canonical stage 3 dragon pose. Preserve the exact pose ID hub_front_3q_left: same alpha silhouette, same head angle, same horns, same wing position, same body posture, same canvas size, same crop, same bounding box, same camera angle, same attachment landmarks. Only change color and surface markings: crimson red scales, warm gold underbelly, amber eyes, subtle darker red scale pattern. No accessory. Transparent background with PNG alpha, no shadows, no gradients, no text."
+    },
+    {
+      "asset_id": "dragon_stage3_sapphire_hub_front_3q_left",
+      "output": "assets/images/dragons/pose_samples/raw/dragon_stage3_sapphire_hub_front_3q_left.png",
+      "refs": [
+        "assets/images/dragons/pose_samples/raw/dragon_stage3_pose_template_hub_front_3q_left.png"
+      ],
+      "prompt": "Match the approved Math Dragons style bible: stylized semi-realistic fantasy digital painting for ages 7-14, Wings of Fire book-cover influence with Clash Royale readability, warm dramatic lighting, rich scale texture, clear readable silhouette, expressive amber eyes, deeper proportions than a toddler mascot, polished mobile game asset. Avoid chibi proportions, plastic toy rendering, flat vector outlines, baby-cute nursery style, grimdark horror, classroom motifs, text, watermarks, and UI elements. Create a sapphire skin variant from the provided canonical stage 3 dragon pose. Preserve the exact pose ID hub_front_3q_left: same alpha silhouette, same head angle, same horns, same wing position, same body posture, same canvas size, same crop, same bounding box, same camera angle, same attachment landmarks. Only change color and surface markings: sapphire blue scales, pale silver-blue underbelly, amber eyes, subtle darker blue scale pattern. No accessory. Transparent background with PNG alpha, no shadows, no gradients, no text."
+    },
+    {
+      "asset_id": "acc_crown_hub_front_3q_left",
+      "output": "assets/images/dragons/pose_samples/raw/acc_crown_hub_front_3q_left.png",
+      "refs": [
+        "assets/images/dragons/pose_samples/raw/dragon_stage3_pose_template_hub_front_3q_left.png"
+      ],
+      "prompt": "Match the approved Math Dragons style bible: stylized semi-realistic fantasy digital painting for ages 7-14, Wings of Fire book-cover influence with Clash Royale readability, warm dramatic lighting, painterly highlights, polished fantasy metal, clear readable silhouette, mobile game asset. Avoid plastic toy rendering, flat vector outlines, baby-cute nursery style, grimdark horror, text, watermarks, and UI elements. Create an accessory-only golden crown layer for the Math Dragons pose ID hub_front_3q_left. The crown must match the perspective of a dragon facing slightly left in front three-quarter view. It should be angled to sit naturally on the skull between the two horns, with an elliptical rim following the head perspective and rear rim slightly hidden by where horns would occlude it. Accessory only: no dragon, no head, no body, no face, no mannequin. Place the crown centered on a 1024x1024 canvas with generous padding for calibration. Transparent background with PNG alpha, no shadows, no gradients, no text."
+    }
+  ]
+}

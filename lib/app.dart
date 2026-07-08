@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,7 @@ import 'hub/settings_screen.dart';
 import 'hub/achievement_screen.dart';
 import 'monetization/store_screen.dart';
 import 'hub/customize_screen.dart';
+import 'dev/accessory_calibration_screen.dart';
 import 'storage/local_storage.dart';
 import 'core/event_bus.dart';
 import 'core/game_registry.dart';
@@ -193,6 +195,9 @@ class _MathDragonsAppState extends State<MathDragonsApp>
           '/achievements': (context) => const AchievementScreen(),
           '/store': (context) => const StoreScreen(),
           '/customize': (context) => const CustomizeScreen(),
+          if (kDebugMode)
+            '/dev/accessory-calibration': (context) =>
+                const AccessoryCalibrationScreen(),
         },
       ),
       ),

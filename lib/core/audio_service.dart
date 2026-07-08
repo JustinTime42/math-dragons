@@ -16,6 +16,11 @@ class AudioService {
   AudioPool? _buttonTapPool;
   AudioPool? _munchPool;
 
+  /// One-shot player for the victory fanfare. Kept separate from
+  /// [FlameAudio.bgm] (which always forces ReleaseMode.loop) so the fanfare
+  /// plays exactly once instead of repeating until another track starts.
+  AudioPlayer? _victoryPlayer;
+
   static const double _musicVolume = 0.4;
   static const double _sfxVolume = 0.8;
   static const double _uiSfxVolume = 0.5;
@@ -83,10 +88,14 @@ class AudioService {
   Future<void> playVictoryMusic() async {
     if (!_musicEnabled) return;
     await _stopMusicInternal();
-    _currentMusicTrack = 'music/victory.ogg';
     try {
-      await FlameAudio.bgm.play('music/victory.ogg', volume: _musicVolume)
-          .timeout(_audioTimeout);
+      // Play the fanfare as a single run. Routing it through FlameAudio.bgm
+      // would loop it forever (bgm forces ReleaseMode.loop); playLongAudio
+      // uses ReleaseMode.release, so it stops on its own after one play.
+      _victoryPlayer = await FlameAudio.playLongAudio(
+        'music/victory.ogg',
+        volume: _musicVolume,
+      ).timeout(_audioTimeout);
     } on TimeoutException {
       debugPrint('AudioService: Victory music load timed out — audio unavailable');
     } catch (e) {
@@ -266,6 +275,18 @@ class AudioService {
       FlameAudio.bgm.stop();
     } catch (e) {
       debugPrint('AudioService: Stop music failed: $e');
+    }
+    // Also tear down the one-shot victory player so its fanfare can't bleed
+    // into the next screen.
+    final victory = _victoryPlayer;
+    _victoryPlayer = null;
+    if (victory != null) {
+      try {
+        await victory.stop();
+        await victory.dispose();
+      } catch (e) {
+        debugPrint('AudioService: Stop victory player failed: $e');
+      }
     }
   }
 

@@ -96,13 +96,20 @@ class GameScoreThresholds {
     );
   }
 
-  /// Fire Trail: correctToAdvance is the base; score = correct answers * multiplier.
+  /// Fire Trail: score is based on the fixed answer-gem count for the level.
   static GameScoreThresholds fireTrail(int levelNumber) {
     final world = ((levelNumber - 1) ~/ 8) + 1;
-    final base = 6 + world * 3;
+    final levelInWorld = ((levelNumber - 1) % 8) + 1;
+    final answerGemCount = switch (world) {
+      1 => 4,
+      2 => levelInWorld > 4 ? 5 : 4,
+      3 => 5,
+      4 => levelInWorld > 4 ? 6 : 5,
+      _ => 6,
+    };
     return GameScoreThresholds(
-      medianScore: base * 10,
-      highScore: base * 15,
+      medianScore: answerGemCount * (8 + world),
+      highScore: answerGemCount * (10 + world),
     );
   }
 

@@ -67,11 +67,16 @@ class _GameCardState extends State<GameCard>
     _tapController.reverse();
   }
 
-  void _onTap() {
-    context.read<AudioService>().playButtonTap();
-    Navigator.of(context).push(
+  Future<void> _onTap() async {
+    final audio = context.read<AudioService>();
+    audio.playButtonTap();
+    // Await the whole game flow. The future completes only once the game
+    // stack has been popped (and GameShell.dispose has stopped its music),
+    // so resuming hub music here can't race the game's teardown.
+    await Navigator.of(context).push(
       DragonPageRoute.gameTransition(gameId: widget.gameId),
     );
+    if (mounted) audio.playHubMusic();
   }
 
   /// Progress within current world (each world = 10 levels).

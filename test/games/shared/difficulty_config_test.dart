@@ -322,17 +322,17 @@ void main() {
         final level5 = GameScoreThresholds.fireTrail(5);
         final level10 = GameScoreThresholds.fireTrail(10);
 
-        // Level 1 is world 1: base = 6 + 1*3 = 9
-        expect(level1.medianScore, 90);
-        expect(level1.highScore, 135);
+        // Level 1 is world 1 with 4 answer gems.
+        expect(level1.medianScore, 36);
+        expect(level1.highScore, 44);
 
-        // Level 5 is world 1: base = 6 + 1*3 = 9
-        expect(level5.medianScore, 90);
-        expect(level5.highScore, 135);
+        // Level 5 is world 1 with 4 answer gems.
+        expect(level5.medianScore, 36);
+        expect(level5.highScore, 44);
 
-        // Level 10 is world 2: base = 6 + 2*3 = 12
-        expect(level10.medianScore, 120);
-        expect(level10.highScore, 180);
+        // Level 10 is world 2 with 4 answer gems.
+        expect(level10.medianScore, 40);
+        expect(level10.highScore, 48);
 
         // Verify increasing trend
         expect(level10.medianScore > level1.medianScore, true);
@@ -340,30 +340,30 @@ void main() {
       });
 
       test('correctly calculates world-based thresholds', () {
-        // World 1 (levels 1-8): base = 9
+        // World 1 (levels 1-8): 4 gems, 8+world median / 10+world high
         final world1 = GameScoreThresholds.fireTrail(1);
-        expect(world1.medianScore, 90);
-        expect(world1.highScore, 135);
+        expect(world1.medianScore, 36);
+        expect(world1.highScore, 44);
 
-        // World 2 (levels 9-16): base = 12
+        // World 2 early levels: 4 gems
         final world2 = GameScoreThresholds.fireTrail(9);
-        expect(world2.medianScore, 120);
-        expect(world2.highScore, 180);
+        expect(world2.medianScore, 40);
+        expect(world2.highScore, 48);
 
-        // World 3 (levels 17-24): base = 15
+        // World 3: 5 gems
         final world3 = GameScoreThresholds.fireTrail(17);
-        expect(world3.medianScore, 150);
-        expect(world3.highScore, 225);
+        expect(world3.medianScore, 55);
+        expect(world3.highScore, 65);
 
-        // World 4 (levels 25-32): base = 18
+        // World 4 early levels: 5 gems
         final world4 = GameScoreThresholds.fireTrail(25);
-        expect(world4.medianScore, 180);
-        expect(world4.highScore, 270);
+        expect(world4.medianScore, 60);
+        expect(world4.highScore, 70);
 
-        // World 5 (levels 33-40): base = 21
+        // World 5: 6 gems
         final world5 = GameScoreThresholds.fireTrail(33);
-        expect(world5.medianScore, 210);
-        expect(world5.highScore, 315);
+        expect(world5.medianScore, 78);
+        expect(world5.highScore, 90);
       });
     });
 

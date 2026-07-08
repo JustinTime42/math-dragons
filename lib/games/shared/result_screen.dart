@@ -112,6 +112,20 @@ class _ResultScreenState extends State<ResultScreen>
     super.dispose();
   }
 
+  /// Replay the same level: restore the looping game music (the victory
+  /// fanfare is a one-shot and has stopped the music channel) before the
+  /// caller pops this sheet and restarts the game.
+  void _handlePlayAgain() {
+    context.read<AudioService>().playGameMusic(widget.results.gameId);
+    widget.onPlayAgain();
+  }
+
+  /// Advance to the next level: same music handover as [_handlePlayAgain].
+  void _handleNextLevel() {
+    context.read<AudioService>().playGameMusic(widget.results.gameId);
+    widget.onNextLevel?.call();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -202,7 +216,7 @@ class _ResultScreenState extends State<ResultScreen>
                 width: double.infinity,
                 height: 52,
                 child: ElevatedButton.icon(
-                  onPressed: widget.onNextLevel,
+                  onPressed: _handleNextLevel,
                   icon: const Icon(Icons.arrow_forward),
                   label: Text(l10n.nextLevel),
                 ),
@@ -212,7 +226,7 @@ class _ResultScreenState extends State<ResultScreen>
                 width: double.infinity,
                 height: 44,
                 child: OutlinedButton.icon(
-                  onPressed: widget.onPlayAgain,
+                  onPressed: _handlePlayAgain,
                   icon: const Icon(Icons.replay, size: 18),
                   label: Text(l10n.playAgain),
                 ),
@@ -223,7 +237,7 @@ class _ResultScreenState extends State<ResultScreen>
                 width: double.infinity,
                 height: 52,
                 child: ElevatedButton.icon(
-                  onPressed: widget.onPlayAgain,
+                  onPressed: _handlePlayAgain,
                   icon: const Icon(Icons.replay),
                   label: Text(l10n.playAgain),
                 ),

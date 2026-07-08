@@ -16,10 +16,12 @@ import 'systems/equation_builder.dart';
 import 'systems/solvability_checker.dart';
 import '../shared/math_problem.dart';
 
-typedef OnEquationResult = void Function(EquationResult result, int responseTimeMs);
+typedef OnEquationResult =
+    void Function(EquationResult result, int responseTimeMs);
 typedef OnGameOver = void Function();
 typedef OnScoreChanged = void Function(int score, int combo, int streak);
-typedef OnEquationChanged = void Function(String displayString, EquationStep step);
+typedef OnEquationChanged =
+    void Function(String displayString, EquationStep step);
 typedef OnLevelComplete = void Function();
 typedef OnProgressChanged = void Function(int solved, int required);
 
@@ -65,7 +67,6 @@ class DragonEggsFlameGame extends FlameGame with TapCallbacks {
   DateTime? _gameStartTime;
 
   List<MathFact>? _factPool;
-  MathFact? _focusFact;
 
   // ignore: unused_field
   bool _valuesHidden = false;
@@ -98,11 +99,7 @@ class DragonEggsFlameGame extends FlameGame with TapCallbacks {
     equationBuilder = EquationBuilder();
     solvabilityChecker = SolvabilityChecker();
 
-    spawner.difficultyEngine = difficultyEngine;
-
     _regenerateFactPool();
-    _pickFocusFact();
-    spawner.focusFact = _focusFact;
 
     add(DangerLine(y: dangerLineY, lineWidth: fieldWidth));
 
@@ -119,13 +116,17 @@ class DragonEggsFlameGame extends FlameGame with TapCallbacks {
 
     final cappedDt = dt.clamp(0.0, 0.05);
 
-    physics.update(eggs, cappedDt, currentTier.gravityMultiplier);
-    spawner.update(cappedDt, eggs, _onEggSpawned);
-    solvabilityChecker.check(eggs, spawner, currentTier, _onEggSpawned);
+    final intensity = _levelIntensity;
+    physics.update(
+      eggs,
+      cappedDt,
+      currentTier.gravityMultiplier * (1.0 + intensity * 0.40),
+    );
+    spawner.update(cappedDt, eggs, _onEggSpawned, intensity);
+    solvabilityChecker.check(cappedDt, eggs, spawner, _onEggSpawned);
 
     for (final egg in eggs) {
-      if (!egg.hasEnteredField &&
-          egg.position.y > dangerLineY + egg.radius) {
+      if (!egg.hasEnteredField && egg.position.y > dangerLineY + egg.radius) {
         egg.hasEnteredField = true;
       }
     }
@@ -153,10 +154,7 @@ class DragonEggsFlameGame extends FlameGame with TapCallbacks {
     final accepted = equationBuilder.trySelect(egg);
     if (!accepted) return;
 
-    onEquationChanged(
-      equationBuilder.displayString,
-      equationBuilder.step,
-    );
+    onEquationChanged(equationBuilder.displayString, equationBuilder.step);
 
     if (equationBuilder.shouldEvaluate) {
       _evaluateEquation();
@@ -165,19 +163,13 @@ class DragonEggsFlameGame extends FlameGame with TapCallbacks {
 
   void pressEquals() {
     if (equationBuilder.pressEquals()) {
-      onEquationChanged(
-        equationBuilder.displayString,
-        equationBuilder.step,
-      );
+      onEquationChanged(equationBuilder.displayString, equationBuilder.step);
     }
   }
 
   void deselectAll() {
     equationBuilder.deselectAll();
-    onEquationChanged(
-      equationBuilder.displayString,
-      equationBuilder.step,
-    );
+    onEquationChanged(equationBuilder.displayString, equationBuilder.step);
   }
 
   void _evaluateEquation() {
@@ -211,13 +203,11 @@ class DragonEggsFlameGame extends FlameGame with TapCallbacks {
     onEquationResult(result, responseTimeMs);
 
     equationBuilder.reset();
-    onEquationChanged(
-      equationBuilder.displayString,
-      equationBuilder.step,
-    );
+    onEquationChanged(equationBuilder.displayString, equationBuilder.step);
 
-    _pickFocusFact();
-    spawner.focusFact = _focusFact;
+    if (result.isCorrect) {
+      spawner.recordSolvedFact(result.factKey);
+    }
     _equationStartTime = DateTime.now();
   }
 
@@ -230,10 +220,12 @@ class DragonEggsFlameGame extends FlameGame with TapCallbacks {
 
     for (final egg in equationBuilder.parts) {
       egg.startPop();
-      add(EggPopEffect(
-        effectPosition: egg.position.clone(),
-        color: egg.baseColor,
-      ));
+      add(
+        EggPopEffect(
+          effectPosition: egg.position.clone(),
+          color: egg.baseColor,
+        ),
+      );
     }
 
     final isNew = _isNewFact(result.factKey);
@@ -358,8 +350,6 @@ class DragonEggsFlameGame extends FlameGame with TapCallbacks {
     equationBuilder.reset();
     spawner.updateTier(currentTier);
     _regenerateFactPool();
-    _pickFocusFact();
-    spawner.focusFact = _focusFact;
 
     _equationStartTime = DateTime.now();
 
@@ -375,19 +365,12 @@ class DragonEggsFlameGame extends FlameGame with TapCallbacks {
       operations: currentTier.operations,
       resultMax: currentTier.resultMax,
     );
+    spawner.factPool = _factPool ?? const [];
   }
 
-  void _pickFocusFact() {
-    if (_factPool == null || _factPool!.isEmpty) return;
-    if (difficultyEngine != null) {
-      final suggested = difficultyEngine!.selectNext(_factPool!);
-      if (suggested != null) {
-        _focusFact = suggested;
-        return;
-      }
-    }
-    final random = Random();
-    _focusFact = _factPool![random.nextInt(_factPool!.length)];
+  double get _levelIntensity {
+    if (currentTier.requiredSolves <= 0) return 0;
+    return (levelCorrectCount / currentTier.requiredSolves).clamp(0.0, 1.0);
   }
 
   void setPaused(bool paused) {
@@ -443,9 +426,8 @@ class DragonEggsFlameGame extends FlameGame with TapCallbacks {
 
     equationBuilder.reset();
     spawner.updateTier(currentTier);
+    spawner.resetSession();
     _regenerateFactPool();
-    _pickFocusFact();
-    spawner.focusFact = _focusFact;
 
     _gameStartTime = DateTime.now();
     _equationStartTime = DateTime.now();

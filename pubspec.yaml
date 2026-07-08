@@ -1,7 +1,7 @@
 name: math_dragons
 description: Dragon-powered math games that are actually fun!
 publish_to: 'none'
-version: 1.0.1+5
+version: 1.0.2+6
 
 environment:
   sdk: ^3.11.0
@@ -54,6 +54,28 @@ flutter:
 
   assets:
     - assets/images/dragons/
+    - assets/images/dragons/posed/raw/dragons/hub/stage_0_egg/
+    - assets/images/dragons/posed/raw/dragons/hub/stage_1_hatchling/
+    - assets/images/dragons/posed/raw/dragons/hub/stage_2_fledgling/
+    - assets/images/dragons/posed/raw/dragons/hub/stage_3_young/
+    - assets/images/dragons/posed/raw/dragons/hub/stage_4_adult/
+    - assets/images/dragons/posed/raw/dragons/hub/stage_5_elder/
+    - assets/images/dragons/posed/raw/dragons/portrait/stage_0_egg/
+    - assets/images/dragons/posed/raw/dragons/portrait/stage_1_hatchling/
+    - assets/images/dragons/posed/raw/dragons/portrait/stage_2_fledgling/
+    - assets/images/dragons/posed/raw/dragons/portrait/stage_3_young/
+    - assets/images/dragons/posed/raw/dragons/portrait/stage_4_adult/
+    - assets/images/dragons/posed/raw/dragons/portrait/stage_5_elder/
+    - assets/images/dragons/posed/raw/accessories/hub/stage_1_hatchling/
+    - assets/images/dragons/posed/raw/accessories/hub/stage_2_fledgling/
+    - assets/images/dragons/posed/raw/accessories/hub/stage_3_young/
+    - assets/images/dragons/posed/raw/accessories/hub/stage_4_adult/
+    - assets/images/dragons/posed/raw/accessories/hub/stage_5_elder/
+    - assets/images/dragons/posed/raw/accessories/portrait/stage_1_hatchling/
+    - assets/images/dragons/posed/raw/accessories/portrait/stage_2_fledgling/
+    - assets/images/dragons/posed/raw/accessories/portrait/stage_3_young/
+    - assets/images/dragons/posed/raw/accessories/portrait/stage_4_adult/
+    - assets/images/dragons/posed/raw/accessories/portrait/stage_5_elder/
     - assets/images/hub/
     - assets/images/games/runes/
     - assets/images/games/fire_trail/

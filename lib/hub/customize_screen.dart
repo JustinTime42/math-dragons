@@ -4,6 +4,7 @@ import 'package:math_dragons/l10n/app_localizations.dart';
 import '../core/player_profile.dart';
 import '../models/cosmetic_catalog.dart';
 import '../storage/local_storage.dart';
+import '../theme/dragon_anchor_points.dart';
 import '../theme/dragon_assets.dart';
 import '../theme/dragon_colors.dart';
 import '../theme/dragon_spacing.dart';
@@ -34,49 +35,45 @@ class _CustomizeScreenState extends State<CustomizeScreen> {
     final unequip = _profile.equippedColor == colorId;
     if (unequip) {
       // copyWith can't set nullable fields to null, so reconstruct
-      _storage.updateProfile((p) => PlayerProfile(
-            id: p.id,
-            dragonName: p.dragonName,
-            dragonEvolution: p.dragonEvolution,
-            totalScales: p.totalScales,
-            totalCorrectAnswers: p.totalCorrectAnswers,
-            totalPlayTimeMinutes: p.totalPlayTimeMinutes,
-            dailyChallengeStreak: p.dailyChallengeStreak,
-            createdAt: p.createdAt,
-            lastPlayedAt: p.lastPlayedAt,
-            gameStats: p.gameStats,
-            settings: p.settings,
-            ownedCosmetics: p.ownedCosmetics,
-            equippedColor: null,
-            equippedAccessories: p.equippedAccessories,
-            schemaVersion: p.schemaVersion,
-            isFirstSession: p.isFirstSession,
-            ageGroup: p.ageGroup,
-            firebaseUid: p.firebaseUid,
-            linkedProvider: p.linkedProvider,
-          ));
+      _storage.updateProfile(
+        (p) => PlayerProfile(
+          id: p.id,
+          dragonName: p.dragonName,
+          dragonEvolution: p.dragonEvolution,
+          totalScales: p.totalScales,
+          totalCorrectAnswers: p.totalCorrectAnswers,
+          totalPlayTimeMinutes: p.totalPlayTimeMinutes,
+          dailyChallengeStreak: p.dailyChallengeStreak,
+          createdAt: p.createdAt,
+          lastPlayedAt: p.lastPlayedAt,
+          gameStats: p.gameStats,
+          settings: p.settings,
+          ownedCosmetics: p.ownedCosmetics,
+          equippedColor: null,
+          equippedAccessories: p.equippedAccessories,
+          schemaVersion: p.schemaVersion,
+          isFirstSession: p.isFirstSession,
+          ageGroup: p.ageGroup,
+          firebaseUid: p.firebaseUid,
+          linkedProvider: p.linkedProvider,
+        ),
+      );
     } else {
       _storage.updateProfile((p) => p.copyWith(equippedColor: colorId));
     }
     setState(() => _profile = _storage.getProfile());
   }
 
-  void _toggleAccessory(String accId) {
-    final item = CosmeticCatalog.findById(accId);
-    final current = List<String>.from(_profile.equippedAccessories);
-    if (current.contains(accId)) {
-      current.remove(accId);
-    } else {
-      // Remove any other accessory in the same slot
-      if (item?.slot != null) {
-        current.removeWhere((id) {
-          final other = CosmeticCatalog.findById(id);
-          return other?.slot == item!.slot;
-        });
-      }
-      current.add(accId);
-    }
-    _storage.updateProfile((p) => p.copyWith(equippedAccessories: current));
+  /// Toggle an equipped-list cosmetic (accessory or aura effect). Slot and
+  /// single-aura rules are enforced by [CosmeticCatalog.toggleEquipped].
+  void _toggleEquipped(String cosmeticId) {
+    final item = CosmeticCatalog.findById(cosmeticId);
+    if (item == null) return;
+    final next = CosmeticCatalog.toggleEquipped(
+      _profile.equippedAccessories,
+      item,
+    );
+    _storage.updateProfile((p) => p.copyWith(equippedAccessories: next));
     setState(() => _profile = _storage.getProfile());
   }
 
@@ -85,28 +82,30 @@ class _CustomizeScreenState extends State<CustomizeScreen> {
     final unequip = _profile.equippedBackground == bgId;
     if (unequip) {
       // copyWith can't set nullable fields to null, so reconstruct
-      _storage.updateProfile((p) => PlayerProfile(
-            id: p.id,
-            dragonName: p.dragonName,
-            dragonEvolution: p.dragonEvolution,
-            totalScales: p.totalScales,
-            totalCorrectAnswers: p.totalCorrectAnswers,
-            totalPlayTimeMinutes: p.totalPlayTimeMinutes,
-            dailyChallengeStreak: p.dailyChallengeStreak,
-            createdAt: p.createdAt,
-            lastPlayedAt: p.lastPlayedAt,
-            gameStats: p.gameStats,
-            settings: p.settings,
-            ownedCosmetics: p.ownedCosmetics,
-            equippedColor: p.equippedColor,
-            equippedAccessories: p.equippedAccessories,
-            schemaVersion: p.schemaVersion,
-            isFirstSession: p.isFirstSession,
-            ageGroup: p.ageGroup,
-            firebaseUid: p.firebaseUid,
-            linkedProvider: p.linkedProvider,
-            equippedBackground: null,
-          ));
+      _storage.updateProfile(
+        (p) => PlayerProfile(
+          id: p.id,
+          dragonName: p.dragonName,
+          dragonEvolution: p.dragonEvolution,
+          totalScales: p.totalScales,
+          totalCorrectAnswers: p.totalCorrectAnswers,
+          totalPlayTimeMinutes: p.totalPlayTimeMinutes,
+          dailyChallengeStreak: p.dailyChallengeStreak,
+          createdAt: p.createdAt,
+          lastPlayedAt: p.lastPlayedAt,
+          gameStats: p.gameStats,
+          settings: p.settings,
+          ownedCosmetics: p.ownedCosmetics,
+          equippedColor: p.equippedColor,
+          equippedAccessories: p.equippedAccessories,
+          schemaVersion: p.schemaVersion,
+          isFirstSession: p.isFirstSession,
+          ageGroup: p.ageGroup,
+          firebaseUid: p.firebaseUid,
+          linkedProvider: p.linkedProvider,
+          equippedBackground: null,
+        ),
+      );
     } else {
       _storage.updateProfile((p) => p.copyWith(equippedBackground: bgId));
     }
@@ -125,9 +124,14 @@ class _CustomizeScreenState extends State<CustomizeScreen> {
     final ownedBackgrounds = CosmeticCatalog.backgrounds
         .where((b) => _profile.ownedCosmetics.contains(b.id))
         .toList();
-    final hasAnything = ownedColors.isNotEmpty ||
+    final ownedEffects = CosmeticCatalog.effects
+        .where((e) => _profile.ownedCosmetics.contains(e.id))
+        .toList();
+    final hasAnything =
+        ownedColors.isNotEmpty ||
         ownedAccessories.isNotEmpty ||
-        ownedBackgrounds.isNotEmpty;
+        ownedBackgrounds.isNotEmpty ||
+        ownedEffects.isNotEmpty;
 
     return Scaffold(
       backgroundColor: DragonColors.midnightBlue,
@@ -149,8 +153,8 @@ class _CustomizeScreenState extends State<CustomizeScreen> {
                   ? BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(
-                          DragonAssets.backgroundImages[
-                                  _profile.equippedBackground!] ??
+                          DragonAssets.backgroundImages[_profile
+                                  .equippedBackground!] ??
                               DragonAssets.gameBackgrounds['dragon_eggs']!,
                         ),
                         fit: BoxFit.cover,
@@ -160,8 +164,7 @@ class _CustomizeScreenState extends State<CustomizeScreen> {
                       color: DragonColors.midnightBlue,
                       boxShadow: [
                         BoxShadow(
-                          color:
-                              DragonColors.dragonGold.withValues(alpha: 0.2),
+                          color: DragonColors.dragonGold.withValues(alpha: 0.2),
                           blurRadius: 32,
                           spreadRadius: 8,
                         ),
@@ -191,16 +194,16 @@ class _CustomizeScreenState extends State<CustomizeScreen> {
                   const SizedBox(height: DragonSpacing.base),
                   Text(
                     l10n.emptyWardrobe,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Colors.white70,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleMedium?.copyWith(color: Colors.white70),
                   ),
                   const SizedBox(height: DragonSpacing.sm),
                   Text(
                     l10n.emptyWardrobeHint,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white38,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: Colors.white38),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -220,6 +223,14 @@ class _CustomizeScreenState extends State<CustomizeScreen> {
               _SectionLabel(title: l10n.dragonAccessories),
               const SizedBox(height: DragonSpacing.sm),
               _buildAccessoryGrid(ownedAccessories),
+              const SizedBox(height: DragonSpacing.lg),
+            ],
+
+            // Aura effects section
+            if (ownedEffects.isNotEmpty) ...[
+              const _SectionLabel(title: 'Aura Effects'),
+              const SizedBox(height: DragonSpacing.sm),
+              _buildEffectGrid(ownedEffects),
               const SizedBox(height: DragonSpacing.lg),
             ],
 
@@ -272,6 +283,8 @@ class _CustomizeScreenState extends State<CustomizeScreen> {
         return _EquipTile(
           item: item,
           equipped: equipped,
+          previewSkinId: _profile.equippedColor,
+          previewStage: _profile.dragonEvolution,
           onTap: () => _equipColor(item.id),
         );
       },
@@ -294,7 +307,33 @@ class _CustomizeScreenState extends State<CustomizeScreen> {
         return _EquipTile(
           item: item,
           equipped: equipped,
-          onTap: () => _toggleAccessory(item.id),
+          previewSkinId: _profile.equippedColor,
+          previewStage: _profile.dragonEvolution,
+          onTap: () => _toggleEquipped(item.id),
+        );
+      },
+    );
+  }
+
+  Widget _buildEffectGrid(List<CosmeticItem> items) {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 4,
+        mainAxisSpacing: DragonSpacing.sm,
+        crossAxisSpacing: DragonSpacing.sm,
+      ),
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        final item = items[index];
+        final equipped = _profile.equippedAccessories.contains(item.id);
+        return _EquipTile(
+          item: item,
+          equipped: equipped,
+          previewSkinId: _profile.equippedColor,
+          previewStage: _profile.dragonEvolution,
+          onTap: () => _toggleEquipped(item.id),
         );
       },
     );
@@ -316,6 +355,8 @@ class _CustomizeScreenState extends State<CustomizeScreen> {
         return _EquipTile(
           item: item,
           equipped: equipped,
+          previewSkinId: _profile.equippedColor,
+          previewStage: _profile.dragonEvolution,
           onTap: () => _equipBackground(item.id),
         );
       },
@@ -332,9 +373,9 @@ class _SectionLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: Colors.white,
-          ),
+      style: Theme.of(
+        context,
+      ).textTheme.titleMedium?.copyWith(color: Colors.white),
     );
   }
 }
@@ -342,11 +383,15 @@ class _SectionLabel extends StatelessWidget {
 class _EquipTile extends StatelessWidget {
   final CosmeticItem item;
   final bool equipped;
+  final String? previewSkinId;
+  final int previewStage;
   final VoidCallback onTap;
 
   const _EquipTile({
     required this.item,
     required this.equipped,
+    required this.previewSkinId,
+    required this.previewStage,
     required this.onTap,
   });
 
@@ -366,33 +411,14 @@ class _EquipTile extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (item.imagePath != null)
-              Image.asset(
-                item.imagePath!,
-                width: 36,
-                height: 36,
-                fit: BoxFit.contain,
-              )
-            else
-              Container(
-                width: 36,
-                height: 36,
-                decoration: BoxDecoration(
-                  color: item.previewColor ?? Colors.white12,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: Text(item.previewEmoji,
-                      style: const TextStyle(fontSize: 20)),
-                ),
-              ),
+            _buildPreview(),
             const SizedBox(height: 4),
             Text(
               item.name,
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color: equipped ? DragonColors.dragonGold : Colors.white70,
-                    fontSize: 10,
-                  ),
+                color: equipped ? DragonColors.dragonGold : Colors.white70,
+                fontSize: 10,
+              ),
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
             ),
@@ -400,5 +426,49 @@ class _EquipTile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildPreview() {
+    // Accessory tiles show the standalone item icon (item.imagePath), not the
+    // dragon wearing it — the tiles are too small to read the worn detail.
+    final previewImage = _previewImageFor(item);
+    if (previewImage != null) {
+      return Image.asset(
+        previewImage,
+        width: 36,
+        height: 36,
+        fit: BoxFit.contain,
+      );
+    }
+
+    return Container(
+      width: 36,
+      height: 36,
+      decoration: BoxDecoration(
+        color: item.previewColor ?? Colors.white12,
+        shape: BoxShape.circle,
+      ),
+      child: Center(
+        child: Text(item.previewEmoji, style: const TextStyle(fontSize: 20)),
+      ),
+    );
+  }
+
+  String? _previewImageFor(CosmeticItem item) {
+    switch (item.type) {
+      case CosmeticType.color:
+        return DragonAssets.resolveDragonImage(
+          evolutionStage: 3,
+          context: DragonRenderContext.portrait,
+          skinId: item.id,
+        );
+      case CosmeticType.accessory:
+        return item.imagePath;
+      case CosmeticType.background:
+        return item.imagePath;
+      case CosmeticType.effect:
+        // Code-drawn aura; shown via previewColor + emoji fallback.
+        return null;
+    }
   }
 }

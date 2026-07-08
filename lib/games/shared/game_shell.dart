@@ -47,15 +47,22 @@ class GameShell extends StatefulWidget {
 class _GameShellState extends State<GameShell> {
   bool _isPaused = false;
 
+  // Captured in initState so dispose never has to touch the (possibly
+  // deactivated) context to stop music.
+  late final SessionManager _session;
+  late final AudioService _audio;
+
   @override
   void initState() {
     super.initState();
+    _session = context.read<SessionManager>();
+    _audio = context.read<AudioService>();
+
     // Start the game session
-    final session = context.read<SessionManager>();
-    session.startGame(widget.gameId);
+    _session.startGame(widget.gameId);
 
     // Start game music
-    context.read<AudioService>().playGameMusic(widget.gameId);
+    _audio.playGameMusic(widget.gameId);
 
     // Emit GameStarted event after the current build frame completes,
     // so that synchronous EventBus listeners don't trigger setState during build.
@@ -71,14 +78,15 @@ class _GameShellState extends State<GameShell> {
 
   @override
   void dispose() {
-    // End the game session and stop music
+    // Stop music first, in its own guard. Ending the session writes to
+    // storage and can throw; that must never skip the music stop and leave
+    // the game track looping after we've left the screen.
     try {
-      final session = context.read<SessionManager>();
-      session.endGame();
-      context.read<AudioService>().stopMusic();
-    } catch (_) {
-      // Provider may not be available during dispose
-    }
+      _audio.stopMusic();
+    } catch (_) {}
+    try {
+      _session.endGame();
+    } catch (_) {}
     super.dispose();
   }
 

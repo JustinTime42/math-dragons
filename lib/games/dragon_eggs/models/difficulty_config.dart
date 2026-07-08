@@ -58,8 +58,8 @@ class DifficultyTier {
       ops = [MathOp.add, MathOp.subtract, MathOp.multiply, MathOp.divide];
     }
 
-    final gravity = 1.0 + (l - 1) * 0.01;
-    final spawnMs = (2000 - (l - 1) * 22).clamp(900, 2000);
+    final gravity = 0.95 + (l - 1) * 0.018;
+    final spawnMs = (2100 - (l - 1) * 28).clamp(620, 2100);
 
     final int resMax;
     if (l <= 20) {
@@ -68,7 +68,7 @@ class DifficultyTier {
       resMax = maxNum * maxNum;
     }
 
-    final solves = (3 + (l - 1) * 0.2).round().clamp(3, 12);
+    final solves = (14 + (l - 1) * 0.75).round().clamp(14, 52);
 
     return DifficultyTier(
       level: l,

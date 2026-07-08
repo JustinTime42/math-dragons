@@ -189,10 +189,14 @@ class AudioService {
   Future<void> playVictoryMusic() async {
     if (!_musicEnabled) return;
     await _stopMusicInternal();
-    _currentMusicTrack = 'music/victory.ogg';
     try {
-      // Play once without looping
-      FlameAudio.bgm.play('music/victory.ogg', volume: _musicVolume);
+      // Must NOT use FlameAudio.bgm here: bgm.play() always forces
+      // ReleaseMode.loop, so the fanfare would repeat forever. playLongAudio
+      // uses ReleaseMode.release and plays a single run.
+      _victoryPlayer = await FlameAudio.playLongAudio(
+        'music/victory.ogg',
+        volume: _musicVolume,
+      );
     } catch (e) {
       debugPrint('AudioService: Victory music failed: $e');
     }

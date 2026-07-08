@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:math_dragons/l10n/app_localizations.dart';
@@ -6,6 +7,7 @@ import '../theme/dragon_spacing.dart';
 import '../storage/local_storage.dart';
 import '../core/player_profile.dart';
 import '../core/audio_service.dart';
+import '../models/cosmetic_catalog.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -39,19 +41,47 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   void _saveSettings() {
     final storage = context.read<LocalStorage>();
-    storage.updateProfile((p) => p.copyWith(
-          settings: PlayerSettings(
-            soundEnabled: _soundEnabled,
-            musicEnabled: _musicEnabled,
-            hapticsEnabled: _hapticsEnabled,
-          ),
-        ));
+    storage.updateProfile(
+      (p) => p.copyWith(
+        settings: PlayerSettings(
+          soundEnabled: _soundEnabled,
+          musicEnabled: _musicEnabled,
+          hapticsEnabled: _hapticsEnabled,
+        ),
+      ),
+    );
   }
 
   void _onNameChanged(String name) {
     if (name.trim().isEmpty) return;
     final storage = context.read<LocalStorage>();
     storage.updateProfile((p) => p.copyWith(dragonName: name.trim()));
+  }
+
+  /// Debug-only: put the profile in a state where every cosmetic can be tried
+  /// immediately (young dragon, all cosmetics owned, plenty of scales). Used to
+  /// exercise the Track A worn accessories and Track D auras in-app.
+  void _grantTestLoadout() {
+    final storage = context.read<LocalStorage>();
+    final allIds = [
+      ...CosmeticCatalog.colors,
+      ...CosmeticCatalog.accessories,
+      ...CosmeticCatalog.backgrounds,
+      ...CosmeticCatalog.effects,
+    ].map((c) => c.id).toList();
+    storage.updateProfile(
+      (p) => p.copyWith(
+        dragonEvolution: 3,
+        totalScales: p.totalScales < 5000 ? 5000 : p.totalScales,
+        ownedCosmetics: {...p.ownedCosmetics, ...allIds}.toList(),
+      ),
+    );
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Test loadout granted: young dragon, all cosmetics owned'),
+      ),
+    );
   }
 
   @override
@@ -61,9 +91,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(l10n.settings)),
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: DragonColors.lairGradient,
-        ),
+        decoration: const BoxDecoration(gradient: DragonColors.lairGradient),
         child: ListView(
           padding: const EdgeInsets.all(DragonSpacing.base),
           children: [
@@ -149,6 +177,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
             const SizedBox(height: DragonSpacing.lg),
 
+            if (kDebugMode) ...[
+              _buildSectionHeader(context, 'Developer Tools'),
+              const SizedBox(height: DragonSpacing.sm),
+              _buildActionTile(
+                context,
+                icon: Icons.auto_awesome,
+                title: 'Grant Test Loadout',
+                subtitle: 'Young dragon, all cosmetics owned, 5000 scales',
+                onTap: _grantTestLoadout,
+              ),
+              _buildActionTile(
+                context,
+                icon: Icons.tune,
+                title: 'Accessory Calibration',
+                subtitle: 'Legacy anchor tool (superseded by posed layers)',
+                onTap: () =>
+                    Navigator.pushNamed(context, '/dev/accessory-calibration'),
+              ),
+              const SizedBox(height: DragonSpacing.lg),
+            ],
+
             // About Section
             _buildSectionHeader(context, l10n.aboutTitle),
             const SizedBox(height: DragonSpacing.sm),
@@ -164,9 +213,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   Text(
                     l10n.appTitle,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontFamily: 'Cinzel',
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleLarge?.copyWith(fontFamily: 'Cinzel'),
                   ),
                   const SizedBox(height: DragonSpacing.xs),
                   Text(
@@ -209,21 +258,43 @@ class _SettingsScreenState extends State<SettingsScreen> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: DragonSpacing.xs),
-      decoration: BoxDecoration(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: DragonSpacing.xs),
+      child: Material(
         color: DragonColors.nightSurface,
         borderRadius: BorderRadius.circular(8),
-      ),
-      child: SwitchListTile(
-        secondary: Icon(icon, color: DragonColors.textSecondary, size: 22),
-        title: Text(title),
-        subtitle: Text(
-          subtitle,
-          style: Theme.of(context).textTheme.bodySmall,
+        clipBehavior: Clip.antiAlias,
+        child: SwitchListTile(
+          secondary: Icon(icon, color: DragonColors.textSecondary, size: 22),
+          title: Text(title),
+          subtitle: Text(
+            subtitle,
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+          value: value,
+          onChanged: onChanged,
         ),
-        value: value,
-        onChanged: onChanged,
+      ),
+    );
+  }
+
+  Widget _buildActionTile(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required VoidCallback onTap,
+  }) {
+    return Material(
+      color: DragonColors.nightSurface,
+      borderRadius: BorderRadius.circular(8),
+      clipBehavior: Clip.antiAlias,
+      child: ListTile(
+        leading: Icon(icon, color: DragonColors.textSecondary, size: 22),
+        title: Text(title),
+        subtitle: Text(subtitle, style: Theme.of(context).textTheme.bodySmall),
+        trailing: const Icon(Icons.chevron_right),
+        onTap: onTap,
       ),
     );
   }

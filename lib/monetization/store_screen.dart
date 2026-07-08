@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../core/player_profile.dart';
 import '../models/cosmetic_catalog.dart';
 import '../storage/local_storage.dart';
+import '../theme/dragon_anchor_points.dart';
 import '../theme/dragon_assets.dart';
 import '../theme/dragon_colors.dart';
 import '../theme/dragon_spacing.dart';
@@ -33,10 +34,10 @@ class StoreScreen extends StatelessWidget {
                   Text(
                     '${profile.totalScales}',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: DragonColors.dragonGold,
-                          fontFamily: 'JetBrainsMono',
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: DragonColors.dragonGold,
+                      fontFamily: 'JetBrainsMono',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
@@ -49,12 +50,16 @@ class StoreScreen extends StatelessWidget {
         children: [
           // IAP section placeholder (Step 11)
           const _SectionHeader(
-              title: 'Premium Packs', subtitle: 'Coming in a future update'),
+            title: 'Premium Packs',
+            subtitle: 'Coming in a future update',
+          ),
           const SizedBox(height: DragonSpacing.lg),
 
           // Dragon Colors section
           const _SectionHeader(
-              title: 'Dragon Colors', subtitle: 'Customize your dragon'),
+            title: 'Dragon Colors',
+            subtitle: 'Customize your dragon',
+          ),
           const SizedBox(height: DragonSpacing.sm),
           _CosmeticGrid(
             items: CosmeticCatalog.colors,
@@ -65,22 +70,39 @@ class StoreScreen extends StatelessWidget {
 
           // Backgrounds section
           const _SectionHeader(
-              title: 'Backgrounds', subtitle: 'Customize your lair'),
+            title: 'Backgrounds',
+            subtitle: 'Customize your lair',
+          ),
           const SizedBox(height: DragonSpacing.sm),
           _CosmeticGrid(
             items: CosmeticCatalog.backgrounds,
             profile: profile,
             storage: storage,
           ),
-          // TODO: Re-enable Accessories section when ready
-          // const _SectionHeader(
-          //     title: 'Accessories', subtitle: 'Style your dragon'),
-          // const SizedBox(height: DragonSpacing.sm),
-          // _CosmeticGrid(
-          //   items: CosmeticCatalog.accessories,
-          //   profile: profile,
-          //   storage: storage,
-          // ),
+          const SizedBox(height: DragonSpacing.lg),
+
+          const _SectionHeader(
+            title: 'Accessories',
+            subtitle: 'Style your dragon',
+          ),
+          const SizedBox(height: DragonSpacing.sm),
+          _CosmeticGrid(
+            items: CosmeticCatalog.accessories,
+            profile: profile,
+            storage: storage,
+          ),
+          const SizedBox(height: DragonSpacing.lg),
+
+          const _SectionHeader(
+            title: 'Aura Effects',
+            subtitle: 'Surround your dragon in a glow',
+          ),
+          const SizedBox(height: DragonSpacing.sm),
+          _CosmeticGrid(
+            items: CosmeticCatalog.effects,
+            profile: profile,
+            storage: storage,
+          ),
           const SizedBox(height: DragonSpacing.xxl),
         ],
       ),
@@ -101,15 +123,15 @@ class _SectionHeader extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: Colors.white,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineMedium?.copyWith(color: Colors.white),
         ),
         Text(
           subtitle,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white54,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: Colors.white54),
         ),
       ],
     );
@@ -144,10 +166,12 @@ class _CosmeticGridState extends State<_CosmeticGrid> {
     if (_profile.totalScales < item.cost) return;
     if (_profile.ownedCosmetics.contains(item.id)) return;
 
-    widget.storage.updateProfile((p) => p.copyWith(
-          totalScales: p.totalScales - item.cost,
-          ownedCosmetics: [...p.ownedCosmetics, item.id],
-        ));
+    widget.storage.updateProfile(
+      (p) => p.copyWith(
+        totalScales: p.totalScales - item.cost,
+        ownedCosmetics: [...p.ownedCosmetics, item.id],
+      ),
+    );
     setState(() => _profile = widget.storage.getProfile());
   }
 
@@ -155,27 +179,21 @@ class _CosmeticGridState extends State<_CosmeticGrid> {
     if (!_profile.ownedCosmetics.contains(item.id)) return;
 
     if (item.type == CosmeticType.color) {
-      widget.storage
-          .updateProfile((p) => p.copyWith(equippedColor: item.id));
+      widget.storage.updateProfile((p) => p.copyWith(equippedColor: item.id));
     } else if (item.type == CosmeticType.background) {
-      widget.storage
-          .updateProfile((p) => p.copyWith(equippedBackground: item.id));
+      widget.storage.updateProfile(
+        (p) => p.copyWith(equippedBackground: item.id),
+      );
     } else {
-      final current = List<String>.from(_profile.equippedAccessories);
-      if (current.contains(item.id)) {
-        current.remove(item.id);
-      } else {
-        // Remove any other accessory in the same slot
-        if (item.slot != null) {
-          current.removeWhere((id) {
-            final other = CosmeticCatalog.findById(id);
-            return other?.slot == item.slot;
-          });
-        }
-        current.add(item.id);
-      }
-      widget.storage
-          .updateProfile((p) => p.copyWith(equippedAccessories: current));
+      // Accessories and aura effects share the equipped list; slot and
+      // single-aura rules are enforced by the shared helper.
+      final next = CosmeticCatalog.toggleEquipped(
+        _profile.equippedAccessories,
+        item,
+      );
+      widget.storage.updateProfile(
+        (p) => p.copyWith(equippedAccessories: next),
+      );
     }
     setState(() => _profile = widget.storage.getProfile());
   }
@@ -198,8 +216,8 @@ class _CosmeticGridState extends State<_CosmeticGrid> {
         final equipped = item.type == CosmeticType.color
             ? _profile.equippedColor == item.id
             : item.type == CosmeticType.background
-                ? _profile.equippedBackground == item.id
-                : _profile.equippedAccessories.contains(item.id);
+            ? _profile.equippedBackground == item.id
+            : _profile.equippedAccessories.contains(item.id);
         final canAfford = _profile.totalScales >= item.cost;
 
         return _CosmeticTile(
@@ -207,6 +225,8 @@ class _CosmeticGridState extends State<_CosmeticGrid> {
           owned: owned,
           equipped: equipped,
           canAfford: canAfford,
+          previewSkinId: _profile.equippedColor,
+          previewStage: _profile.dragonEvolution,
           onTap: owned
               ? () => _equip(item)
               : (canAfford ? () => _purchase(item) : null),
@@ -221,6 +241,8 @@ class _CosmeticTile extends StatelessWidget {
   final bool owned;
   final bool equipped;
   final bool canAfford;
+  final String? previewSkinId;
+  final int previewStage;
   final VoidCallback? onTap;
 
   const _CosmeticTile({
@@ -228,6 +250,8 @@ class _CosmeticTile extends StatelessWidget {
     required this.owned,
     required this.equipped,
     required this.canAfford,
+    required this.previewSkinId,
+    required this.previewStage,
     this.onTap,
   });
 
@@ -243,8 +267,8 @@ class _CosmeticTile extends StatelessWidget {
             color: equipped
                 ? DragonColors.dragonGold
                 : (owned
-                    ? DragonColors.emeraldFlame.withAlpha(80)
-                    : Colors.transparent),
+                      ? DragonColors.emeraldFlame.withAlpha(80)
+                      : Colors.transparent),
             width: equipped ? 2 : 1,
           ),
         ),
@@ -261,24 +285,14 @@ class _CosmeticTile extends StatelessWidget {
                     : (item.previewColor ?? Colors.white12),
                 shape: BoxShape.circle,
               ),
-              child: Center(
-                child: item.imagePath != null
-                    ? Image.asset(
-                        item.imagePath!,
-                        width: 40,
-                        height: 40,
-                        fit: BoxFit.contain,
-                      )
-                    : Text(item.previewEmoji,
-                        style: const TextStyle(fontSize: 28)),
-              ),
+              child: Center(child: _buildPreview()),
             ),
             const SizedBox(height: DragonSpacing.xs),
             Text(
               item.name,
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color: Colors.white,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.labelSmall?.copyWith(color: Colors.white),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 2),
@@ -286,17 +300,17 @@ class _CosmeticTile extends StatelessWidget {
               Text(
                 'Equipped',
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: DragonColors.dragonGold,
-                      fontSize: 10,
-                    ),
+                  color: DragonColors.dragonGold,
+                  fontSize: 10,
+                ),
               )
             else if (owned)
               Text(
                 'Owned',
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: DragonColors.emeraldFlame,
-                      fontSize: 10,
-                    ),
+                  color: DragonColors.emeraldFlame,
+                  fontSize: 10,
+                ),
               )
             else
               Row(
@@ -304,18 +318,22 @@ class _CosmeticTile extends StatelessWidget {
                 children: [
                   Opacity(
                     opacity: canAfford ? 1.0 : 0.3,
-                    child: Image.asset(DragonAssets.iconScale, width: 10, height: 10),
+                    child: Image.asset(
+                      DragonAssets.iconScale,
+                      width: 10,
+                      height: 10,
+                    ),
                   ),
                   const SizedBox(width: 2),
                   Text(
                     '${item.cost}',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: canAfford
-                              ? DragonColors.dragonGold
-                              : Colors.white24,
-                          fontFamily: 'JetBrainsMono',
-                          fontSize: 10,
-                        ),
+                      color: canAfford
+                          ? DragonColors.dragonGold
+                          : Colors.white24,
+                      fontFamily: 'JetBrainsMono',
+                      fontSize: 10,
+                    ),
                   ),
                 ],
               ),
@@ -323,5 +341,38 @@ class _CosmeticTile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildPreview() {
+    // Accessory tiles show the standalone item icon, not the worn dragon.
+    final previewImage = _previewImageFor(item);
+    if (previewImage != null) {
+      return Image.asset(
+        previewImage,
+        width: 40,
+        height: 40,
+        fit: BoxFit.contain,
+      );
+    }
+
+    return Text(item.previewEmoji, style: const TextStyle(fontSize: 28));
+  }
+
+  String? _previewImageFor(CosmeticItem item) {
+    switch (item.type) {
+      case CosmeticType.color:
+        return DragonAssets.resolveDragonImage(
+          evolutionStage: 3,
+          context: DragonRenderContext.portrait,
+          skinId: item.id,
+        );
+      case CosmeticType.accessory:
+        return item.imagePath;
+      case CosmeticType.background:
+        return item.imagePath;
+      case CosmeticType.effect:
+        // Code-drawn aura; the tile falls back to previewEmoji/previewColor.
+        return null;
+    }
   }
 }

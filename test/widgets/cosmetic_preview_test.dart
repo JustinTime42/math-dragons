@@ -2,26 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:math_dragons/widgets/cosmetic_preview.dart';
 
+// The adopted art direction (see docs/step12/ACCESSORY_PIPELINE_DECISION.md)
+// renders accessories as full-canvas posed layers registered 1:1 to the dragon
+// template, with occlusion baked into each layer's alpha. There is no runtime
+// per-accessory anchor positioning and no separate "behind" pass; every
+// equipped accessory layer is stacked over the dragon at the same registered
+// offset. These tests assert that registered-layer behavior.
 void main() {
   group('CosmeticPreview', () {
     testWidgets('renders with default size', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: Center(
-              child: CosmeticPreview(evolutionStage: 0),
-            ),
+            body: Center(child: CosmeticPreview(evolutionStage: 0)),
           ),
         ),
       );
 
       expect(find.byType(CosmeticPreview), findsOneWidget);
-      // Default size SizedBox should be 72x72
       final sizedBox = tester.widget<SizedBox>(
-        find.descendant(
-          of: find.byType(CosmeticPreview),
-          matching: find.byType(SizedBox),
-        ).first,
+        find
+            .descendant(
+              of: find.byType(CosmeticPreview),
+              matching: find.byType(SizedBox),
+            )
+            .first,
       );
       expect(sizedBox.width, 72);
       expect(sizedBox.height, 72);
@@ -31,9 +36,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: Center(
-              child: CosmeticPreview(evolutionStage: 0, size: 160),
-            ),
+            body: Center(child: CosmeticPreview(evolutionStage: 0, size: 160)),
           ),
         ),
       );
@@ -41,14 +44,12 @@ void main() {
       expect(find.byType(CosmeticPreview), findsOneWidget);
     });
 
-    testWidgets('uses portrait images by default (useHubImage: false)',
+    testWidgets('uses portrait posed art by default (useHubImage: false)',
         (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: Center(
-              child: CosmeticPreview(evolutionStage: 1),
-            ),
+            body: Center(child: CosmeticPreview(evolutionStage: 1)),
           ),
         ),
       );
@@ -56,10 +57,11 @@ void main() {
       final images = tester.widgetList<Image>(find.byType(Image)).toList();
       expect(images.isNotEmpty, isTrue);
       final assetImage = images.first.image as AssetImage;
-      expect(assetImage.assetName, contains('dragon_hatchling'));
+      expect(assetImage.assetName, contains('portrait'));
+      expect(assetImage.assetName, contains('stage1'));
     });
 
-    testWidgets('uses hub images when useHubImage is true', (tester) async {
+    testWidgets('uses hub posed art when useHubImage is true', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
@@ -76,7 +78,7 @@ void main() {
       expect(assetImage.assetName, contains('hub'));
     });
 
-    testWidgets('shows color variant when equippedColorId is set',
+    testWidgets('shows skin-specific posed art when equippedColorId is set',
         (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
@@ -97,7 +99,7 @@ void main() {
       expect(assetImage.assetName, contains('crimson'));
     });
 
-    testWidgets('shows accessory images with Positioned widgets',
+    testWidgets('stacks a registered accessory layer over the dragon',
         (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
@@ -112,18 +114,17 @@ void main() {
         ),
       );
 
-      // Should have 2 images: dragon + crown accessory
+      // Dragon + one registered crown layer.
       final images = tester.widgetList<Image>(find.byType(Image)).toList();
       expect(images.length, 2);
       final accImage = images[1].image as AssetImage;
       expect(accImage.assetName, contains('acc_crown'));
 
-      // The accessory should be inside a Positioned widget
+      // Registered layers are placed with Positioned (at the shared offset).
       expect(find.byType(Positioned), findsWidgets);
     });
 
-    testWidgets('shows multiple accessory images at different positions',
-        (tester) async {
+    testWidgets('stacks multiple registered accessory layers', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
@@ -137,21 +138,18 @@ void main() {
         ),
       );
 
-      // Dragon + 2 accessories
+      // Dragon + 2 registered layers.
       final images = tester.widgetList<Image>(find.byType(Image)).toList();
       expect(images.length, 3);
 
-      // Both accessories should be in Positioned widgets
-      final positioned =
-          tester.widgetList<Positioned>(find.byType(Positioned)).toList();
-      expect(positioned.length, greaterThanOrEqualTo(2));
-
-      // Crown (headTop) and scarf (neck) should have different top positions
-      expect(positioned[0].top, isNot(equals(positioned[1].top)));
+      final names = images
+          .map((i) => (i.image as AssetImage).assetName)
+          .toList();
+      expect(names.any((n) => n.contains('acc_crown')), isTrue);
+      expect(names.any((n) => n.contains('acc_scarf')), isTrue);
     });
 
-    testWidgets('wing decorations render behind dragon (z-order)',
-        (tester) async {
+    testWidgets('wing decorations render as a registered layer', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
@@ -165,21 +163,20 @@ void main() {
         ),
       );
 
-      // Should have Stack with 3 images: wing (behind), dragon, crown (front)
+      // Dragon + 2 registered layers. Occlusion (wings behind the body) is
+      // baked into each layer's alpha, not handled by a separate draw pass.
       final images = tester.widgetList<Image>(find.byType(Image)).toList();
       expect(images.length, 3);
 
-      // First image should be the wing decorations (behind layer)
-      final firstImage = images[0].image as AssetImage;
-      expect(firstImage.assetName, contains('acc_wing_decorations'));
+      // The dragon is drawn under the accessory layers.
+      final dragonName = (images[0].image as AssetImage).assetName;
+      expect(dragonName, contains('dragon_'));
 
-      // Second should be dragon
-      final secondImage = images[1].image as AssetImage;
-      expect(secondImage.assetName, contains('dragon_'));
-
-      // Third should be crown (front layer)
-      final thirdImage = images[2].image as AssetImage;
-      expect(thirdImage.assetName, contains('acc_crown'));
+      final names = images
+          .map((i) => (i.image as AssetImage).assetName)
+          .toList();
+      expect(names.any((n) => n.contains('acc_wing_decorations')), isTrue);
+      expect(names.any((n) => n.contains('acc_crown')), isTrue);
     });
 
     testWidgets('egg stage does not show accessories', (tester) async {
@@ -196,13 +193,12 @@ void main() {
         ),
       );
 
-      // Only dragon image, no accessories rendered
+      // Only the dragon (egg) posed art; wearable accessories start at stage 1.
       final images = tester.widgetList<Image>(find.byType(Image)).toList();
       expect(images.length, 1);
       final assetImage = images.first.image as AssetImage;
-      expect(assetImage.assetName, contains('dragon_egg'));
+      expect(assetImage.assetName, contains('stage0'));
 
-      // No Positioned widgets for accessories
       expect(find.byType(Positioned), findsNothing);
     });
 
@@ -210,9 +206,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: Center(
-              child: CosmeticPreview(evolutionStage: 99),
-            ),
+            body: Center(child: CosmeticPreview(evolutionStage: 99)),
           ),
         ),
       );
@@ -220,7 +214,7 @@ void main() {
       expect(find.byType(CosmeticPreview), findsOneWidget);
     });
 
-    testWidgets('accessories from different slots render at different positions',
+    testWidgets('stacks one registered layer per equipped accessory',
         (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
@@ -241,18 +235,13 @@ void main() {
         ),
       );
 
-      // Dragon + 3 accessories
+      // Dragon + 3 registered accessory layers.
       final images = tester.widgetList<Image>(find.byType(Image)).toList();
       expect(images.length, 4);
 
-      // 3 Positioned widgets for 3 accessories
       final positioned =
           tester.widgetList<Positioned>(find.byType(Positioned)).toList();
       expect(positioned.length, 3);
-
-      // Each should have a unique top value (head, neck, chest are different)
-      final tops = positioned.map((p) => p.top).toSet();
-      expect(tops.length, 3, reason: 'All three slots should have unique Y positions');
     });
   });
 }

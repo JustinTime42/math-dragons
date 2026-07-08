@@ -93,8 +93,8 @@
 - [ ] Dragon head moves on a grid in 4 directions at a step-based speed
 - [ ] Flame trail follows the dragon head, rendering with a fire gradient
 - [ ] Math problem displays prominently on screen
-- [ ] 1 correct answer gem + 3-5 distractor gems are placed on the grid
-- [ ] Eating the correct gem: score increases, celebration effect, new problem generated
+- [ ] 4-6 answer gems are placed once when the level loads, one per generated problem
+- [ ] Eating the answer for the displayed problem: score increases, celebration effect, next remaining problem displays
 - [ ] Eating a wrong gem: flame intensity drops by 20%, red flash, trail dims
 - [ ] Correct answer restores 10% flame intensity (capped at 100%)
 - [ ] Game over when flame intensity reaches 0%
@@ -213,8 +213,9 @@ and mechanics to port:
 - **Step timing:** Movement is Hz-based. At 8 Hz, the dragon moves 8 cells per
   second. Accumulator-based timing ensures consistent speed regardless of frame rate.
 - **Self-collision:** Hitting any segment of the flame trail = game over.
-- **Answer placement:** Correct + distractor gems placed on random free cells (not
-  on the dragon or trail).
+- **Answer placement:** Level answer gems are placed on random free cells when the
+  level loads (not on the dragon, trail, or immediate next step). They stay fixed
+  until eaten or the level ends.
 - **Problem watermark:** The original shows the problem as a large watermark in the
   center of the grid. Fire Trail shows it as a prominent Flutter widget above the grid.
 - **Wrong-answer flash:** Red tint over the entire game area, fading over 400ms.
@@ -440,9 +441,8 @@ class FireTrailFlameGame extends FlameGame {
     problems = ProblemManager(config: config);
     trailManager = TrailManager(initialLength: 5);
 
-    // Generate first problem and place gems
-    problems.generateProblem();
-    _placeGems();
+    // Generate all level problems and place fixed answer gems
+    _placeLevelGems();
   }
 
   void _seedDragon() {
@@ -1724,11 +1724,13 @@ Show ResultScreen
 ### Level Completion
 
 Unlike Dragon Eggs (which is endless until game over), Fire Trail has level-based goals:
-each level requires a certain number of correct answers to complete.
+each level preloads the same number of answer gems the board previously displayed
+(4-6 depending on level). The level completes when all preplaced gems are eaten,
+unless wrong answers extinguish the flame first.
 
 ```dart
 void _checkLevelComplete() {
-  if (correctCount >= config.correctToAdvance) {
+  if (gemData.isEmpty) {
     phase = GamePhase.levelComplete;
     // Show result screen with option to advance to next level
   }
@@ -1764,8 +1766,10 @@ int calculateStars(double accuracy, int score, int levelNumber) {
 ```dart
 void _handleGemEaten(AnswerGem gem) {
   final responseTimeMs = _getResponseTimeMs();
+  final isCorrect = identical(gem.problem, problems.currentProblem);
+  gemData.remove(gem);
 
-  if (gem.isCorrect) {
+  if (isCorrect) {
     // Correct answer
     score += _calculateScore();
     correctCount++;
@@ -1784,9 +1788,8 @@ void _handleGemEaten(AnswerGem gem) {
     // Celebration effect
     add(GemSparkleEffect(position: gem.position.toPixel(cellSize)));
 
-    // New problem + re-place gems
-    problems.generateProblem();
-    _placeGems();
+    // Advance to the next remaining preplaced answer
+    problems.currentProblem = gemData.isEmpty ? null : gemData.first.problem;
 
     // Check level completion
     _checkLevelComplete();
@@ -1804,9 +1807,6 @@ void _handleGemEaten(AnswerGem gem) {
     // Trail grows by 2 (penalizing — more self-collision risk)
     trailManager.pendingGrowth += 2;
 
-    // Re-place gems but keep the same problem
-    _placeGems();
-
     // Red flash
     onWrongFlash();
 
@@ -1818,7 +1818,7 @@ void _handleGemEaten(AnswerGem gem) {
   }
 
   // Record in FactTracker
-  _recordAnswer(problems.currentProblem!, gem.value, gem.isCorrect, responseTimeMs);
+  _recordAnswer(gem.problem, gem.value, isCorrect, responseTimeMs);
 
   // Update UI
   onFlameChanged(flameIntensity.value);

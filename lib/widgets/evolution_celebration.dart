@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import '../theme/dragon_anchor_points.dart';
 import '../theme/dragon_assets.dart';
 import '../theme/dragon_colors.dart';
 
@@ -23,10 +24,8 @@ Future<void> showEvolutionCelebration(
     barrierDismissible: false,
     barrierColor: Colors.transparent,
     transitionDuration: Duration.zero,
-    pageBuilder: (ctx, anim1, anim2) => _EvolutionCelebration(
-      oldStage: oldStage,
-      newStage: newStage,
-    ),
+    pageBuilder: (ctx, anim1, anim2) =>
+        _EvolutionCelebration(oldStage: oldStage, newStage: newStage),
   );
 }
 
@@ -34,10 +33,7 @@ class _EvolutionCelebration extends StatefulWidget {
   final int oldStage;
   final int newStage;
 
-  const _EvolutionCelebration({
-    required this.oldStage,
-    required this.newStage,
-  });
+  const _EvolutionCelebration({required this.oldStage, required this.newStage});
 
   @override
   State<_EvolutionCelebration> createState() => _EvolutionCelebrationState();
@@ -104,21 +100,24 @@ class _EvolutionCelebrationState extends State<_EvolutionCelebration>
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
-    _ringExpand = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _ringController, curve: Curves.easeOut),
-    );
-    _ringOpacity = Tween<double>(begin: 0.8, end: 0.0).animate(
-      CurvedAnimation(parent: _ringController, curve: Curves.easeIn),
-    );
+    _ringExpand = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _ringController, curve: Curves.easeOut));
+    _ringOpacity = Tween<double>(
+      begin: 0.8,
+      end: 0.0,
+    ).animate(CurvedAnimation(parent: _ringController, curve: Curves.easeIn));
 
     // Stage name fade-in (500ms)
     _textController = AnimationController(
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
-    _textOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _textController, curve: Curves.easeOut),
-    );
+    _textOpacity = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _textController, curve: Curves.easeOut));
 
     // "Tap to continue" fade-in (400ms)
     _promptController = AnimationController(
@@ -248,8 +247,7 @@ class _EvolutionCelebrationState extends State<_EvolutionCelebration>
                               fontFamily: 'Cinzel',
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
-                              color:
-                                  DragonColors.dragonGold.withAlpha(200),
+                              color: DragonColors.dragonGold.withAlpha(200),
                               letterSpacing: 3.0,
                             ),
                           ),
@@ -282,7 +280,10 @@ class _EvolutionCelebrationState extends State<_EvolutionCelebration>
                               ],
                             ),
                             child: Image.asset(
-                              DragonAssets.dragonHubCompanions[stage],
+                              DragonAssets.resolveDragonImage(
+                                evolutionStage: stage,
+                                context: DragonRenderContext.hub,
+                              ),
                               width: 140,
                               height: 140,
                               fit: BoxFit.contain,
@@ -308,9 +309,7 @@ class _EvolutionCelebrationState extends State<_EvolutionCelebration>
                                   DragonColors.warmGlow,
                                   DragonColors.dragonGold,
                                 ],
-                                stops: const [
-                                  0.0, 0.35, 0.5, 0.65, 1.0
-                                ],
+                                stops: const [0.0, 0.35, 0.5, 0.65, 1.0],
                               ).createShader(bounds);
                             },
                             blendMode: BlendMode.srcIn,
@@ -336,8 +335,7 @@ class _EvolutionCelebrationState extends State<_EvolutionCelebration>
                             style: TextStyle(
                               fontFamily: 'Nunito',
                               fontSize: 14,
-                              color: DragonColors.textSecondary
-                                  .withAlpha(180),
+                              color: DragonColors.textSecondary.withAlpha(180),
                             ),
                           ),
                         ),
@@ -381,8 +379,7 @@ class _GoldRingPainter extends CustomPainter {
       ..color = DragonColors.warmGlow.withAlpha((opacity * 200).round());
 
     for (int i = 0; i < particleCount; i++) {
-      final angle =
-          (i / particleCount) * 2 * pi + expand * pi * 0.5;
+      final angle = (i / particleCount) * 2 * pi + expand * pi * 0.5;
       final dotRadius = 2.5 * (1.0 - expand * 0.5);
       final px = center.dx + radius * cos(angle);
       final py = center.dy + radius * sin(angle);

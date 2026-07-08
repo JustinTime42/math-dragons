@@ -4,8 +4,8 @@ import '../models/egg_data.dart';
 import '../models/difficulty_config.dart';
 import '../components/egg_component.dart';
 import '../../shared/math_problem.dart';
-import '../../../core/difficulty_engine.dart';
 import '../../../theme/dragon_colors.dart';
+import 'egg_field_planner.dart';
 import 'package:flutter/material.dart';
 
 /// Controls when and what type of eggs appear.
@@ -13,12 +13,10 @@ class EggSpawner {
   final double fieldWidth;
   final double dangerLineY;
   DifficultyTier tier;
-  MathFact? focusFact;
-
-  /// Optional difficulty engine for adaptive fact selection.
-  DifficultyEngine? difficultyEngine;
+  List<MathFact> factPool = const [];
 
   final Random _random = Random();
+  final EggFieldPlanner _fieldPlanner = EggFieldPlanner();
   double _spawnTimer = 0;
   bool _penaltyActive = false;
   double _penaltyTimer = 0;
@@ -26,7 +24,6 @@ class EggSpawner {
   static const double _baseEggSize = 64.0;
   static const double _sizeVariance = 0.1;
   static const double _minTouchSize = 44.0;
-  static const int _maxOperators = 8;
 
   EggSpawner({
     required this.fieldWidth,
@@ -38,12 +35,17 @@ class EggSpawner {
     double dt,
     List<EggComponent> eggs,
     void Function(EggComponent) onSpawn,
+    double intensity,
   ) {
     _spawnTimer -= dt * 1000; // convert to ms
     if (_spawnTimer <= 0) {
-      final interval = _penaltyActive
-          ? tier.spawnIntervalMs / 2
-          : tier.spawnIntervalMs;
+      final intensityScale = (1.0 - intensity.clamp(0.0, 1.0) * 0.45).clamp(
+        0.45,
+        1.0,
+      );
+      final interval =
+          (_penaltyActive ? tier.spawnIntervalMs / 2 : tier.spawnIntervalMs) *
+          intensityScale;
       _spawnTimer = interval.toDouble();
       onSpawn(createEgg(eggs));
     }
@@ -67,7 +69,37 @@ class EggSpawner {
   }
 
   EggComponent createEgg(List<EggComponent> eggs) {
-    final type = _selectType(eggs);
+    final plan = _fieldPlanner.planNormalSpawn(
+      visibleValues: _visibleValues(eggs),
+      tier: tier,
+      factPool: factPool,
+    );
+    return _createEggFromPlan(plan);
+  }
+
+  EggComponent createHelperEgg(List<EggComponent> eggs) {
+    final plan = _fieldPlanner.planHelperSpawn(
+      visibleValues: _visibleValues(eggs),
+      tier: tier,
+      factPool: factPool,
+    );
+    return _createEggFromPlan(plan);
+  }
+
+  void recordSolvedFact(String factKey) {
+    _fieldPlanner.recordSolvedFact(factKey);
+  }
+
+  void resetSession() {
+    _fieldPlanner.resetSession();
+  }
+
+  bool hasSolvableEquation(List<EggComponent> eggs) {
+    return _fieldPlanner.findSolvableEquation(_visibleValues(eggs)) != null;
+  }
+
+  EggComponent _createEggFromPlan(EggValuePlan plan) {
+    final type = plan.type;
     final radius = _generateEggRadius();
 
     // x: random within field, keeping edges clear
@@ -83,10 +115,10 @@ class EggSpawner {
     final Color baseColor;
 
     if (type == EggType.number) {
-      value = _selectNumberValue();
+      value = plan.value as int;
       baseColor = _colorForNumber(value as int);
     } else {
-      value = _selectOperator();
+      value = plan.value as MathOp;
       baseColor = _colorForOperator(value as MathOp);
     }
 
@@ -101,40 +133,19 @@ class EggSpawner {
     );
   }
 
-  EggType _selectType(List<EggComponent> eggs) {
-    final numCount = eggs
+  List<VisibleEggValue> _visibleValues(List<EggComponent> eggs) {
+    return eggs
         .where(
-            (e) => e.type == EggType.number && e.state == EggState.active)
-        .length;
-    final opCount = eggs
-        .where(
-            (e) => e.type == EggType.operator && e.state == EggState.active)
-        .length;
-
-    if (opCount >= _maxOperators) return EggType.number;
-
-    final ratio = opCount / max(numCount, 1);
-    if (ratio < 0.4) return EggType.operator;
-    if (ratio > 0.6) return EggType.number;
-
-    return _random.nextDouble() < 0.35 ? EggType.operator : EggType.number;
-  }
-
-  int _selectNumberValue() {
-    // 30% chance: spawn a component of the current focus fact
-    if (focusFact != null && _random.nextDouble() < 0.30) {
-      final components = [focusFact!.left, focusFact!.right, focusFact!.result];
-      return components[_random.nextInt(components.length)];
-    }
-
-    // 70% chance: random number from current tier's range
-    return tier.numberMin +
-        _random.nextInt(tier.numberMax - tier.numberMin + 1);
-  }
-
-  MathOp _selectOperator() {
-    final ops = tier.operations;
-    return ops[_random.nextInt(ops.length)];
+          (egg) =>
+              egg.state == EggState.active || egg.state == EggState.selected,
+        )
+        .map((egg) {
+          if (egg.type == EggType.number) {
+            return VisibleEggValue.number(egg.value as int);
+          }
+          return VisibleEggValue.operator(egg.value as MathOp);
+        })
+        .toList();
   }
 
   double _generateEggRadius() {

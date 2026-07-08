@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'fact_tracker.dart';
 import '../games/shared/math_problem.dart';
+import '../games/shared/problem_generation.dart';
 
 /// Adaptive difficulty engine that selects math facts based on player mastery.
 ///
@@ -9,6 +10,7 @@ import '../games/shared/math_problem.dart';
 class DifficultyEngine {
   final FactTracker _factTracker;
   final Random _random;
+  late final ProblemScheduler _problemScheduler;
 
   /// Recent fact keys to enforce spacing rules.
   final List<String> _recentFacts = [];
@@ -21,11 +23,14 @@ class DifficultyEngine {
   static const int _staleDays = 7;
   static const double _needsPracticeCap = 0.40;
 
-  DifficultyEngine({
-    required FactTracker factTracker,
-    Random? random,
-  })  : _factTracker = factTracker,
-        _random = random ?? Random();
+  DifficultyEngine({required FactTracker factTracker, Random? random})
+    : _factTracker = factTracker,
+      _random = random ?? Random() {
+    _problemScheduler = ProblemScheduler(
+      getFact: _factTracker.getFact,
+      random: _random,
+    );
+  }
 
   /// Select the next math fact from the eligible pool for a given level's parameters.
   ///
@@ -52,7 +57,8 @@ class DifficultyEngine {
     if (candidates.isEmpty) {
       // Fallback: pick any eligible fact
       return _recordSelection(
-          eligibleFacts[_random.nextInt(eligibleFacts.length)]);
+        eligibleFacts[_random.nextInt(eligibleFacts.length)],
+      );
     }
 
     // 5. Filter out recently-seen facts
@@ -68,13 +74,24 @@ class DifficultyEngine {
     return _recordSelection(selected);
   }
 
+  /// Select a game-neutral problem blueprint using the newer session scheduler.
+  ///
+  /// Existing callers can keep using [selectNext]. New game adapters should use
+  /// this method so they can validate the selected fact and preserve the due
+  /// reason/mastery evidence through their game-specific generation step.
+  ProblemBlueprint? selectBlueprint(List<MathFact> eligibleFacts) {
+    return _problemScheduler.select(eligibleFacts);
+  }
+
   /// Record a fact that was answered incorrectly, for re-presentation scheduling.
   void recordIncorrect(String factKey) {
     _recentIncorrect.add(factKey);
     // Keep window bounded
     if (_recentIncorrect.length > _rePresentIncorrectWindow * 2) {
       _recentIncorrect.removeRange(
-          0, _recentIncorrect.length - _rePresentIncorrectWindow * 2);
+        0,
+        _recentIncorrect.length - _rePresentIncorrectWindow * 2,
+      );
     }
   }
 
@@ -82,6 +99,7 @@ class DifficultyEngine {
   void resetSession() {
     _recentFacts.clear();
     _recentIncorrect.clear();
+    _problemScheduler.resetSession();
   }
 
   // ── Private ──
@@ -146,7 +164,8 @@ class DifficultyEngine {
 
   /// Calculate actual weights, applying the 40% cap on needs-practice.
   Map<FactBucket, double> _calculateWeights(
-      Map<FactBucket, List<MathFact>> buckets) {
+    Map<FactBucket, List<MathFact>> buckets,
+  ) {
     // Base weights from the plan
     var weights = <FactBucket, double>{
       FactBucket.needsPractice: 0.40,
@@ -156,8 +175,9 @@ class DifficultyEngine {
     };
 
     // Zero out empty buckets and redistribute
-    final emptyBuckets =
-        weights.keys.where((b) => buckets[b]!.isEmpty).toList();
+    final emptyBuckets = weights.keys
+        .where((b) => buckets[b]!.isEmpty)
+        .toList();
     if (emptyBuckets.isNotEmpty) {
       double freed = 0;
       for (final empty in emptyBuckets) {
@@ -165,8 +185,9 @@ class DifficultyEngine {
         weights[empty] = 0;
       }
 
-      final nonEmpty =
-          weights.keys.where((b) => buckets[b]!.isNotEmpty).toList();
+      final nonEmpty = weights.keys
+          .where((b) => buckets[b]!.isNotEmpty)
+          .toList();
       if (nonEmpty.isNotEmpty) {
         final share = freed / nonEmpty.length;
         for (final b in nonEmpty) {
@@ -179,12 +200,10 @@ class DifficultyEngine {
     // redistribution and there are other non-empty buckets, clamp it
     if (weights[FactBucket.needsPractice]! > _needsPracticeCap) {
       final others = weights.keys
-          .where(
-              (b) => b != FactBucket.needsPractice && buckets[b]!.isNotEmpty)
+          .where((b) => b != FactBucket.needsPractice && buckets[b]!.isNotEmpty)
           .toList();
       if (others.isNotEmpty) {
-        final excess =
-            weights[FactBucket.needsPractice]! - _needsPracticeCap;
+        final excess = weights[FactBucket.needsPractice]! - _needsPracticeCap;
         weights[FactBucket.needsPractice] = _needsPracticeCap;
         final share = excess / others.length;
         for (final b in others) {

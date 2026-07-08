@@ -24,6 +24,12 @@ class FireTrailConfig {
     required this.correctToAdvance,
   });
 
+  /// Number of answer gems visible on the board for a level.
+  ///
+  /// Fire Trail now preloads one problem per visible gem, so this preserves the
+  /// old board density while making gem positions stable for the whole level.
+  int get answerGemCount => distractorCount + 1;
+
   /// Interpolate speed linearly within a world.
   static double speedForLevel(int worldNumber, int levelInWorld) {
     const worldSpeeds = [

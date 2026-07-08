@@ -33,6 +33,7 @@ Dragon-powered math games that are actually fun! A collection of four math mini-
 - [x] **Dragon Runes** (Step 6) — Number Links port with circular node layout, drag-to-connect chain mechanics, equation validation, level generation, hint system, spell-casting particle effects, 5 worlds (50 levels)
 - [x] **Dragon's Feast** (Step 7) — Merged Muncher port with 5x5 grid navigation, 26+ math categories (even/odd, multiples, primes, composites, perfect squares, factors, ranges), enemy AI (chasers + wanderers), power-ups (freeze/wings/shield), 5 worlds (40 levels)
 - [x] **Adaptive Difficulty** (Step 8) — DifficultyEngine with per-operation accuracy tracking, adaptive level selection, performance windows, EventBus integration
+- [x] **Problem Generation Design** — documented curriculum/scheduler/adapter methodology with solvability and spacing invariants
 - [x] **ProgressionManager** (Step 8) — Dragon evolution stages (Egg→Elder Dragon), XP system, evolution thresholds, cross-game progress tracking
 - [x] **Achievement System** (Step 9) — 52 achievements across 3 categories (per-game, cross-game, milestones), reactive EventBus-based unlocking, achievement popup overlay, tabbed browser screen
 - [x] **Daily Challenges** (Step 9) — 2-3 deterministic tasks per day, 5 challenge types, streak tracking with bonus scales, hub card with live progress
@@ -168,9 +169,11 @@ math_dragons/
 │   │   ├── anonymous_auth.dart   # UID ↔ PlayerProfile linkage manager
 │   │   └── account_upgrade.dart  # Google Sign-In upgrade flow
 │   ├── hub/                      # Hub screen, game cards, profile bar, settings
+│   ├── dev/                      # Debug-only internal tooling (accessory calibration)
 │   ├── navigation/               # Custom page route transitions
 │   ├── games/
 │   │   ├── shared/               # Game shell, result screen, shared components
+│   │   │   └── problem_generation.dart # Curriculum components, mastery estimates, scheduler, validators
 │   │   ├── dragon_runes/         # Number Links port (Flame game)
 │   │   │   ├── components/       # Rune nodes, connection line, particles, hints
 │   │   │   ├── models/           # RuneNodeData, EquationTarget, config, equations
@@ -215,7 +218,7 @@ math_dragons/
 │   ├── games/dragons_feast/      # Dragon's Feast game tests (90 tests)
 │   ├── monetization/             # Store screen tests
 │   └── integration/              # Integration tests (placeholder)
-├── docs/                         # Planning documents
+├── docs/                         # Planning documents, including MATH_PROBLEM_GENERATION_DESIGN.md
 └── pubspec.yaml
 ```
 

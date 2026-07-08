@@ -95,7 +95,7 @@ class _FireTrailScreenState extends State<FireTrailScreen> {
     setState(() {
       _score = score;
       _streak = streak;
-      _correctCount = _flameGame.correctCount;
+      _correctCount = _flameGame.answersEatenCount;
     });
   }
 
@@ -385,7 +385,7 @@ class _FireTrailScreenState extends State<FireTrailScreen> {
                     score: _score,
                     streak: _streak,
                     correctCount: _correctCount,
-                    correctToAdvance: _config.correctToAdvance,
+                    correctToAdvance: _config.answerGemCount,
                   ),
                 ),
               ],

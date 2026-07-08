@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:math_dragons/l10n/app_localizations.dart';
 import '../../storage/local_storage.dart';
+import '../../theme/dragon_anchor_points.dart';
 import '../../theme/dragon_assets.dart';
 import '../../theme/dragon_colors.dart';
 import '../../theme/dragon_spacing.dart';
@@ -63,13 +64,11 @@ class _DragonsFeastScreenState extends State<DragonsFeastScreen> {
     final engine = context.read<DifficultyEngine>();
     final profile = context.read<LocalStorage>().getProfile();
 
-    // Resolve dragon image: color variant if equipped, otherwise evolution portrait.
-    final dragonImagePath = profile.equippedColor != null
-        ? (DragonAssets.colorVariantImages[profile.equippedColor] ??
-            DragonAssets.dragonPortraits[
-                profile.dragonEvolution.clamp(0, DragonAssets.dragonPortraits.length - 1)])
-        : DragonAssets.dragonPortraits[
-            profile.dragonEvolution.clamp(0, DragonAssets.dragonPortraits.length - 1)];
+    final dragonImagePath = DragonAssets.resolveDragonImage(
+      evolutionStage: profile.dragonEvolution,
+      context: DragonRenderContext.portrait,
+      skinId: profile.equippedColor,
+    );
 
     _flameGame = DragonsFeastFlameGame(
       config: _config,
@@ -92,22 +91,22 @@ class _DragonsFeastScreenState extends State<DragonsFeastScreen> {
     final eventBus = context.read<EventBus>();
     final responseTimeMs = _flameGame.getResponseTimeMs();
 
-    final factKey =
-        '${_config.category.id}:${isCorrect ? "correct" : "wrong"}';
-    eventBus.emit(AnswerGiven(
-      gameId: 'dragons_feast',
-      problem: factKey,
-      playerAnswer: isCorrect ? 'correct' : 'wrong',
-      correctAnswer: isCorrect ? 'correct' : 'should_skip',
-      correct: isCorrect,
-      responseTimeMs: responseTimeMs,
-    ));
+    final factKey = '${_config.category.id}:${isCorrect ? "correct" : "wrong"}';
+    eventBus.emit(
+      AnswerGiven(
+        gameId: 'dragons_feast',
+        problem: factKey,
+        playerAnswer: isCorrect ? 'correct' : 'wrong',
+        correctAnswer: isCorrect ? 'correct' : 'should_skip',
+        correct: isCorrect,
+        responseTimeMs: responseTimeMs,
+      ),
+    );
 
     if (isCorrect && streak > 0 && streak % 5 == 0) {
-      eventBus.emit(StreakAchieved(
-        gameId: 'dragons_feast',
-        streakLength: streak,
-      ));
+      eventBus.emit(
+        StreakAchieved(gameId: 'dragons_feast', streakLength: streak),
+      );
     }
 
     setState(() {
@@ -121,11 +120,13 @@ class _DragonsFeastScreenState extends State<DragonsFeastScreen> {
     _gameOverShown = true;
 
     final eventBus = context.read<EventBus>();
-    eventBus.emit(GameEnded(
-      gameId: 'dragons_feast',
-      finalScore: _flameGame.score,
-      duration: _flameGame.gameDuration,
-    ));
+    eventBus.emit(
+      GameEnded(
+        gameId: 'dragons_feast',
+        finalScore: _flameGame.score,
+        duration: _flameGame.gameDuration,
+      ),
+    );
 
     Future.delayed(const Duration(milliseconds: 500), () {
       if (!mounted) return;
@@ -136,17 +137,18 @@ class _DragonsFeastScreenState extends State<DragonsFeastScreen> {
   void _onLevelComplete() {
     final eventBus = context.read<EventBus>();
     final totalEats = _flameGame.correctEaten + _flameGame.wrongEaten;
-    final accuracy =
-        totalEats > 0 ? _flameGame.correctEaten / totalEats : 0.0;
+    final accuracy = totalEats > 0 ? _flameGame.correctEaten / totalEats : 0.0;
     final stars = _flameGame.calculateStars();
 
-    eventBus.emit(LevelCompleted(
-      gameId: 'dragons_feast',
-      levelNumber: _flameGame.currentLevel,
-      score: _flameGame.score,
-      stars: stars,
-      accuracy: accuracy,
-    ));
+    eventBus.emit(
+      LevelCompleted(
+        gameId: 'dragons_feast',
+        levelNumber: _flameGame.currentLevel,
+        score: _flameGame.score,
+        stars: stars,
+        accuracy: accuracy,
+      ),
+    );
 
     // Show category transition, then advance level
     setState(() {
@@ -194,8 +196,7 @@ class _DragonsFeastScreenState extends State<DragonsFeastScreen> {
 
   void _showResults() {
     final totalEats = _flameGame.correctEaten + _flameGame.wrongEaten;
-    final accuracy =
-        totalEats > 0 ? _flameGame.correctEaten / totalEats : 0.0;
+    final accuracy = totalEats > 0 ? _flameGame.correctEaten / totalEats : 0.0;
     final stars = _flameGame.calculateStars();
 
     final results = GameResults(
@@ -339,96 +340,93 @@ class _DragonsFeastScreenState extends State<DragonsFeastScreen> {
       autofocus: true,
       onKeyEvent: _handleKeyEvent,
       child: GameShell(
-      gameId: 'dragons_feast',
-      title: l10n.dragonsFeast,
-      accentColor: DragonColors.dragonsFeastAccent,
-      level: _currentLevel,
-      backgroundImage: DragonAssets.gameBackgrounds['dragons_feast'],
-      onPauseChanged: _onPauseChanged,
-      child: Column(
-        children: [
-          // Category display + lives
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: DragonSpacing.base,
-              vertical: DragonSpacing.xs,
+        gameId: 'dragons_feast',
+        title: l10n.dragonsFeast,
+        accentColor: DragonColors.dragonsFeastAccent,
+        level: _currentLevel,
+        backgroundImage: DragonAssets.gameBackgrounds['dragons_feast'],
+        onPauseChanged: _onPauseChanged,
+        child: Column(
+          children: [
+            // Category display + lives
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: DragonSpacing.base,
+                vertical: DragonSpacing.xs,
+              ),
+              child: Row(
+                children: [
+                  Expanded(child: CategoryDisplay(categoryName: _categoryName)),
+                  const SizedBox(width: DragonSpacing.sm),
+                  LivesDisplay(lives: _lives),
+                ],
+              ),
             ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: CategoryDisplay(categoryName: _categoryName),
-                ),
-                const SizedBox(width: DragonSpacing.sm),
-                LivesDisplay(lives: _lives),
-              ],
-            ),
-          ),
 
-          // Game area with swipe detection
-          Expanded(
-            child: Stack(
-              children: [
-                // Flame game
-                GestureDetector(
-                  onPanStart: (d) => _onSwipeStart(d.localPosition),
-                  onPanUpdate: (d) => _onSwipeUpdate(d.localPosition),
-                  onPanEnd: (_) => _onSwipeEnd(),
-                  child: GameWidget(game: _flameGame),
-                ),
+            // Game area with swipe detection
+            Expanded(
+              child: Stack(
+                children: [
+                  // Flame game
+                  GestureDetector(
+                    onPanStart: (d) => _onSwipeStart(d.localPosition),
+                    onPanUpdate: (d) => _onSwipeUpdate(d.localPosition),
+                    onPanEnd: (_) => _onSwipeEnd(),
+                    child: GameWidget(game: _flameGame),
+                  ),
 
-                // Wrong answer red flash
-                if (_showWrongFlash)
-                  IgnorePointer(
-                    child: AnimatedOpacity(
-                      opacity: _showWrongFlash ? 0.35 : 0.0,
-                      duration: const Duration(milliseconds: 200),
-                      child: Container(color: Colors.red),
+                  // Wrong answer red flash
+                  if (_showWrongFlash)
+                    IgnorePointer(
+                      child: AnimatedOpacity(
+                        opacity: _showWrongFlash ? 0.35 : 0.0,
+                        duration: const Duration(milliseconds: 200),
+                        child: Container(color: Colors.red),
+                      ),
                     ),
-                  ),
 
-                // Category transition overlay
-                if (_showCategoryTransition)
-                  CategoryTransition(
-                    categoryName: DragonsFeastConfig.configForLevel(
-                            min(_currentLevel + 1, 40))
-                        .category
-                        .displayName,
-                    onComplete: _onCategoryTransitionComplete,
-                  ),
+                  // Category transition overlay
+                  if (_showCategoryTransition)
+                    CategoryTransition(
+                      categoryName: DragonsFeastConfig.configForLevel(
+                        min(_currentLevel + 1, 40),
+                      ).category.displayName,
+                      onComplete: _onCategoryTransitionComplete,
+                    ),
 
-                // Countdown overlay (reusing the same pattern)
-                if (_showCountdown)
-                  _CountdownOverlay(onComplete: _onCountdownComplete),
-              ],
+                  // Countdown overlay (reusing the same pattern)
+                  if (_showCountdown)
+                    _CountdownOverlay(onComplete: _onCountdownComplete),
+                ],
+              ),
             ),
-          ),
 
-          // Bottom HUD: score/streak/progress
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: DragonSpacing.base,
-              vertical: DragonSpacing.xs,
+            // Bottom HUD: score/streak/progress
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: DragonSpacing.base,
+                vertical: DragonSpacing.xs,
+              ),
+              child: FeastScoreDisplay(
+                score: _score,
+                streak: _streak,
+                correctEaten: _correctEaten,
+                requiredCorrect: _requiredCorrect,
+                level: _currentLevel,
+              ),
             ),
-            child: FeastScoreDisplay(
-              score: _score,
-              streak: _streak,
-              correctEaten: _correctEaten,
-              requiredCorrect: _requiredCorrect,
-              level: _currentLevel,
-            ),
-          ),
 
-          // D-pad controls
-          Padding(
-            padding: const EdgeInsets.only(bottom: DragonSpacing.sm),
-            child: FeastDPadControls(
-              onDirection: (dir) => _flameGame.movePlayer(dir),
-              onMunch: () => _flameGame.munchTile(),
+            // D-pad controls
+            Padding(
+              padding: const EdgeInsets.only(bottom: DragonSpacing.sm),
+              child: FeastDPadControls(
+                onDirection: (dir) => _flameGame.movePlayer(dir),
+                onMunch: () => _flameGame.munchTile(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
     );
   }
 }

@@ -15,6 +15,10 @@ class CosmeticItem {
   final String? imagePath;
   final AccessorySlot? slot;
 
+  /// Aura render style for [CosmeticType.effect] items. Null for other types.
+  /// The aura is tinted with [previewColor].
+  final AuraStyle? auraStyle;
+
   const CosmeticItem({
     required this.id,
     required this.name,
@@ -24,10 +28,19 @@ class CosmeticItem {
     this.previewColor,
     this.imagePath,
     this.slot,
+    this.auraStyle,
   });
 }
 
-enum CosmeticType { color, accessory, background }
+enum CosmeticType { color, accessory, background, effect }
+
+/// Visual style for a non-occluding aura [CosmeticType.effect].
+///
+/// Effects render as a soft glow behind the dragon and never intersect the
+/// dragon silhouette, so they sidestep the perspective/occlusion problem that
+/// worn accessories have on the 3/4 painterly art. See
+/// `docs/step12/ACCESSORY_PIPELINE_DECISION.md` (Track D).
+enum AuraStyle { glow }
 
 /// All available cosmetics.
 class CosmeticCatalog {
@@ -208,7 +221,37 @@ class CosmeticCatalog {
         imagePath: 'assets/images/games/dragon_eggs/dragon_eggs_background_sunset.png'),
   ];
 
-  /// Find a cosmetic item by ID across colors, accessories, and backgrounds.
+  /// Non-occluding aura effects. These render as a soft glow behind the dragon
+  /// and never touch the dragon silhouette, so they need no per-stage or
+  /// per-skin art and are code-drawn at runtime (see [AuraStyle]).
+  static const effects = [
+    CosmeticItem(
+        id: 'effect_ember_aura',
+        name: 'Ember Aura',
+        type: CosmeticType.effect,
+        cost: 200,
+        previewEmoji: '\u{1F525}',
+        previewColor: Color(0xFFFF7A18),
+        auraStyle: AuraStyle.glow),
+    CosmeticItem(
+        id: 'effect_frost_aura',
+        name: 'Frost Aura',
+        type: CosmeticType.effect,
+        cost: 200,
+        previewEmoji: '\u{2744}',
+        previewColor: Color(0xFF7EC8FF),
+        auraStyle: AuraStyle.glow),
+    CosmeticItem(
+        id: 'effect_arcane_aura',
+        name: 'Arcane Aura',
+        type: CosmeticType.effect,
+        cost: 250,
+        previewEmoji: '\u{2728}',
+        previewColor: Color(0xFFB57EFF),
+        auraStyle: AuraStyle.glow),
+  ];
+
+  /// Find a cosmetic item by ID across all cosmetic categories.
   static CosmeticItem? findById(String id) {
     for (final item in colors) {
       if (item.id == id) return item;
@@ -219,6 +262,30 @@ class CosmeticCatalog {
     for (final item in backgrounds) {
       if (item.id == id) return item;
     }
+    for (final item in effects) {
+      if (item.id == id) return item;
+    }
     return null;
+  }
+
+  /// Toggle [item] in the equipped-accessory list, enforcing the equip rules:
+  /// at most one item per [AccessorySlot], and at most one aura
+  /// [CosmeticType.effect] at a time. Returns a new list; does not mutate
+  /// [current]. Shared by the store and customize screens.
+  static List<String> toggleEquipped(List<String> current, CosmeticItem item) {
+    final next = List<String>.from(current);
+    if (next.contains(item.id)) {
+      next.remove(item.id);
+      return next;
+    }
+    if (item.type == CosmeticType.effect) {
+      // Only one aura may be equipped at a time.
+      next.removeWhere((id) => findById(id)?.type == CosmeticType.effect);
+    } else if (item.slot != null) {
+      // Only one accessory per body slot.
+      next.removeWhere((id) => findById(id)?.slot == item.slot);
+    }
+    next.add(item.id);
+    return next;
   }
 }

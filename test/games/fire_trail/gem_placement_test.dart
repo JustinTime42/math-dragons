@@ -142,5 +142,41 @@ void main() {
         expect(values.length, gems.length);
       }
     });
+
+    test('level answer gems are generated once for current board density', () {
+      final gems = manager.placeLevelAnswerGems(
+        head: const GridPosition(7, 7),
+        trail: const [GridPosition(6, 7), GridPosition(5, 7)],
+        gridSize: 15,
+      );
+
+      expect(gems.length, manager.config.answerGemCount);
+      expect(gems.length, 4);
+      expect(manager.currentProblem, same(gems.first.problem));
+    });
+
+    test('level answer gems avoid reserved next-step cells', () {
+      const reserved = GridPosition(8, 7);
+      final gems = manager.placeLevelAnswerGems(
+        head: const GridPosition(7, 7),
+        trail: const [GridPosition(6, 7), GridPosition(5, 7)],
+        gridSize: 15,
+        reserved: {reserved},
+      );
+
+      expect(gems.any((g) => g.position == reserved), isFalse);
+    });
+
+    test('level answer gems have unique answer values', () {
+      for (int i = 0; i < 20; i++) {
+        final gems = manager.placeLevelAnswerGems(
+          head: const GridPosition(7, 7),
+          trail: const [GridPosition(6, 7), GridPosition(5, 7)],
+          gridSize: 15,
+        );
+        final values = gems.map((g) => g.value).toSet();
+        expect(values.length, gems.length);
+      }
+    });
   });
 }

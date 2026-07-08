@@ -165,5 +165,82 @@ void main() {
       expect(CosmeticCatalog.findById('acc_wing_decorations')!.slot,
           AccessorySlot.wings);
     });
+
+    test('all catalog items (incl. effects) have unique IDs', () {
+      final allItems = [
+        ...CosmeticCatalog.colors,
+        ...CosmeticCatalog.accessories,
+        ...CosmeticCatalog.backgrounds,
+        ...CosmeticCatalog.effects,
+      ];
+      final ids = allItems.map((item) => item.id).toSet();
+      expect(ids.length, allItems.length);
+    });
+  });
+
+  group('CosmeticCatalog effects', () {
+    test('every effect is type effect with an aura style and tint, no slot', () {
+      expect(CosmeticCatalog.effects, isNotEmpty);
+      for (final item in CosmeticCatalog.effects) {
+        expect(item.type, CosmeticType.effect, reason: item.id);
+        expect(item.auraStyle, isNotNull, reason: item.id);
+        expect(item.previewColor, isNotNull, reason: item.id);
+        expect(item.slot, isNull, reason: item.id);
+        expect(item.imagePath, isNull, reason: item.id);
+      }
+    });
+
+    test('findById resolves an effect', () {
+      final item = CosmeticCatalog.findById('effect_ember_aura');
+      expect(item, isNotNull);
+      expect(item!.type, CosmeticType.effect);
+    });
+  });
+
+  group('CosmeticCatalog.toggleEquipped', () {
+    CosmeticItem item(String id) => CosmeticCatalog.findById(id)!;
+
+    test('equipping an accessory adds it', () {
+      final result = CosmeticCatalog.toggleEquipped([], item('acc_crown'));
+      expect(result, ['acc_crown']);
+    });
+
+    test('toggling an equipped id removes it', () {
+      final result =
+          CosmeticCatalog.toggleEquipped(['acc_crown'], item('acc_crown'));
+      expect(result, isEmpty);
+    });
+
+    test('a second accessory in the same slot replaces the first', () {
+      final result = CosmeticCatalog.toggleEquipped(
+          ['acc_crown'], item('acc_wizard_hat'));
+      expect(result, ['acc_wizard_hat']);
+    });
+
+    test('accessories in different slots coexist', () {
+      final result = CosmeticCatalog.toggleEquipped(
+          ['acc_crown'], item('acc_battle_armor'));
+      expect(result, containsAll(['acc_crown', 'acc_battle_armor']));
+      expect(result.length, 2);
+    });
+
+    test('only one aura effect can be equipped at a time', () {
+      final result = CosmeticCatalog.toggleEquipped(
+          ['effect_ember_aura'], item('effect_frost_aura'));
+      expect(result, ['effect_frost_aura']);
+    });
+
+    test('an aura and an accessory coexist', () {
+      final result = CosmeticCatalog.toggleEquipped(
+          ['acc_crown'], item('effect_ember_aura'));
+      expect(result, containsAll(['acc_crown', 'effect_ember_aura']));
+      expect(result.length, 2);
+    });
+
+    test('does not mutate the input list', () {
+      final input = ['acc_crown'];
+      CosmeticCatalog.toggleEquipped(input, item('acc_wizard_hat'));
+      expect(input, ['acc_crown']);
+    });
   });
 }

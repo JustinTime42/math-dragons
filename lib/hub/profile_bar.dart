@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../theme/dragon_anchor_points.dart';
 import '../theme/dragon_assets.dart';
 import '../theme/dragon_colors.dart';
 import '../theme/dragon_spacing.dart';
@@ -28,13 +29,16 @@ class ProfileBar extends StatelessWidget {
       valueListenable: storage.profileNotifier,
       builder: (context, profile, child) {
         final evolutionProgress = progressionMgr.getEvolutionProgress();
-        final stage = profile.dragonEvolution
-            .clamp(0, DragonAssets.dragonPortraits.length - 1);
+        final stage = profile.dragonEvolution.clamp(
+          0,
+          DragonAssets.dragonPortraits.length - 1,
+        );
         final evolutionName = evolutionNames[stage];
-        final portraitImage = profile.equippedColor != null
-            ? (DragonAssets.colorVariantImages[profile.equippedColor] ??
-                DragonAssets.dragonPortraits[stage])
-            : DragonAssets.dragonPortraits[stage];
+        final portraitImage = DragonAssets.resolveDragonImage(
+          evolutionStage: stage,
+          context: DragonRenderContext.portrait,
+          skinId: profile.equippedColor,
+        );
 
         return Padding(
           padding: const EdgeInsets.symmetric(
@@ -50,17 +54,10 @@ class ProfileBar extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: DragonColors.dragonGold.withValues(alpha: 0.15),
                   shape: BoxShape.circle,
-                  border: Border.all(
-                    color: DragonColors.dragonGold,
-                    width: 2,
-                  ),
+                  border: Border.all(color: DragonColors.dragonGold, width: 2),
                 ),
                 child: Center(
-                  child: Image.asset(
-                    portraitImage,
-                    width: 28,
-                    height: 28,
-                  ),
+                  child: Image.asset(portraitImage, width: 28, height: 28),
                 ),
               ),
 
@@ -69,8 +66,7 @@ class ProfileBar extends StatelessWidget {
               // Dragon name + evolution stage + progress bar
               Expanded(
                 child: GestureDetector(
-                  onTap: () =>
-                      _showEvolutionDialog(context, evolutionProgress),
+                  onTap: () => _showEvolutionDialog(context, evolutionProgress),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -82,8 +78,7 @@ class ProfileBar extends StatelessWidget {
                       ),
                       Text(
                         evolutionName,
-                        style:
-                            Theme.of(context).textTheme.bodySmall?.copyWith(
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: DragonColors.textSecondary,
                           fontSize: 11,
                         ),
@@ -115,11 +110,7 @@ class ProfileBar extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset(
-                      DragonAssets.iconScale,
-                      width: 16,
-                      height: 16,
-                    ),
+                    Image.asset(DragonAssets.iconScale, width: 16, height: 16),
                     const SizedBox(width: DragonSpacing.xs),
                     Text(
                       formatScales(profile.totalScales),
@@ -139,7 +130,9 @@ class ProfileBar extends StatelessWidget {
               // Settings button
               IconButton(
                 icon: const Icon(
-                    Icons.settings, color: DragonColors.textSecondary),
+                  Icons.settings,
+                  color: DragonColors.textSecondary,
+                ),
                 onPressed: () {
                   Navigator.pushNamed(context, '/settings');
                 },
@@ -151,8 +144,7 @@ class ProfileBar extends StatelessWidget {
     );
   }
 
-  void _showEvolutionDialog(
-      BuildContext context, EvolutionProgress progress) {
+  void _showEvolutionDialog(BuildContext context, EvolutionProgress progress) {
     final stage = progress.currentStage;
     final stageName = evolutionNames[stage.clamp(0, evolutionNames.length - 1)];
 
@@ -163,7 +155,10 @@ class ProfileBar extends StatelessWidget {
         title: Row(
           children: [
             Image.asset(
-              DragonAssets.dragonPortraits[stage.clamp(0, DragonAssets.dragonPortraits.length - 1)],
+              DragonAssets.resolveDragonImage(
+                evolutionStage: stage,
+                context: DragonRenderContext.portrait,
+              ),
               width: 32,
               height: 32,
             ),
@@ -188,56 +183,57 @@ class ProfileBar extends StatelessWidget {
                   Text(
                     'Next: ${evolutionNames[progress.nextStage!]}',
                     style: const TextStyle(
-                        color: DragonColors.dragonGold, fontSize: 14),
+                      color: DragonColors.dragonGold,
+                      fontSize: 14,
+                    ),
                   ),
                   const SizedBox(height: 12),
-                  ...progress.requirements.map((req) => Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
-                        child: Row(
-                          children: [
-                            Icon(
-                              req.isMet ? Icons.check_circle : Icons.circle_outlined,
-                              size: 16,
+                  ...progress.requirements.map(
+                    (req) => Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Row(
+                        children: [
+                          Icon(
+                            req.isMet
+                                ? Icons.check_circle
+                                : Icons.circle_outlined,
+                            size: 16,
+                            color: req.isMet
+                                ? Colors.greenAccent
+                                : DragonColors.textSecondary,
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              req.label,
+                              style: TextStyle(
+                                color: req.isMet
+                                    ? Colors.white70
+                                    : Colors.white,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            '${req.current}/${req.target}',
+                            style: TextStyle(
+                              fontFamily: 'JetBrainsMono',
+                              fontSize: 12,
                               color: req.isMet
                                   ? Colors.greenAccent
-                                  : DragonColors.textSecondary,
+                                  : DragonColors.dragonGold,
                             ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Text(
-                                req.label,
-                                style: TextStyle(
-                                  color: req.isMet
-                                      ? Colors.white70
-                                      : Colors.white,
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              '${req.current}/${req.target}',
-                              style: TextStyle(
-                                fontFamily: 'JetBrainsMono',
-                                fontSize: 12,
-                                color: req.isMet
-                                    ? Colors.greenAccent
-                                    : DragonColors.dragonGold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )),
-                  const SizedBox(height: 8),
-                  _EvolutionProgressBar(
-                    progress: progress.overallProgress,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
+                  const SizedBox(height: 8),
+                  _EvolutionProgressBar(progress: progress.overallProgress),
                   const SizedBox(height: 4),
                   Text(
                     '${(progress.overallProgress * 100).round()}%',
-                    style: const TextStyle(
-                      color: Colors.white54,
-                      fontSize: 11,
-                    ),
+                    style: const TextStyle(color: Colors.white54, fontSize: 11),
                   ),
                 ],
               ),

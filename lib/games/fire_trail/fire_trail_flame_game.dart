@@ -43,6 +43,7 @@ class FireTrailFlameGame extends FlameGame {
   bool dirLocked = false;
   List<GridPosition> trail = [];
   List<AnswerGemData> gemData = [];
+  int levelGemCount = 0;
   GamePhase phase = GamePhase.countdown;
 
   // -- Scoring --
@@ -85,6 +86,11 @@ class FireTrailFlameGame extends FlameGame {
 
   int get totalAttempts => correctCount + wrongCount;
 
+  int get answerGemTarget =>
+      levelGemCount == 0 ? config.answerGemCount : levelGemCount;
+
+  int get answersEatenCount => answerGemTarget - gemData.length;
+
   Duration get gameDuration => DateTime.now().difference(_gameStartedAt);
 
   @override
@@ -99,8 +105,7 @@ class FireTrailFlameGame extends FlameGame {
     add(GridRenderer(gridSize: gridSize, cellSize: cellSize));
 
     // Initialize sub-systems
-    movement =
-        MovementSystem(gridSize: gridSize, wrap: config.wrapMode);
+    movement = MovementSystem(gridSize: gridSize, wrap: config.wrapMode);
     problems = ProblemManager(config: config);
     problems.difficultyEngine = difficultyEngine;
     problems.initFactPool();
@@ -108,10 +113,9 @@ class FireTrailFlameGame extends FlameGame {
 
     _seedDragon();
 
-    // Generate first problem
-    problems.generateProblem();
+    // Generate all level problems and place their answer gems once.
     _problemShownAt = DateTime.now();
-    _placeGems();
+    _placeLevelGems();
 
     // Notify Flutter after the current build frame to avoid setState during build.
     final initialProblemText = problems.currentProblem?.displayText ?? '';
@@ -195,7 +199,10 @@ class FireTrailFlameGame extends FlameGame {
   }
 
   void _handleGemEaten(AnswerGemData gem) {
-    if (gem.isCorrect) {
+    final isCorrect = identical(gem.problem, problems.currentProblem);
+    gemData.remove(gem);
+
+    if (isCorrect) {
       // Correct answer
       score += _calculateScore();
       correctCount++;
@@ -219,18 +226,8 @@ class FireTrailFlameGame extends FlameGame {
         ),
       ));
 
-      // New problem + re-place gems
-      problems.generateProblem();
-      _problemShownAt = DateTime.now();
-      onProblemChanged(problems.currentProblem?.displayText ?? '');
-      _placeGems();
-
-      // Check level completion
-      if (correctCount >= config.correctToAdvance) {
-        phase = GamePhase.levelComplete;
-        onLevelComplete();
-        return;
-      }
+      onAnswerEaten(true, score, streak);
+      _advanceProblem();
     } else {
       // Wrong answer
       wrongCount++;
@@ -240,10 +237,8 @@ class FireTrailFlameGame extends FlameGame {
       // Trail grows by 2
       trailManager.pendingGrowth += 2;
 
-      // Re-place gems but keep the same problem
-      _placeGems();
-
       onWrongFlash();
+      onAnswerEaten(false, score, streak);
 
       // Check game over
       if (!flameIntensity.isAlive) {
@@ -252,9 +247,15 @@ class FireTrailFlameGame extends FlameGame {
       }
     }
 
-    onAnswerEaten(gem.isCorrect, score, streak);
     onFlameChanged(flameIntensity.value);
     onScoreChanged(score);
+
+    // Check level completion after the eaten gem has been reported.
+    if (gemData.isEmpty) {
+      phase = GamePhase.levelComplete;
+      onLevelComplete();
+      return;
+    }
   }
 
   int _calculateScore() {
@@ -264,12 +265,21 @@ class FireTrailFlameGame extends FlameGame {
     return (base * streakMultiplier).round();
   }
 
-  void _placeGems() {
-    gemData = problems.placeGems(
+  void _placeLevelGems() {
+    final nextCell = movement.nextPosition(headPosition, currentDirection);
+    gemData = problems.placeLevelAnswerGems(
       head: headPosition,
       trail: trail,
       gridSize: gridSize,
+      reserved: nextCell == null ? const {} : {nextCell},
     );
+    levelGemCount = gemData.length;
+  }
+
+  void _advanceProblem() {
+    problems.setCurrentProblem(gemData.isEmpty ? null : gemData.first.problem);
+    _problemShownAt = DateTime.now();
+    onProblemChanged(problems.currentProblem?.displayText ?? '');
   }
 
   void _triggerGameOver(String reason) {
@@ -327,10 +337,9 @@ class FireTrailFlameGame extends FlameGame {
     trailManager.reset();
 
     _seedDragon();
-    problems.generateProblem();
     _problemShownAt = DateTime.now();
+    _placeLevelGems();
     onProblemChanged(problems.currentProblem?.displayText ?? '');
-    _placeGems();
     _rebuildVisuals();
     onFlameChanged(flameIntensity.value);
     onScoreChanged(score);
@@ -362,7 +371,10 @@ class FireTrailFlameGame extends FlameGame {
       score: score,
       medianScore: thresholds.medianScore,
       highScore: thresholds.highScore,
-      problemsAttempted: totalAttempts,
+      problemsAttempted: max(
+        totalAttempts,
+        LevelThresholds.minProblemsForLevel(levelNumber),
+      ),
       levelNumber: levelNumber,
     );
 
@@ -411,7 +423,7 @@ class FireTrailFlameGame extends FlameGame {
     for (final gem in gemData) {
       add(AnswerGemComponent(
         value: gem.value,
-        isCorrect: gem.isCorrect,
+        isCorrect: identical(gem.problem, problems.currentProblem),
         position:
             Vector2(gem.position.x * cellSize, gem.position.y * cellSize),
         size: Vector2.all(cellSize),

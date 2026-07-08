@@ -28,7 +28,20 @@ from pathlib import Path
 TOOLS_DIR = Path(__file__).parent
 sys.path.insert(0, str(TOOLS_DIR))
 
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+except ModuleNotFoundError:
+    def load_dotenv(path):
+        env_path = Path(path)
+        if not env_path.exists():
+            return
+        for line in env_path.read_text().splitlines():
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+
 load_dotenv(TOOLS_DIR / ".env")
 
 PROJECT_ROOT = TOOLS_DIR.parent.parent
