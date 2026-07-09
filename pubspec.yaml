@@ -1,7 +1,7 @@
 name: math_dragons
 description: Dragon-powered math games that are actually fun!
 publish_to: 'none'
-version: 1.0.2+6
+version: 1.0.2+7
 
 environment:
   sdk: ^3.11.0
