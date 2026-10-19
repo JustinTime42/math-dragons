@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app.dart';
+import 'core/founding_tester.dart';
 import 'storage/local_storage.dart';
 
 void main() async {
@@ -22,6 +23,7 @@ void main() async {
   try {
     final storage = LocalStorage();
     await storage.initialize();
+    await FoundingTester.record(storage);
     runApp(MathDragonsApp(storage: storage));
   } catch (e, stackTrace) {
     debugPrint('Fatal error during app initialization: $e');

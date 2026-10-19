@@ -1083,6 +1083,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Equipped'**
   String get equipped;
+
+  /// Generic cancel button
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// Title of the parental gate dialog shown before opening a web link
+  ///
+  /// In en, this message translates to:
+  /// **'Grown-ups only'**
+  String get parentalGateTitle;
+
+  /// Parental gate multiplication question
+  ///
+  /// In en, this message translates to:
+  /// **'To continue, what is {a} × {b}?'**
+  String parentalGateQuestion(int a, int b);
+
+  /// Shown when the parental gate answer is wrong
+  ///
+  /// In en, this message translates to:
+  /// **'Not quite. Ask a grown-up to try again.'**
+  String get parentalGateWrong;
+
+  /// Parental gate submit button
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get parentalGateContinue;
+
+  /// Settings section heading for parent-only links
+  ///
+  /// In en, this message translates to:
+  /// **'For Parents'**
+  String get forParentsSection;
+
+  /// Explanation under the For Parents heading
+  ///
+  /// In en, this message translates to:
+  /// **'These open playmathdragons.com in your browser. A grown-up check comes first.'**
+  String get forParentsHint;
+
+  /// Settings link to the privacy policy
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get privacyPolicyLink;
+
+  /// Settings link to the beta feedback form
+  ///
+  /// In en, this message translates to:
+  /// **'Send feedback'**
+  String get feedbackLink;
+
+  /// Settings link to the support page
+  ///
+  /// In en, this message translates to:
+  /// **'Help and support'**
+  String get supportLink;
+
+  /// Shown if an external link fails to open
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t open the browser. Visit playmathdragons.com instead.'**
+  String get linkOpenFailed;
 }
 
 class _AppLocalizationsDelegate

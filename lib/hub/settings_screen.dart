@@ -8,6 +8,8 @@ import '../storage/local_storage.dart';
 import '../core/player_profile.dart';
 import '../core/audio_service.dart';
 import '../models/cosmetic_catalog.dart';
+import '../core/external_links.dart';
+import '../monetization/parental_gate.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -50,6 +52,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       ),
     );
+  }
+
+  /// Parent-only links: parental gate first, then the system browser.
+  Future<void> _openParentLink(Uri uri) async {
+    final passed = await ParentalGate.show(context);
+    if (!passed || !mounted) return;
+    final messenger = ScaffoldMessenger.of(context);
+    final failedText = AppLocalizations.of(context)!.linkOpenFailed;
+    final opened = await ExternalLinks.launcher(uri);
+    if (!opened) {
+      messenger.showSnackBar(SnackBar(content: Text(failedText)));
+    }
   }
 
   void _onNameChanged(String name) {
@@ -197,6 +211,39 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               const SizedBox(height: DragonSpacing.lg),
             ],
+
+            // For Parents (all links behind the parental gate)
+            _buildSectionHeader(context, l10n.forParentsSection),
+            const SizedBox(height: DragonSpacing.xs),
+            Text(
+              l10n.forParentsHint,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            const SizedBox(height: DragonSpacing.sm),
+            _buildActionTile(
+              context,
+              icon: Icons.privacy_tip_outlined,
+              title: l10n.privacyPolicyLink,
+              subtitle: 'playmathdragons.com/privacy',
+              onTap: () => _openParentLink(ExternalLinks.privacyPolicy),
+            ),
+            const SizedBox(height: DragonSpacing.xs),
+            _buildActionTile(
+              context,
+              icon: Icons.rate_review_outlined,
+              title: l10n.feedbackLink,
+              subtitle: 'playmathdragons.com/feedback',
+              onTap: () => _openParentLink(ExternalLinks.feedback),
+            ),
+            const SizedBox(height: DragonSpacing.xs),
+            _buildActionTile(
+              context,
+              icon: Icons.help_outline,
+              title: l10n.supportLink,
+              subtitle: 'playmathdragons.com/support',
+              onTap: () => _openParentLink(ExternalLinks.support),
+            ),
+            const SizedBox(height: DragonSpacing.lg),
 
             // About Section
             _buildSectionHeader(context, l10n.aboutTitle),
