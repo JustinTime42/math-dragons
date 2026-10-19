@@ -4,6 +4,7 @@ owner: Justin
 created: 2026-10-19
 supersedes: the landing-page section of /spec.md, once approved
 sources:
+  - marketing/website/source/routeworks-2026-10-19.md (old site text: privacy, support, info)
   - marketing/reports/Beta landing page for kids app.md (research, 2026-10-19)
   - marketing/reports/Faceless short form video playbook.md (funnel/CTA consistency)
   - /spec.md (Justin's original landing-page outline)
@@ -53,7 +54,7 @@ No numeric targets until the first 10-15 videos produce a baseline (no public be
 | `/api/contact` | Form handler for `/support` and `/feedback` | Worker route |
 | `/articles/*` | Later: SEO articles (math history, techniques) | Phase 2, not in launch scope |
 
-Legacy: `apps.routeworks.app/math-dragons` 301s to `playmathdragons.com/` and its privacy page 301s to `/privacy`, kept until every build that links to the old URL has expired.
+Legacy: almost nobody has seen `apps.routeworks.app/math-dragons` (Justin, 2026-10-19), so redirects are nice-to-have, not a requirement. If cheap, 301 `/math-dragons` to `/`, `/math-dragons/privacy` to `/privacy`, `/math-dragons/support` to `/support`. Store listings (App Store Connect, Play Console) must be repointed to the new URLs regardless.
 
 ## 4. Page requirements
 
@@ -90,11 +91,11 @@ Legacy: `apps.routeworks.app/math-dragons` 301s to `playmathdragons.com/` and it
 - In a detected webview: top banner "You're inside Facebook's browser. Tap the menu, then Open in Chrome/Safari, so the install works."
   - Android: `intent://` escape button; the Android stepper sits behind the banner.
   - iOS: tap-initiated `x-safari-https://` attempt via `window.open`, with the manual instruction as fallback.
-- iPad: treat `Macintosh` UA with `navigator.maxTouchPoints > 1` as iOS (pending Justin's answer on iPad support).
+- iPad: the app supports iPad (Justin, 2026-10-19). Treat `Macintosh` UA with `navigator.maxTouchPoints > 1` as iOS; iPad visitors get the iPhone/iPad path, labeled "iPhone or iPad". Do not device-filter the TestFlight link.
 
 ### 4.4 Desktop
 
-Replace the stepper with one QR code (to `/qr`), the typed URL `playmathdragons.com`, and an optional "email me the link" field (waitlist-backed, see 4.8). QR generated at build time as inline SVG.
+Replace the stepper with one QR code (to `/qr`) and the typed URL `playmathdragons.com`. QR generated at build time as inline SVG. (No "email me the link": no waitlist at launch.)
 
 ### 4.5 `/story`, `/faq`
 
@@ -103,15 +104,22 @@ Replace the stepper with one QR code (to `/qr`), the typed URL `playmathdragons.
 
 ### 4.6 `/privacy`
 
-Single page, sections: who we are and how to reach us (named privacy contact); the Math Dragons app (collects no data, no ads, no accounts, no third-party SDKs, children's privacy statement); the website (contact/feedback form, waitlist, analytics vendor, hosting logs, retention periods); Do Not Track / Global Privacy Control response; third parties receiving site data; deletion requests; effective date and change process. Migration steps: update URL in App Store Connect and Play Console, 301 from the old URL, in-app link in the next build (see App dependencies), keep the old redirect alive until old builds expire.
+Single page, migrated from the old policy (`source/routeworks-2026-10-19.md`), developer **Routeworks LLC**, privacy contact **privacy@routeworks.app**. Sections: who we are and how to reach us; the Math Dragons app (collects no data, no ads, no accounts, no third-party SDKs, children's privacy statement); the website (contact/feedback form, waitlist, analytics vendor, hosting logs, retention periods); Do Not Track / Global Privacy Control response; third parties receiving site data; deletion requests; effective date and change process. Migration steps: update URLs in App Store Connect and Play Console; in-app link in the next build (see Dependencies).
+
+**Corrections required when migrating the old policy** (each passes the accuracy review):
+- It describes in-app purchases ($4.99 unlock, consumable currency packs) and RevenueCat as current, but IAP is not in the app (`purchases_flutter` is commented out at `pubspec.yaml:29`; no purchase code in `lib/`). Its §6 also says "no in-app purchases", contradicting its own §10. The new policy describes only what ships, with IAP added when (and if) it ships.
+- "The App does not connect to the internet and cannot transmit any information" is not literally true while the Android manifest declares `INTERNET` and `ACCESS_NETWORK_STATE` (`android/app/src/main/AndroidManifest.xml:2-3`). Either remove the permissions (app task, if nothing needs them) or reword to "does not send any information".
+- "Complies with COPPA and applicable provisions of GDPR" is a legal conclusion; restate as specific facts (collects no personal information, no ads, no accounts, no third-party SDKs).
+- "No external links that could lead children away" must change once the required in-app privacy link exists (a parent gate keeps it accurate in spirit; reword to say links are behind a parent gate).
+- Add the website section (form, analytics, hosting logs), which the old policy lacks.
 
 ### 4.7 Forms (`/support`, `/feedback`)
 
-Email and message required, name optional. Notice: "This form is for parents and other adults. If you're under 13, please ask a parent to write to us." Stated purpose ("so we can reply") and retention period. A separate, unticked waitlist opt-in; never auto-add. Spam: honeypot field + time-to-submit check + Workers Rate Limiting; Cloudflare Turnstile only on these pages and only if spam appears. Written procedure for deleting a message from a child (FTC one-time-response exception).
+Messages go to **support@routeworks.app** (existing support address; "we aim to respond within 48 hours" carried over only if Justin still commits to it). Email and message required, name optional. Notice: "This form is for parents and other adults. If you're under 13, please ask a parent to write to us." Stated purpose ("so we can reply") and retention period. A separate, unticked waitlist opt-in; never auto-add. Spam: honeypot field + time-to-submit check + Workers Rate Limiting; Cloudflare Turnstile only on these pages and only if spam appears. Written procedure for deleting a message from a child (FTC one-time-response exception).
 
-### 4.8 Waitlist (secondary)
+### 4.8 Waitlist
 
-Visually secondary to the install CTA. Uses: desktop "email me the link", parents stuck mid-flow, launch news, and the cross-platform founding-family record (a deferred option for honoring the perk). Email only, double opt-in, postal address (P.O. box) in every message, one-click unsubscribe, exportable provider.
+**Not at launch** (Justin, 2026-10-19). If added later: visually secondary to the install CTA; email only, double opt-in, postal address (P.O. box) in every message per CAN-SPAM, one-click unsubscribe, exportable provider. Revisit when launch news or the founding-family record needs a channel.
 
 ### 4.9 Founding perk wording
 
@@ -141,7 +149,11 @@ Privacy, Support, Feedback, Accessibility, analytics opt-out link, contact email
 - **Server routes (the only dynamic code):**
   - `/go/:platform` (`ios` | `android`): reads `src` query param, writes one data point to Workers Analytics Engine (`platform`, `src`, timestamp; **no IP, no identifier**), then 302s to the configured target. Unknown platform: 302 to `/`.
   - `/api/contact`: validates honeypot, time-to-submit, rate limit; forwards to Justin's inbox (Email Workers binding or email API). Returns JSON `{ ok: true }` or `{ ok: false, error: <code> }`.
-- **Single source of truth for outbound links:** one config module holding the TestFlight public link, TestFlight App Store link, Google Group URL, and Play opt-in URL. Changing a build or URL is a one-line edit.
+- **Single source of truth for outbound links:** one config module. Changing a build or URL is a one-line edit. Values:
+  - TestFlight public link: `https://testflight.apple.com/join/Qj1a4NA8` (Justin, 2026-10-19)
+  - Google Group: `math-dragons@googlegroups.com`, web URL `https://groups.google.com/g/math-dragons` (URL derived from the address; verify)
+  - Play opt-in: `https://play.google.com/apps/testing/com.mathdragonsgame.mathDragons` (derived from `applicationId` in `android/app/build.gradle*`; verify in Play Console)
+  - TestFlight app on the App Store: verify the current link before use
 - **Static config files:** `_redirects` (legacy and typo paths, all 302 except the routeworks 301s), `_headers` (CSP via Astro's CSP API, HSTS, caching).
 - **Campaign data:** a content collection, one entry per video: `{ id: "yt012", platform: "youtube"|"facebook"|"qr", video: "MD-012", headline, subhead?, poster, clip?, callback?, active }`. Pages under `/yt###`, `/fb###` are generated from it.
 - **Source propagation:** `src` stays in the URL and in page memory, is attached to `join_click`, and is appended to the `/go/*` links. No cookies, localStorage, or sessionStorage.
@@ -152,7 +164,7 @@ Per the Spec → Interface → Test → Implement rule, W4 starts by writing the
 
 ## 7. Analytics and consent
 
-- **Vendor:** Umami Cloud free tier (100K events/month, custom events, cookieless) to start; Plausible Starter ($9/month) if UTM/channel reporting or retention becomes limiting. Cloudflare Web Analytics cannot record custom events or query strings, so it is not the primary tool.
+- **Vendor: Umami Cloud free tier** (Justin, 2026-10-19; 100K events/month, custom events, cookieless, six-month retention). Plausible Starter ($9/month) is the upgrade path if limits bite. Cloudflare Web Analytics cannot record custom events or query strings, so it is not the primary tool.
 - **Events:** `join_click {platform, src}`, `step2_click {src}`, `troubleshoot_open`, `inapp_banner_shown {app}`, `escape_click {app}`, `qr_view`, `waitlist_submit {src}`.
 - **Server-side backup:** `/go/*` counter in Workers Analytics Engine (ad-blocker-proof).
 - **Consent posture (US-first, small EU exposure):** no cookies or web storage; skip the analytics script entirely when the browser sends Global Privacy Control or Do Not Track; footer opt-out link; disclosure in `/privacy`. Revisit with a geo-targeted EU consent prompt only if EU traffic becomes material.
@@ -183,20 +195,21 @@ Per the Spec → Interface → Test → Implement rule, W4 starts by writing the
 - **Stage 1 guides:** `brand-and-voice.md`, `compliance-checklist.md` (W2 copy), `visual-style.md` (W3 design).
 - **App tasks (app workstream):**
   - In-app privacy policy link to `playmathdragons.com/privacy` (none exists in `lib/` as of 2026-10-19; Apple 5.1.1(i) and Google User Data policy require one in the app). Also a parent-gated link to `/feedback`.
-  - Founding-tester flag (decided 2026-10-19).
-- **Justin (accounts/config):** Cloudflare zone for `playmathdragons.com`; Google Group auto-approve; Play Console feedback URL set to `/feedback`; App Store Connect privacy and support URLs; analytics account; email provider; P.O. box.
+  - Founding-tester flag (decided 2026-10-19). Before building, check App Store 3.1.1 (apps may not use their own mechanisms, e.g. license keys or codes, to unlock content) against a local flag unlocking future IAP content, and evaluate Apple's sanctioned grandfathering via StoreKit `AppTransaction` (original app version / purchase date). Any codes on iOS must be Apple offer codes, not self-issued.
+  - Review the Android `INTERNET` / `ACCESS_NETWORK_STATE` permissions (likely Firebase leftovers); remove if unused so the privacy policy's "doesn't connect to the internet" can stay true.
+- **Justin (accounts/config):** Cloudflare zone for `playmathdragons.com`; Google Group auto-approve; Play Console feedback URL set to `/feedback`; App Store Connect privacy and support URLs; Umami Cloud account.
 
 ## 12. Open decisions (need Justin before W1 approval)
 
+Resolved 2026-10-19 (Justin): TestFlight link, Google Group, iPad supported, Umami free, no waitlist, privacy@routeworks.app, legacy URLs low priority.
+
+Still open:
 1. **Campaign path convention.** Proposed: `/yt012`, `/fb012` (zero-padded, platform-prefixed, matches `MD-012`). Must be fixed before the first video since it's spoken on screen.
-2. **Beta links:** the TestFlight public link, Google Group URL, and Play opt-in URL (not found in the repo).
-3. **iPad:** does the app support iPad, and should the TestFlight link filter devices?
-4. **Analytics:** start on Umami Cloud free (proposed) or go straight to Plausible?
-5. **Waitlist at launch?** Proposed: yes, small and secondary. Provider choice (needs double opt-in, postal footer, export); and P.O. box or mail-receiving agency for the CAN-SPAM address.
-6. **Named privacy contact:** personal name, a business name (Routeworks?), or a role address like privacy@playmathdragons.com.
-7. **Can `apps.routeworks.app/math-dragons` serve 301s indefinitely?**
-8. **Origin-story imagery:** what's acceptable with no children shown.
-9. **EU/UK posture:** notice + opt-out + GPC skip (proposed), or an EU consent prompt.
+2. **Monetization story for the site.** The old site says "free to start with two full games, $4.99 one-time unlock, optional currency packs". IAP isn't in the app yet. What is the beta today (all four games free?), and what does the site say about the future model? This also defines the founding perk concretely (e.g. "beta families get the full unlock free").
+3. **Origin-story imagery:** what's acceptable with no children shown.
+4. **EU/UK posture:** notice + opt-out + GPC skip (proposed), or an EU consent prompt.
+5. **"Built by a dad in Alaska"**: confirm the location line (it was bracketed in `/spec.md`).
+6. **Support response promise:** keep "we aim to respond within 48 hours"?
 
 ## 13. Verification still owed (from research)
 
