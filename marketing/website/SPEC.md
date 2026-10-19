@@ -1,5 +1,5 @@
 ---
-status: draft (awaiting Justin's W1 approval)
+status: draft, all decisions resolved (awaiting Justin's overall W1 approval)
 owner: Justin
 created: 2026-10-19
 supersedes: the landing-page section of /spec.md, once approved
@@ -48,7 +48,7 @@ No numeric targets until the first 10-15 videos produce a baseline (no public be
 | `/feedback` | Feedback form for testers | Set as the Play Console feedback channel (Google shows it on the opt-in page) and linked from the app |
 | `/accessibility` | Accessibility statement + contact | |
 | `/beta-status` | Build status; linked from a site banner when a build lapses | |
-| `/yt###`, `/fb###` | Campaign landing variants, one per video (`/yt012`, `/fb012`) | Prerendered from campaign data, `noindex`, canonical to `/` |
+| `/yt###`, `/fb###` | Campaign landing variants, one per video (`/yt012`, `/fb012`) | Prerendered from campaign data, `noindex`, canonical to `/`. **Used only in clickable links** (FB first comment, the YouTube "join the beta" video description). Spoken and on-screen URL is always plain `playmathdragons.com`. User-friendliness beats attribution (Justin, 2026-10-19): do what's easy, keep it simple. |
 | `/qr` | Target of the desktop QR code; lands the phone on the detected stepper | Campaign entry with `src=qr` |
 | `/go/ios`, `/go/android` | Server-side click counter + 302 to TestFlight / Google Group | Worker route; single place to repoint links |
 | `/api/contact` | Form handler for `/support` and `/feedback` | Worker route |
@@ -99,7 +99,7 @@ Replace the stepper with one QR code (to `/qr`) and the typed URL `playmathdrago
 
 ### 4.5 `/story`, `/faq`
 
-- `/story`: Justin's origin story (from `/spec.md`): his daughter struggling, every app broken the same way, so he built one. Two or three paragraphs, "Built by a dad in Alaska."
+- `/story`: Justin's origin story (from `/spec.md`): his daughter struggling, every app broken the same way, so he built one. Two or three paragraphs. No name or age for his daughter. Imagery (Justin, 2026-10-19): any of hands at keyboard, desk, sketches/whiteboard designs, prototype-vs-today screenshots, Alaska landscape, Tallyclaw/game art; **never a clear image of Justin's face or his kids**.
 - `/faq` (corrected from `/spec.md`): devices (iPhone via TestFlight and Android via Play testing, both live now); ages 5-12; is it free (free during beta; the founding perk); what math it covers (addition, subtraction, multiplication, division, number properties; verify current scope against the app before W2); child data (the app collects none: no accounts, no ads, progress stays on the device); what beta testing involves; how to leave the beta.
 
 ### 4.6 `/privacy`
@@ -131,7 +131,7 @@ Text buttons during the beta ("Join the iPhone beta (TestFlight)", "Join the And
 
 ### 4.11 Footer
 
-Privacy, Support, Feedback, Accessibility, analytics opt-out link, contact email, YouTube `@playmathdragons` and Facebook links, trademark credit lines, "Built by a dad in Alaska."
+Privacy, Support, Feedback, Accessibility, analytics opt-out link, contact email, YouTube `@playmathdragons` and Facebook links, trademark credit lines, and the line "Built in Alaska by a dad, for his own kid." (Alaska appears in the footer and `/story` only, as a trust detail, not in the hero or videos.)
 
 ## 5. Claims rules (apply to all copy)
 
@@ -167,7 +167,7 @@ Per the Spec → Interface → Test → Implement rule, W4 starts by writing the
 - **Vendor: Umami Cloud free tier** (Justin, 2026-10-19; 100K events/month, custom events, cookieless, six-month retention). Plausible Starter ($9/month) is the upgrade path if limits bite. Cloudflare Web Analytics cannot record custom events or query strings, so it is not the primary tool.
 - **Events:** `join_click {platform, src}`, `step2_click {src}`, `troubleshoot_open`, `inapp_banner_shown {app}`, `escape_click {app}`, `qr_view`, `waitlist_submit {src}`.
 - **Server-side backup:** `/go/*` counter in Workers Analytics Engine (ad-blocker-proof).
-- **Consent posture (US-first, small EU exposure):** no cookies or web storage; skip the analytics script entirely when the browser sends Global Privacy Control or Do Not Track; footer opt-out link; disclosure in `/privacy`. Revisit with a geo-targeted EU consent prompt only if EU traffic becomes material.
+- **Consent posture (approved by Justin 2026-10-19; US-first, small EU exposure):** no cookies or web storage for analytics; skip the analytics script entirely when the browser sends Global Privacy Control or Do Not Track; footer link "Don't count my visits" (stores only the opt-out preference itself, via Umami's built-in disable flag); disclosure in `/privacy`. The app tracks nothing, so the opt-out concerns the website only. Revisit with a geo-targeted EU consent prompt only if EU traffic becomes material.
 
 ## 8. Non-functional requirements
 
@@ -205,12 +205,7 @@ Resolved 2026-10-19 (Justin): TestFlight link, Google Group, iPad supported, Uma
 
 Also resolved 2026-10-19 (Justin): everything in the app is free during the beta; monetization arrives with full release. Store rules are not to be broken: use Apple's (and Google's) built-in mechanisms for any unlock codes or grandfathering. Support keeps "we aim to respond within 48 hours".
 
-Still open:
-1. **Campaign path convention.** Proposed: `/yt012`, `/fb012` (zero-padded, platform-prefixed, matches `MD-012`). Must be fixed before the first video since it's spoken on screen.
-3. **Origin-story imagery:** what's acceptable with no children shown.
-4. **EU/UK posture:** notice + opt-out + GPC skip (proposed), or an EU consent prompt.
-5. **"Built by a dad in Alaska"**: confirm the location line (it was bracketed in `/spec.md`).
-
+No open decisions remain as of 2026-10-19. The spec awaits Justin's overall W1 approval.
 
 ## 13. Verification still owed (from research)
 
