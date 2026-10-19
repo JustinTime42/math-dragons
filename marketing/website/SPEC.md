@@ -69,9 +69,9 @@ Legacy: almost nobody has seen `apps.routeworks.app/math-dragons` (Justin, 2026-
 
 **Campaign variants** reuse the landing layout. Each campaign entry overrides headline, subhead, poster/clip, and optionally a one-line callback to the video ("You just saw Tallyclaw's 9s trick. Here's the game it came from."). Message match is the cheapest conversion lever a static site has.
 
-**Value exchange** beside the stepper, plain words: "You get: the full game, free, early, and [founding perk]. We ask: your kid plays a few times over two weeks, and you answer one short survey." Final wording in W2.
+**Value exchange** beside the stepper, plain words: "You get: the full game, free, early, and the full unlock free when Math Dragons launches. We ask: your kid plays a few times over two weeks, and you answer one short survey." Final wording in W2.
 
-**How it works:** four games, what each practices, adaptive difficulty. Real screenshots (`assets/images/screenshots`). Feature-descriptive claims only.
+**How it works:** four games, what each practices. Adaptivity claims only per `guides/brand-and-voice.md` §5.2 (Fire Trail and Dragon's Feast steer toward missed facts; Dragon Eggs does not). Real screenshots (`assets/images/screenshots`). Feature-descriptive claims only.
 
 **Origin teaser** linking to `/story`. **FAQ preview** (top 4) linking to `/faq`.
 
@@ -123,7 +123,7 @@ Messages go to **support@routeworks.app**; the page says "We aim to respond with
 
 ### 4.9 Founding perk wording
 
-Justin's decision (2026-10-19): everyone who joins the beta and installs gets lifetime free access, honored for now by an on-device founding-tester flag (app task). Research caution: "lifetime free" is a promise with no store mechanics behind it today, and Apple 2.3.1(a) treats undeliverable off-store promises as misleading. So the site wording must be **literal and deliverable**, e.g. "If Math Dragons ever adds paid features, every beta family gets them free." It is a thank-you to everyone, never tied to ratings, reviews, survey answers, or purchases, and it is described as a gift, not payment for testing. Exact wording passes the W2 accuracy review and Justin's sign-off.
+Justin's decision (2026-10-19): everyone who joins the beta and installs gets lifetime free access, honored for now by an on-device founding-tester flag (app task). Research caution: "lifetime free" is a promise with no store mechanics behind it today, and Apple 2.3.1(a) treats undeliverable off-store promises as misleading. So the site wording must be **literal and deliverable**, and is fixed in `guides/brand-and-voice.md` §5.4: **"Everyone in the beta gets the full unlock free when Math Dragons launches."** Delivery at launch must use store-native mechanisms (StoreKit `AppTransaction` / Apple offer codes, Play promo codes). It is a thank-you to everyone, never tied to ratings, reviews, survey answers, or purchases, and it is described as a gift, not payment for testing. Exact wording passes the W2 accuracy review and Justin's sign-off.
 
 ### 4.10 Badges, trademarks, imagery
 

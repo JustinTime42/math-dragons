@@ -1,5 +1,5 @@
 ---
-status: draft (awaiting accuracy review + Justin's approval)
+status: draft, accuracy review applied 2026-10-19 (see brand-and-voice.review.md); awaiting Justin's approval
 guide: brand-and-voice
 created: 2026-10-19
 applies_to: videos (scripts, VO, on-screen text, titles, descriptions, comments), website copy, social profiles, community replies
@@ -17,7 +17,7 @@ This guide is a rubric. Every script, caption, page and reply is checked against
 
 **Math Dragons is the calm, correct voice in a feed full of math panic.**
 
-Parents scroll past rage-bait math puzzles, "new math" rants and apps that promise genius. We are the opposite: steady, accurate, a little funny, and on the parent's side. The app is the demo of that attitude: short, adaptive practice in a dragon world, with no ads and no accounts.
+Parents scroll past rage-bait math puzzles, "new math" rants and apps that promise genius. We are the opposite: steady, accurate, a little funny, and on the parent's side. The app is the demo of that attitude: short practice sessions in a dragon world, with no ads and no accounts.
 
 ## 2. Who we talk to
 
@@ -30,7 +30,7 @@ Parents scroll past rage-bait math puzzles, "new math" rants and apps that promi
 1. **Correct.** Every fact, number and story is verified before it ships (mandatory accuracy and sense review, `marketing/README.md`). We would rather be boring than wrong. Accuracy is part of the brand, not a tax on it: myth-busting is one of our formats.
 2. **Calm.** We lower the temperature. No panic, no shame, no "your kid is falling behind." Math anxiety is real; we never add to it.
 3. **Honest.** We say what the app does, not what it will do to your child's future. Specific facts over big claims.
-4. **Generous.** Useful tips with no strings. Most videos never mention the app. Beta families get the full unlock free at launch.
+4. **Generous.** Useful tips with no strings. Most videos never mention the app. Everyone in the beta gets the full unlock free when Math Dragons launches.
 5. **Fun.** Dry humor, a gruff old dragon, genuinely interesting math. Fun is how we earn the watch, never at someone's expense.
 
 ## 4. The two voices
@@ -54,13 +54,14 @@ Parents scroll past rage-bait math puzzles, "new math" rants and apps that promi
   - Short, clipped sentences. Pauses do the work.
   - Old-soldier framing ("I've seen empires fall over less than long division"), lightly old-fashioned, never fake Shakespeare.
   - Understatement over shouting. He growls; he doesn't scream.
-  - Speaks to the parent, often as a co-conspirator ("Don't tell the kid. Eight times seven is just fifty-six. No trick. Just respect.").
+  - Speaks to the parent, often as a co-conspirator ("Don't tell the kid, but seven times eight took me a century.").
 - **What he never does:**
   - Never mocks a child, a parent, or a teacher. He can roast a bad math meme, a myth, or a confusing worksheet format.
   - Never asks a child to do anything, never invites kids to talk to him, never plays with kids on screen.
   - Never guilt-trips (no Duolingo-style "you missed your lesson" menace).
   - Never hype-coaches ("LET'S GOOO") or uses baby talk.
   - Never states a fact that hasn't passed review. **The eyewitness conceit never changes the facts.** If he "was there," what he describes must be what historians actually support, and legends are called legends ("I was there. It didn't happen like that." is his signature myth-bust move).
+- **Comments:** if a commenter appears to be a child, neither voice replies; hide the comment if it contains personal information.
 - **Frequency:** a recurring cameo and segment host (e.g. history and myth-bust segments), not in every video. Roughly one video in three features him; the Narrator carries the rest.
 - **Voice spec (ElevenLabs Voice Design, draft prompt):** "Elderly male dragon. Deep, gravelly, slow, resonant, with a warm undertone under the gruffness. Dry, deadpan delivery, theatrical pauses. Weathered, like an old soldier telling stories by a fire. Not menacing, not a horror villain, not cartoonish." Test 3-5 generations; pick for warmth plus gravel; lock the voice ID in `production-pipeline.md`.
 - **Visual:** rigged 2D puppet built from the style-bible dragon art, mouth shapes driven by Rhubarb Lip Sync. Battle scars and age are visual cues, never gore. Details belong in `visual-style.md`.
@@ -69,27 +70,27 @@ Parents scroll past rage-bait math puzzles, "new math" rants and apps that promi
 
 The Narrator is the guide; Tallyclaw is the color commentary. Typical beat: Narrator sets up a parent problem or a fact, Tallyclaw lands the line or the myth-bust, Narrator brings it home with the useful takeaway. Tallyclaw never delivers the CTA; the Narrator does, plainly.
 
-### 4.4 Sample lines (calibration, all reviewed for accuracy)
+### 4.4 Sample lines (calibration; accuracy-reviewed 2026-10-19)
 
 Use these to calibrate tone. Don't reuse them verbatim more than once.
 
 | Situation | Line |
 |---|---|
 | Tallyclaw, times tables | "Seven times eight. Fifty-six. Even I needed a trick for that one." |
-| Tallyclaw, base 60 | "Sixty splits evenly by two, three, four, five and six. The Babylonians knew what they were doing." |
+| Tallyclaw, base 60 | "Sixty splits evenly by two, three, four, five and six. Whoever picked it knew what they were doing." (Babylon inherited base 60 from Sumer, and why it was first chosen is debated, so don't credit one inventor.) |
 | Tallyclaw, myth-bust | "Einstein failed math? I was there. He did not." |
 | Tallyclaw, Gauss story | "Young Gauss adding one to a hundred in seconds? The story's been polished more than my scales." |
-| Tallyclaw, fingers | "Fingers aren't cheating. They're tools. Most kids put them down on their own, around seven or eight." |
-| Tallyclaw, aside to parent (site troubleshooter) | "Wrong Google account. Most common mistake in the realm. Check the little circle in the corner." |
+| Tallyclaw, fingers | "Fingers aren't cheating. They're tools. They tend to fade on their own as the facts stick." |
+| Tallyclaw, aside to parent (site troubleshooter) | "Wrong Google account. Classic mistake. Check the little circle in the corner." |
 | Narrator, homework | "Short and calm beats long and tense. Five minutes, then stop while it's still fun." |
-| Narrator, the app | "It's four little dragon games. It notices which facts your kid already knows and spends the time on the ones they don't." |
-| Narrator, beta CTA | "It's free while we test it. If you want in, it's playmathdragons.com." |
+| Narrator, the app | "It's four little dragon games. Fire Trail and Dragon's Feast keep track of the facts your kid misses and bring them back more often." |
+| Narrator, beta CTA | "It's free during the beta. If you want in, it's playmathdragons.com." |
 
 ## 5. What we say: messaging
 
 ### 5.1 Positioning statement (internal)
 
-For parents of kids 5-12 who want math practice without the fight, Math Dragons is a set of four dragon-themed math games that adapts to what each child already knows, with no ads, no accounts and no data collected by the app, built by a dad for his own kid.
+For parents of kids 5-12 who want math practice without the fight, Math Dragons is a set of four dragon-themed math games, two of which steer practice toward the facts a child misses, with no ads, no accounts and no data collected by the app, built by a dad for his own kid.
 
 ### 5.2 Proof points (all must stay literally true; re-verify before each use)
 
@@ -97,27 +98,27 @@ For parents of kids 5-12 who want math practice without the fight, Math Dragons 
 |---|---|
 | Four mini-games (Dragon Eggs, Fire Trail, Dragon Runes, Dragon's Feast) | Verified in `lib/games/*/*_registration.dart` 2026-10-19 |
 | Addition, subtraction, multiplication, division facts; number properties (even/odd, multiples, primes, factors) in Dragon's Feast | Verify scope against the app |
-| Adapts practice to the facts a child is still learning | True (adaptive difficulty engine) |
+| Steers practice toward missed facts | **Only partly true** (review 2026-10-19): Fire Trail and Dragon's Feast use the adaptive engine (weak facts capped at about 40% of picks, mixed with known facts on purpose); Dragon Runes uses it for one fact per level; Dragon Eggs picks problems at random (`dragon_eggs_game.dart:54`). Name the games when claiming it. App opportunity: wire Eggs and Runes into the engine so the simple claim becomes true |
 | No ads | True |
 | No accounts | True |
 | The app collects no data | True as of 2026-10-19 (no Firebase or SDKs in the app). Always scope to "the app"; the website collects form messages and anonymous analytics |
 | Works offline | True |
 | Ages 5-12 | Justin's decision 2026-10-19 |
-| Free during the beta; beta families get the paid unlock free at full release | Justin's decision 2026-10-19; wording must stay literal (see 5.4) |
+| Free during the beta; everyone in the beta gets the full unlock free when Math Dragons launches | Justin's decision 2026-10-19; use exactly the 5.4 sentence. Delivery path (store-native) not yet built |
 | Built by a dad for his own kid, in Alaska | Footer/story only for "Alaska" |
 | iPhone, iPad and Android | True (TestFlight + Play closed testing) |
 
 ### 5.3 Core messages (rotate; one per piece)
 
 1. **Practice without the fight.** Short, calm, adaptive sessions beat long, tense ones.
-2. **Math is the game, not the toll gate.** The math is the gameplay, not a quiz you answer to get back to the fun.
+2. **The math is the game.** There's no quiz to get through before the fun; solving is the fun.
 3. **No ads, no accounts, nothing collected by the app.** Stated as plain facts, never as a badge.
 4. **A real person built this.** A dad, his kid, every app failing the same way, so he built one.
-5. **You can help without being a math person.** (And "math person" is a myth.)
+5. **You can help without being a "math person."** Everyone can get better at math facts with practice.
 
 ### 5.4 The beta and founding perk
 
-- Say: "It's free while we test it." / "Join the beta at playmathdragons.com." / "If Math Dragons ever adds paid features, every beta family gets them free."
+- Say: "It's free during the beta." / "Join the beta at playmathdragons.com." / The perk, in exactly these words: **"Everyone in the beta gets the full unlock free when Math Dragons launches."** (Matches Justin's decision: the paid unlock, not currency packs.)
 - Frame the perk as a thank-you to everyone who joins. Never tie it to reviews, ratings, survey answers or anything else. Never call it payment for testing.
 - Don't say "lifetime" or "forever" unless the exact wording has passed review.
 
@@ -131,21 +132,22 @@ For parents of kids 5-12 who want math practice without the fight, Math Dragons 
 
 ### 6.1 Use
 
-practice, adapts, your kid, five minutes, try this tonight, tricks, facts, calm, short, free while we test it, parents, homework, the app collects no data (scoped), built by a dad
+practice, your kid, five minutes, try this tonight, tricks, facts, calm, short, free during the beta, parents, homework, the app collects no data (scoped), built by a dad
 
 ### 6.2 Avoid (and use instead)
 
 | Avoid | Why | Use instead |
 |---|---|---|
-| proven, scientifically proven, clinically, guaranteed | FTC: outcome claims need a study of the app itself | describe what it does |
-| improves scores, boosts grades, learn 2x faster, makes kids smarter | same | "practice", "adapts to what they know" |
+| proven, scientifically proven, clinically, guaranteed | FTC requires solid evidence for outcome claims; our conservative standard is a study of the app itself, which we don't have | describe what it does |
+| improves scores, boosts grades, learn 2x faster, makes kids smarter | same | "practice"; name the games that bring missed facts back |
+| algebra, calculus (from Dragon Runes world names like "Inferno Algebra", "Dragon's Calculus") | the app covers the four operations and number properties only | never show or say these in a way that implies the app teaches them |
 | genius, gifted, ahead of the class, behind | pressure and comparison; contradicts "calm" | (drop it) |
 | COPPA compliant, kid-safe certified, any seal | legal conclusion; FTC acted on false seal claims | "no ads, no accounts, the app collects no data" |
 | safe (unqualified) | vague claim | the specific facts |
 | we collect no data | the website collects some | "the app collects no data" |
 | addictive, kids can't put it down | wrong value for a kids' product | "kids ask to play again" only if a real parent said it, attributed |
 | screen-time guilt framing ("guilt-free screen time") | guilt is a pressure tactic | "screen time you can feel fine about" sparingly, or skip |
-| math person / not a math person (as real categories) | myth | "everyone can get better at math facts" |
+| math person / not a math person (as real categories) | fixed-ability framing; the evidence favors practice and support | "everyone can get better at math facts" |
 | learning styles, left-brain/right-brain | debunked myths | (never, except to debunk) |
 | "Hey kids", "boys and girls", "count with me", "can YOU solve it" (to a child) | child-directed language, MFK risk | address the parent: "Try this with your kid" |
 | Comment YES, tag a friend, share if you agree | Facebook demotes engagement bait | genuine questions; "Send this to whoever does homework duty" (untested) |
@@ -153,7 +155,7 @@ practice, adapts, your kid, five minutes, try this tonight, tricks, facts, calm,
 
 ## 7. Writing mechanics
 
-- **Reading level:** 5th-7th grade. Short words, short sentences. (Landing pages written at that level convert about twice as well in Unbounce's 2024 data; it also just reads kinder.)
+- **Reading level:** 5th-7th grade. Short words, short sentences. (In Unbounce's 2024 data, pages at that level converted at about twice the rate of professional-level copy; it also just reads kinder.)
 - **Person:** second person to the parent ("your kid"); first person singular for the Narrator ("I built"); Tallyclaw in his own first person.
 - **Punctuation:** zero em-dashes (Justin's rule; they read as AI). Use commas, periods, parentheses.
 - **Reframes:** "That's not X, that's Y" style constructions: default zero, max one per piece.
@@ -200,4 +202,5 @@ practice, adapts, your kid, five minutes, try this tonight, tricks, facts, calm,
 
 - Pick a tagline (5.5).
 - Generate and lock Tallyclaw's ElevenLabs voice (4.2) and Justin's voice clone; record both voice IDs in `production-pipeline.md`.
-- Confirm the four game names and the exact math scope before any proof point ships (5.2).
+- Confirm the exact math scope before any proof point ships (5.2). Game names verified 2026-10-19.
+- Decide whether to make adaptivity true across all four games (app task) so the simple "it adapts" claim can be used.
