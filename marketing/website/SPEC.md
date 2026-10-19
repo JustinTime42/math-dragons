@@ -115,7 +115,7 @@ Single page, migrated from the old policy (`source/routeworks-2026-10-19.md`), d
 
 ### 4.7 Forms (`/support`, `/feedback`)
 
-Messages go to **support@routeworks.app** (existing support address; "we aim to respond within 48 hours" carried over only if Justin still commits to it). Email and message required, name optional. Notice: "This form is for parents and other adults. If you're under 13, please ask a parent to write to us." Stated purpose ("so we can reply") and retention period. A separate, unticked waitlist opt-in; never auto-add. Spam: honeypot field + time-to-submit check + Workers Rate Limiting; Cloudflare Turnstile only on these pages and only if spam appears. Written procedure for deleting a message from a child (FTC one-time-response exception).
+Messages go to **support@routeworks.app**; the page says "We aim to respond within 48 hours" (Justin, 2026-10-19). Email and message required, name optional. Notice: "This form is for parents and other adults. If you're under 13, please ask a parent to write to us." Stated purpose ("so we can reply") and retention period. A separate, unticked waitlist opt-in; never auto-add. Spam: honeypot field + time-to-submit check + Workers Rate Limiting; Cloudflare Turnstile only on these pages and only if spam appears. Written procedure for deleting a message from a child (FTC one-time-response exception).
 
 ### 4.8 Waitlist
 
@@ -203,13 +203,14 @@ Per the Spec → Interface → Test → Implement rule, W4 starts by writing the
 
 Resolved 2026-10-19 (Justin): TestFlight link, Google Group, iPad supported, Umami free, no waitlist, privacy@routeworks.app, legacy URLs low priority.
 
+Also resolved 2026-10-19 (Justin): everything in the app is free during the beta; monetization arrives with full release. Store rules are not to be broken: use Apple's (and Google's) built-in mechanisms for any unlock codes or grandfathering. Support keeps "we aim to respond within 48 hours".
+
 Still open:
 1. **Campaign path convention.** Proposed: `/yt012`, `/fb012` (zero-padded, platform-prefixed, matches `MD-012`). Must be fixed before the first video since it's spoken on screen.
-2. **Monetization story for the site.** The old site says "free to start with two full games, $4.99 one-time unlock, optional currency packs". IAP isn't in the app yet. What is the beta today (all four games free?), and what does the site say about the future model? This also defines the founding perk concretely (e.g. "beta families get the full unlock free").
 3. **Origin-story imagery:** what's acceptable with no children shown.
 4. **EU/UK posture:** notice + opt-out + GPC skip (proposed), or an EU consent prompt.
 5. **"Built by a dad in Alaska"**: confirm the location line (it was bracketed in `/spec.md`).
-6. **Support response promise:** keep "we aim to respond within 48 hours"?
+
 
 ## 13. Verification still owed (from research)
 
