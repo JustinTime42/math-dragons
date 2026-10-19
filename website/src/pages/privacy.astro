@@ -38,13 +38,20 @@ const updated = 'October 19, 2026';
   <ul>
     <li>the dragon's name (chosen in the app) and its growth stage</li>
     <li>game progress: scores, levels, stars, scales earned, play time, achievements and streaks</li>
-    <li>which math facts have been practiced, and how often they were answered correctly</li>
+    <li>which math facts have been practiced, how often they were answered correctly, and how long answers took</li>
+    <li>when the game was played (dates and times of play)</li>
     <li>cosmetics owned and equipped, and settings such as sound and music</li>
     <li>a note that the app was installed during the beta, so beta families can get the full unlock free at launch</li>
   </ul>
   <p>
-    This information never leaves the device. We can't see it, and no one else can either. The
-    operating system keeps it in the app's private storage, where other apps can't read it.
+    The app never sends this information to us or anyone else, and we can't see it. The operating
+    system keeps it in the app's private storage, where other apps can't read it.
+  </p>
+  <p>
+    <strong>Device backups:</strong> if your device's own backup is turned on (iCloud Backup on
+    iPhone or iPad, or Google's backup on Android), it may include the app's data, the same as other
+    apps. That backup is stored in your Apple or Google account under their privacy policies. We
+    can't see it.
   </p>
 
   <h3>What the app does not collect</h3>
@@ -81,8 +88,9 @@ const updated = 'October 19, 2026';
     If you join the beta, Apple (TestFlight) or Google (Google Play testing) handles the download.
     They may share limited information with us under their own privacy policies, such as how many
     people installed the app, crash reports, and any feedback or screenshots you choose to send
-    through TestFlight. For the Android beta, you join a Google Group, so Google shows us the email
-    address you joined with. We use this only to run the beta and fix problems.
+    through TestFlight. For the Android beta, you join a Google Group, so Google shows us (the group
+    owner) the email address you joined with. Other testers can't see it. We use it only to run the
+    beta, and we remove the group when the beta ends, or remove you sooner if you ask.
   </p>
 
   <h2>3. Children's privacy</h2>
@@ -105,7 +113,8 @@ const updated = 'October 19, 2026';
   </p>
   <p>
     If you email us, we use your email address and message only to reply and to fix problems you
-    report. We delete emails when they are no longer needed, or sooner if you ask.
+    report. Our email is handled by Microsoft 365. We delete support emails within 12 months after
+    the conversation ends, or sooner if you ask.
   </p>
   <p>
     <strong>Do Not Track:</strong> we don't track visitors on this website or across other
@@ -120,14 +129,18 @@ const updated = 'October 19, 2026';
   </p>
 
   <h2>6. Deleting data</h2>
-  <p>Because the app's data lives only on your device, you control it:</p>
+  <p>Because the app's data lives on your device, you control it:</p>
   <ul>
     <li><strong>iPhone or iPad:</strong> delete the app to remove all of its data.</li>
     <li>
-      <strong>Android:</strong> open Settings, then Apps, then Math Dragons, then Storage, and
-      tap Clear data. Or uninstall the app.
+      <strong>Android:</strong> open Settings, then Apps, then Math Dragons, then Storage (or
+      Storage &amp; cache), and tap Clear storage (Clear data on some phones). Or uninstall the app.
     </li>
   </ul>
+  <p>
+    A copy may remain in your own device backup until that backup is replaced or deleted in your
+    Apple or Google account settings.
+  </p>
   <p>
     There is no data on our servers to delete. To have us delete an email you sent, write to
     <a href={mailto(contacts.privacy, 'Delete my email')}>{contacts.privacy}</a>.

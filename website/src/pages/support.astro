@@ -50,22 +50,24 @@ import { beta, contacts, mailto } from '../config/site';
 
     <dt>Are there ads or purchases?</dt>
     <dd>
-      No ads, ever. There are no purchases right now: everything is free during the beta. Paid
-      features are planned for the full release, and everyone in the beta gets the full unlock free
-      when Math Dragons launches.
+      No ads. There are no purchases right now: everything is free during the beta. Paid features
+      are planned for the full release. Everyone in the beta gets the full unlock free when Math
+      Dragons launches. It's our thank-you for joining.
     </dd>
 
-    <dt>Is my child's information safe?</dt>
+    <dt>What does the app do with my child's information?</dt>
     <dd>
-      The app collects no data. Progress stays on your device and is never sent anywhere. There are
-      no accounts. See the <a href="/privacy">privacy policy</a> for details.
+      Nothing leaves the app. The app collects no data and has no accounts, and we never receive
+      your child's progress. It stays on your device (and in your device's own backup, if you use
+      one). See the <a href="/privacy">privacy policy</a> for details.
     </dd>
 
     <dt>How do I reset my child's progress?</dt>
     <dd>
-      On Android, open Settings, then Apps, then Math Dragons, then Storage, and tap Clear data. On
-      iPhone or iPad, delete the app and install it again. Either way, all progress and settings
-      are erased and can't be recovered.
+      On Android, open Settings, then Apps, then Math Dragons, then Storage (or Storage &amp; cache),
+      and tap Clear storage (Clear data on some phones). On iPhone or iPad, delete the app and
+      install it again. Either way, all progress and settings on the device are erased. A device
+      backup may still hold an older copy.
     </dd>
 
     <dt>Can more than one child use it on the same device?</dt>
@@ -74,10 +76,17 @@ import { beta, contacts, mailto } from '../config/site';
       dragon and progress.
     </dd>
 
+    <dt>I reset or reinstalled the app. Do I still get the beta thank-you?</dt>
+    <dd>
+      Yes. Email <a href={mailto(contacts.support, 'Math Dragons beta thank-you')}>{contacts.support}</a>
+      and we'll make sure you get the full unlock at launch.
+    </dd>
+
     <dt>How do I leave the beta?</dt>
     <dd>
-      Delete the app. On iPhone or iPad you can also stop testing in the TestFlight app. On Android,
-      open <a href={beta.playOptIn}>the tester page</a> and choose Leave the program.
+      On iPhone or iPad, open the TestFlight app, choose Math Dragons, and tap Stop Testing (deleting
+      the app alone doesn't leave the beta). On Android, open
+      <a href={beta.playOptIn}>the tester page</a> and choose Leave the program, then uninstall.
     </dd>
 
     <dt>The app crashed or isn't working right.</dt>

@@ -160,7 +160,7 @@ practice, your kid, five minutes, try this tonight, tricks, facts, calm, short, 
 - **Punctuation:** zero em-dashes (Justin's rule; they read as AI). Use commas, periods, parentheses.
 - **Reframes:** "That's not X, that's Y" style constructions: default zero, max one per piece.
 - **Numbers:** digits on screen ("7 x 8 = 56"); natural speech in VO ("seven times eight"). All on-screen math is rendered from code and checked by the review, never typed by hand into a video model.
-- **Names:** Math Dragons (two words, both capitalized). Tallyclaw. Game names as in the app. TestFlight with ™ on first US mention on the website.
+- **Names:** Math Dragons (two words, both capitalized). Tallyclaw. Game names as in the app. TestFlight with ® on first US mention on the website (Apple lists it as registered; review 2026-10-19).
 - **CTA:** one per piece, after the payoff, spoken and on screen. Spoken URL is always plain `playmathdragons.com`.
 - **Hashtags and metadata:** parent, teacher and homeschool tags only. Never kid tags.
 
