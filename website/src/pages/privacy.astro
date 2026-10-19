@@ -1,0 +1,148 @@
+---
+import Base from '../layouts/Base.astro';
+import { contacts, mailto } from '../config/site';
+
+// Update both dates whenever the policy text changes.
+const effective = 'October 19, 2026';
+const updated = 'October 19, 2026';
+---
+
+<Base
+  title="Privacy policy"
+  description="How Math Dragons handles information: the app collects no data, has no ads and no accounts. This policy also covers playmathdragons.com."
+  path="/privacy"
+>
+  <h1>Privacy policy</h1>
+  <p class="muted">Effective {effective}. Last updated {updated}.</p>
+
+  <p>
+    This policy explains how {contacts.developer} ("we", "us") handles information in the Math
+    Dragons app ("the app") and on this website, playmathdragons.com ("the website"). The short
+    version: <strong>the app collects no data.</strong> It has no ads, no accounts, and it doesn't
+    send anything anywhere.
+  </p>
+
+  <h2>1. Who we are</h2>
+  <p>
+    Math Dragons is made by {contacts.developer}. For privacy questions, email
+    <a href={mailto(contacts.privacy, 'Math Dragons privacy')}>{contacts.privacy}</a>.
+  </p>
+
+  <h2>2. The app</h2>
+
+  <h3>What the app stores, and where</h3>
+  <p>
+    To run the game, the app keeps this information <strong>only on your device</strong>, in the
+    app's private storage:
+  </p>
+  <ul>
+    <li>the dragon's name (chosen in the app) and its growth stage</li>
+    <li>game progress: scores, levels, stars, scales earned, play time, achievements and streaks</li>
+    <li>which math facts have been practiced, and how often they were answered correctly</li>
+    <li>cosmetics owned and equipped, and settings such as sound and music</li>
+    <li>a note that the app was installed during the beta, so beta families can get the full unlock free at launch</li>
+  </ul>
+  <p>
+    This information never leaves the device. We can't see it, and no one else can either. The
+    operating system keeps it in the app's private storage, where other apps can't read it.
+  </p>
+
+  <h3>What the app does not collect</h3>
+  <p>The app does not collect, store or send:</p>
+  <ul>
+    <li>names, email addresses, or any other information that identifies a person</li>
+    <li>location</li>
+    <li>device identifiers or advertising IDs</li>
+    <li>analytics, usage tracking or telemetry</li>
+    <li>photos, contacts or any other data from the device</li>
+  </ul>
+  <p>
+    The app contains no advertising, no analytics tools and no third-party services that collect
+    data. It doesn't ask for an account and works without an internet connection.
+  </p>
+
+  <h3>Links out of the app</h3>
+  <p>
+    The only links in the app are in Settings, under <strong>For Parents</strong>: this privacy
+    policy, a feedback page and a help page on playmathdragons.com. Each one is behind a grown-ups
+    check (a multiplication problem young children can't easily solve) and opens in your web
+    browser. The app has no social features and no other links.
+  </p>
+
+  <h3>Purchases</h3>
+  <p>
+    The app has no in-app purchases right now. Everything is free during the beta. If we add paid
+    features later, we'll update this policy before they launch, and any purchase will go through
+    the App Store or Google Play behind a grown-ups check.
+  </p>
+
+  <h3>Beta testing through Apple and Google</h3>
+  <p>
+    If you join the beta, Apple (TestFlight) or Google (Google Play testing) handles the download.
+    They may share limited information with us under their own privacy policies, such as how many
+    people installed the app, crash reports, and any feedback or screenshots you choose to send
+    through TestFlight. For the Android beta, you join a Google Group, so Google shows us the email
+    address you joined with. We use this only to run the beta and fix problems.
+  </p>
+
+  <h2>3. Children's privacy</h2>
+  <p>
+    Math Dragons is made for children ages 5 to 12. The app does not collect personal information
+    from anyone, including children under 13, and it never asks a child to enter any. There is no
+    chat, no sharing, and no way for a child to contact anyone through the app.
+  </p>
+  <p>
+    If you're a parent or guardian with a question or concern, email
+    <a href={mailto(contacts.privacy, 'Math Dragons privacy')}>{contacts.privacy}</a>.
+  </p>
+
+  <h2>4. The website</h2>
+  <p>
+    This website has no ads, no analytics, no cookies and no forms. It is hosted by Cloudflare,
+    which, like any web host, processes basic technical information (such as your IP address and
+    browser type) to deliver pages and protect the site from abuse. We don't use that information
+    to identify or track you.
+  </p>
+  <p>
+    If you email us, we use your email address and message only to reply and to fix problems you
+    report. We delete emails when they are no longer needed, or sooner if you ask.
+  </p>
+  <p>
+    <strong>Do Not Track:</strong> we don't track visitors on this website or across other
+    websites, so there is nothing for Do Not Track or Global Privacy Control signals to turn off.
+    If we ever add analytics, we will update this policy first and respect those signals.
+  </p>
+
+  <h2>5. Sharing</h2>
+  <p>
+    We don't sell or share personal information. The app has nothing to share, because it doesn't
+    collect any.
+  </p>
+
+  <h2>6. Deleting data</h2>
+  <p>Because the app's data lives only on your device, you control it:</p>
+  <ul>
+    <li><strong>iPhone or iPad:</strong> delete the app to remove all of its data.</li>
+    <li>
+      <strong>Android:</strong> open Settings, then Apps, then Math Dragons, then Storage, and
+      tap Clear data. Or uninstall the app.
+    </li>
+  </ul>
+  <p>
+    There is no data on our servers to delete. To have us delete an email you sent, write to
+    <a href={mailto(contacts.privacy, 'Delete my email')}>{contacts.privacy}</a>.
+  </p>
+
+  <h2>7. Changes to this policy</h2>
+  <p>
+    If this policy changes, we'll update the date at the top. If we change how the app handles
+    information, we'll update this page before the change reaches the app.
+  </p>
+
+  <h2>8. Contact</h2>
+  <p>
+    {contacts.developer}<br />
+    Privacy: <a href={mailto(contacts.privacy, 'Math Dragons privacy')}>{contacts.privacy}</a><br />
+    Support: <a href={mailto(contacts.support, 'Math Dragons')}>{contacts.support}</a>
+  </p>
+</Base>

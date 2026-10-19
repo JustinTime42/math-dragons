@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import { beta, contacts, mailto } from '../config/site';
+---
+
+<Base
+  title="Help and support"
+  description="Help with Math Dragons: joining the beta, devices, resetting progress, and how to reach us."
+  path="/support"
+>
+  <h1>Help and support</h1>
+
+  <div class="card highlight">
+    <h2>Contact us</h2>
+    <p>
+      For questions, bug reports or feedback, email
+      <a href={mailto(contacts.support, 'Math Dragons help')}>{contacts.support}</a>. We aim to
+      respond within 48 hours.
+    </p>
+    <p class="muted">
+      Please include your device model and system version if something isn't working.
+    </p>
+  </div>
+
+  <h2>Common questions</h2>
+  <dl>
+    <dt>What ages is Math Dragons for?</dt>
+    <dd>Kids ages 5 to 12. It practices addition, subtraction, multiplication and division facts.</dd>
+
+    <dt>Which devices does it work on?</dt>
+    <dd>
+      iPhone and iPad with iOS or iPadOS 15 or later, and Android phones and tablets with Android 7.0
+      or later.
+    </dd>
+
+    <dt>How do I join the beta?</dt>
+    <dd>
+      Follow the steps on the <a href="/#join">home page</a>. iPhone and iPad use Apple's TestFlight
+      app. Android uses a Google tester group and Google Play.
+    </dd>
+
+    <dt>Android says "App not available." What now?</dt>
+    <dd>
+      Make sure the Google account signed in to the Play Store is the same one that joined the
+      tester group. Then wait a few minutes and open the tester page again, in Chrome.
+    </dd>
+
+    <dt>Does it need the internet?</dt>
+    <dd>No. Math Dragons works offline.</dd>
+
+    <dt>Are there ads or purchases?</dt>
+    <dd>
+      No ads, ever. There are no purchases right now: everything is free during the beta. Paid
+      features are planned for the full release, and everyone in the beta gets the full unlock free
+      when Math Dragons launches.
+    </dd>
+
+    <dt>Is my child's information safe?</dt>
+    <dd>
+      The app collects no data. Progress stays on your device and is never sent anywhere. There are
+      no accounts. See the <a href="/privacy">privacy policy</a> for details.
+    </dd>
+
+    <dt>How do I reset my child's progress?</dt>
+    <dd>
+      On Android, open Settings, then Apps, then Math Dragons, then Storage, and tap Clear data. On
+      iPhone or iPad, delete the app and install it again. Either way, all progress and settings
+      are erased and can't be recovered.
+    </dd>
+
+    <dt>Can more than one child use it on the same device?</dt>
+    <dd>
+      Right now the app has one player profile per device. Siblings sharing a device share the same
+      dragon and progress.
+    </dd>
+
+    <dt>How do I leave the beta?</dt>
+    <dd>
+      Delete the app. On iPhone or iPad you can also stop testing in the TestFlight app. On Android,
+      open <a href={beta.playOptIn}>the tester page</a> and choose Leave the program.
+    </dd>
+
+    <dt>The app crashed or isn't working right.</dt>
+    <dd>
+      Close and reopen the app, then try restarting the device. If it keeps happening, email
+      <a href={mailto(contacts.support, 'Math Dragons bug report')}>{contacts.support}</a> with what
+      happened and your device model and system version.
+    </dd>
+  </dl>
+
+  <h2>About the app</h2>
+  <dl>
+    <dt>Developer</dt>
+    <dd>{contacts.developer}</dd>
+    <dt>Ages</dt>
+    <dd>5 to 12</dd>
+    <dt>Ads</dt>
+    <dd>None</dd>
+    <dt>Internet required</dt>
+    <dd>No</dd>
+    <dt>Price</dt>
+    <dd>Free during the beta</dd>
+  </dl>
+</Base>

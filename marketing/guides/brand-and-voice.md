@@ -1,5 +1,5 @@
 ---
-status: draft, accuracy review applied 2026-10-19 (see brand-and-voice.review.md); awaiting Justin's approval
+status: approved (Justin, 2026-10-19; accuracy review applied, see brand-and-voice.review.md)
 guide: brand-and-voice
 created: 2026-10-19
 applies_to: videos (scripts, VO, on-screen text, titles, descriptions, comments), website copy, social profiles, community replies

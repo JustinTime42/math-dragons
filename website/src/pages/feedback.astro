@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import { contacts, mailto } from '../config/site';
+---
+
+<Base
+  title="Send feedback"
+  description="Tell us what's working and what isn't in the Math Dragons beta."
+  path="/feedback"
+>
+  <h1>Send feedback</h1>
+  <p class="lede">
+    Thank you for testing Math Dragons. Honest feedback is the most useful thing you can give us,
+    especially the parts your kid didn't like.
+  </p>
+
+  <div class="card highlight">
+    <h2>Email us</h2>
+    <p>
+      <a class="button" href={mailto(contacts.support, 'Math Dragons beta feedback')}
+        >Email {contacts.support}</a
+      >
+    </p>
+    <p class="muted">We read everything and aim to respond within 48 hours.</p>
+  </div>
+
+  <h2>What helps most</h2>
+  <ul>
+    <li>Which games your kid went back to, and which they skipped</li>
+    <li>Anything that was confusing, too hard or too easy</li>
+    <li>Bugs: what happened, and your device model and system version</li>
+    <li>Your kid's age (just the age, nothing else)</li>
+  </ul>
+
+  <h2>On iPhone or iPad</h2>
+  <p>
+    You can also send feedback through TestFlight: take a screenshot while using Math Dragons, then
+    tap <strong>Share Beta Feedback</strong>. Or open the TestFlight app, choose Math Dragons, and
+    tap <strong>Send Beta Feedback</strong>.
+  </p>
+
+  <p class="muted">
+    Please send feedback as a parent or another adult. If you're under 13, ask a grown-up to write
+    to us.
+  </p>
+</Base>

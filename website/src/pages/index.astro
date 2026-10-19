@@ -1,0 +1,101 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import dragon from '../assets/dragon.png';
+import { beta } from '../config/site';
+---
+
+<Base
+  title="Math Dragons: dragon math games for kids 5 to 12"
+  description="Four dragon math games for kids ages 5 to 12. Free beta for iPhone, iPad and Android. No ads, no accounts, and the app collects no data."
+  path="/"
+>
+  <script slot="head" src="/js/platform.js" is:inline></script>
+
+  <div class="hero">
+    <Image src={dragon} alt="" width={96} height={96} loading="eager" />
+    <h1>Math Dragons</h1>
+  </div>
+
+  <p class="lede">
+    Four dragon math games for kids ages 5 to 12. Short practice sessions for addition, subtraction,
+    multiplication and division.
+  </p>
+
+  <ul class="facts" aria-label="At a glance">
+    <li>Free during the beta</li>
+    <li>No ads</li>
+    <li>No accounts</li>
+    <li>The app collects no data</li>
+    <li>Works offline</li>
+    <li>iPhone, iPad and Android</li>
+  </ul>
+
+  <p><a class="button" href="#join">Join the free beta</a></p>
+
+  <h2>Why I built it</h2>
+  <p>
+    I'm a dad and a developer. My daughter was struggling with math facts, and every app we tried
+    had the same problems. So I built one.
+  </p>
+
+  <h2 id="join">Join the beta</h2>
+  <p>
+    <strong>You get:</strong> the full game, free, before anyone else. Everyone in the beta gets the
+    full unlock free when Math Dragons launches.
+    <br />
+    <strong>We ask:</strong> let your kid play a few times over two weeks, then tell us what worked
+    and what didn't.
+  </p>
+
+  <div class="inapp-banner" role="note">
+    <strong>You're inside Facebook's or Instagram's browser.</strong> The install steps may not work
+    here. Tap the menu (<span aria-hidden="true">⋯</span>), then choose Open in Safari or Open in
+    Chrome, and come back to this page.
+  </div>
+
+  <div class="join-grid">
+    <section class="card ios" aria-labelledby="ios-title">
+      <p class="yours">Looks like your device</p>
+      <h3 id="ios-title">iPhone or iPad</h3>
+      <ol class="steps">
+        <li>
+          Get <a href={beta.testflightApp}>TestFlight</a>, Apple's free app for testing new apps.
+        </li>
+        <li>Come back here and tap <a href={beta.testflight}>Join the Math Dragons beta</a>.</li>
+        <li>Tap <strong>Install</strong> in TestFlight.</li>
+      </ol>
+      <p><a class="button" href={beta.testflight}>Join on iPhone or iPad</a></p>
+    </section>
+
+    <section class="card android" aria-labelledby="android-title">
+      <p class="yours">Looks like your device</p>
+      <h3 id="android-title">Android</h3>
+      <ol class="steps">
+        <li>
+          <a href={beta.googleGroup}>Join the tester group</a>.
+          <strong>Use the same Google account your Play Store uses.</strong>
+        </li>
+        <li>Then open <a href={beta.playOptIn}>the tester page</a> and tap <strong>Become a tester</strong>.</li>
+        <li>Install Math Dragons from Google Play.</li>
+      </ol>
+      <p><a class="button" href={beta.googleGroup}>Start on Android</a></p>
+      <details>
+        <summary>Did it say "App not available"?</summary>
+        <ul>
+          <li>
+            Check which Google account is signed in to the Play Store (tap the little circle in the
+            corner). It has to be the one that joined the group.
+          </li>
+          <li>Wait a few minutes after joining, then try the tester page again.</li>
+          <li>Open these links in Chrome, signed in to that same account.</li>
+        </ul>
+      </details>
+    </section>
+  </div>
+
+  <p class="muted">
+    Questions first? See <a href="/support">help and support</a> or the
+    <a href="/privacy">privacy policy</a>.
+  </p>
+</Base>

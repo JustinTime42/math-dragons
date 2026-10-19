@@ -1,0 +1,13 @@
+{
+  // Static site served from Cloudflare Workers static assets (SPEC.md §6).
+  // No Worker script yet: /go/* and /api/contact arrive in a later phase.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "playmathdragons",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  },
+  "routes": [{ "pattern": "playmathdragons.com", "custom_domain": true }]
+}
