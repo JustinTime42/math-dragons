@@ -2,7 +2,7 @@
 
 Source of truth for progress. Update it in the same session as the work, before writing a handoff. Pipeline definition: `README.md`.
 
-**Current stage:** 0. Research, awaiting Justin's review gate (report delivered 2026-10-19)
+**Current stage:** 0. Research, awaiting Justin's review gate (report delivered 2026-10-19). Parallel track: W (website) not started.
 
 ## Stage 0: Research
 - [x] Scaffold pipeline folder, tracker, `/handoff` skill (2026-10-19)
@@ -18,7 +18,7 @@ Each guide is drafted from the research report, reviewed by Justin, then frozen 
 - [ ] `format-library.md`: reusable video templates (beat structure, length, example) per format
 - [ ] `script-standards.md`: hook rules, structure, length, CTA patterns, the script checklist used at the Stage 3 gate
 - [ ] `compliance-checklist.md`: Made-for-Kids, AI disclosure, engagement-bait, claims (FTC), music rights, link rules
-- [ ] `fact-check-protocol.md`: how claims get verified; links to the evidence bank
+- [ ] `fact-check-protocol.md`: operationalizes the mandatory accuracy and sense review in `README.md` (claims list, independent verifier, code-checked math, sense read, `review.md`, Justin sign-off); links to the evidence bank
 - [ ] `production-pipeline.md`: tools, automation design, quality bar, per-video cost/time budget
 - [ ] `metrics-and-learning.md`: what we track, where, and how lessons flow back into the guides
 - [ ] `idea-scoring-rubric.md`: how Stage 2 ideas are scored
@@ -30,18 +30,35 @@ Each guide is drafted from the research report, reviewed by Justin, then frozen 
 
 ## Stage 3: Treatments
 - [ ] Treatments for first batch (`videos/MD-###/treatment.md`)
+- [ ] Accuracy and sense review passed + Justin sign-off on each (`videos/MD-###/review.md`)
 
 ## Stage 4: Production plans
 - [ ] Plans for first batch
 
 ## Stage 5: Production
 - [ ] Pipeline tooling decision + build (manual first pass, then automate what repeats)
-- [ ] First 3 videos produced and QA'd
+- [ ] First 3 videos produced and QA'd, including the second accuracy and sense review on the rendered file
 
 ## Stage 6: Publish + learn
 - [ ] Channel setup checklist (YouTube + FB page; Not Made for Kids; link routing)
 - [ ] Publishing log + metrics sheet live
 - [ ] First weekly review
+
+## Track W: Marketing website (`playmathdragons.com`)
+Same quality bar as the videos: spec, review gates, the mandatory accuracy and sense review (README), and Justin sign-off. **Critical path:** every video CTA points at this site, so the beta landing page must be live and tested before the first video is published.
+
+Starting material: `/spec.md` (landing-page section spec: hero, origin story, how it works, social proof, testing-track explainer, FAQ, privacy, contact, footer) and the current placeholder `apps.routeworks.app/math-dragons` (hosts the privacy policy). `spec.md` has stale or unverified items that must be corrected: "zero data stored... everything on device" wording, ages 5-9 (now 5-12), "Android now, iOS coming?" (both are live), "email capture... google account" (Play now joins via open Google Group), "lifetime free access" for testers (check against App Store/Play incentive rules).
+
+- [ ] W0. Research: landing-page conversion best practices for app betas, kids'-app site requirements (COPPA, App Store/Play privacy-policy and support-URL requirements, Apple "Kids" category rules if applicable), device-detection routing to TestFlight vs Google Group + Play opt-in, per-video attribution paths without third-party trackers, privacy-respecting analytics
+- [ ] W1. Site spec `marketing/website/SPEC.md`: sitemap, page-by-page content outline, routing logic, attribution scheme (`/yt1`-style paths), analytics stance, hosting/stack, accessibility + performance targets. Supersedes the landing section of `/spec.md` once approved
+- [ ] W1 GATE: Justin approves spec
+- [ ] W2. Copy: all page copy written to the brand/voice guide (needs Stage 1 `brand-and-voice.md` + `compliance-checklist.md`), Tallyclaw's role on the site
+- [ ] W2 GATE: accuracy and sense review (claims list incl. privacy/age/feature claims, independent verifier) + Justin sign-off
+- [ ] W3. Design: visual direction from `docs/VISUAL_DESIGN_GUIDE.md` + `guides/visual-style.md`, mobile-first (most traffic arrives from phones via Shorts/Reels)
+- [ ] W3 GATE: Justin approves design
+- [ ] W4. Build + deploy: DNS for `playmathdragons.com`, HTTPS, privacy policy migrated, redirects from the old routeworks URL
+- [ ] W5. QA GATE: real-device run of both join flows (iPhone → TestFlight, Android → Google Group → Play opt-in → install), every link checked, Lighthouse performance/accessibility, no third-party trackers, second accuracy review on the live pages, Justin sign-off
+- [ ] W6. Launch: point all video CTAs and the YouTube/FB profile links at it; monitor per-path visits
 
 ## Decisions (resolved 2026-10-19, Justin)
 - **Age range: primarily 5-12.** Video copy uses this. Note: `docs/store-listing.md` (6-12) and `docs/VISUAL_DESIGN_GUIDE.md` §1 (7-14+) still differ; flag before the next store-listing edit.
@@ -51,6 +68,10 @@ Each guide is drafted from the research report, reviewed by Justin, then frozen 
 - **Privacy facts:** the app has no Firebase code or packages in `lib/` or `pubspec.yaml` (verified 2026-10-19; leftover Firebase infra is unused), no accounts, no ads. "No accounts, no ads, nothing collected" is supportable; keep any claim limited to the app itself (Apple/Google collect their own TestFlight/Play data). The vault product facts and repo README "Step 10 / Firebase" lines are stale.
 
 ## Open decisions (need Justin)
-- [ ] **Short beta URL.** Recommended: one short dedicated domain that 301-redirects to (or hosts) a device-detecting landing page, which sends iPhone visitors to TestFlight and Android to the Google Group + Play opt-in. Avoid bit.ly-style shorteners (low trust, spam-flagged on Meta). whois 2026-10-19: `mathdragons.com` registered 2025-08-25 (Justin's?); available per whois: `playmathdragons.com`, `getmathdragons.com`, `trymathdragons.com`, `mathdragons.fun`, `mathdragons.io`, `mathdragons.gg`; `mathdragons.app` has no DNS (likely available, unconfirmed).
-- [ ] **Dragon mascot personality + voice:** proposal in the 2026-10-19 session (recommended: the ancient, theatrical veteran dragon who "was there" for math history; gruff and fierce, secretly soft; speaks to parents, with its own ElevenLabs Voice Design voice and Rhubarb lip-sync on a rigged 2D puppet). Awaiting Justin's pick; it seeds `guides/brand-and-voice.md`.
+- [ ] **Website hosting/stack:** what runs `apps.routeworks.app` today, and should `playmathdragons.com` live there (redirect/alias) or be a new static site (e.g. in this repo under `website/`, deployed to Cloudflare Pages/Netlify/Firebase Hosting)? Decide in W1.
+- [x] **Short beta URL: `playmathdragons.com`** (Justin 2026-10-19; whois showed it available, not yet registered). Plan: domain points at a device-detecting landing page (iPhone to TestFlight, Android to Google Group + Play opt-in); per-video paths for attribution. Prior analysis: one short dedicated domain that 301-redirects to (or hosts) a device-detecting landing page, which sends iPhone visitors to TestFlight and Android to the Google Group + Play opt-in. Avoid bit.ly-style shorteners (low trust, spam-flagged on Meta). whois 2026-10-19: `mathdragons.com` registered 2025-08-25 (Justin's?); available per whois: `playmathdragons.com`, `getmathdragons.com`, `trymathdragons.com`, `mathdragons.fun`, `mathdragons.io`, `mathdragons.gg`; `mathdragons.app` has no DNS (likely available, unconfirmed).
+- [x] **Dragon mascot personality + voice: APPROVED (Justin 2026-10-19)**: the Ancient Veteran, with Justin's cloned voice as main narrator and the dragon as recurring cameo/segment host. Production approach approved: ElevenLabs Voice Design dragon voice + rigged 2D puppet from style-bible art + Rhubarb Lip Sync mouth timing, AI video lip-sync only for tested hero moments. Original proposal (recommended: the ancient, theatrical veteran dragon who "was there" for math history; gruff and fierce, secretly soft; speaks to parents, with its own ElevenLabs Voice Design voice and Rhubarb lip-sync on a rigged 2D puppet). Seeds `guides/brand-and-voice.md`.
+- [x] **Dragon name: Tallyclaw** (Justin 2026-10-19; nickname "Tally"). Conflict check 2026-10-19: no dragon/game character or trademark found by that name; `youtube.com/@tallyclaw` free (404); `tallyclaw.com` is taken by an unrelated QuickBooks bookkeeping service (different class, low risk, but no mascot .com and shared search results). Keep channel handles brand-level; Tallyclaw is a character, not the channel name.
+- [x] **Domain `playmathdragons.com` registered by Justin** (2026-10-19).
+- [ ] **Is `youtube.com/@mathdragons` ("MATH DRAGONS") Justin's existing channel?** If not, the channel needs a different handle (`@playmathdragons` was free 2026-10-19).
 - [ ] Hold promo videos until current TestFlight + Play builds are approved, with a rebuild cadence that beats TestFlight's 90-day build expiry?
