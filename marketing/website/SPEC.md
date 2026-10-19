@@ -1,5 +1,5 @@
 ---
-status: draft, all decisions resolved (awaiting Justin's overall W1 approval)
+status: approved (Justin, 2026-10-19)
 owner: Justin
 created: 2026-10-19
 supersedes: the landing-page section of /spec.md, once approved
