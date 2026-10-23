@@ -92,6 +92,16 @@ test('brand rules: no em-dashes, no banned claims', () => {
   }
 });
 
+test('no missing spaces around links or bold text', () => {
+  // Catches "theprivacy policy" / "</a>and": a word glued to an inline tag.
+  const glued = /[A-Za-z0-9,]<(a|strong)\b|<\/(a|strong)>[A-Za-z(]/g;
+  for (const [file, html] of Object.entries(pages)) {
+    const body = html.slice(html.indexOf('<body'));
+    const hits = [...body.matchAll(glued)].map((m) => body.slice(m.index - 15, m.index + 25));
+    assert.deepEqual(hits, [], `${file}: text glued to a tag`);
+  }
+});
+
 test('every image has an alt attribute', () => {
   for (const [file, html] of Object.entries(pages)) {
     for (const m of html.matchAll(/<img\b[^>]*>/g)) {

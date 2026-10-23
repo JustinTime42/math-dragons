@@ -12,4 +12,8 @@ export default defineConfig({
     inlineStylesheets: 'never',
   },
   trailingSlash: 'never',
+  // Astro's HTML compression dropped the space between a line of text and a
+  // link starting on the next line ("theprivacy policy"). Pages are small;
+  // keep the whitespace.
+  compressHTML: false,
 });
