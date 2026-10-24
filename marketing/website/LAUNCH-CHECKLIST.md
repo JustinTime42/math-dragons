@@ -1,21 +1,21 @@
 # Launch checklist: playmathdragons.com + app 1.0.3+8
 
-Status as of 2026-10-23: site and app build are done and committed, nothing deployed or pushed. Steps marked **JUSTIN** need your accounts; **CLAUDE** steps happen in a session once yours are done. Tick boxes as you go.
+Status as of 2026-10-23 (later): Cloudflare nameservers active, wrangler logged in, Zoho Mail live for support@/privacy@playmathdragons.com (MX, SPF, DKIM verified; site switched to these addresses). Remaining: delete the two proxied GoDaddy A records (domain returns 525), Google Group settings, copy sign-off, then deploy. Steps marked **JUSTIN** need your accounts; **CLAUDE** steps happen in a session once yours are done. Tick boxes as you go.
 
 Order matters: the site must be live before build 1.0.3+8 goes to Apple/Google review, because the build links to `/privacy`, `/support` and `/feedback`.
 
 ## Part 1: get the site live
 
 ### 1. Add the domain to Cloudflare (JUSTIN, ~10 min + DNS wait)
-- [ ] Sign in at dash.cloudflare.com (create a free account if needed). Click **Add a domain**, enter `playmathdragons.com`, choose **Free**.
+- [x] Sign in at dash.cloudflare.com (create a free account if needed). Click **Add a domain**, enter `playmathdragons.com`, choose **Free**.
 - [ ] Cloudflare imports existing DNS records. **Delete the two A records** for `playmathdragons.com` pointing to `15.197.148.33` and `3.33.130.190` (GoDaddy parking). Leave anything else (e.g. MX) alone.
-- [ ] Copy the two nameservers Cloudflare shows (like `xxx.ns.cloudflare.com`).
-- [ ] At GoDaddy: My Products, then `playmathdragons.com`, then **DNS**, then **Nameservers**, then **Change nameservers**, choose **I'll use my own nameservers**, paste both Cloudflare nameservers, save. (If GoDaddy offers to turn off DNSSEC, accept.)
-- [ ] Back in Cloudflare, wait for the domain to show **Active** (minutes to a few hours; Cloudflare emails you).
+- [x] Copy the two nameservers Cloudflare shows (like `xxx.ns.cloudflare.com`).
+- [x] At GoDaddy: My Products, then `playmathdragons.com`, then **DNS**, then **Nameservers**, then **Change nameservers**, choose **I'll use my own nameservers**, paste both Cloudflare nameservers, save. (If GoDaddy offers to turn off DNSSEC, accept.)
+- [x] Back in Cloudflare, wait for the domain to show **Active** (minutes to a few hours; Cloudflare emails you).
 - [ ] In Cloudflare, **Security**, then **Bots**: make sure **Bot Fight Mode is off** (it sets a cookie; the privacy policy says the site sets none).
 
 ### 2. Log wrangler in (JUSTIN, 1 min)
-- [ ] In Claude Code, run: `! cd website && npx wrangler login` and approve in the browser.
+- [x] In Claude Code, run: `! cd website && npx wrangler login` and approve in the browser.
 
 ### 3. Lock down the Google Group (JUSTIN, 3 min)
 At groups.google.com, open **math dragons**, then **Group settings**:
@@ -39,6 +39,11 @@ At groups.google.com, open **math dragons**, then **Group settings**:
 - [ ] Verify live: HTTPS, all four pages, 404, security headers, `/privacy/` redirects to `/privacy`.
 - [ ] Verify **no cookies or storage** in a real browser's DevTools before the "no cookies" line stands.
 - [ ] Merge `website/store-pages` (on Justin's OK).
+
+### Email (done 2026-10-23)
+- [x] Zoho Mail: support@ and privacy@playmathdragons.com send and receive; MX/SPF/DKIM (`zmail`) verified by DNS lookup.
+- [ ] Optional: the imported `_dmarc` record sends reports to GoDaddy (`dmarc_rua@onsecureserver.net`); change `rua` to `mailto:privacy@playmathdragons.com` or remove it.
+- [ ] After deploy: update the contact email in App Store Connect and Play Console to support@playmathdragons.com.
 
 ## Part 2: ship app 1.0.3+8
 

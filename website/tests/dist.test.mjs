@@ -63,7 +63,7 @@ test('external links are only the configured beta links or email', () => {
     for (const href of hrefs(html)) {
       if (href.startsWith('/') || href.startsWith('#')) continue;
       if (href.startsWith('mailto:')) {
-        assert.match(href, /^mailto:(support|privacy)@routeworks\.app/, `${file}: ${href}`);
+        assert.match(href, /^mailto:(support|privacy)@playmathdragons\.com/, `${file}: ${href}`);
         continue;
       }
       if (href.startsWith('https://playmathdragons.com')) continue; // canonical / og
@@ -113,7 +113,7 @@ test('every image has an alt attribute', () => {
 test('privacy policy names the developer and privacy contact', () => {
   const html = pages['privacy.html'];
   assert.ok(html.includes('Routeworks LLC'));
-  assert.ok(html.includes('privacy@routeworks.app'));
+  assert.ok(html.includes('privacy@playmathdragons.com'));
   assert.ok(html.includes('The app collects no data') || html.includes('the app collects no data'));
 });
 

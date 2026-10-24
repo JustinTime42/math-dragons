@@ -31,8 +31,8 @@ export const beta: BetaLinks = {
 };
 
 export const contacts: Contacts = {
-  support: 'support@routeworks.app',
-  privacy: 'privacy@routeworks.app',
+  support: 'support@playmathdragons.com',
+  privacy: 'privacy@playmathdragons.com',
   developer: 'Routeworks LLC',
 };
 
