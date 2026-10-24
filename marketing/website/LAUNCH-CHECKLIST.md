@@ -49,9 +49,10 @@ Live check: /, /privacy, /support, /feedback 200; /privacy/ 307 to /privacy; unk
 
 ## Part 2: ship app 1.0.3+8
 
-### 6. Merge and build (CLAUDE, on Justin's OK to push)
-- [ ] Merge `app/store-links-founding-flag` into `main` and push (this triggers the Codemagic iOS test workflow).
-- [ ] Remove the worktree `~/dev/math-dragons-app-links` after merge.
+### 6. Merge and build (CLAUDE): DONE 2026-10-24
+Merged to main and pushed (`28d6638`); 613 app tests, analyzer, 11 site tests green. Branches and worktree removed.
+- [x] Merge `app/store-links-founding-flag` into `main` and push (this triggers the Codemagic iOS test workflow).
+- [x] Remove the worktree `~/dev/math-dragons-app-links` after merge.
 
 ### 7. iOS (JUSTIN)
 - [ ] In Codemagic, start **iOS Release (App Store)** manually. It uploads to TestFlight.
@@ -61,7 +62,7 @@ Live check: /, /privacy, /support, /feedback 200; /privacy/ 307 to /privacy; unk
 - [ ] Open the link on a phone to confirm it offers **Accept / Install**.
 
 ### 8. Android (JUSTIN)
-- [ ] Build the bundle (Claude can do it: `flutter build appbundle --release`; output `build/app/outputs/bundle/release/app-release.aab`).
+- [x] (2026-10-24: built from main, 1.0.3 (8), signed with the RouteWorks upload key, no INTERNET permission) Build the bundle (Claude can do it: `flutter build appbundle --release`; output `build/app/outputs/bundle/release/app-release.aab`).
 - [ ] Play Console: Math Dragons, then **Test and release**, then **Closed testing**, then your track, then **Create new release**, upload the `.aab`, roll out.
 - [ ] **App content**, then **Privacy policy**: set `https://playmathdragons.com/privacy`.
 - [ ] Closed testing track, **Testers** tab: set the **Feedback URL or email** to `https://playmathdragons.com/feedback`.
