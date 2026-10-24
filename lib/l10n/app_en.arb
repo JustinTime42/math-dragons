@@ -630,5 +630,40 @@
   "@emptyWardrobeHint": { "description": "Empty state hint when no cosmetics are owned" },
 
   "equipped": "Equipped",
-  "@equipped": { "description": "Label shown on equipped cosmetic items" }
+  "@equipped": { "description": "Label shown on equipped cosmetic items" },
+  "cancel": "Cancel",
+  "@cancel": { "description": "Generic cancel button" },
+
+  "parentalGateTitle": "Grown-ups only",
+  "@parentalGateTitle": { "description": "Title of the parental gate dialog shown before opening a web link" },
+
+  "parentalGateQuestion": "To continue, what is {a} × {b}?",
+  "@parentalGateQuestion": {
+    "description": "Parental gate multiplication question",
+    "placeholders": { "a": { "type": "int" }, "b": { "type": "int" } }
+  },
+
+  "parentalGateWrong": "Not quite. Ask a grown-up to try again.",
+  "@parentalGateWrong": { "description": "Shown when the parental gate answer is wrong" },
+
+  "parentalGateContinue": "Continue",
+  "@parentalGateContinue": { "description": "Parental gate submit button" },
+
+  "forParentsSection": "For Parents",
+  "@forParentsSection": { "description": "Settings section heading for parent-only links" },
+
+  "forParentsHint": "These open playmathdragons.com in your browser. A grown-up check comes first.",
+  "@forParentsHint": { "description": "Explanation under the For Parents heading" },
+
+  "privacyPolicyLink": "Privacy policy",
+  "@privacyPolicyLink": { "description": "Settings link to the privacy policy" },
+
+  "feedbackLink": "Send feedback",
+  "@feedbackLink": { "description": "Settings link to the beta feedback form" },
+
+  "supportLink": "Help and support",
+  "@supportLink": { "description": "Settings link to the support page" },
+
+  "linkOpenFailed": "Couldn't open the browser. Visit playmathdragons.com instead.",
+  "@linkOpenFailed": { "description": "Shown if an external link fails to open" }
 }

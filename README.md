@@ -47,7 +47,10 @@ Dragon-powered math games that are actually fun! A collection of four math mini-
 - [x] **Sync Indicator** (Step 10) — Cloud status icon in profile bar (synced/syncing/offline)
 - [x] **Connectivity Monitor** (Step 10) — Auto-retry Firebase init and sync on network reconnection
 - [x] **Firestore Security Rules** (Step 10) — User-scoped access with data validation
-- [x] **535 unit tests** — all passing
+- [x] **Parent-gated links** — Settings > For Parents opens playmathdragons.com privacy, feedback and support pages, each behind a parental gate (two-digit multiplication, App Store 1.3 Kids Category rule); `url_launcher` opens the system browser
+- [x] **Founding-tester flag** — beta installs are marked locally (`lib/core/founding_tester.dart`, app_meta box) so beta families can get the paid unlock free at full release; nothing leaves the device
+- [x] **No network permission** — release Android manifest declares no `INTERNET` permission (the app makes no network calls)
+- [x] **613 tests** — all passing
 - [x] `flutter analyze` passes clean
 - [x] `flutter test` passes — all green
 - [x] `flutter build apk --debug` succeeds
@@ -259,19 +262,9 @@ math_dragons/
 - **Auth:** Firebase Anonymous Auth + optional Google Sign-In upgrade
 - **Fonts:** Cinzel (headings), Nunito (body), JetBrains Mono (counters)
 
-## Firebase Setup (Cloud Sync)
+## Firebase (removed)
 
-The app works fully offline without Firebase. To enable cloud sync:
-
-1. Create a Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
-2. Enable **Authentication** (Anonymous + Google sign-in methods)
-3. Enable **Cloud Firestore** (production mode)
-4. Register an Android app with package name `com.mathdragonsgame.math_dragons`
-5. Download `google-services.json` and place it at `android/app/google-services.json`
-6. For Google Sign-In, register your debug SHA-1 fingerprint in Firebase Console
-7. Deploy `firestore.rules` from the project root via Firebase CLI or the console
-
-Without `google-services.json`, the app gracefully falls back to local-only mode -- no crash, no error dialogs, all features work.
+The app no longer contains any Firebase code or packages (verified 2026-10-19). It is fully offline, has no accounts, and collects no data. Leftover Firebase project files (`firebase.json`, `firestore.rules`) and the unused `firebaseUid`/`linkedProvider` profile fields remain only for history and existing installs; they are not used.
 
 ## Notes
 

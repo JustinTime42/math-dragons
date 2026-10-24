@@ -584,4 +584,41 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get equipped => 'Equipped';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get parentalGateTitle => 'Grown-ups only';
+
+  @override
+  String parentalGateQuestion(int a, int b) {
+    return 'To continue, what is $a × $b?';
+  }
+
+  @override
+  String get parentalGateWrong => 'Not quite. Ask a grown-up to try again.';
+
+  @override
+  String get parentalGateContinue => 'Continue';
+
+  @override
+  String get forParentsSection => 'For Parents';
+
+  @override
+  String get forParentsHint =>
+      'These open playmathdragons.com in your browser. A grown-up check comes first.';
+
+  @override
+  String get privacyPolicyLink => 'Privacy policy';
+
+  @override
+  String get feedbackLink => 'Send feedback';
+
+  @override
+  String get supportLink => 'Help and support';
+
+  @override
+  String get linkOpenFailed =>
+      'Couldn\'t open the browser. Visit playmathdragons.com instead.';
 }
