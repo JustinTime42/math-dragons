@@ -25,7 +25,7 @@ Each guide is drafted from the research report, reviewed by Justin, then frozen 
 - [ ] GATE: Justin approves all guides
 
 ## Stage 2: Idea bank
-- [ ] Generate 100+ one-liners across pillars/formats into `ideas/idea-bank.md`
+- [x] Generate 100+ one-liners across pillars/formats into `ideas/idea-bank.md` (125 ideas, 2026-10-26; independent review PASS WITH FIXES, fixes applied, `ideas/idea-bank.review.md`)
 - [ ] Score against rubric; Justin selects first batch (target 10-15)
 
 ## Stage 3: Treatments
