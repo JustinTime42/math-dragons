@@ -1,5 +1,5 @@
 ---
-status: draft (awaiting accuracy review + Justin's approval)
+status: approved (Justin, 2026-10-26)
 guide: content-strategy
 created: 2026-10-26
 sources:

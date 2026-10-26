@@ -1,5 +1,5 @@
 ---
-status: draft (awaiting Justin's approval)
+status: approved (Justin, 2026-10-26)
 guide: idea-scoring-rubric
 created: 2026-10-26
 sources:

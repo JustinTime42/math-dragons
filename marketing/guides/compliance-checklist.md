@@ -1,5 +1,5 @@
 ---
-status: draft (awaiting accuracy review + Justin's approval)
+status: approved (Justin, 2026-10-26)
 guide: compliance-checklist
 created: 2026-10-26
 applies_to: every video (script, render, upload), every caption and comment, website copy
