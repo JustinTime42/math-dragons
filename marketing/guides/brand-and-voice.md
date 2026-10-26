@@ -1,5 +1,5 @@
 ---
-status: approved (Justin, 2026-10-19; accuracy review applied, see brand-and-voice.review.md). Factual corrections 2026-10-26 from compliance-and-strategy.review.md: adaptivity claims withdrawn (§4.4, §5.1, §5.2, §6.2), CTA rule unified (§7), TestFlight ® website-only (§7)
+status: approved (Justin, 2026-10-19; accuracy review applied, see brand-and-voice.review.md). Updates 2026-10-26: adaptivity stays a core claim (Justin's decision), published only once the adaptive-practice fix ships (§5.2); CTA rule unified (§7); TestFlight ® website-only (§7)
 guide: brand-and-voice
 created: 2026-10-19
 applies_to: videos (scripts, VO, on-screen text, titles, descriptions, comments), website copy, social profiles, community replies
@@ -83,14 +83,14 @@ Use these to calibrate tone. Don't reuse them verbatim more than once.
 | Tallyclaw, fingers | "Fingers aren't cheating. They're tools. They tend to fade on their own as the facts stick." |
 | Tallyclaw, aside to parent (site troubleshooter) | "Wrong Google account. Classic mistake. Check the little circle in the corner." |
 | Narrator, homework | "Short and calm beats long and tense. Five minutes, then stop while it's still fun." |
-| Narrator, the app | "It's four little dragon games. Short rounds, no ads, and it works offline." |
+| Narrator, the app (publish after the adaptive-practice fix (`docs/specs/adaptive-practice.md`) ships) | "It's four little dragon games. They keep track of the facts your kid misses and bring them back more often." |
 | Narrator, beta CTA | "It's free during the beta. If you want in, it's playmathdragons.com." |
 
 ## 5. What we say: messaging
 
 ### 5.1 Positioning statement (internal)
 
-For parents of kids 5-12 who want math practice without the fight, Math Dragons is a set of four dragon-themed math games for short practice sessions, with no ads, no accounts and no data collected by the app, built by a dad for his own kid.
+For parents of kids 5-12 who want math practice without the fight, Math Dragons is a set of four dragon-themed math games that adapt to the facts each child is still learning, with no ads, no accounts and no data collected by the app, built by a dad for his own kid.
 
 ### 5.2 Proof points (all must stay literally true; re-verify before each use)
 
@@ -98,7 +98,7 @@ For parents of kids 5-12 who want math practice without the fight, Math Dragons 
 |---|---|
 | Four mini-games (Dragon Eggs, Fire Trail, Dragon Runes, Dragon's Feast) | Verified in `lib/games/*/*_registration.dart` 2026-10-19 |
 | Addition, subtraction, multiplication, division facts; number properties (even/odd, multiples, primes, factors) in Dragon's Feast | Verify scope against the app |
-| Steers practice toward missed facts | **DO NOT CLAIM** (corrected 2026-10-26, review `compliance-and-strategy.review.md`): Dragon Eggs and Fire Trail pick problems at random (Fire Trail's screen never passes the engine to the game, `lib/games/fire_trail/fire_trail_game.dart:60-69`); Dragon Runes brings back one missed fact per level; Dragon's Feast only nudges which numbers appear. The 2026-10-19 version of this row was wrong. App task: wire the engine into all four games, then this claim can return |
+| Adapts: tracks the facts a child misses and brings them back more often | **Core claim, in progress** (Justin, 2026-10-26). Not yet true app-wide: Dragon Eggs and Fire Trail are random today (Fire Trail's screen never passes the engine, `lib/games/fire_trail/fire_trail_game.dart:60-69`), Dragon Runes repeats one missed fact per level, Dragon's Feast only nudges number choice. The fix is specified in `docs/specs/adaptive-practice.md`. **Use freely in scripts and plans; publish (video, caption, site) only once the fix has shipped in the build testers can install**, worded to match what the spec delivers |
 | No ads | True |
 | No accounts | True |
 | The app collects no data | True as of 2026-10-19 (no Firebase or SDKs in the app). Always scope to "the app"; the website collects form messages and anonymous analytics |
@@ -110,7 +110,7 @@ For parents of kids 5-12 who want math practice without the fight, Math Dragons 
 
 ### 5.3 Core messages (rotate; one per piece)
 
-1. **Practice without the fight.** Short, calm sessions beat long, tense ones.
+1. **Practice without the fight.** Short, calm, adaptive sessions beat long, tense ones.
 2. **The math is the game.** There's no quiz to get through before the fun; solving is the fun.
 3. **No ads, no accounts, nothing collected by the app.** Stated as plain facts, never as a badge.
 4. **A real person built this.** A dad, his kid, every app failing the same way, so he built one.
@@ -139,7 +139,7 @@ practice, your kid, five minutes, try this tonight, tricks, facts, calm, short, 
 | Avoid | Why | Use instead |
 |---|---|---|
 | proven, scientifically proven, clinically, guaranteed | FTC requires solid evidence for outcome claims; our conservative standard is a study of the app itself, which we don't have | describe what it does |
-| improves scores, boosts grades, learn 2x faster, makes kids smarter, adapts / adaptive (until the app task ships) | same; adaptivity isn't true app-wide yet (§5.2) | "practice", "short rounds" |
+| improves scores, boosts grades, learn 2x faster, makes kids smarter | same | "practice"; "adapts to the facts your kid misses" (once shipped, §5.2) |
 | algebra, calculus (from Dragon Runes world names like "Inferno Algebra", "Dragon's Calculus") | the app covers the four operations and number properties only | never show or say these in a way that implies the app teaches them |
 | genius, gifted, ahead of the class, behind | pressure and comparison; contradicts "calm" | (drop it) |
 | COPPA compliant, kid-safe certified, any seal | legal conclusion; FTC acted on false seal claims | "no ads, no accounts, the app collects no data" |
@@ -203,4 +203,4 @@ practice, your kid, five minutes, try this tonight, tricks, facts, calm, short, 
 - Pick a tagline (5.5).
 - Generate and lock Tallyclaw's ElevenLabs voice (4.2) and Justin's voice clone; record both voice IDs in `production-pipeline.md`.
 - Confirm the exact math scope before any proof point ships (5.2). Game names verified 2026-10-19.
-- Decide whether to make adaptivity true across all four games (app task) so the simple "it adapts" claim can be used.
+- Ship the adaptive-practice fix (`docs/specs/adaptive-practice.md`) before the first video that claims adaptivity is published.

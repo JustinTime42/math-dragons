@@ -29,6 +29,8 @@ What we optimize for follows from that: engaged testers and audience trust, not 
 | **Facebook Reels** (Math Dragons Page) | Parents; may convert well, untested | Same master video, uploaded natively. Link goes in the Page's first comment (caption links are plain text unless we pay for Meta One). Facebook's in-app browser is the biggest risk to the Android sign-up (the site shows an "open in your browser" banner). |
 | Instagram Reels | Later, optional | Cheap to add from the same masters once the YouTube/Facebook routine is stable. |
 
+**Vertical first.** Every Short and Reel is vertical 9:16; Shorts are the reach engine. The only horizontal video is the one "Join the beta" walkthrough, because it's the clickable-link destination. A vertical "How to join the beta" Short also exists for reach and points to the walkthrough like every other Short.
+
 Every video is rendered once and uploaded natively to each platform (no cross-platform watermarks).
 
 ## 3. Content pillars and mix
@@ -104,7 +106,7 @@ We don't bend the schedule around these (Justin, 2026-10-26); they slot into the
 ## 9. First 30 days
 
 1. **Set up channels:** YouTube `@playmathdragons` and a Facebook Page, banner and profile art from the style bible, `playmathdragons.com` in the links, descriptions written to parents. **Turn on YouTube's advanced features** right away (phone verification, plus channel history or ID verification): the per-Short related-video link requires them. Until they're on, Shorts rely on the spoken URL and the channel link.
-2. **Make the "Join the beta" walkthrough** (60-120 s, long-form) first: every Short points to it.
+2. **Make the "Join the beta" walkthrough** (60-120 s, horizontal) first: every Short points to it. Cut a vertical "How to join" Short from the same material.
 3. **Produce the first 6-9 videos by hand** (gameplay capture, Justin's voice clone, simple programmatic math animation) across all four pillars, so the first weeks test the mix.
 4. **Post 3 a week** and log metrics from day one.
 5. **Week 4 review:** early signals only (hooks: viewed-vs-swiped; shares; any beta traffic). Too few posts per pillar to shift the mix yet; adjust individual hooks and lengths. First mix decision at about day 60.

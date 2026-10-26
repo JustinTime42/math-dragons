@@ -41,7 +41,7 @@ Policies change. Each rule cites the dated research behind it; re-verify any rul
 **Why it matters:** the FTC requires objective claims to be truthful and backed by evidence before they're made, and has acted against children's educational-benefit claims and false privacy-seal claims. Apple can act on misleading marketing made outside the App Store (guideline 2.3.1(a)).
 
 - [ ] Every app claim is on the proof-point list in `brand-and-voice.md` §5.2 and is true **today**.
-- [ ] **No adaptivity claims** ("adapts", "focuses on what your kid misses") until the app task ships: today Dragon Eggs and Fire Trail are random, Dragon Runes repeats one missed fact per level, and Dragon's Feast only nudges number choice (`brand-and-voice.md` §5.2).
+- [ ] **Adaptivity claims** ("adapts", "brings back the facts your kid misses") are a core message, but **publish only once the adaptive-practice fix has shipped** in the build testers can install, worded to match what that build does (`brand-and-voice.md` §5.2). At the upload gate, confirm the fix is live.
 - [ ] No outcome claims: "improves", "boosts scores", "proven", "learn faster", "makes kids smarter", "genius". Describe what the app does, not what it does to a child's future.
 - [ ] Privacy is scoped: "The app collects no data" (never "we collect no data"; the website collects some). Never "COPPA compliant", never a seal or certification we don't hold, never "safe" without the specifics.
 - [ ] The perk uses exactly: "Everyone in the beta gets the full unlock free when Math Dragons launches." Never tied to reviews, ratings, feedback content, follows or shares. Never called payment for testing.
