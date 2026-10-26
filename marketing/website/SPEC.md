@@ -210,3 +210,38 @@ No open decisions remain as of 2026-10-19. The spec awaits Justin's overall W1 a
 ## 13. Verification still owed (from research)
 
 TestFlight and Play flows inside Facebook/Instagram webviews (real device); whether `intent://` and `x-safari-https://` escapes still work; Workers `_redirects` rule limits; TestFlight TM vs R; Google Play attribution line; CAN-SPAM, Consumer Reviews Rule, and Endorsement Guides text; CalOPPA statute text and state age-verification laws; current OG/structured-data/Lighthouse/Playwright tooling versions.
+
+## 14. Phase 2: analytics and launch list (approved by Justin 2026-10-26)
+
+Justin approved Umami analytics before the first video, and a **double-opt-in email list** so testers (including anonymous TestFlight testers) can be told when Math Dragons launches.
+
+### 14.1 Launch list
+- **Purpose (stated at signup):** an email when Math Dragons launches in the App Store and Google Play, occasional beta news (at most about one email a month), and delivery of the beta thank-you if a tester needs it (e.g. after a reinstall). Nothing else; never shared or sold.
+- **Who:** parents and other adults. The form says so; a required checkbox: "I'm 18 or older." (Parent-directed posture, SPEC §2; a child's signup is deleted on discovery.)
+- **Fields:** email only. The checkbox is required and unticked by default. No name, no child details.
+- **Double opt-in:** the provider sends a confirmation email; nobody is added until they click it.
+- **Provider:** Buttondown (Claude's recommendation 2026-10-26: privacy-first, analytics off by default, custom-domain sending; free to 100 subscribers, then about $9/month to 1,000). Verify at setup: double opt-in on, open/click tracking off, sending from `playmathdragons.com`, export available.
+- **Architecture:** the form posts to our own Worker route `POST /api/subscribe` (same origin, so the CSP stays `form-action 'self'`). The Worker validates (honeypot field, email format, checkbox), applies Workers rate limiting, and calls the provider's API with a secret key (`wrangler secret`). The browser never talks to the provider. Responses: redirect to `/subscribe/thanks` (check your email) or back with an error message; works without JavaScript.
+- **Placement:** a small "Tell me when it launches" block on `/` below the join steps, and on `/feedback`. Secondary to the install CTA.
+- **Every email** (CAN-SPAM): accurate sender and subject, a one-click unsubscribe, and Routeworks LLC's postal address (JUSTIN: provide a P.O. box or business address).
+
+### 14.2 Analytics (Umami Cloud, free tier)
+- Cookieless; loaded only if the browser does not send Global Privacy Control or Do Not Track, and only if the visitor hasn't opted out.
+- Footer link "Don't count my visits" stores only that preference (Umami's `umami.disabled` localStorage flag); a second click turns counting back on.
+- Events: `join_click {platform}` on the iPhone/Android buttons, `step2_click`, `troubleshoot_open`, `inapp_banner_shown`, `launch_list_submit`.
+- Source attribution: campaign paths (`/yt`, `/fb###`) redirect with a `?ref=` value that Umami records. `/yt` is used in the YouTube beta-walkthrough description; `/fb###` in Facebook first comments. Redirects live in `public/_redirects` (302).
+- CSP: allow the Umami script and its collection endpoint only (`script-src`, `connect-src`).
+
+### 14.3 Privacy policy changes (all pass the accuracy review + Justin sign-off before deploy)
+- Website section rewritten: analytics (Umami: what it records, cookieless, no IP stored by us, opt-out, GPC/DNT honored), the launch list (what, why, double opt-in, Buttondown as processor, kept until unsubscribe; deleted within 30 days of a request), the contact emails (unchanged), Cloudflare hosting.
+- Remove "no analytics, no cookies and no forms"; state accurately: no cookies; one localStorage entry only if you opt out of counting.
+- Children: the list is adults-only; a child's address is deleted when discovered.
+- Updated "last updated" date.
+
+### 14.4 Tests
+Contract tests in `website/tests/`: the subscribe route (valid → provider called once and redirect to thanks; honeypot → silently accepted, provider not called; bad email or no checkbox → error, provider not called; rate limit), the analytics loader (not loaded under GPC/DNT/opt-out), CSP still has no `'unsafe-inline'`, campaign redirects carry `ref`, and the existing page contract tests.
+
+### 14.5 Needs from Justin before deploy
+1. Buttondown account (or approve another provider), API key added with `wrangler secret put BUTTONDOWN_API_KEY`, sending domain set up for playmathdragons.com (DNS records in Cloudflare).
+2. Umami Cloud account and the website ID.
+3. Postal address for the email footer.
