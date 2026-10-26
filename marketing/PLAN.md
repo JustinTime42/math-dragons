@@ -21,7 +21,7 @@ Each guide is drafted from the research report, reviewed by Justin, then frozen 
 - [ ] `fact-check-protocol.md`: operationalizes the mandatory accuracy and sense review in `README.md` (claims list, independent verifier, code-checked math, sense read, `review.md`, Justin sign-off); links to the evidence bank
 - [ ] `production-pipeline.md`: tools, automation design, quality bar, per-video cost/time budget
 - [ ] `metrics-and-learning.md`: what we track, where, and how lessons flow back into the guides
-- [ ] `idea-scoring-rubric.md`: how Stage 2 ideas are scored
+- [x] `idea-scoring-rubric.md` DRAFTED 2026-10-26, awaiting Justin. Scope: how Stage 2 ideas are scored
 - [ ] GATE: Justin approves all guides
 
 ## Stage 2: Idea bank
