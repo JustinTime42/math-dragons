@@ -1,5 +1,5 @@
 ---
-status: approved (Justin, 2026-10-19; accuracy review applied, see brand-and-voice.review.md)
+status: approved (Justin, 2026-10-19; accuracy review applied, see brand-and-voice.review.md). Factual corrections 2026-10-26 from compliance-and-strategy.review.md: adaptivity claims withdrawn (§4.4, §5.1, §5.2, §6.2), CTA rule unified (§7), TestFlight ® website-only (§7)
 guide: brand-and-voice
 created: 2026-10-19
 applies_to: videos (scripts, VO, on-screen text, titles, descriptions, comments), website copy, social profiles, community replies
@@ -83,14 +83,14 @@ Use these to calibrate tone. Don't reuse them verbatim more than once.
 | Tallyclaw, fingers | "Fingers aren't cheating. They're tools. They tend to fade on their own as the facts stick." |
 | Tallyclaw, aside to parent (site troubleshooter) | "Wrong Google account. Classic mistake. Check the little circle in the corner." |
 | Narrator, homework | "Short and calm beats long and tense. Five minutes, then stop while it's still fun." |
-| Narrator, the app | "It's four little dragon games. Fire Trail and Dragon's Feast keep track of the facts your kid misses and bring them back more often." |
+| Narrator, the app | "It's four little dragon games. Short rounds, no ads, and it works offline." |
 | Narrator, beta CTA | "It's free during the beta. If you want in, it's playmathdragons.com." |
 
 ## 5. What we say: messaging
 
 ### 5.1 Positioning statement (internal)
 
-For parents of kids 5-12 who want math practice without the fight, Math Dragons is a set of four dragon-themed math games, two of which steer practice toward the facts a child misses, with no ads, no accounts and no data collected by the app, built by a dad for his own kid.
+For parents of kids 5-12 who want math practice without the fight, Math Dragons is a set of four dragon-themed math games for short practice sessions, with no ads, no accounts and no data collected by the app, built by a dad for his own kid.
 
 ### 5.2 Proof points (all must stay literally true; re-verify before each use)
 
@@ -98,7 +98,7 @@ For parents of kids 5-12 who want math practice without the fight, Math Dragons 
 |---|---|
 | Four mini-games (Dragon Eggs, Fire Trail, Dragon Runes, Dragon's Feast) | Verified in `lib/games/*/*_registration.dart` 2026-10-19 |
 | Addition, subtraction, multiplication, division facts; number properties (even/odd, multiples, primes, factors) in Dragon's Feast | Verify scope against the app |
-| Steers practice toward missed facts | **Only partly true** (review 2026-10-19): Fire Trail and Dragon's Feast use the adaptive engine (weak facts capped at about 40% of picks, mixed with known facts on purpose); Dragon Runes uses it for one fact per level; Dragon Eggs picks problems at random (`dragon_eggs_game.dart:54`). Name the games when claiming it. App opportunity: wire Eggs and Runes into the engine so the simple claim becomes true |
+| Steers practice toward missed facts | **DO NOT CLAIM** (corrected 2026-10-26, review `compliance-and-strategy.review.md`): Dragon Eggs and Fire Trail pick problems at random (Fire Trail's screen never passes the engine to the game, `lib/games/fire_trail/fire_trail_game.dart:60-69`); Dragon Runes brings back one missed fact per level; Dragon's Feast only nudges which numbers appear. The 2026-10-19 version of this row was wrong. App task: wire the engine into all four games, then this claim can return |
 | No ads | True |
 | No accounts | True |
 | The app collects no data | True as of 2026-10-19 (no Firebase or SDKs in the app). Always scope to "the app"; the website collects form messages and anonymous analytics |
@@ -110,7 +110,7 @@ For parents of kids 5-12 who want math practice without the fight, Math Dragons 
 
 ### 5.3 Core messages (rotate; one per piece)
 
-1. **Practice without the fight.** Short, calm, adaptive sessions beat long, tense ones.
+1. **Practice without the fight.** Short, calm sessions beat long, tense ones.
 2. **The math is the game.** There's no quiz to get through before the fun; solving is the fun.
 3. **No ads, no accounts, nothing collected by the app.** Stated as plain facts, never as a badge.
 4. **A real person built this.** A dad, his kid, every app failing the same way, so he built one.
@@ -139,7 +139,7 @@ practice, your kid, five minutes, try this tonight, tricks, facts, calm, short, 
 | Avoid | Why | Use instead |
 |---|---|---|
 | proven, scientifically proven, clinically, guaranteed | FTC requires solid evidence for outcome claims; our conservative standard is a study of the app itself, which we don't have | describe what it does |
-| improves scores, boosts grades, learn 2x faster, makes kids smarter | same | "practice"; name the games that bring missed facts back |
+| improves scores, boosts grades, learn 2x faster, makes kids smarter, adapts / adaptive (until the app task ships) | same; adaptivity isn't true app-wide yet (§5.2) | "practice", "short rounds" |
 | algebra, calculus (from Dragon Runes world names like "Inferno Algebra", "Dragon's Calculus") | the app covers the four operations and number properties only | never show or say these in a way that implies the app teaches them |
 | genius, gifted, ahead of the class, behind | pressure and comparison; contradicts "calm" | (drop it) |
 | COPPA compliant, kid-safe certified, any seal | legal conclusion; FTC acted on false seal claims | "no ads, no accounts, the app collects no data" |
@@ -160,8 +160,8 @@ practice, your kid, five minutes, try this tonight, tricks, facts, calm, short, 
 - **Punctuation:** zero em-dashes (Justin's rule; they read as AI). Use commas, periods, parentheses.
 - **Reframes:** "That's not X, that's Y" style constructions: default zero, max one per piece.
 - **Numbers:** digits on screen ("7 x 8 = 56"); natural speech in VO ("seven times eight"). All on-screen math is rendered from code and checked by the review, never typed by hand into a video model.
-- **Names:** Math Dragons (two words, both capitalized). Tallyclaw. Game names as in the app. TestFlight with ® on first US mention on the website (Apple lists it as registered; review 2026-10-19).
-- **CTA:** one per piece, after the payoff, spoken and on screen. Spoken URL is always plain `playmathdragons.com`.
+- **Names:** Math Dragons (two words, both capitalized). Tallyclaw. Game names as in the app. TestFlight with ® on first mention in website body copy only (Apple lists it as registered; Apple says the symbols are for US-only materials and not for headlines, so none in videos).
+- **CTA:** at most one per piece, after the payoff, spoken and on screen. Value videos usually have none (see `content-strategy.md` §6). A small `playmathdragons.com` corner mark is branding, not a CTA. Spoken URL is always plain `playmathdragons.com`.
 - **Hashtags and metadata:** parent, teacher and homeschool tags only. Never kid tags.
 
 ## 8. Humor rules
@@ -189,7 +189,7 @@ practice, your kid, five minutes, try this tonight, tricks, facts, calm, short, 
 ## 11. Voice checklist (Stage 3 and W2 gate)
 
 - [ ] Addresses an adult in the first line or on-screen text; no child-directed language anywhere
-- [ ] One idea, one core message, one CTA (after the payoff)
+- [ ] One idea, one core message, at most one CTA (after the payoff)
 - [ ] Every factual claim, number, date and joke premise listed for the accuracy review
 - [ ] No banned words or claims (section 6.2)
 - [ ] Tallyclaw (if present) stays in character: gruff, dry, protective; addresses adults; no facts bent for the bit

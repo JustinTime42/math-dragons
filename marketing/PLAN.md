@@ -14,10 +14,10 @@ Source of truth for progress. Update it in the same session as the work, before 
 Each guide is drafted from the research report, reviewed by Justin, then frozen as the rubric for later gates.
 - [x] `brand-and-voice.md` APPROVED by Justin 2026-10-19 (accuracy review PASS WITH FIXES, fixes applied, `guides/brand-and-voice.review.md`). Scope: channel identity, the dragon as mascot/"face", tone, words we use and avoid, VO voice spec
 - [ ] `visual-style.md`: 9:16 layout, safe zones, caption style, color/type pulled from `docs/VISUAL_DESIGN_GUIDE.md`, how AI visuals match the in-game art
-- [ ] `content-strategy.md`: audience, pillars, promo-vs-value ratio, series, cadence, platform differences (YT vs FB)
+- [x] `content-strategy.md` DRAFTED 2026-10-26; independent review PASS WITH FIXES (`guides/compliance-and-strategy.review.md`), fixes applied; Justin approved cadence (3/week), pillar mix + 4:1 ratio, calendar days within cadence; awaiting final approval of the full doc. Scope: audience, pillars, promo-vs-value ratio, series, cadence, platform differences (YT vs FB)
 - [ ] `format-library.md`: reusable video templates (beat structure, length, example) per format
 - [ ] `script-standards.md`: hook rules, structure, length, CTA patterns, the script checklist used at the Stage 3 gate
-- [ ] `compliance-checklist.md`: Made-for-Kids, AI disclosure, engagement-bait, claims (FTC), music rights, link rules
+- [x] `compliance-checklist.md` DRAFTED 2026-10-26; review PASS WITH FIXES, fixes applied; keyword-to-DM off (Justin); awaiting final approval. Scope: Made-for-Kids, AI disclosure, engagement-bait, claims (FTC), music rights, link rules
 - [ ] `fact-check-protocol.md`: operationalizes the mandatory accuracy and sense review in `README.md` (claims list, independent verifier, code-checked math, sense read, `review.md`, Justin sign-off); links to the evidence bank
 - [ ] `production-pipeline.md`: tools, automation design, quality bar, per-video cost/time budget
 - [ ] `metrics-and-learning.md`: what we track, where, and how lessons flow back into the guides
@@ -73,8 +73,11 @@ Branch `app/store-links-founding-flag` (worktree `~/dev/math-dragons-app-links`)
 - [x] (done 7655335; merged release manifest verified) Review/remove Android `INTERNET` + `ACCESS_NETWORK_STATE` permissions (`android/app/src/main/AndroidManifest.xml:2-3`) if unused.
 - [x] (done 7655335; parental gate per MOBILE_APP_PLAN, Apple 1.3) In-app privacy policy link to `playmathdragons.com/privacy` and a parent-gated `/feedback` link. None exists in `lib/` (checked 2026-10-19); Apple 5.1.1(i) and Google's User Data policy require a privacy link in the app.
 
-- [ ] Adaptivity is partial (review 2026-10-19): Dragon Eggs ignores the adaptive engine (`dragon_eggs_game.dart:54`), Dragon Runes uses it for one fact per level. Wiring both in would make "it adapts" true app-wide. Also `docs/store-listing.md` claims "Adaptive difficulty automatically adjusts" and ages 6-12 (now 5-12); fix before next store-listing edit.
+- [ ] **Adaptivity is NOT true today (corrected 2026-10-26):** Fire Trail never receives the difficulty engine (`lib/games/fire_trail/fire_trail_game.dart:60-69`, `FireTrailFlameGame(difficultyEngine:)` left null), so it's random like Dragon Eggs; Dragon Runes repeats one missed fact per level; Dragon's Feast only nudges number choice. All adaptivity claims withdrawn from guides/site. Fix = pass the engine into Fire Trail (and wire Eggs), with tests; then the claim can return. Earlier note: Dragon Eggs ignores the adaptive engine (`dragon_eggs_game.dart:54`), Dragon Runes uses it for one fact per level. Wiring both in would make "it adapts" true app-wide. Also `docs/store-listing.md` claims "Adaptive difficulty automatically adjusts" and ages 6-12 (now 5-12); fix before next store-listing edit.
 - [ ] Settings About shows hardcoded "Version 1.0.0" (`lib/hub/settings_screen.dart`); minor.
+
+- **Community (Justin 2026-10-26):** no tester community yet. Justin floated Discord for support/feedback/discussion; Claude's view (2026-10-26 session): parents skew Facebook, Discord skews gamers/devs and teens; start a moderated adults-only Facebook group once ~15-20 active Android testers exist; revisit Discord for a build-in-public/dev audience later.
+- **Kids as an audience (Justin asked 2026-10-26):** answered in session: stay parent-directed for now; kid-directed videos must be marked Made for Kids, which strips the funnel features; revisit a separate kids presence after public launch.
 
 ## Decisions (resolved 2026-10-19, Justin)
 - **Age range: primarily 5-12.** Video copy uses this. Note: `docs/store-listing.md` (6-12) and `docs/VISUAL_DESIGN_GUIDE.md` §1 (7-14+) still differ; flag before the next store-listing edit.

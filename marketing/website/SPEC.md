@@ -71,7 +71,7 @@ Legacy: almost nobody has seen `apps.routeworks.app/math-dragons` (Justin, 2026-
 
 **Value exchange** beside the stepper, plain words: "You get: the full game, free, early, and the full unlock free when Math Dragons launches. We ask: your kid plays a few times over two weeks, and you answer one short survey." Final wording in W2.
 
-**How it works:** four games, what each practices. Adaptivity claims only per `guides/brand-and-voice.md` §5.2 (Fire Trail and Dragon's Feast steer toward missed facts; Dragon Eggs does not). Real screenshots (`assets/images/screenshots`). Feature-descriptive claims only.
+**How it works:** four games, what each practices. No adaptivity claims until the app task ships (`guides/brand-and-voice.md` §5.2, corrected 2026-10-26). Real screenshots (`assets/images/screenshots`). Feature-descriptive claims only.
 
 **Origin teaser** linking to `/story`. **FAQ preview** (top 4) linking to `/faq`.
 
@@ -135,7 +135,7 @@ Privacy, Support, Feedback, Accessibility, analytics opt-out link, contact email
 
 ## 5. Claims rules (apply to all copy)
 
-- Safe: feature descriptions ("practice", "adapts", "four games").
+- Safe: feature descriptions ("practice", "four games", "short rounds").
 - Needs documentation: curriculum or standards alignment, only if mapped.
 - Off-limits without a study of the app itself: "improves", "proven", "learn faster", outcome-stating testimonials.
 - Never: "COPPA compliant" as a badge or headline, any safe-harbor seal, "safe" without specifics, "we collect no data" (the site does). Use "The Math Dragons app collects no data" / "built to collect no personal information from children".

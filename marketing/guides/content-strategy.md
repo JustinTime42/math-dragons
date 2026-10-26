@@ -25,8 +25,8 @@ What we optimize for follows from that: engaged testers and audience trust, not 
 | Platform | Role | Notes |
 |---|---|---|
 | **YouTube Shorts** (`@playmathdragons`) | Home base, discovery | Shorts are judged separately from long-form. No clickable links in Shorts descriptions or comments since 2023; the only clickable link is the per-Short **related video**. |
-| **YouTube long-form** | One "Join the beta" walkthrough (60-120 s) | The related-video target for every Short, with `playmathdragons.com` in the first line of its description. Pinned on the channel. |
-| **Facebook Reels** (Math Dragons Page) | Parents, likely our best converter | Same master video, uploaded natively. Link goes in the Page's first comment (caption links are plain text unless we pay for Meta One). |
+| **YouTube long-form** | One "Join the beta" walkthrough (60-120 s), **uploaded landscape (16:9)** | Any vertical or square upload up to 3 minutes is classified as a Short, and Shorts descriptions have no clickable links, so this one must be horizontal. It's the related-video target for every Short, with `playmathdragons.com/yt` in the first line of its description. Featured on the channel. |
+| **Facebook Reels** (Math Dragons Page) | Parents; may convert well, untested | Same master video, uploaded natively. Link goes in the Page's first comment (caption links are plain text unless we pay for Meta One). Facebook's in-app browser is the biggest risk to the Android sign-up (the site shows an "open in your browser" banner). |
 | Instagram Reels | Later, optional | Cheap to add from the same masters once the YouTube/Facebook routine is stable. |
 
 Every video is rendered once and uploaded natively to each platform (no cross-platform watermarks).
@@ -48,7 +48,7 @@ Series build habit and give each video a home. Names are working titles.
 
 | Series | Pillar | Format |
 |---|---|---|
-| **Dragon Puzzle** (weekly) | 1 | Puzzle in part 1, answer and the common wrong answer explained in part 2 a few days later |
+| **Dragon Puzzle** (every other week) | 1 | Puzzle in part 1, answer and the common wrong answer explained in part 2 a few days later (2 posts per fortnight, so pillar 1 stays near its share) |
 | **Tricks They Didn't Teach Us** | 1 | One technique, shown with exact on-screen math, honest about where it comes from |
 | **Homework Decoder** | 2 | "Your kid's worksheet says 'make a ten'. Here's what that means." |
 | **Tallyclaw Was There** | 3 | History or myth-bust, "I was there. It didn't happen like that." |
@@ -68,14 +68,16 @@ In the largest dataset found (108K Shorts), median views peaked at 11-20 seconds
 
 ## 6. Calls to action by video type
 
-- **Value videos (pillars 1-3):** no spoken pitch. The handle and `playmathdragons.com` sit in a small on-screen corner mark; the Facebook first comment and the YouTube related video still carry the link. The video's job is to be worth watching and sharing.
+Rule (shared with `brand-and-voice.md` §7 and `compliance-checklist.md` §H): **at most one CTA per video.** The small `playmathdragons.com` corner mark is branding, not a CTA.
+
+- **Value videos (pillars 1-3):** no spoken pitch. The corner mark is on screen; the Facebook first comment and the YouTube related video still carry the link. The video's job is to be worth watching and sharing.
 - **Promo videos (pillar 4):** one spoken and on-screen CTA after the payoff, in the last 2-5 seconds: "It's free during the beta. If you want in, it's playmathdragons.com."
 - **Puzzle part 1:** the CTA is the puzzle itself ("Answer in the next video"). A genuine question in the caption is fine; "comment your answer" style bait on Facebook is not (see `compliance-checklist.md` §D).
 
 ## 7. Cadence
 
 - **Start at 3 videos a week**, sustainable for one person while the first pipeline is manual. Move toward 5 once production is templated.
-- **Commit to 90 days** before judging the channel. Judge individual formats after 10-15 posts each.
+- **Commit to 90 days** before judging the channel. At 3 a week that's about 39 videos: roughly 14 / 10 / 8 / 8 across the four pillars. Judge a **pillar** after about 8-10 posts, and a single **series or format** only once it has 10+ posts, so pillar 3 and 4 decisions come near the end of the 90 days, or sooner if we move to 5 a week.
 - **Batch:** script and record a week's videos in one sitting.
 - **Posting time:** don't optimize it. YouTube has said time of day isn't something it optimizes for (2023 statement).
 
@@ -83,27 +85,34 @@ In the largest dataset found (108K Shorts), median views peaked at 11-20 seconds
 
 Tie videos to moments parents already think about:
 
+We don't bend the schedule around these (Justin, 2026-10-26); they slot into the regular 3-a-week cadence as the topic for that week. Every date gets verified in the video's accuracy review before it's used.
+
 | When | Hook |
 |---|---|
-| **Nov 23** | Fibonacci Day (11/23: 1, 1, 2, 3). First one: November 23, 2026 |
-| Thanksgiving and winter break | Offline car-ride and travel math (the app works offline) |
-| Report card season | Calm conversations about math grades |
-| **Mar 14** | Pi Day |
-| Summer break | Keeping math light over the summer |
-| August-September | Back to school, homework routines |
+| Mar 14 | Pi Day (also UNESCO's International Day of Mathematics) |
+| April | Mathematics and Statistics Awareness Month (US) |
+| Apr 30 | Carl Friedrich Gauss's birthday (careful: the 1-to-100 story is embellished) |
+| Jun 28 | Tau Day |
+| Aug 26 | Katherine Johnson's birthday |
+| Sep 25 | Math Storytelling Day |
+| 2nd Tuesday of October | Ada Lovelace Day |
+| Nov 23 | Fibonacci Day (11/23: 1, 1, 2, 3) |
+| Dec 22 | Srinivasa Ramanujan's birthday (National Mathematics Day in India) |
+| Thanksgiving, winter and summer breaks | Offline car-ride and travel math (the app works offline) |
+| Report card season, back to school | Calm conversations about grades; homework routines |
 
 ## 9. First 30 days
 
-1. **Set up channels:** YouTube `@playmathdragons` and a Facebook Page, banner and profile art from the style bible, `playmathdragons.com` in the links, descriptions written to parents.
+1. **Set up channels:** YouTube `@playmathdragons` and a Facebook Page, banner and profile art from the style bible, `playmathdragons.com` in the links, descriptions written to parents. **Turn on YouTube's advanced features** right away (phone verification, plus channel history or ID verification): the per-Short related-video link requires them. Until they're on, Shorts rely on the spoken URL and the channel link.
 2. **Make the "Join the beta" walkthrough** (60-120 s, long-form) first: every Short points to it.
 3. **Produce the first 6-9 videos by hand** (gameplay capture, Justin's voice clone, simple programmatic math animation) across all four pillars, so the first weeks test the mix.
 4. **Post 3 a week** and log metrics from day one.
-5. **Week 4 review:** which pillar and series earned engaged views, shares and beta clicks? Shift the mix.
+5. **Week 4 review:** early signals only (hooks: viewed-vs-swiped; shares; any beta traffic). Too few posts per pillar to shift the mix yet; adjust individual hooks and lengths. First mix decision at about day 60.
 
 ## 10. Beyond our own channels (later phases)
 
 - **Micro and nano creators** (homeschool, parenting, teacher accounts, 1k-20k followers): free access and a press kit, with paid or gifted posts disclosed per the compliance checklist.
-- **Parent Facebook groups:** only where group rules allow it, as a participant, never spam.
+- **Parent Facebook groups:** only where group rules allow it, as a participant, never spam, and always saying Justin built the app (`compliance-checklist.md` §I).
 - Both wait until the first videos show which messages land.
 
 ## 11. Measuring
@@ -111,12 +120,11 @@ Tie videos to moments parents already think about:
 Detailed metrics and the weekly review live in `metrics-and-learning.md` (to be written). The core questions every week:
 - Which videos made people **stop** (YouTube's "viewed vs swiped away"; Facebook watch time vs length)?
 - Which got **shared**?
-- Which sent people to **playmathdragons.com**, and did Android opt-ins keep climbing toward 25+?
+- Which sent people to **playmathdragons.com** (Facebook per video via `/fb###`; YouTube per channel via `/yt`), and did Android opt-ins keep climbing toward 25+?
 
 ## 12. Open decisions (Justin)
 
-1. Pillar mix and the 4:1 value-to-promo ratio: approve as a starting point?
-2. Starting cadence of 3 a week: right for your time?
-3. Series names: keep the working titles or rename?
-4. Facebook "Founding Families" group for testers (weekly build notes, one question a week): set one up now, later, or never? Someone has to moderate it.
-5. Fibonacci Day (Nov 23) is four weeks out: aim the first videos at it?
+Resolved 2026-10-26 (Justin): 3 videos a week to start; pillar mix and 4:1 ratio approved as a starting point; calendar days featured within the normal cadence, not schedule-bending; tester community not yet (see `community` note in PLAN.md).
+
+Still open:
+1. Series names: keep the working titles or rename?
