@@ -606,15 +606,17 @@ Effort assumes one developer (agent or Justin) familiar with the repo, including
 
 ### Phase 1: Fire Trail adapts, and history is clean (1.5 to 2 days)
 
+**Status (2026-10-26): implemented on branch `app/adaptive-phase-1`, not yet merged or released.** All items below are done; `flutter analyze` clean, full suite 660 tests passing. C1 and C2-FT stay unpublished until merge, release and the 9.5 tests pass on the release commit (decision Q11).
+
 Smallest change that makes C1 and C2-FT true.
-1. Approve I-1, I-2, I-3, I-8.
-2. `FireTrailScreen._createGame` passes `difficultyEngine: context.read<DifficultyEngine>()` (`fire_trail_game.dart:60-69`); call `resetSession()` in `initState` (stopgap until Phase 2).
-3. `ProblemManager`: loop `selectBlueprint(accept: uniqueAnswer)` to fill the level, random only on exhaustion (`problem_manager.dart:207-260`).
-4. Fire Trail first-attempt flag per prompt and real response time (`fire_trail_game.dart:72-85`).
-5. `FactTracker` honors `factKey` and `firstAttempt`, drops invalid keys.
-6. Emit correct keys from Runes (RU-d) and Feast (FE-b) so they stop writing junk now, even before they adapt.
-7. Dragon Eggs: reject non-integral division; `factKey: null` for invalid equations (EG-f).
-8. Tests: 9.1, FTT-1, FTT-3, FTT-5, Phase 1 version of SP-3, EGT-5, RUT-1, FET-1.
+1. [x] Approve I-1, I-2, I-3, I-8.
+2. [x] `FireTrailScreen._createGame` passes `difficultyEngine: context.read<DifficultyEngine>()` (`fire_trail_game.dart:60-69`); call `resetSession()` in `initState` (stopgap until Phase 2).
+3. [x] `ProblemManager`: loop `selectBlueprint(accept: uniqueAnswer)` to fill the level, random only on exhaustion (`problem_manager.dart:207-260`).
+4. [x] Fire Trail first-attempt flag per prompt and real response time (`fire_trail_game.dart:72-85`). Response time is measured from when the prompt became active, and from GO for the first prompt (the countdown is excluded).
+5. [x] `FactTracker` honors `factKey` and `firstAttempt`, drops invalid keys.
+6. [x] Emit correct keys from Runes (RU-d) and Feast (FE-b) so they stop writing junk now, even before they adapt.
+7. [x] Dragon Eggs: reject non-integral division; `factKey: null` for invalid equations (EG-f).
+8. [x] Tests: 9.1 (`test/core/fact_tracker_events_test.dart`), FTT-1 and FTT-5 (`test/games/fire_trail/fire_trail_screen_test.dart`), FTT-3 (`test/games/fire_trail/level_carry_over_test.dart`), Phase 1 version of SP-3 (`test/core/select_blueprint_phase1_test.dart`), EGT-5 (`test/games/dragon_eggs/equation_validity_test.dart`), RUT-1 (`test/games/dragon_runes/fact_key_test.dart`), FET-1 (`test/games/dragons_feast/answer_event_test.dart`).
 
 Unlocks C1 and C2-FT. Not yet "mixed with known facts" (known-fact starvation remains).
 

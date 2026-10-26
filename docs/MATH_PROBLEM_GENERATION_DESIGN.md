@@ -108,6 +108,15 @@ Game adapters convert blueprints into playable objects.
 Direct equation prompt. The adapter converts one blueprint into one visible
 equation and answer gem set.
 
+Current behavior (adaptive-practice spec Phase 1, `docs/specs/adaptive-practice.md`):
+`FireTrailScreen` passes the shared `DifficultyEngine` into the game and resets
+its session state when the screen opens. Each level's gems are filled by calling
+`selectBlueprint(accept: ...)` once per gem, vetoing facts whose answer is
+already on the board (vetoed facts are not recorded as selections). Random
+generation is used only when the engine cannot supply a fact. The first answer
+to each prompt is reported as `firstAttempt: true`, retries after a wrong gem
+as `firstAttempt: false`, with the real response time.
+
 Validation:
 
 - operation is allowed
@@ -128,6 +137,8 @@ Validation:
 
 - active eggs contain all required equation components
 - at least one valid equation is possible
+- only valid facts are recorded: non-integral division (7 ÷ 2 = 3) is wrong,
+  and equations with a result <= 0 or uneven division report no fact key
 - helper spawns add a missing component, not a random egg
 - normal spawns avoid over-crowding the same few values
 - recent solved facts are de-prioritized so the board does not fill with one
@@ -153,6 +164,9 @@ Validation:
 - target count is in bounds
 - at least one target uses the scheduled family when possible
 
+Recorded keys: a found target reports its canonical fact key built from its
+operands ("4 × 3 = 12" → "3x4"); multi-operator bonus chains report none.
+
 ### Dragon's Feast
 
 Category/property recognition. This game should use property knowledge
@@ -165,6 +179,10 @@ Validation:
 - wrong tiles fail the active category
 - board has the required number of correct tiles
 - contrast examples are pedagogically meaningful
+
+Recorded keys: eating tile `n` reports `"<categoryId>:n"` (for example
+`"mult_3:14"`), correct when `n` satisfies the category. Selection does not use
+these yet.
 
 ## Extension Rules
 

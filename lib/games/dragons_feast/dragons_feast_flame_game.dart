@@ -35,7 +35,8 @@ class DragonsFeastFlameGame extends FlameGame {
   final DifficultyEngine? difficultyEngine;
 
   // -- Callbacks to Flutter --
-  final void Function(bool isCorrect, int score, int streak) onTileEaten;
+  final void Function(bool isCorrect, int score, int streak, int number)
+      onTileEaten;
   final void Function() onGameOver;
   final void Function() onLevelComplete;
   final void Function(int lives) onLivesChanged;
@@ -447,7 +448,7 @@ class DragonsFeastFlameGame extends FlameGame {
 
       scalesEarned += 2;
 
-      onTileEaten(true, score, streak);
+      onTileEaten(true, score, streak, cell.number);
       onScoreChanged(score);
       onProgressChanged(correctEaten, requiredCorrect);
 
@@ -458,7 +459,7 @@ class DragonsFeastFlameGame extends FlameGame {
       streak = 0;
       wrongEaten++;
 
-      onTileEaten(false, score, streak);
+      onTileEaten(false, score, streak, cell.number);
       onScoreChanged(score);
       onWrongFlash();
 

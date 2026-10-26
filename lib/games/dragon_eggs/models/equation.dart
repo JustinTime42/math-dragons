@@ -18,7 +18,8 @@ class EquationResult {
     required this.playerAnswer,
   })  : correctAnswer = _compute(left, op, right),
         isCorrect = playerAnswer == _compute(left, op, right) &&
-            _compute(left, op, right) > 0,
+            _compute(left, op, right) > 0 &&
+            _dividesEvenly(left, op, right),
         factKey = _buildFactKey(left, op, right);
 
   static int _compute(int a, MathOp op, int b) {
@@ -32,6 +33,12 @@ class EquationResult {
       case MathOp.divide:
         return b != 0 ? a ~/ b : 0;
     }
+  }
+
+  /// Division must have a non-zero divisor and no remainder (7 ÷ 2 is not 3).
+  static bool _dividesEvenly(int a, MathOp op, int b) {
+    if (op != MathOp.divide) return true;
+    return b != 0 && a % b == 0;
   }
 
   static String _buildFactKey(int a, MathOp op, int b) {

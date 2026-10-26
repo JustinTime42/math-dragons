@@ -6,6 +6,7 @@ import 'package:math_dragons/l10n/app_localizations.dart';
 import '../../theme/dragon_assets.dart';
 import '../../theme/dragon_colors.dart';
 import '../../theme/dragon_spacing.dart';
+import '../../core/difficulty_engine.dart';
 import '../../core/event_bus.dart';
 import '../../core/game_events.dart';
 import '../shared/game_shell.dart';
@@ -53,12 +54,16 @@ class _FireTrailScreenState extends State<FireTrailScreen> {
     _currentWorld = ((widget.startingLevel - 1) ~/ 8) + 1;
     _currentLevelInWorld = ((widget.startingLevel - 1) % 8) + 1;
     _config = FireTrailConfig.forLevel(_currentWorld, _currentLevelInWorld);
+    // Stopgap until per-game practice sessions (adaptive-practice spec,
+    // Phase 2): clear the shared engine's session state for this sitting.
+    context.read<DifficultyEngine>().resetSession();
     _createGame();
   }
 
   void _createGame() {
     _flameGame = FireTrailFlameGame(
       config: _config,
+      difficultyEngine: context.read<DifficultyEngine>(),
       onAnswerEaten: _onAnswerEaten,
       onGameOver: _onGameOver,
       onFlameChanged: _onFlameChanged,
@@ -80,7 +85,9 @@ class _FireTrailScreenState extends State<FireTrailScreen> {
         playerAnswer: isCorrect ? '${problem.answer}' : 'wrong',
         correctAnswer: '${problem.answer}',
         correct: isCorrect,
-        responseTimeMs: 0,
+        responseTimeMs: _flameGame.getResponseTimeMs(),
+        factKey: problem.factKey,
+        firstAttempt: _flameGame.lastAnswerWasFirstAttempt,
       ));
     }
 

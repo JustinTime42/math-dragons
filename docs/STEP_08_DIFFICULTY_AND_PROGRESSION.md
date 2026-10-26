@@ -94,7 +94,7 @@ at the right challenge level,
 - [ ] 40% cap on "Needs Practice" problems enforced (rest drawn from other buckets)
 - [ ] All 4 games call DifficultyEngine for problem selection instead of pure random
 - [ ] Dragon Eggs: EggSpawner uses engine-selected focus facts
-- [ ] Fire Trail: ProblemManager consults engine for next problem
+- [x] Fire Trail: ProblemManager consults engine for next problem (wired 2026-10-26, adaptive-practice spec Phase 1; uses `selectBlueprint`, not the bucket algorithm)
 - [ ] Dragon Runes: LevelGenerator receives engine-influenced number families
 - [ ] Dragon's Feast: BoardGenerator uses engine to bias tile number selection
 - [ ] Level advancement requires: minimum score + 60% accuracy + minimum problems attempted

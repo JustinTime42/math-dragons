@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:hive/hive.dart';
 import 'event_bus.dart';
 import 'game_events.dart';
+import 'practice_key.dart';
 import '../storage/local_storage.dart';
 
 part 'fact_tracker.g.dart';
@@ -23,7 +24,8 @@ enum FactStatus {
 }
 
 /// A single math fact's tracking record.
-/// Examples: factKey = "7x8", "15-9", "prime:17", "mult3:12"
+/// Examples: factKey = "7x8", "15-9", "prime:17", "mult_3:12" (see PracticeKey).
+/// Counts reflect first attempts only (spec docs/specs/adaptive-practice.md).
 @HiveType(typeId: 3)
 class FactRecord extends HiveObject {
   @HiveField(0)
@@ -151,7 +153,18 @@ class FactTracker {
   }
 
   void _onAnswerGiven(AnswerGiven event) {
-    final factKey = _normalizeFactKey(event.problem);
+    final factKey = event.factKey ?? _normalizeFactKey(event.problem);
+    if (!PracticeKey.isValid(factKey)) {
+      assert(
+        event.factKey == null,
+        'AnswerGiven.factKey "${event.factKey}" from ${event.gameId} is not '
+        'a valid PracticeKey',
+      );
+      return;
+    }
+    // Retries on the same prompt are part of the same presentation.
+    if (!event.firstAttempt) return;
+
     final existing = _storage.getFact(factKey) ??
         FactRecord(factKey: factKey);
 

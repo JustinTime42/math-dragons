@@ -21,6 +21,15 @@ class AnswerGiven extends GameEvent {
   final bool correct;
   final int responseTimeMs;
 
+  /// Canonical practice-item key (see PracticeKey). When non-null, FactTracker
+  /// uses it verbatim. When null, FactTracker falls back to normalizing
+  /// [problem] and drops the event if the result is not a valid PracticeKey.
+  final String? factKey;
+
+  /// False for any answer after the first one to the same prompt.
+  /// Defaults to true so existing emitters keep compiling.
+  final bool firstAttempt;
+
   AnswerGiven({
     required super.gameId,
     required this.problem,
@@ -28,6 +37,8 @@ class AnswerGiven extends GameEvent {
     required this.correctAnswer,
     required this.correct,
     required this.responseTimeMs,
+    this.factKey,
+    this.firstAttempt = true,
   });
 }
 
