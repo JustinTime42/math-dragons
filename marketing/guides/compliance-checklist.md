@@ -71,7 +71,7 @@ Rules:
 
 ## E. Music and audio
 
-- [ ] Audio is one of: the game's own soundtrack and SFX, ElevenLabs Music on a plan whose current terms allow use in published social video (check the terms before first use; some plan versions restrict streaming media), Meta's Sound Collection (Facebook only), or other audio we have a license for, with the license or receipt saved in the video folder.
+- [ ] Audio is one of: the game's own soundtrack and SFX **once their license is confirmed** (they were generated through a Suno API; see `production-pipeline.md` §8), ElevenLabs Music on a plan whose current terms allow use in published social video (check the terms before first use; some plan versions restrict streaming media), Meta's Sound Collection (Facebook only), or other audio we have a license for, with the license or receipt saved in the video folder.
 - [ ] Never trending commercial songs on the Facebook Page (Meta's popular-music licenses generally cover personal, not business, use).
 - [ ] If AI music is the main focus of a video, tick YouTube's disclosure (section C).
 

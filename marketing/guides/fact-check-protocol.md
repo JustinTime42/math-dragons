@@ -17,11 +17,11 @@ How the mandatory accuracy and sense review (`marketing/README.md`) is run. It e
 | Gate | On | Who |
 |---|---|---|
 | **Script gate** (Stage 3) | `treatment.md`: script, on-screen text, math strings, titles, descriptions, captions, first comment | Independent reviewer, then Justin |
-| **Render gate** (Stage 5) | The exported video file and the final upload copy | Independent reviewer (or Justin for small videos), then Justin |
+| **Render gate** (Stage 5) | The exported video file and the final upload copy | Independent reviewer, then Justin |
 | **Website copy** | Any page change | Independent reviewer, then Justin |
 | **Guides** | New or changed guidance with factual content | Independent reviewer, then Justin |
 
-The **independent reviewer** is a fresh agent with no authoring context, told to try to prove the claims wrong.
+The **independent reviewer** is a fresh agent with no authoring context, told to try to prove the claims wrong. **The author never reviews their own work,** whoever the author is (Claude, a subagent, or Justin); Justin's sign-off is a separate, final step and never replaces the independent review.
 
 ## 2. Procedure
 
@@ -29,12 +29,24 @@ The **independent reviewer** is a fresh agent with no authoring context, told to
 2. **Math.** Recompute every number, equation and answer by running code. Check that the captions and math cards show exactly the treatment's strings.
 3. **Facts and history.** Check each against the sources in §3. Legends must be framed as legends.
 4. **Learning science.** The claim's wording must match its confidence level (`script-standards.md` §5). No outcome claims.
-5. **App claims.** Check against the code of the build testers can install today, not `main`. Adaptivity claims need their phase merged, released, and the claim tests in `docs/specs/adaptive-practice.md` §9.5 passing.
+5. **App claims.** Check against the code of the build testers can install today, not `main`. That build is recorded in `docs/RELEASES.md` (version, build number, commit, date, platforms); add a line there with every release. Adaptivity claims need their phase merged, released, and the claim tests in `docs/specs/adaptive-practice.md` §9.5 passing.
 6. **Volatile facts.** Re-check anything that changes: platform policies, prices, records (largest known prime), guideline wording (AAP), dates of observances.
 7. **Sense read.** Read the whole piece as a skeptical parent and as a math teacher. Does each line make sense? Is the reasoning right, not just the numbers? Does any simplification mislead? Is anything said to a child?
 8. **Compliance.** Run the relevant sections of `compliance-checklist.md`.
 9. **Record** everything in `review.md` (§4).
 10. **Justin signs off.**
+
+## 2b. Render gate checklist (on the exported file)
+
+- [ ] VO matches the approved script word for word (listen through once with the script open)
+- [ ] Captions match the aligned VO words, with numbers shown exactly as the treatment's math strings
+- [ ] Math cards show exactly the treatment's strings; recompute once more
+- [ ] Nothing flashes more than 3 times a second
+- [ ] Loudness about -14 LUFS integrated; voice clear over music
+- [ ] Text and key visuals inside the safe zones (`visual-style.md` §2)
+- [ ] Nothing identifying in hands or gameplay footage
+- [ ] `compliance-checklist.md` stage 2 sections passed
+- [ ] Upload settings planned per `compliance-checklist.md` §J
 
 ## 3. Source hierarchy
 
@@ -69,5 +81,8 @@ Justin sign-off: <date>
 
 If a published video turns out to be wrong:
 - **Minor** (a small imprecision that doesn't change the point): pin a correction comment and fix the description.
-- **Material** (wrong math, a false fact the video depends on, a claim the app doesn't support): make the video private or unlisted, pin a short correction where possible, and log what slipped through. Don't re-upload a lightly edited copy (platforms treat that as unoriginal); make a new, corrected video if the topic is worth it.
+- **Material** (wrong math, a false fact the video depends on, a claim the app doesn't support):
+  - **YouTube:** make the video private or unlisted.
+  - **Facebook:** Reels have no unlisted option; delete the Reel (or, if it's only the caption that's wrong, edit the caption and pin a correction comment).
+  - Log what slipped through. Don't re-upload a lightly edited copy (platforms treat that as unoriginal); make a new, corrected video if the topic is worth it.
 - Every correction gets a line in the weekly review, and the protocol or guides change if a gap let it through.

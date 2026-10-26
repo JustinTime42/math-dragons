@@ -28,10 +28,10 @@ marketing/videos/MD-###/
 
 | Voice | How | Notes |
 |---|---|---|
-| **Narrator (Justin)** | ElevenLabs voice clone of Justin | Instant cloning needs a short clean sample; professional cloning needs much more audio and a higher plan. Start with whichever gives a natural result, then upgrade if needed. Record samples in a quiet room. YouTube exempts cloning your own voice from its AI disclosure; Facebook needs the AI label (`compliance-checklist.md` §C) |
+| **Narrator (Justin)** | ElevenLabs **Professional Voice Clone** (Justin has the Creator plan, 2026-10-26) | Needs substantially more clean audio than an instant clone; follow ElevenLabs' current recording guidance (quiet room, consistent mic, natural reading). YouTube exempts cloning your own voice from its AI disclosure; Facebook needs the AI label (`compliance-checklist.md` §C) |
 | **Tallyclaw** | ElevenLabs Voice Design from the prompt in `brand-and-voice.md` §4.2 | Generate 3-5 candidates; Justin picks |
 
-Lock both: record the voice IDs, model and settings (stability, similarity, style) in `marketing/production/voices.md` so every video sounds the same. Commercial use requires a paid ElevenLabs plan (Starter or above).
+Lock both: record the voice IDs, model and settings (stability, similarity, style) in `marketing/production/voices.md` so every video sounds the same. Commercial use requires a paid ElevenLabs plan; confirm the Creator plan's terms cover use by Routeworks LLC (ElevenLabs' music terms limit lower plans to individual use, and the voice terms should be checked the same way).
 
 ## 3. Phase A: manual (first 6-9 videos)
 
@@ -39,16 +39,17 @@ Per video, after the treatment passes its gate:
 
 1. **Production plan** (`plan.md`, §5): every beat mapped to an asset and its source.
 2. **Voice-over:** generate the Narrator and Tallyclaw lines in ElevenLabs. Save 2-3 takes; pick the best.
-3. **Timing:** get word timestamps (ElevenLabs' timestamp output, or run Whisper on the VO) for captions and lip-sync.
+3. **Timing:** get word-level timestamps by aligning the final VO to the script text: run Whisper with word timestamps on the VO (or group ElevenLabs' per-character timestamps into words), then check the words match the script exactly.
 4. **Math cards:** render each exact math string with Manim (Python) from scripts in `marketing/production/manim/`. Never type math into an AI tool.
 5. **Gameplay:** record on a physical Android phone with `scrcpy --record` (avoids the on-device 3-minute limit). Turn on Do Not Disturb, hide notifications, and use a fresh test profile.
 6. **Hands footage:** phone camera, overhead, per `visual-style.md` §10.
 7. **Tallyclaw:** still art until the puppet exists (§6).
-8. **Assemble:** in **DaVinci Resolve** (free, runs natively on Linux): 1080 × 1920 timeline, captions, corner mark, music.
-9. **Audio:** voice first. Music well under the VO; aim for about -14 LUFS integrated for the whole mix (a common social-video loudness target).
-10. **Export:** H.264 MP4, 1080 × 1920, 30 fps, high bitrate (16-20 Mbps), AAC 48 kHz stereo. One clean master per video.
-11. **Render gate:** a fresh accuracy and compliance review of the actual file (`marketing/README.md`; `compliance-checklist.md` stage 2). Justin watches it.
-12. **Upload:** natively to YouTube and Facebook, following `compliance-checklist.md` §J. Record it in `upload.md`.
+8. **Captions:** a small script (`marketing/production/captions.py`, to build) turns the aligned words into an `.ass` subtitle file with 2-4 words per line and the current word in gold, plus a plain `.srt`. The `.ass` is burned in; the `.srt` is uploaded to YouTube as the caption file.
+9. **Assemble:** in **Kdenlive** (free, Linux-native, handles phone and scrcpy H.264 footage and AAC audio, has a built-in subtitle editor): 1080 × 1920 timeline, gameplay, math cards, hands, Tallyclaw, corner mark, music. (DaVinci Resolve's free Linux version can't import or export H.264 or AAC, so it would need every file converted first; not worth it for Phase A.)
+10. **Audio:** voice first. Music well under the VO; aim for about -14 LUFS integrated for the whole mix (a common social-video loudness target; the platforms normalize anyway).
+11. **Export:** H.264 MP4, 1080 × 1920, 30 fps, high bitrate (16-20 Mbps), AAC 48 kHz stereo, captions burned in (or burn them afterwards with ffmpeg from the `.ass` file). One clean master per video.
+12. **Render gate:** a fresh independent review of the actual file (`fact-check-protocol.md` §2b). Justin watches it.
+13. **Upload:** natively to YouTube (with the `.srt` caption file) and Facebook, following `compliance-checklist.md` §J. Record it in `upload.md`.
 
 **Time:** the first videos will take several hours each while templates and habits form. Research estimates about 45-90 minutes of human time per video once templated (an estimate, not a measured figure).
 
@@ -91,8 +92,8 @@ Sora's API was shut down on 2026-09-24. Candidates for short, text-free hero sho
 
 ## 8. Music
 
-1. **The game's own soundtrack and SFX** (`assets/audio/`) first: owned, and it makes the videos sound like the game.
-2. ElevenLabs Music on a plan whose current terms allow use in published social video (check the terms first; keep the receipt).
+1. **The game's own soundtrack and SFX** (`assets/audio/`), **once their license is confirmed.** The music tracks were generated through a Suno API (`.claude/commands/generate-music.md`), possibly a third-party reseller, and their commercial terms aren't documented yet (also: the `.ogg` files are actually MP3s, and they may be placeholder loops). Until Justin confirms the rights, don't use them in videos.
+2. ElevenLabs Music, only on a plan whose current terms cover use by Routeworks LLC in published social video (their music terms limit lower plans to individual use; check before first use and keep the receipt).
 3. Facebook only: Meta's Sound Collection.
 Never trending commercial songs on the Facebook Page. Never register AI music with Content ID.
 
@@ -102,10 +103,12 @@ Never trending commercial songs on the Facebook Page. Never register AI music wi
 |---|---|
 | Variable cost per video (VO, a few images, optional hero shot) | about $1-5 (research estimate) |
 | ElevenLabs subscription | Starter or Creator tier, depending on cloning and volume |
-| DaVinci Resolve, Manim, Remotion, Rhubarb, scrcpy | free |
+| Kdenlive, Manim, Remotion (up to 3 people), Rhubarb, scrcpy, ffmpeg, Whisper | free |
 
 ## 10. Open decisions (Justin)
 
-1. ElevenLabs plan: start on Starter (instant clone) or go to Creator for a professional clone?
-2. Media storage: local `~/Videos/math-dragons/` only, or also a cloud backup?
-3. Editor for Phase A: DaVinci Resolve (recommended, free on Linux), or something you already know?
+Resolved 2026-10-26 (Justin): Creator plan with a Professional Voice Clone; media stored locally only (`~/Videos/math-dragons/`); editor is Claude's pick, Kdenlive.
+
+Still open:
+1. Soundtrack rights: how were the game tracks made (which Suno plan or service), and do its terms allow commercial use by the LLC? Until confirmed, videos don't use them.
+2. ElevenLabs terms: does the Creator plan cover commercial use by Routeworks LLC (voice and music)?

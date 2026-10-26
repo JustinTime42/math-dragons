@@ -54,7 +54,7 @@ Each game has its own accent color in the app; use it when a video features that
 | Captions and callouts | Nunito Bold | Cream on a dark stroke or shadow |
 | Math | Nunito Bold | Numbers cream, **operators and equals sign in gold**, as in the app |
 
-All three fonts are already in `assets/fonts/` (Cinzel and Nunito are free, SIL Open Font License).
+Cinzel and Nunito (plus JetBrains Mono, used in the app for counters) are already in `assets/fonts/`; all three are free under the SIL Open Font License.
 
 ## 5. Captions
 
@@ -68,14 +68,14 @@ All three fonts are already in `assets/fonts/` (Cinzel and Nunito are free, SIL 
 
 - Dark purple background (Deep Void to Dragon Purple gradient) or a dimmed scene.
 - Nunito Bold, large: equations about 120-160 px tall on the 1080-wide canvas, so they read on a small phone.
-- Numbers cream, operators gold. Correct answers glow emerald; a "common wrong answer" is shown in fire orange and then crossed out.
+- Numbers cream, operators gold. Correct answers glow emerald (emerald on Dragon Purple is about 4.3:1, so use it only at large sizes or as a glow behind cream text); a "common wrong answer" is shown in fire orange and then crossed out.
 - Animate one step at a time. Each step stays on screen long enough to read twice.
 - Rendered from code (Manim or Remotion) from the exact strings in the treatment. Never typed into an AI image or video model.
 
 ## 7. Gameplay
 
 - The app runs in portrait, so a capture fills a 9:16 frame naturally.
-- Platform UI covers the bottom and right of the screen, where the game's own controls may sit. When a moment matters, **scale the gameplay to about 85%** and center it inside the safe area on a branded background, rather than running it full-bleed.
+- Platform UI covers the bottom and right of the screen, where the game's own controls may sit. By default gameplay runs **full-bleed**, with captions and math kept inside the safe area. When a key game element would sit under platform UI, either **crop and zoom** to the part that matters, or place the gameplay in a framed window inside the safe area (at most about 550 × 979 px, keeping its 9:16 shape) on a branded background.
 - No debug banners, no notification bar clutter, no personal data on screen.
 - Captured on a physical device (the dev machine's emulator renders in software and drops frames).
 
@@ -83,10 +83,10 @@ All three fonts are already in `assets/fonts/` (Cinzel and Nunito are free, SIL 
 
 The game's dragon art is painterly and in 3/4 view; a talking puppet needs its own art.
 
-- **Look:** an ancient, battle-scarred veteran. Age shows in weathered scales, a chipped horn, an old healed scar; never gore. Gruff, proud expression at rest. Built from the style bible (`assets/style_bible/`) so he's clearly from the same world. A weathered stone or bronze-tinted variant suits "ancient veteran" (decision for Justin, §12).
+- **Look:** an ancient, battle-scarred veteran. Age shows in weathered scales, a chipped horn, an old healed scar; never gore. Gruff, proud expression at rest. Built from the style bible (`assets/style_bible/`) so he's clearly from the same world. **Color: the stone variant** (`04_stone_dragon.png`), weathered (Justin, 2026-10-26).
 - **Puppet build:** a front-facing or slight 3/4 bust, in separate layers: body, head, jaw/mouth, eyes (with a blink frame), brows. **Nine mouth shapes** matching Rhubarb Lip Sync's set (A-H plus X for rest). Three or four poses: neutral, smug, pointing claw, unimpressed.
 - **Motion:** subtle idle breathing and blinks; mouth driven by Rhubarb from his voice track. No full-body animation needed.
-- **Placement:** usually the lower third or one side of the frame, inside the safe area, never covering the math.
+- **Placement:** usually one side of the frame at mid-height, inside the safe area, never covering the math. (Not the lower third: that falls in the bottom 35% no-text zone.)
 - **Until the puppet exists:** still Tallyclaw art (one or two poses) with the Narrator, per `format-library.md` F4.
 
 ## 9. Illustration and AI imagery
@@ -117,5 +117,7 @@ The game's dragon art is painterly and in 3/4 view; a talking puppet needs its o
 
 ## 13. Open decisions (Justin)
 
-1. Tallyclaw's color: which style-bible variant (amethyst, verdant, stone, tidal, ember) or a new weathered variant?
-2. Caption style: approve the cream-with-gold-highlight look, or test two styles on the first videos?
+Resolved 2026-10-26 (Justin): Tallyclaw is the stone variant.
+
+Still open:
+1. Caption style: approve the cream-with-gold-highlight look, or test two styles on the first videos?

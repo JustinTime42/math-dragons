@@ -13,14 +13,14 @@ Source of truth for progress. Update it in the same session as the work, before 
 ## Stage 1: Guidance docs (`guides/`)
 Each guide is drafted from the research report, reviewed by Justin, then frozen as the rubric for later gates.
 - [x] `brand-and-voice.md` APPROVED by Justin 2026-10-19 (accuracy review PASS WITH FIXES, fixes applied, `guides/brand-and-voice.review.md`). Scope: channel identity, the dragon as mascot/"face", tone, words we use and avoid, VO voice spec
-- [x] `visual-style.md` DRAFTED 2026-10-26, review pending. Scope: 9:16 layout, safe zones, caption style, color/type pulled from `docs/VISUAL_DESIGN_GUIDE.md`, how AI visuals match the in-game art
+- [x] `visual-style.md` DRAFTED 2026-10-26; review (`guides/final-four.review.md`) fixes applied; awaiting Justin. Scope: 9:16 layout, safe zones, caption style, color/type pulled from `docs/VISUAL_DESIGN_GUIDE.md`, how AI visuals match the in-game art
 - [x] `content-strategy.md` APPROVED by Justin 2026-10-26 (drafted same day; independent review PASS WITH FIXES (`guides/compliance-and-strategy.review.md`), fixes applied; Justin approved cadence (3/week), pillar mix + 4:1 ratio, calendar days within cadence; awaiting final approval of the full doc. Scope: audience, pillars, promo-vs-value ratio, series, cadence, platform differences (YT vs FB)
 - [x] `format-library.md` APPROVED by Justin 2026-10-26. Scope: reusable video templates (beat structure, length, example) per format
 - [x] `script-standards.md` APPROVED by Justin 2026-10-26. Scope: hook rules, structure, length, CTA patterns, the script checklist used at the Stage 3 gate
 - [x] `compliance-checklist.md` APPROVED by Justin 2026-10-26. Scope: Made-for-Kids, AI disclosure, engagement-bait, claims (FTC), music rights, link rules
-- [x] `fact-check-protocol.md` DRAFTED 2026-10-26, review pending. Scope: operationalizes the mandatory accuracy and sense review in `README.md` (claims list, independent verifier, code-checked math, sense read, `review.md`, Justin sign-off); links to the evidence bank
-- [x] `production-pipeline.md` DRAFTED 2026-10-26, review pending. Scope: tools, automation design, quality bar, per-video cost/time budget
-- [x] `metrics-and-learning.md` DRAFTED 2026-10-26, review pending. Scope: what we track, where, and how lessons flow back into the guides
+- [x] `fact-check-protocol.md` DRAFTED 2026-10-26; review (`guides/final-four.review.md`) fixes applied; awaiting Justin. Scope: operationalizes the mandatory accuracy and sense review in `README.md` (claims list, independent verifier, code-checked math, sense read, `review.md`, Justin sign-off); links to the evidence bank
+- [x] `production-pipeline.md` DRAFTED 2026-10-26; review (`guides/final-four.review.md`) fixes applied; awaiting Justin. Scope: tools, automation design, quality bar, per-video cost/time budget
+- [x] `metrics-and-learning.md` DRAFTED 2026-10-26; review (`guides/final-four.review.md`) fixes applied; awaiting Justin. Scope: what we track, where, and how lessons flow back into the guides
 - [x] `idea-scoring-rubric.md` APPROVED by Justin 2026-10-26. Scope: how Stage 2 ideas are scored
 - [ ] GATE: Justin approves all guides
 
@@ -79,6 +79,11 @@ Branch `app/store-links-founding-flag` (worktree `~/dev/math-dragons-app-links`)
 
 - **Community (Justin 2026-10-26):** no tester community yet. Justin floated Discord for support/feedback/discussion; Claude's view (2026-10-26 session): parents skew Facebook, Discord skews gamers/devs and teens; start a moderated adults-only Facebook group once ~15-20 active Android testers exist; revisit Discord for a build-in-public/dev audience later.
 - **Kids as an audience (Justin asked 2026-10-26):** answered in session: stay parent-directed for now; kid-directed videos must be marked Made for Kids, which strips the funnel features; revisit a separate kids presence after public launch.
+
+- **Production decisions (Justin 2026-10-26):** Tallyclaw = stone variant; ElevenLabs Creator plan + Professional Voice Clone; editor Kdenlive (Claude's pick; Resolve free on Linux can't handle H.264/AAC); media local only; CSV logs in repo; Umami before first post.
+- [ ] **JUSTIN: soundtrack rights.** Game music was generated via a Suno API (`.claude/commands/generate-music.md`); confirm plan/service and commercial terms for Routeworks LLC before any video uses it. Files are MP3s named `.ogg`.
+- [ ] **JUSTIN: does the Play 12-tester/14-day rule apply?** It's for personal accounts created after 2023-11-13; `docs/GOOGLE_PLAY_PUBLISHING.md` says the account is an Organization. Check Play Console.
+- [ ] **Umami on playmathdragons.com** before the first post (approved 2026-10-26): site change + privacy-policy update + accuracy review + deploy; campaign paths must carry a source tag.
 
 ## Decisions (resolved 2026-10-19, Justin)
 - **Age range: primarily 5-12.** Video copy uses this. Note: `docs/store-listing.md` (6-12) and `docs/VISUAL_DESIGN_GUIDE.md` §1 (7-14+) still differ; flag before the next store-listing edit.

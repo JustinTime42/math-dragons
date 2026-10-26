@@ -15,7 +15,7 @@ What we measure, where it's logged, and how lessons flow back into the guides. E
 ## 1. The numbers that matter
 
 **Goal 1, testers (the one that matters most right now):**
-- **Android testers opted in** (Play Console), weekly. Target 25+, never below 12, and track the 14-day clock.
+- **Android testers opted in** (Play Console), weekly. Play Console shows an aggregate count, not a per-tester 14-day clock, so log the count weekly. **Check first whether the 12-tester, 14-day rule even applies:** Google states it for personal accounts created after November 13, 2023, and `docs/GOOGLE_PLAY_PUBLISHING.md` says this account is an Organization. If it doesn't apply, the target is engaged testers for feedback, not a gate.
 - **iPhone/iPad testers** (App Store Connect TestFlight: invites accepted, installs, sessions).
 - **Feedback received** (emails, TestFlight feedback), logged for the Play production application.
 
@@ -35,9 +35,9 @@ What we measure, where it's logged, and how lessons flow back into the guides. E
 - Follows gained.
 
 **Funnel:**
-- Visits to `playmathdragons.com`, by path (`/fb###` per Facebook video; `/yt` for YouTube as a whole).
+- Visits to `playmathdragons.com`, by source. The campaign paths (`/fb###` per Facebook video, `/yt` for YouTube) don't exist yet: they must be built to carry a source tag (e.g. a `?ref=fb012` or UTM parameter on a redirect, or a real campaign page) so Umami can see them.
 - Clicks on the iPhone and Android join buttons.
-- **Gap today:** the site has no analytics yet. Umami (approved 2026-10-19) has to be added before the first post, with a privacy-policy update and the usual review. Until then, Play and TestFlight counts are the only funnel signal.
+- **Gap today:** the site has no analytics. **Umami is being added before the first post** (Justin, 2026-10-26), with a privacy-policy update and the usual review. Until then, Play and TestFlight counts are the only funnel signal.
 
 ## 2. Where it's logged
 
@@ -73,5 +73,7 @@ No personal data in any of these: no names, emails or child details.
 
 ## 5. Open decisions (Justin)
 
-1. Spreadsheet or CSV in the repo for the logs? (CSV in the repo is the default: versioned, and agents can read it.)
-2. Add Umami to the site before the first post? (Recommended; it's the only way to see which videos send visitors.)
+Resolved 2026-10-26 (Justin): CSV logs in the repo; Umami added to the site before the first post.
+
+Still open:
+1. Does the Play 12-tester, 14-day rule apply to this (Organization) account? Check the Play Console dashboard.
