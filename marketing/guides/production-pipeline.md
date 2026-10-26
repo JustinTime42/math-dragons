@@ -92,7 +92,7 @@ Sora's API was shut down on 2026-09-24. Candidates for short, text-free hero sho
 
 ## 8. Music
 
-1. **The game's own soundtrack and SFX** (`assets/audio/`), **once their license is confirmed.** The music tracks were generated through a Suno API (`.claude/commands/generate-music.md`), possibly a third-party reseller, and their commercial terms aren't documented yet (also: the `.ogg` files are actually MP3s, and they may be placeholder loops). Until Justin confirms the rights, don't use them in videos.
+1. **The game's own soundtrack and SFX** (`assets/audio/`). Justin confirmed 2026-10-26 that Routeworks LLC has the rights to use the music commercially. It makes the videos sound like the game. (Technical note: the music `.ogg` files are actually MP3s; fine for editing.) Never register it with Content ID if it's AI-generated.
 2. ElevenLabs Music, only on a plan whose current terms cover use by Routeworks LLC in published social video (their music terms limit lower plans to individual use; check before first use and keep the receipt).
 3. Facebook only: Meta's Sound Collection.
 Never trending commercial songs on the Facebook Page. Never register AI music with Content ID.
@@ -110,5 +110,4 @@ Never trending commercial songs on the Facebook Page. Never register AI music wi
 Resolved 2026-10-26 (Justin): Creator plan with a Professional Voice Clone; media stored locally only (`~/Videos/math-dragons/`); editor is Claude's pick, Kdenlive.
 
 Still open:
-1. Soundtrack rights: how were the game tracks made (which Suno plan or service), and do its terms allow commercial use by the LLC? Until confirmed, videos don't use them.
-2. ElevenLabs terms: does the Creator plan cover commercial use by Routeworks LLC (voice and music)?
+1. ElevenLabs terms: does the Creator plan cover commercial use by Routeworks LLC (voice and music)?

@@ -81,7 +81,9 @@ Branch `app/store-links-founding-flag` (worktree `~/dev/math-dragons-app-links`)
 - **Kids as an audience (Justin asked 2026-10-26):** answered in session: stay parent-directed for now; kid-directed videos must be marked Made for Kids, which strips the funnel features; revisit a separate kids presence after public launch.
 
 - **Production decisions (Justin 2026-10-26):** Tallyclaw = stone variant; ElevenLabs Creator plan + Professional Voice Clone; editor Kdenlive (Claude's pick; Resolve free on Linux can't handle H.264/AAC); media local only; CSV logs in repo; Umami before first post.
-- [ ] **JUSTIN: soundtrack rights.** Game music was generated via a Suno API (`.claude/commands/generate-music.md`); confirm plan/service and commercial terms for Routeworks LLC before any video uses it. Files are MP3s named `.ogg`.
+- [x] **Soundtrack rights:** Justin confirmed 2026-10-26 that the LLC can use the game music commercially.
+- **Beta goal (Justin 2026-10-26):** a big, thriving test group before the store launch, for feedback and a bigger launch. Gate or not, recruit broadly.
+- [ ] **Launch readiness plan (new):** define a launch bar (retention, crash-free rate, feedback themes resolved), and a way to reach testers on launch day: iOS public-link testers are anonymous, so the only channels are TestFlight build notes, an in-app notice, the Google Group (Android, managers can email members), or an opt-in email list / community.
 - [ ] **JUSTIN: does the Play 12-tester/14-day rule apply?** It's for personal accounts created after 2023-11-13; `docs/GOOGLE_PLAY_PUBLISHING.md` says the account is an Organization. Check Play Console.
 - [ ] **Umami on playmathdragons.com** before the first post (approved 2026-10-26): site change + privacy-policy update + accuracy review + deploy; campaign paths must carry a source tag.
 

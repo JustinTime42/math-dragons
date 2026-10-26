@@ -14,7 +14,7 @@ What we post, where, how often, and why. The voice is set by `brand-and-voice.md
 
 ## 1. Goals (in priority order)
 
-1. **Recruit engaged beta testers.** Target **25-40 active Android testers** and as many engaged iPhone/iPad testers. Google Play's 12-testers-for-14-days production rule applies to personal accounts created after November 13, 2023; this account is registered as an Organization (`docs/GOOGLE_PLAY_PUBLISHING.md`), so it may not apply. Justin to confirm in Play Console. Either way, engaged testers are the point: their feedback shapes the app.
+1. **Recruit engaged beta testers.** Target **25-40 active Android testers** and as many engaged iPhone/iPad testers. Google Play's 12-testers-for-14-days production rule applies to personal accounts created after November 13, 2023; this account is registered as an Organization (`docs/GOOGLE_PLAY_PUBLISHING.md`), so it may not apply. Justin to confirm in Play Console. Either way, Justin's goal (2026-10-26) is a large, thriving test group enjoying the game before the store launch, for better feedback and a stronger launch. That requires a way to reach testers on launch day (see PLAN.md, launch readiness).
 2. **Build an audience of parents** who will be there at launch.
 3. **Learn what works,** fast and cheaply, before investing in automation.
 
