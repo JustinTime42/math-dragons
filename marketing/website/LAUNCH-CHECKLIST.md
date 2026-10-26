@@ -71,3 +71,29 @@ Merged to main and pushed (`28d6638`); 613 app tests, analyzer, 11 site tests gr
 ### 9. End-to-end check (JUSTIN + CLAUDE)
 - [ ] On a real iPhone and a real Android phone, follow the steps on playmathdragons.com from scratch, and check Settings, For Parents: all three links open behind the grown-ups check.
 - [ ] Log results in `marketing/website/qa-log.md`.
+
+## Part 3: website phase 2 (launch list + analytics), branch `website/phase-2`
+
+Built and reviewed 2026-10-26 (`marketing/website/pages-v2.review.md`, PASS WITH FIXES, copy fixes applied; 53 tests pass). The privacy policy describes these settings as true, so each must be done before deploy.
+
+**Buttondown (JUSTIN)**
+- [ ] Create the account; `! cd website && npx wrangler secret put BUTTONDOWN_API_KEY`
+- [ ] Sending domain: set up `playmathdragons.com` (add its DNS records in Cloudflare)
+- [ ] Confirm double opt-in is on (new subscribers stay unconfirmed until they click)
+- [ ] Turn **off all open and click tracking**; confirm with a test send
+- [ ] Turn on automatic cleanup of unconfirmed addresses after 30 days
+- [ ] Ask Buttondown support for hard deletion (or delete by API on request), so "deleted completely within 30 days" is true
+- [ ] Turn **off** Buttondown's hosted signup page/form (it would skip our 18+ checkbox)
+- [ ] Add the postal address for the email footer (CAN-SPAM)
+- [ ] Confirm export works
+
+**Cloudflare (JUSTIN)**
+- [ ] Bot Fight Mode off (done 2026-10-23), and no challenge pages or "Always Online" (they can set cookies)
+- [ ] Workers Logs off, or note it in the policy (they can capture request data)
+- [ ] Always Use HTTPS on (SSL/TLS, Edge Certificates); http:// still served the page on 2026-10-26
+
+**Deploy order (CLAUDE)**
+- [ ] Deploy the new policy and launch list **with the Umami website ID still empty** (the current live policy promises to update the policy before adding analytics)
+- [ ] Set both policy dates to the deploy date
+- [ ] Live checks: form round trip with a test address (confirmation email arrives, no tracking pixels), DevTools shows no cookies, CSP intact
+- [ ] Then add the Umami website ID (JUSTIN creates the Umami Cloud site; stay on the free Hobby plan, since the policy says data is kept six months) and redeploy
