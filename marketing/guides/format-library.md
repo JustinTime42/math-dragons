@@ -28,7 +28,7 @@ All formats are **vertical 9:16** unless marked otherwise. Timings are targets, 
 
 ## F1. Dragon Puzzle (two parts)
 
-- **Pillar / series:** 1 / Dragon Puzzle (every other week)
+- **Pillar / series:** 1 / Dragon Puzzle (once every 4-week cycle)
 - **Length:** part 1: 13-20 s; part 2: 20-30 s
 - **Voices:** Narrator; Tallyclaw optional in part 2
 - **Part 1 beats:**
@@ -70,7 +70,7 @@ All formats are **vertical 9:16** unless marked otherwise. Timings are targets, 
   3. 20-35 s: why teachers teach it, at the evidence level the research supports.
   4. 35-50 s: one way to help at home without taking over.
 - **Rules:** calm and pro-teacher. Never mocks "new math". Never claims a method is the only right way. Recreated worksheets use our own layout: never copy a publisher's page design or branding.
-- **Example concept:** "Make a ten": 8 + 5 becomes 8 + 2 + 3 = 10 + 3 = 13. (The Common Core grade 1 standard 1.OA.C.6 uses this exact strategy as its example.)
+- **Example concept:** "Make a ten": 8 + 6 becomes 8 + 2 + 4 = 10 + 4 = 14. (This is the exact example in the Common Core grade 1 standard 1.OA.C.6; corrected 2026-10-26, the earlier 8 + 5 version wrongly claimed to be the standard's example.)
 
 ## F4. Tallyclaw Was There
 
