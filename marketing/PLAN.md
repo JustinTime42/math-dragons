@@ -15,8 +15,8 @@ Each guide is drafted from the research report, reviewed by Justin, then frozen 
 - [x] `brand-and-voice.md` APPROVED by Justin 2026-10-19 (accuracy review PASS WITH FIXES, fixes applied, `guides/brand-and-voice.review.md`). Scope: channel identity, the dragon as mascot/"face", tone, words we use and avoid, VO voice spec
 - [ ] `visual-style.md`: 9:16 layout, safe zones, caption style, color/type pulled from `docs/VISUAL_DESIGN_GUIDE.md`, how AI visuals match the in-game art
 - [x] `content-strategy.md` DRAFTED 2026-10-26; independent review PASS WITH FIXES (`guides/compliance-and-strategy.review.md`), fixes applied; Justin approved cadence (3/week), pillar mix + 4:1 ratio, calendar days within cadence; awaiting final approval of the full doc. Scope: audience, pillars, promo-vs-value ratio, series, cadence, platform differences (YT vs FB)
-- [ ] `format-library.md`: reusable video templates (beat structure, length, example) per format
-- [ ] `script-standards.md`: hook rules, structure, length, CTA patterns, the script checklist used at the Stage 3 gate
+- [x] `format-library.md` DRAFTED 2026-10-26 (8 formats), review pending. Scope: reusable video templates (beat structure, length, example) per format
+- [x] `script-standards.md` DRAFTED 2026-10-26 (incl. treatment template), review pending. Scope: hook rules, structure, length, CTA patterns, the script checklist used at the Stage 3 gate
 - [x] `compliance-checklist.md` DRAFTED 2026-10-26; review PASS WITH FIXES, fixes applied; keyword-to-DM off (Justin); awaiting final approval. Scope: Made-for-Kids, AI disclosure, engagement-bait, claims (FTC), music rights, link rules
 - [ ] `fact-check-protocol.md`: operationalizes the mandatory accuracy and sense review in `README.md` (claims list, independent verifier, code-checked math, sense read, `review.md`, Justin sign-off); links to the evidence bank
 - [ ] `production-pipeline.md`: tools, automation design, quality bar, per-video cost/time budget
@@ -67,6 +67,7 @@ Starting material: `/spec.md` (landing-page section spec: hero, origin story, ho
 - [ ] W6. Launch: point all video CTAs and the YouTube/FB profile links at it; monitor per-path visits
 
 ## App tasks surfaced by marketing work (app workstream, separate branch)
+- [ ] **Adaptive practice fix** (Justin 2026-10-26: keep adaptivity claims, fix the app): spec being written to `docs/specs/adaptive-practice.md`. Gates publishing any adaptivity claim.
 Branch `app/store-links-founding-flag` (worktree `~/dev/math-dragons-app-links`), commit 7655335: items 1, 3, 4 below DONE (613 tests pass, signed release .aab 1.0.3+8 builds; not pushed or released).
 - [x] Founding-tester flag (done 7655335; stored in app_meta box, no schema migration needed; cutoff placeholder 2099-01-01, MUST be set to the paid-launch date in the release that adds paid features)
 - [ ] Founding flag pre-check: App Store 3.1.1 bans self-issued unlock mechanisms (license keys, codes); evaluate StoreKit `AppTransaction` grandfathering; iOS codes must be Apple offer codes. (Corrects Claude's earlier "own signed codes" option, which likely violates 3.1.1 on iOS.)
