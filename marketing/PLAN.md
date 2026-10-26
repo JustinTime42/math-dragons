@@ -13,14 +13,14 @@ Source of truth for progress. Update it in the same session as the work, before 
 ## Stage 1: Guidance docs (`guides/`)
 Each guide is drafted from the research report, reviewed by Justin, then frozen as the rubric for later gates.
 - [x] `brand-and-voice.md` APPROVED by Justin 2026-10-19 (accuracy review PASS WITH FIXES, fixes applied, `guides/brand-and-voice.review.md`). Scope: channel identity, the dragon as mascot/"face", tone, words we use and avoid, VO voice spec
-- [ ] `visual-style.md`: 9:16 layout, safe zones, caption style, color/type pulled from `docs/VISUAL_DESIGN_GUIDE.md`, how AI visuals match the in-game art
+- [x] `visual-style.md` DRAFTED 2026-10-26, review pending. Scope: 9:16 layout, safe zones, caption style, color/type pulled from `docs/VISUAL_DESIGN_GUIDE.md`, how AI visuals match the in-game art
 - [x] `content-strategy.md` APPROVED by Justin 2026-10-26 (drafted same day; independent review PASS WITH FIXES (`guides/compliance-and-strategy.review.md`), fixes applied; Justin approved cadence (3/week), pillar mix + 4:1 ratio, calendar days within cadence; awaiting final approval of the full doc. Scope: audience, pillars, promo-vs-value ratio, series, cadence, platform differences (YT vs FB)
 - [x] `format-library.md` APPROVED by Justin 2026-10-26. Scope: reusable video templates (beat structure, length, example) per format
 - [x] `script-standards.md` APPROVED by Justin 2026-10-26. Scope: hook rules, structure, length, CTA patterns, the script checklist used at the Stage 3 gate
 - [x] `compliance-checklist.md` APPROVED by Justin 2026-10-26. Scope: Made-for-Kids, AI disclosure, engagement-bait, claims (FTC), music rights, link rules
-- [ ] `fact-check-protocol.md`: operationalizes the mandatory accuracy and sense review in `README.md` (claims list, independent verifier, code-checked math, sense read, `review.md`, Justin sign-off); links to the evidence bank
-- [ ] `production-pipeline.md`: tools, automation design, quality bar, per-video cost/time budget
-- [ ] `metrics-and-learning.md`: what we track, where, and how lessons flow back into the guides
+- [x] `fact-check-protocol.md` DRAFTED 2026-10-26, review pending. Scope: operationalizes the mandatory accuracy and sense review in `README.md` (claims list, independent verifier, code-checked math, sense read, `review.md`, Justin sign-off); links to the evidence bank
+- [x] `production-pipeline.md` DRAFTED 2026-10-26, review pending. Scope: tools, automation design, quality bar, per-video cost/time budget
+- [x] `metrics-and-learning.md` DRAFTED 2026-10-26, review pending. Scope: what we track, where, and how lessons flow back into the guides
 - [x] `idea-scoring-rubric.md` APPROVED by Justin 2026-10-26. Scope: how Stage 2 ideas are scored
 - [ ] GATE: Justin approves all guides
 
