@@ -35,14 +35,14 @@ Every video is rendered once and uploaded natively to each platform (no cross-pl
 
 ## 3. Content pillars and mix
 
-Most videos earn attention on their own; a minority promote the app, and those promos still teach something. Working ratio: **about four value videos per promo**.
+Most videos earn attention on their own; a minority promote the app, and those promos still teach something. Working ratio: **about four to five value videos per promo**; the concrete 4-week slot plan is in `format-library.md`.
 
 | Pillar | Share | What it is | Why |
 |---|---|---|---|
-| **1. Puzzles and tricks** | ~35% | Genuinely solvable puzzles with a common wrong answer, aimed at parents to try with their kid; "tricks they didn't teach us" (finger 9s, making ten, area model) with honest origins | The proven faceless-math reach engine; comments come naturally |
+| **1. Puzzles and tricks** | ~33% | Genuinely solvable puzzles with a common wrong answer, aimed at parents to try with their kid; "tricks they didn't teach us" (finger 9s, making ten, area model) with honest origins | The proven faceless-math reach engine; comments come naturally |
 | **2. Parent playbook** | ~25% | Calm math at home: homework without tears, math anxiety, "new math" decoded for parents, quick games for the car or dinner table | Trust and shares ("send this to whoever does homework duty"); the under-served calm alternative to rants |
-| **3. Tallyclaw was there** | ~20% | Math history and myth-busts, hosted by Tallyclaw: base 60, the origin of zero, Einstein didn't fail math, the Gauss story's embellishments | Awe and amusement drive shares; accuracy is our differentiator |
-| **4. Math Dragons in action** | ~20% | Promos built as lessons (the making-ten trick, then the game that drills it); gameplay as the payoff of a parent story; the dad-built origin; build-in-public moments | Converts viewers to testers |
+| **3. Tallyclaw was there** | ~25% | Math history and myth-busts, hosted by Tallyclaw: base 60, the origin of zero, Einstein didn't fail math, the Gauss story's embellishments | Awe and amusement drive shares; accuracy is our differentiator |
+| **4. Math Dragons in action** | ~17% | Promos built as lessons (the making-ten trick, then the game that drills it); gameplay as the payoff of a parent story; the dad-built origin; build-in-public moments | Converts viewers to testers |
 
 ## 4. Recurring series
 
@@ -50,7 +50,7 @@ Series build habit and give each video a home. Names are working titles.
 
 | Series | Pillar | Format |
 |---|---|---|
-| **Dragon Puzzle** (every other week) | 1 | Puzzle in part 1, answer and the common wrong answer explained in part 2 a few days later (2 posts per fortnight, so pillar 1 stays near its share) |
+| **Dragon Puzzle** (once every 4 weeks) | 1 | Puzzle in part 1, answer and the common wrong answer explained in part 2 a few days later |
 | **Tricks They Didn't Teach Us** | 1 | One technique, shown with exact on-screen math, honest about where it comes from |
 | **Homework Decoder** | 2 | "Your kid's worksheet says 'make a ten'. Here's what that means." |
 | **Tallyclaw Was There** | 3 | History or myth-bust, "I was there. It didn't happen like that." |
@@ -63,7 +63,7 @@ Each series gets its own YouTube playlist. (A Shorts "series" feature with seaso
 | Goal | Length | Rule |
 |---|---|---|
 | Discovery (puzzles, tricks, trivia, gameplay moments) | **11-30 s** | One idea. Design for the loop: the reveal lands in the last second or the last line flows into the first |
-| Trust (parent playbook, deeper explainers) | 45-90 s | Re-hook about every 10 s |
+| Trust (parent playbook, homework decoder, deeper explainers) | 30-90 s | Re-hook about every 10 s |
 | History stories | up to 3 min | Later, once there's an audience |
 
 In the largest dataset found (108K Shorts), median views peaked at 11-20 seconds and fell off past 30. No end cards on Shorts: they hurt replays and completion.
@@ -79,7 +79,7 @@ Rule (shared with `brand-and-voice.md` §7 and `compliance-checklist.md` §H): *
 ## 7. Cadence
 
 - **Start at 3 videos a week**, sustainable for one person while the first pipeline is manual. Move toward 5 once production is templated.
-- **Commit to 90 days** before judging the channel. At 3 a week that's about 39 videos: roughly 14 / 10 / 8 / 8 across the four pillars. Judge a **pillar** after about 8-10 posts, and a single **series or format** only once it has 10+ posts, so pillar 3 and 4 decisions come near the end of the 90 days, or sooner if we move to 5 a week.
+- **Commit to 90 days** before judging the channel. At 3 a week that's about 39 videos: roughly 13 / 10 / 10 / 6 across the four pillars (`format-library.md` cycle). Judge a **pillar** after about 8-10 posts, and a single **series or format** only once it has 10+ posts. Pillar 4 is judged on beta clicks and opt-ins rather than post count.
 - **Batch:** script and record a week's videos in one sitting.
 - **Posting time:** don't optimize it. YouTube has said time of day isn't something it optimizes for (2023 statement).
 

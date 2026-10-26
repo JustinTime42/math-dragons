@@ -159,7 +159,7 @@ practice, your kid, five minutes, try this tonight, tricks, facts, calm, short, 
 - **Person:** second person to the parent ("your kid"); first person singular for the Narrator ("I built"); Tallyclaw in his own first person.
 - **Punctuation:** zero em-dashes (Justin's rule; they read as AI). Use commas, periods, parentheses.
 - **Reframes:** "That's not X, that's Y" style constructions: default zero, max one per piece.
-- **Numbers:** digits on screen ("7 x 8 = 56"); natural speech in VO ("seven times eight"). All on-screen math is rendered from code and checked by the review, never typed by hand into a video model.
+- **Numbers:** digits on screen ("7 × 8 = 56"); natural speech in VO ("seven times eight"). All on-screen math is rendered from code and checked by the review, never typed by hand into a video model.
 - **Names:** Math Dragons (two words, both capitalized). Tallyclaw. Game names as in the app. TestFlight with ® on first mention in website body copy only (Apple lists it as registered; Apple says the symbols are for US-only materials and not for headlines, so none in videos).
 - **CTA:** at most one per piece, after the payoff, spoken and on screen. Value videos usually have none (see `content-strategy.md` §6). A small `playmathdragons.com` corner mark is branding, not a CTA. Spoken URL is always plain `playmathdragons.com`.
 - **Hashtags and metadata:** parent, teacher and homeschool tags only. Never kid tags.
