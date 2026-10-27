@@ -128,6 +128,17 @@ For parents of kids 5-12 who want math practice without the fight, Math Dragons 
 - "Calm math. Fierce dragons."
 - "Four dragon games. Zero ads. Real practice."
 
+### 5.6 Origin lines (approved by Justin 2026-10-27)
+
+The "why I built it" idea, in Justin's own framing: most math apps are worksheets with game decorations; a genuinely fun game has risk, a clock to race, and rewards that feel earned on the way, not only at the end. Math Dragons puts real math problems inside games with all of those, so the pull of a good mobile game is pointed at a real math workout.
+
+Approved lines (Narrator, first person; use verbatim or near-verbatim):
+1. "Every math app we tried was a worksheet with a costume on. The math was the chore you did to get back to the fun. So I built games where solving the problem is the fun part."
+2. "A real game has risk, a clock you're racing, and a reward that feels earned. A worksheet only has the reward at the end. I wanted the whole path to feel like a game, with every move a real math problem."
+3. "I wanted the pull of the games kids can't put down, pointed at something good: a real math workout that feels like playing."
+
+Guardrails for this theme: it's Justin's experience ("the ones we tried"), never a claim about all math apps or a named competitor; never "addictive", "hooked", "dopamine" or brain-chemistry language; "a clock you're racing", not "time pressure". The game mechanics these lines describe (risk, the clock, rewards) are checked against the app in each video's accuracy review (first: MD-014). Related core message: §5.3 #2.
+
 ## 6. Words
 
 ### 6.1 Use
