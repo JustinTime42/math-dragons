@@ -74,7 +74,7 @@ Merged to main and pushed (`28d6638`); 613 app tests, analyzer, 11 site tests gr
 
 ## Part 3: website phase 2 (launch list + analytics), branch `website/phase-2`
 
-Built and reviewed 2026-10-26 (`marketing/website/pages-v2.review.md`, PASS WITH FIXES, copy fixes applied; 53 tests pass). The privacy policy describes these settings as true, so each must be done before deploy.
+Built and reviewed 2026-10-26 (`marketing/website/pages-v2.review.md`, PASS WITH FIXES, copy fixes applied; 53 tests pass). Privacy policy split into app-only `/privacy` and `/website-privacy` (reviewed, `privacy-split.review.md`; 55 tests). **Copy approved by Justin 2026-10-27.** Deploy waits on the Buttondown and Cloudflare items below. The privacy policy describes these settings as true, so each must be done before deploy.
 
 **Buttondown (JUSTIN)**
 - [ ] Create the account; `! cd website && npx wrangler secret put BUTTONDOWN_API_KEY`
