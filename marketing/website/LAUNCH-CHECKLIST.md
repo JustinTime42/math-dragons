@@ -97,3 +97,11 @@ Built and reviewed 2026-10-26 (`marketing/website/pages-v2.review.md`, PASS WITH
 - [ ] Set both policy dates to the deploy date
 - [ ] Live checks: form round trip with a test address (confirmation email arrives, no tracking pixels), DevTools shows no cookies, CSP intact
 - [ ] Then add the Umami website ID (JUSTIN creates the Umami Cloud site; stay on the free Hobby plan, since the policy says data is kept six months) and redeploy
+
+## Ongoing: keep the retention promises (JUSTIN, quarterly)
+
+Both privacy policies promise deletion within 12 months. Decided 2026-10-27: no beta-record exception needed, since launch is well under 12 months away (revisit if that changes).
+- [ ] Every quarter: delete Zoho Mail support threads whose conversation ended more than 12 months ago
+- [ ] Every quarter: delete TestFlight feedback older than 12 months in App Store Connect (confirm App Store Connect allows deleting feedback)
+- [ ] Launch list: confirm Buttondown's 30-day cleanup of unconfirmed addresses is still on; handle any deletion requests within 30 days
+- `marketing/metrics/feedback-log.md` holds anonymized summaries only and may be kept
