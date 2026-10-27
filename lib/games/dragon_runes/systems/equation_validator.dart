@@ -1,3 +1,4 @@
+import '../../../core/practice_key.dart';
 import '../models/rune_node_data.dart';
 import '../models/equation_target.dart';
 
@@ -38,6 +39,59 @@ class EquationValidator {
     required this.solvedTargets,
     required this.foundCanonicals,
   });
+
+  /// Canonical practice key for a single-operator equation such as
+  /// "4 × 3 = 12" ("3x4"), or null when the text is not exactly one true,
+  /// valid fact (multi-operator chains, uneven division, results <= 0).
+  /// Accepts "a op b = c" and "c = a op b".
+  static String? factKeyForEquation(String equationText) {
+    final tokens = equationText.trim().split(RegExp(r'\s+'));
+    if (tokens.length != 5) return null;
+
+    final List<String> expr;
+    final String rhs;
+    if (tokens[3] == '=') {
+      expr = tokens.sublist(0, 3);
+      rhs = tokens[4];
+    } else if (tokens[1] == '=') {
+      expr = tokens.sublist(2, 5);
+      rhs = tokens[0];
+    } else {
+      return null;
+    }
+
+    final a = int.tryParse(expr[0]);
+    final b = int.tryParse(expr[2]);
+    final c = int.tryParse(rhs);
+    if (a == null || b == null || c == null) return null;
+
+    final String key;
+    final int value;
+    switch (expr[1]) {
+      case '+':
+        key = a <= b ? '$a+$b' : '$b+$a';
+        value = a + b;
+      case '\u2212': // minus sign
+      case '-':
+        key = '$a-$b';
+        value = a - b;
+      case '\u00D7': // multiplication sign
+      case '*':
+      case 'x':
+        key = a <= b ? '${a}x$b' : '${b}x$a';
+        value = a * b;
+      case '\u00F7': // division sign
+      case '/':
+        if (b == 0 || a % b != 0) return null;
+        key = '$a/$b';
+        value = a ~/ b;
+      default:
+        return null;
+    }
+
+    if (value != c) return null;
+    return PracticeKey.isValid(key) ? key : null;
+  }
 
   /// Validate a chain of node indices.
   EquationResult validate(List<int> chain) {

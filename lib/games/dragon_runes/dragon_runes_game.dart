@@ -152,6 +152,9 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
               correctAnswer: target.displayText,
               correct: true,
               responseTimeMs: responseTimeMs,
+              factKey: EquationValidator.factKeyForEquation(
+                target.displayText,
+              ),
             ),
           );
 
@@ -193,6 +196,8 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
               correctAnswer: displayText,
               correct: true,
               responseTimeMs: responseTimeMs,
+              // Null for multi-operator chains; FactTracker then drops it.
+              factKey: EquationValidator.factKeyForEquation(displayText),
             ),
           );
 

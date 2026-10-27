@@ -217,12 +217,13 @@ class ProblemManager {
 
     int attempts = 0;
     while (gems.length < targetCount && attempts < targetCount * 100) {
+      // Find the cell first so an engine selection is never wasted.
+      final pos = _findFreeCell(occupied, gridSize);
+      if (pos == null) break;
+
       final problem = _generateUniqueProblem(usedValues);
       attempts++;
       if (problem == null) continue;
-
-      final pos = _findFreeCell(occupied, gridSize);
-      if (pos == null) break;
 
       gems.add(
         AnswerGemData(
@@ -244,13 +245,27 @@ class ProblemManager {
     currentProblem = problem;
   }
 
+  /// Next problem whose answer is not in [usedValues].
+  ///
+  /// Asks the engine first, vetoing facts whose answer is already on the
+  /// board (vetoed facts are not recorded as selections). Random generation
+  /// is used only when the engine cannot supply a fact.
   MathProblem? _generateUniqueProblem(Set<int> usedValues) {
-    for (int i = 0; i < 40; i++) {
-      if (i == 0) {
-        generateProblem();
-      } else {
-        _generateRandom();
+    if (difficultyEngine != null &&
+        _eligibleFacts != null &&
+        _eligibleFacts!.isNotEmpty) {
+      final blueprint = difficultyEngine!.selectBlueprint(
+        _eligibleFacts!,
+        accept: (fact) =>
+            !usedValues.contains(fact.result) && _isValidFact(fact),
+      );
+      if (blueprint != null) {
+        return currentProblem = MathProblem.fromFact(blueprint.fact);
       }
+    }
+
+    for (int i = 0; i < 40; i++) {
+      _generateRandom();
       final problem = currentProblem;
       if (problem != null && !usedValues.contains(problem.answer)) {
         return problem;

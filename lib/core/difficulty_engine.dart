@@ -79,8 +79,17 @@ class DifficultyEngine {
   /// Existing callers can keep using [selectNext]. New game adapters should use
   /// this method so they can validate the selected fact and preserve the due
   /// reason/mastery evidence through their game-specific generation step.
-  ProblemBlueprint? selectBlueprint(List<MathFact> eligibleFacts) {
-    return _problemScheduler.select(eligibleFacts);
+  ///
+  /// [accept] lets the caller veto facts (for example, an answer value that is
+  /// already on the board). Vetoed facts are not recorded as selections.
+  ProblemBlueprint? selectBlueprint(
+    List<MathFact> eligibleFacts, {
+    bool Function(MathFact fact)? accept,
+  }) {
+    final candidates = accept == null
+        ? eligibleFacts
+        : eligibleFacts.where(accept).toList();
+    return _problemScheduler.select(candidates);
   }
 
   /// Record a fact that was answered incorrectly, for re-presentation scheduling.

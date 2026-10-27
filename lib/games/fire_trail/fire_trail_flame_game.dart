@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flame/game.dart';
+import 'package:flutter/foundation.dart' show visibleForTesting;
 
 import '../../core/difficulty_engine.dart';
 import '../shared/difficulty_config.dart';
@@ -58,6 +59,13 @@ class FireTrailFlameGame extends FlameGame {
   double _stepAccumulator = 0;
   double _stepIntervalMs = 0;
   DateTime? _problemShownAt;
+
+  // -- Attempt tracking (first answer to each prompt) --
+  bool _promptAnswered = false;
+
+  /// True when the most recent answer was the first one given to its prompt.
+  /// Later answers to the same prompt (retries after a wrong gem) are false.
+  bool lastAnswerWasFirstAttempt = true;
   DateTime _gameStartedAt = DateTime.now();
 
   // -- Flame --
@@ -189,7 +197,7 @@ class FireTrailFlameGame extends FlameGame {
     }
 
     if (hitGem != null) {
-      _handleGemEaten(hitGem);
+      handleGemEaten(hitGem);
     } else {
       // Normal movement: remove tail (or grow if pending)
       trailManager.handleNormalStep(trail);
@@ -198,8 +206,12 @@ class FireTrailFlameGame extends FlameGame {
     _rebuildVisuals();
   }
 
-  void _handleGemEaten(AnswerGemData gem) {
+  /// Resolve eating [gem]: correct when it answers the active prompt.
+  @visibleForTesting
+  void handleGemEaten(AnswerGemData gem) {
     final isCorrect = identical(gem.problem, problems.currentProblem);
+    lastAnswerWasFirstAttempt = !_promptAnswered;
+    _promptAnswered = true;
     gemData.remove(gem);
 
     if (isCorrect) {
@@ -274,10 +286,12 @@ class FireTrailFlameGame extends FlameGame {
       reserved: nextCell == null ? const {} : {nextCell},
     );
     levelGemCount = gemData.length;
+    _promptAnswered = false;
   }
 
   void _advanceProblem() {
     problems.setCurrentProblem(gemData.isEmpty ? null : gemData.first.problem);
+    _promptAnswered = false;
     _problemShownAt = DateTime.now();
     onProblemChanged(problems.currentProblem?.displayText ?? '');
   }
@@ -299,6 +313,8 @@ class FireTrailFlameGame extends FlameGame {
     phase = GamePhase.playing;
     _stepAccumulator = 0;
     _gameStartedAt = DateTime.now();
+    // The first prompt is visible during the countdown; time it from GO.
+    _problemShownAt = _gameStartedAt;
   }
 
   void setPaused(bool paused) {

@@ -13,16 +13,40 @@ import '../../theme/dragon_spacing.dart';
 import '../../core/difficulty_engine.dart';
 import '../../core/event_bus.dart';
 import '../../core/game_events.dart';
+import '../../core/practice_key.dart';
 import '../shared/game_shell.dart';
 import '../shared/result_screen.dart';
 import '../fire_trail/models/grid_position.dart';
 import 'dragons_feast_flame_game.dart';
 import 'models/feast_config.dart';
+import 'models/math_category.dart';
 import 'widgets/category_display.dart';
 import 'widgets/category_transition.dart';
 import 'widgets/feast_dpad_controls.dart';
 import 'widgets/feast_score_display.dart';
 import 'widgets/lives_display.dart';
+
+/// Builds the [AnswerGiven] event for eating the tile showing [number].
+///
+/// The practice item is the number under this category ("mult_3:14"), so a
+/// wrong eat is a miss on that specific number.
+AnswerGiven answerEventForTile({
+  required MathCategory category,
+  required int number,
+  required int responseTimeMs,
+}) {
+  final isCorrect = category.predicate(number);
+  final factKey = PracticeKey.forProperty(category.id, number);
+  return AnswerGiven(
+    gameId: 'dragons_feast',
+    problem: factKey,
+    playerAnswer: isCorrect ? 'correct' : 'wrong',
+    correctAnswer: isCorrect ? 'correct' : 'should_skip',
+    correct: isCorrect,
+    responseTimeMs: responseTimeMs,
+    factKey: factKey,
+  );
+}
 
 /// The main Dragon's Feast game screen. Wraps Flame game with Flutter overlays.
 class DragonsFeastScreen extends StatefulWidget {
@@ -87,18 +111,14 @@ class _DragonsFeastScreenState extends State<DragonsFeastScreen> {
     _flameGame.currentLevel = _currentLevel;
   }
 
-  void _onTileEaten(bool isCorrect, int score, int streak) {
+  void _onTileEaten(bool isCorrect, int score, int streak, int number) {
     final eventBus = context.read<EventBus>();
     final responseTimeMs = _flameGame.getResponseTimeMs();
 
-    final factKey = '${_config.category.id}:${isCorrect ? "correct" : "wrong"}';
     eventBus.emit(
-      AnswerGiven(
-        gameId: 'dragons_feast',
-        problem: factKey,
-        playerAnswer: isCorrect ? 'correct' : 'wrong',
-        correctAnswer: isCorrect ? 'correct' : 'should_skip',
-        correct: isCorrect,
+      answerEventForTile(
+        category: _config.category,
+        number: number,
         responseTimeMs: responseTimeMs,
       ),
     );

@@ -8,6 +8,7 @@ import '../../theme/dragon_colors.dart';
 import '../../theme/dragon_spacing.dart';
 import '../../core/event_bus.dart';
 import '../../core/game_events.dart';
+import '../../core/practice_key.dart';
 import '../shared/game_shell.dart';
 import '../shared/result_screen.dart';
 import 'dragon_eggs_flame_game.dart';
@@ -16,6 +17,23 @@ import 'systems/equation_builder.dart';
 import 'widgets/equation_display.dart';
 import 'widgets/score_display.dart';
 import 'widgets/feedback_overlay.dart';
+
+/// Builds the [AnswerGiven] event for a built equation.
+///
+/// Every built equation is a first attempt. Equations that are not a valid
+/// fact (result <= 0, uneven division, divisor below 2) carry no fact key, so
+/// FactTracker ignores them; the gameplay outcome is unchanged.
+AnswerGiven answerEventForEquation(EquationResult result, int responseTimeMs) {
+  return AnswerGiven(
+    gameId: 'dragon_eggs',
+    problem: result.factKey,
+    playerAnswer: '${result.playerAnswer}',
+    correctAnswer: '${result.correctAnswer}',
+    correct: result.isCorrect,
+    responseTimeMs: responseTimeMs,
+    factKey: PracticeKey.isValid(result.factKey) ? result.factKey : null,
+  );
+}
 
 class DragonEggsScreen extends StatefulWidget {
   final int startingLevel;
@@ -64,14 +82,7 @@ class _DragonEggsScreenState extends State<DragonEggsScreen> {
 
   void _onEquationResult(EquationResult result, int responseTimeMs) {
     final eventBus = context.read<EventBus>();
-    eventBus.emit(AnswerGiven(
-      gameId: 'dragon_eggs',
-      problem: result.factKey,
-      playerAnswer: '${result.playerAnswer}',
-      correctAnswer: '${result.correctAnswer}',
-      correct: result.isCorrect,
-      responseTimeMs: responseTimeMs,
-    ));
+    eventBus.emit(answerEventForEquation(result, responseTimeMs));
 
     if (result.isCorrect &&
         _flameGame.streak > 0 &&
