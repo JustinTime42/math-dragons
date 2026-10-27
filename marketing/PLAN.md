@@ -26,7 +26,7 @@ Each guide is drafted from the research report, reviewed by Justin, then frozen 
 
 ## Stage 2: Idea bank
 - [x] Generate 100+ one-liners across pillars/formats into `ideas/idea-bank.md` (125 ideas, 2026-10-26; independent review PASS WITH FIXES, fixes applied, `ideas/idea-bank.review.md`)
-- [ ] Score against rubric; Justin selects first batch (target 10-15)
+- [x] Score against rubric; Justin selected the first batch 2026-10-27: MD-001..MD-014 (`videos/INDEX.md`), the 12-slot cycle plus the two join-the-beta pieces
 
 ## Stage 3: Treatments
 - [ ] Treatments for first batch (`videos/MD-###/treatment.md`)
