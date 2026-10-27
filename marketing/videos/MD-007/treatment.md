@@ -30,12 +30,12 @@ A parent learns what "make a ten" on their kid's homework means, using the exact
 | 18-21 s | Hands (Justin's, overhead) tap the paper | You may already do this | Narrator: You may already do this in your head. |
 | 21-26 s | Full chain card, one step at a time; small label "Common Core 1.OA.C.6, grade 1" | 8 + 6 = 8 + 2 + 4 = 10 + 4 = 14 | Narrator: That's the exact example in the Common Core standard for first grade. |
 | 26-33 s | Re-hook. Math card: "hard fact" box splits into two "easy step" boxes | Why teach it? / 1 harder fact → 2 easy steps | Narrator: Why teach it? Ten is easy to add to, so one harder fact becomes two easy steps. |
-| 33-44 s | Illustration: a ten frame (two rows of five). 8 gold dots, 2 dots slide in from a second frame of 6, leaving 4 | Ten frame: a box with 10 spaces / Studies: kids who needed extra help | Narrator: Here it is as a ten frame, a box with ten spaces. In studies of kids who needed extra help, pictures like this worked well. |
+| 33-44 s | Illustration: a ten frame (two rows of five). 8 gold dots, 2 dots slide in from a second frame of 6, leaving 4 | Ten frame: a box with 10 spaces / Studies: kids who needed extra help | Narrator: Here it is as a ten frame, a box with ten spaces. In studies of kids who needed extra help, pictures like this were part of what worked. |
 | 44-48 s | The standard's strategies listed briefly, "making ten" highlighted | One of several strategies | Narrator: The standard lists it as one of several strategies. |
 | 48-55 s | Hands write "How many more to make 10?" on paper, then put the pen down and slide the paper away (the kid finishes) | Ask: "How many more to make 10?" | Narrator: To help at home, ask one question: how many more to make ten? Then let your kid finish. |
 | 55-56 s | Back to the worksheet line, now filled: `8 + 6 = 14` (loops to frame one) | 8 + 6 = 14 | (no VO) |
 
-Word count: 128 (budget about 135 for 54 s of speech at 2.5 words/s). F3 target 30-60 s.
+Word count: 131 (budget about 135 for 54 s of speech at 2.5 words/s). F3 target 30-60 s.
 
 ## Math strings (exact, rendered from code)
 - `Make a ten to add: 8 + 6 = ___`
@@ -59,9 +59,10 @@ Verified (python, 2026-10-27): `8 + 6 == 14`; `10 - 8 == 2`; `6 == 2 + 4`; `8 + 
 | 3 | "You may already do this in your head." | MLE inference (making ten is what fluent adults do mentally); worded as "may" | LOW-MODERATE (inference, hedged) |
 | 4 | Ten is easy to add to, so one harder fact becomes two easy steps | Pedagogical reasoning behind the strategy (CCSS lists it among strategies for adding within 20); not a research claim | Reasoning, no outcome claimed |
 | 5 | A ten frame is a box with ten spaces | Definition (shown on screen as two rows of five) | HIGH |
-| 6 | "In studies of kids who needed extra help, pictures like this worked well." | WWC 2021 practice guide Rec 3 (concrete and semi-concrete representations, Strong, 28 studies), evidence row "Representations" (HIGH); wording scoped per idea-bank.review §1a (guide covers K-6 students struggling with math) | HIGH, scoped wording |
+| 6 | "In studies of kids who needed extra help, pictures like this were part of what worked." | WWC 2021 practice guide (2021006, Fuchs et al.), Rec 3 (concrete and semi-concrete representations, Strong, 28 studies, grades K-6; Table 3.1 lists "5 frames, 10 frames, double 10 frames" as semi-concrete representations; https://ies.ed.gov/ncee/WWC/Docs/PracticeGuide/WWC-PraxGuide-Elementary-Math-Summary-508c.pdf). The studies tested interventions that used representations, not ten-frame pictures alone, hence "part of what worked"; evidence row "Representations" (HIGH); wording scoped per idea-bank.review §1a (guide covers K-6 students struggling with math) | HIGH, scoped wording |
 | 7 | The standard lists it as one of several strategies | CCSS 1.OA.C.6 (fetched: counting on, making ten, decomposing a number leading to ten, relationship between addition and subtraction, easier equivalent sums) | HIGH |
 | 8 | Help-at-home tip: ask "how many more to make ten?", then let your kid finish | F3 beat 4 ("help without taking over"); tip, no outcome claim | Tip |
+| 9 | Hook B (if picked): "your kid's worksheet turns eight plus six into ten plus four" | py: `8 + 6 == 10 + 4 == 14`; CCSS 1.OA.C.6 | HIGH |
 
 Cut: "the same thing every fluent adult does" (unsourced generalization; hedged to "you may"); any claim that teachers "often" use ten frames (no fetched source; the ten frame is shown as our own picture); any claim the app teaches making ten (F6 note: the app drills facts, it doesn't teach strategies).
 
@@ -101,7 +102,7 @@ None (value video). Corner mark only.
 ## Gate checklist (script-standards §9)
 - [x] Hook: content on frame one, three stacked signals, adult address ("Your kid's homework"), open loop; two alternatives written
 - [x] One idea; follows its format's beats (F3: worksheet phrase, method on math cards, why teachers teach it at the evidence level, one way to help at home)
-- [x] Word count within budget for the target length (128 vs about 135)
+- [x] Word count within budget for the target length (131 vs about 135)
 - [x] Voice checklist passed (brand §11): calm, pro-teacher, no "only way", WWC claim scoped, zero em-dashes, zero X/Y reframes
 - [x] Every number and equation listed as an exact string
 - [x] Claims list complete, with sources and confidence
@@ -110,3 +111,10 @@ None (value video). Corner mark only.
 - [x] Compliance checklist §A-H passed (recreated worksheet, no publisher design, no kids, no app claim)
 - [ ] Independent accuracy and sense review passed (`marketing/README.md`), results in `review.md`
 - [ ] Justin's sign-off
+
+## Fixes applied (2026-10-27)
+From `review.md` (PASS, optional notes):
+- 33-44 s VO: "pictures like this worked well" became "pictures like this were part of what worked" (the WWC studies tested interventions using representations, not ten-frame pictures alone). The beat is now 29 words in 11 s (2.6 w/s). Word count 128 to 131 (budget about 135).
+- Claim 6: added WWC Table 3.1 (ten frames listed), 28 studies, K-6, and the PDF link. Claims list: added Hook B.
+- Minus glyph: left as the ASCII hyphen (`10 - 8 = 2`, as the CCSS text writes it). MD-002 uses `−` (U+2212). Picking one glyph for all math cards is a visual-style decision for Justin.
+- Math rechecked in python (`8 + 6 == 8 + 2 + 4 == 10 + 4 == 14`, ten frame 2 × 5 = 10, 10 - 8 = 2, 6 - 2 = 4).

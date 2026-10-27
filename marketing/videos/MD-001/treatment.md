@@ -51,8 +51,9 @@ No equations. Exact on-screen strings with numbers (rendered from code like any 
 - `iPhone or iPad: 3 steps`
 - `Android: 3 steps`
 - Step labels `1.` `2.` `3.` (twice)
+- Gameplay equations: every equation visible in the 5-13 s cuts (and any Dragon Eggs screen) is listed here at capture and recomputed at the render gate. Dragon Eggs footage shows addition or subtraction only (see Production notes).
 
-Verified (python, 2026-10-27): the site lists exactly 3 `<li>` steps in each card (`website/src/pages/index.astro` iOS and Android `<ol class="steps">`); 4 games registered (`lib/games/*/*_registration.dart`, 4 files).
+Verified (python, 2026-10-27): the site lists exactly 3 `<li>` steps in each card (`website/src/pages/index.astro` iOS and Android `<ol class="steps">`); 4 games registered (`lib/games/*/*_registration.dart`, 4 files). Rechecked for the fixes (python, 2026-10-27): still 3 and 3 steps, 4 registrations.
 
 ## Claims list
 | # | Claim (as written) | Source | Confidence |
@@ -60,7 +61,7 @@ Verified (python, 2026-10-27): the site lists exactly 3 `<li>` steps in each car
 | 1 | Math Dragons is free during the beta | brand-and-voice §5.2, §5.4; site `index.astro` "Free during the beta" | HIGH |
 | 2 | Four dragon math games (Dragon Eggs, Fire Trail, Dragon Runes, Dragon's Feast) | code: `lib/games/*/*_registration.dart` (`displayName`); brand §5.2 | HIGH |
 | 3 | For kids five to twelve | brand §5.2 (Justin's decision 2026-10-19); site lede | HIGH (positioning) |
-| 4 | Short practice in addition, subtraction, multiplication and division | site lede (copy approved by Justin); code: `Operation.addition/subtraction/multiplication/division` in Dragon Eggs, Fire Trail, Dragon Runes registrations | HIGH |
+| 4 | Short practice in addition, subtraction, multiplication and division | site lede (copy approved by Justin); code: `MathOperation.addition/subtraction/multiplication/division` in Dragon Eggs, Fire Trail, Dragon Runes registrations (in 1.0.3 Dragon Eggs scores uneven division as correct; fixed in `3cd97d9`, ships in 1.0.4 (9), so no Dragon Eggs division on screen) | HIGH |
 | 5 | No ads | brand §5.2; idea-bank.review §2 (I-113: `ad_manager.dart` empty stub, no ad SDK in `pubspec.yaml`) | HIGH |
 | 6 | No accounts | brand §5.2; idea-bank.review §2 (no auth code or packages) | HIGH |
 | 7 | The app collects no data (scoped to "the app") | brand §5.2; idea-bank.review §2 (no network packages, no Firebase, no Android INTERNET permission in 1.0.3); `docs/RELEASES.md` 1.0.3 (8) | HIGH |
@@ -68,13 +69,16 @@ Verified (python, 2026-10-27): the site lists exactly 3 `<li>` steps in each car
 | 9 | "Everyone in the beta gets the full unlock free when Math Dragons launches." | brand §5.4 exact sentence | HIGH (Justin's decision; delivery path not yet built, brand §5.2) |
 | 10 | "It's my thank-you for joining." | site `index.astro` ("It's our thank-you for joining"), adapted to first person; not tied to feedback or reviews (brand §5.4) | HIGH |
 | 11 | The site shows the steps for your device | site: `platform.js` + "Looks like your device" cards in `index.astro` | HIGH |
-| 12 | iPhone/iPad: three steps (get TestFlight; tap Join the Math Dragons beta; Accept, then Install) | site `index.astro` iOS `<ol>`; `website/src/config/site.ts` (`testflightApp`, `testflight`) | HIGH, but **must be live**: LAUNCH-CHECKLIST step 7 (public link accepting testers) is unchecked |
+| 12 | iPhone/iPad: three steps (get TestFlight; tap Join the Math Dragons beta; Accept, then Install) | site `index.astro` iOS `<ol>`; `website/src/config/site.ts` (`testflightApp`, `testflight`) | HIGH; live: the TestFlight public link shows "Join the Math Dragons beta" (checked 2026-10-27) |
 | 13 | TestFlight is Apple's free app for testing new apps | site `index.astro` wording; `site.ts` `testflightApp` (App Store id899247664) | HIGH |
-| 14 | Android: three steps (join the tester group; Become a tester; install from Google Play) | site `index.astro` Android `<ol>`; `site.ts` (`googleGroup`, `playOptIn`); LAUNCH-CHECKLIST Part 1 §3 (Anyone can join) | HIGH, but **must be live**: LAUNCH-CHECKLIST step 8 (Play closed-testing release rolled out) is unchecked |
+| 14 | Android: three steps (join the tester group; Become a tester; install from Google Play) | site `index.astro` Android `<ol>`; `site.ts` (`googleGroup`, `playOptIn`); LAUNCH-CHECKLIST Part 1 §3 (Anyone can join) | HIGH; live: Justin reported Android closed testing working (2026-10-27) |
 | 15 | Use the same Google account your Play Store uses | site `index.astro` (bold warning); playbook "The landing page must absorb store friction" (Play closed testing admits only group members, needs a Google account) | HIGH |
 | 16 | If Play says "App not available", check the account circle in the corner; it has to be the one that joined the group | site `index.astro` troubleshooting `<details>`; brand §4.4 site troubleshooter line | HIGH |
 | 17 | Wait a few minutes, then try the tester page again | site `index.astro` troubleshooting | HIGH |
-| 18 | Works on iPhone, iPad and Android (implied by both flows) | brand §5.2 | HIGH |
+| 18 | Works on iPhone, iPad and Android (implied by both flows) | brand §5.2; both flows live (claims 12, 14) | HIGH |
+| 19 | Description: "built by a dad" | site `index.astro` "Why I built it"; brand §5.2 | HIGH |
+| 20 | Hook B text "iPhone or Android: 3 steps each" (if Hook B is picked) | site `index.astro`: 3 `<li>` in each `<ol class="steps">` (py) | HIGH |
+| 21 | Gameplay equations visible in footage | Listed at capture, recomputed at the render gate (script-standards §4) | to check at render gate |
 
 Cut: the playbook's "the opt-in link can take hours" (true for a fresh publish, not for a tester today; would be a time promise, F8 rules). No time-to-join claim anywhere (F8 rule; compliance §H).
 
@@ -86,27 +90,30 @@ Narrator, last 5 s, spoken and on screen: "It's free during the beta. If you wan
 - YouTube description (long-form, links clickable):
   ```
   playmathdragons.com/yt
-  How to join the free Math Dragons beta, step by step, on iPhone, iPad or Android. Four dragon math games for kids 5 to 12, built by a dad. No ads, no accounts, and the app collects no data.
-  Everyone in the beta gets the full unlock free when Math Dragons launches.
-  If you can, let your kid play a few times over two weeks, then tell me what worked and what didn't: playmathdragons.com/feedback
+
+  How to join the free Math Dragons beta, step by step, on iPhone, iPad or Android. Four dragon math games for kids 5 to 12, built by a dad. No ads, no accounts, and the app collects no data. Everyone in the beta gets the full unlock free when Math Dragons launches.
+
+  Once you're in: if you can, let your kid play a few times over two weeks, then tell me what worked and what didn't: playmathdragons.com/feedback
+
   #parenting #homeschool #teachers
   ```
-  (The feedback request is the site's own wording and sits apart from the perk line, so the perk is never read as payment for feedback.)
+  (The perk closes the "what you get" paragraph; the feedback request is a separate paragraph after a blank line and starts "Once you're in", so the perk can't be read as payment for feedback, brand §5.4.)
 - Shorts description: n/a (long-form, horizontal).
 - Facebook caption (only if Justin also posts it to the Page): "Here's exactly how to join the free Math Dragons beta on iPhone, iPad or Android. Which step would you want explained better?"
 - Facebook first comment (only if posted to Facebook): `Free beta for iPhone, iPad and Android: playmathdragons.com/fb001`
 - Hashtags: #parenting #homeschool #teachers
 
 ## Production notes
-- **Hard prerequisites (record nothing until all are true):** LAUNCH-CHECKLIST step 7 (TestFlight public link enabled and accepting testers), step 8 (Play closed-testing release rolled out, feedback URL set) and step 9 (end-to-end check on a real iPhone and Android phone) are done; `website/phase-2` is deployed, because `/yt` and `/fb###` redirects exist only in that branch's `public/_redirects` and the page layout (launch-list form) changes there. Record against the live page so the video matches what parents see.
+- **Prerequisites:** the beta is live (TestFlight public link shows "Join the Math Dragons beta", checked 2026-10-27; Justin reported Android closed testing working). Walk both flows once on the recording day to confirm nothing changed. Still required before upload: `website/phase-2` is deployed, because `/yt` and `/fb###` redirects exist only in that branch's `public/_redirects` and the page layout (launch-list form) changes there. Record against the live page so the video matches what parents see.
 - **Re-make rule (F8):** remake whenever the join flow or the site's step wording changes. Re-check every step against `index.astro` and `site.ts` at the render gate.
 - **iPhone capture:** iOS built-in screen recording on Justin's iPhone, Do Not Disturb on, status bar clean. Use a device with TestFlight not yet installed (or delete it first) so step 1 is real. No Apple ID, email or notifications visible.
 - **Android capture:** `scrcpy --record` on a physical phone signed in to a **dedicated test Google account** with a neutral name and no photo. The Google Groups join page and the Play account circle both show the account; blur or crop the address. Leave the group and opt out afterwards if the account must be reused (opting out and back in restarts a tester's 14-day count; harmless for a test account, but don't use a real tester's account).
 - **Device frames:** Apple bezel on the iPhone window only; Android window unframed. Never an iPhone and an Android device side by side in one frame (compliance §F). No App Store, TestFlight or Google Play badges; the real TestFlight and Play screens appear only as the steps themselves. No ® in the video.
-- **Gameplay:** 2 s clips of each of the four games, captured on a physical device (visual-style §7). Do not show Dragon Runes world names "Inferno Algebra" or "Dragon's Calculus" (brand §6.2; `lib/games/dragon_runes/dragon_runes_registration.dart:110,131`).
+- **Gameplay:** 2 s clips of each of the four games, captured on a physical device (visual-style §7). **Dragon Eggs: addition or subtraction only, no division, until 1.0.4 (9) is released to testers** (1.0.3 accepts 7 ÷ 2 = 3 as correct; fixed in `3cd97d9`). Don't show the Dragon Store screen. List every equation visible in the cuts and recompute it at the render gate. Do not show Dragon Runes world names "Inferno Algebra" or "Dragon's Calculus" (brand §6.2; `lib/games/dragon_runes/dragon_runes_registration.dart:110,131`).
 - **Tallyclaw still art:** neutral pose (13-19 s) and smug pose (102-107 s), built from `assets/style_bible/approved/04_stone_dragon.png` / `09_stone_face.png` per visual-style §8. No Tallyclaw voice. Still art doesn't exist yet; it's needed for MD-003, MD-005 and MD-006 too.
 - **Music:** `assets/audio/music/hub_theme.ogg` (the file is MP3 inside), well under the VO, ducked during speech. SFX: none, or the game's soft correct chime on each step number.
 - **Captions:** burned in (2-4 words) plus `.srt` upload.
+- **Facebook version only (optional):** if Justin posts this to the Page, add one on-screen line in the 27-36 s beat, "In Facebook? Open in Safari or Chrome", matching the site's in-app-browser banner. Not in the YouTube master.
 - **Thumbnail / cover frame:** Tallyclaw still (or the game's dragon), text "Join the free beta" and "iPhone, iPad, Android" in text (no store badges), per visual-style §12.
 
 ## Upload
@@ -128,3 +135,12 @@ Narrator, last 5 s, spoken and on screen: "It's free during the beta. If you wan
 - [x] Compliance checklist §A-H passed (A adult-addressed, no kids or kid tags; B claims on §5.2, no adaptivity, perk exact and untied; C disclosure set; D no bait; E game soundtrack; F no badges or ®, Apple bezel only, no side-by-side; G test account, nothing identifying; H one CTA, `/yt` and `/fb001` only in clickable places, no step count or time that isn't true)
 - [ ] Independent accuracy and sense review passed (`marketing/README.md`), results in `review.md`
 - [ ] Justin's sign-off
+
+## Fixes applied (2026-10-27)
+From `review.md` (PASS WITH FIXES) and the coordinator's corrections:
+- Prerequisites: the beta is now live (TestFlight link checked 2026-10-27; Android closed testing working per Justin), so the "record nothing until LAUNCH-CHECKLIST 7-9" gate became "walk both flows on the recording day"; `website/phase-2` deploy is still required for `/yt` and `/fb###`. Claims 12 and 14 updated to match.
+- Gameplay: Dragon Eggs footage limited to addition or subtraction until 1.0.4 (9) ships (1.0.3 accepts 7 ÷ 2 = 3); no Dragon Store screen; every visible equation listed at capture and recomputed at the render gate (Production notes and Math strings).
+- Description: perk sentence moved into the "what you get" paragraph; the feedback request is now its own paragraph after a blank line, starting "Once you're in".
+- Claims list: added "built by a dad", Hook B's "3 steps each" and gameplay equations; citation fixed from `Operation.*` to `MathOperation.*`.
+- Optional Facebook-only on-screen line "In Facebook? Open in Safari or Chrome" added to Production notes.
+- Script, word count (210) and title unchanged.

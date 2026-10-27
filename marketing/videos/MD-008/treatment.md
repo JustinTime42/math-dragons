@@ -40,7 +40,7 @@ Word count: 93 Narrator words (budget about 95 at 2.5 words/s for 38 s; F6 range
 | # | Claim (as written) | Source | Confidence |
 |---|---|---|---|
 | 1 | "On Google Play, an app with ads says 'Contains ads' on its page." | Google Play Console Help 9859455 (fetched 2026-10-27): "Apps that contain ads show a 'Contains ads' label on their store listing. This label will be visible to all Play Store users." | HIGH |
-| 2 | "Both app stores have a privacy section on the app's page." (labels "App Privacy" and "Data safety") | Apple, developer.apple.com/app-store/app-privacy-details/ (fetched 2026-10-27): "On each app's product page, users can learn about some of the data types the app may collect"; Google Play Help 11416267 (fetched 2026-10-27): "Under 'Data safety,' you'll find a summary of the app's data safety practices." Reviewer: confirm the App Store section heading reads "App Privacy" on a current product page | HIGH (section exists); MODERATE until the "App Privacy" heading is eyeballed |
+| 2 | "Both app stores have a privacy section on the app's page." (labels "App Privacy" and "Data safety") | Apple, developer.apple.com/app-store/app-privacy-details/ (fetched 2026-10-27): "On each app's product page, users can learn about some of the data types the app may collect"; Google Play Help 11416267 (fetched 2026-10-27): "Under 'Data safety,' you'll find a summary of the app's data safety practices." Reviewer: confirm the App Store section heading reads "App Privacy" on a current product page | HIGH (heading "App Privacy" confirmed on a live App Store product page by the reviewer, 2026-10-27) |
 | 3 | "The developer fills it in." | Apple page: "You'll need to provide information about your app's privacy practices ... in App Store Connect"; Google: "Developers use the Data safety section to share information about how their app handles your data", and an independent review "does not verify the accuracy and completeness" | HIGH |
 | 4 | "the dragon math game I built" (Justin built it) | brand-and-voice §5.2 "Built by a dad for his own kid" | HIGH |
 | 5 | "No ads." | brand-and-voice §5.2; `lib/monetization/ad_manager.dart` is an empty TODO stub; no ad SDK in `pubspec.yaml` (idea-bank.review §2, re-checked 2026-10-27) | HIGH |
@@ -70,6 +70,7 @@ No adaptivity claim is used, so nothing here waits on 1.0.4 (9).
   3. Dragon Eggs, an early level: a correct equation hatches an egg (about 3 s).
   4. Hub with the dragon companion for the CTA backdrop (about 5 s).
   Do not show: the store screen ("Premium Packs: Coming in a future update", `store_screen.dart:52`, reads like a purchase prompt), Dragon Runes world names ("Inferno Algebra", "Dragon's Calculus"; banned by `brand-and-voice.md` §6.2), any debug banner, the Settings dragon-name field with a real name in it.
+- **Pre-publish check (required, review row 7):** the video sends parents to look, so before upload confirm Math Dragons' own declarations match it: Play Console Data safety says "No data collected" (and no data shared) and the Ads declaration is "No"; App Store Connect App Privacy says "Data Not Collected". Record the result in `upload.md`. Don't publish on a mismatch.
 - **Music:** `assets/audio/music/hub_theme.ogg` under the question cards, `fire_trail.ogg` under the gameplay, both well under the VO. SFX: `assets/audio/sfx/correct.wav` on each check mark.
 - **Cover frame:** the 0-4 s card with all three question marks and "3 questions before you install" visible.
 
@@ -91,3 +92,9 @@ No adaptivity claim is used, so nothing here waits on 1.0.4 (9).
 - [x] Compliance checklist §A-H passed
 - [ ] Independent accuracy and sense review passed (`marketing/README.md`), results in `review.md`
 - [ ] Justin's sign-off
+
+## Fixes applied (2026-10-27)
+From `review.md` (script gate, PASS WITH FIXES):
+- Claim 2 raised to HIGH: the reviewer confirmed the App Store section heading reads "App Privacy".
+- Production notes: added the required pre-publish check that Play Data safety says "No data collected", the Play Ads declaration is "No", and App Store Connect says "Data Not Collected".
+- No script, word-count or copy changes.

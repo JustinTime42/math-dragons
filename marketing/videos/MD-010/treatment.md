@@ -4,7 +4,7 @@ status: treatment
 pillar: 3
 series: Tallyclaw Was There
 format: F4
-target_length_s: 55
+target_length_s: 56
 voices: Narrator (Tallyclaw as still art, per F4 until the puppet exists)
 platforms: YouTube Shorts, Facebook Reels
 promo: no
@@ -24,16 +24,16 @@ Parents get the real answer to "why is an hour sixty minutes?": a relay from Egy
 | Time | Visual (block + description) | On-screen text | VO (speaker: line) |
 |---|---|---|---|
 | 0-6 s | Still Tallyclaw, unimpressed pose, left of a clock face (minute hand only) | "Why 60 minutes?" | Narrator: "Parents, when your kid asks why an hour has sixty minutes, here's the real answer." |
-| 6-10 s | Tallyclaw, pointing-claw pose; a dotted path appears across a map-style illustration (Egypt, Babylon, Greece, Europe), no text inside the art | "Tallyclaw was there." | Narrator: "Tallyclaw says he was there. It took about three thousand years." |
+| 6-10 s | Tallyclaw, pointing-claw pose; a dotted path with four labelled stops (labels added in the edit, no text inside the art): "Egypt", "Babylon", "Greek astronomers" (a label, not a pin on Greece: Ptolemy worked in Alexandria), "Europe's clocks" | "Tallyclaw was there." | Narrator: "Tallyclaw says he was there. It took about three thousand years." |
 | 10-19 s | Illustration: Egyptian sundial, daylight split into 12 wedges; then a night sky with 12 star markers; math card `12 + 12 = 24` | "Egypt: 12 + 12 = 24" | Narrator: "First, Egypt. About thirty-five hundred years ago, they split the daylight into twelve parts, and the night into twelve more." |
 | 19-23 s | Illustration: Babylonian clay tablet (schematic, no fake cuneiform) | "Babylon: base 60" | Narrator: "The sixty comes from Babylon. Their astronomers counted in sixties." |
 | 23-31 s | Illustration: a Greek astronomer's circle diagram (flat style, no realistic face); one degree zooms open into 60 slices, one slice into 60 more | "1 degree → 60 → 60" | Narrator: "Greek astronomers borrowed that to cut each degree of a circle into sixty parts, and each part into sixty more." |
 | 31-37 s | Text cards in Cinzel: "pars minuta prima" → "minute"; "pars minuta secunda" → "second" | "minute" / "second" | Narrator: "In Latin, the first small part became the minute. The second became, well, the second." |
-| 37-41 s | Illustration: a late-1500s clock gaining a minute hand | "Minute hands: late 1500s" | Narrator: "Clocks didn't even show minutes until the late fifteen hundreds." |
-| 41-51 s | Math card, re-hook: `60 ÷ 2 = 30`, `60 ÷ 3 = 20`, `60 ÷ 4 = 15`, `60 ÷ 5 = 12`, `60 ÷ 6 = 10` stack in one at a time, glowing emerald; then `100 ÷ 3 = 33.33…` in fire orange | "Why 60? Nobody's sure." | Narrator: "Why sixty? Nobody knows for sure. But sixty splits evenly by two, three, four, five and six. A hundred won't even split into thirds." |
-| 51-55 s | Tallyclaw, smug pose, back beside the clock face from frame one (loop) | Speech bubble: "Whoever picked 60 knew their business." | Narrator: "Tallyclaw's verdict: whoever picked sixty knew their business." |
+| 37-43 s | Illustration: an hourglass-style hour icon splitting into 60, then a late-1500s clock gaining a minute hand | "Hours: same split" / "Minute hands: late 1500s" | Narrator: "Later, hours got the same split. Clocks didn't show minutes until the late fifteen hundreds." |
+| 43-52 s | Math card, re-hook: `60 ÷ 2 = 30`, `60 ÷ 3 = 20`, `60 ÷ 4 = 15`, `60 ÷ 5 = 12`, `60 ÷ 6 = 10` stack in one at a time, glowing emerald; then `100 ÷ 3 = 33.33…` in fire orange | "Why 60? Nobody's sure." | Narrator: "Why sixty? Nobody knows for sure. But sixty splits evenly by two, three, four, five and six. A hundred won't split into thirds." |
+| 52-56 s | Tallyclaw, smug pose, back beside the clock face from frame one (loop) | Speech bubble: "Whoever picked 60 knew their business." | Narrator: "Tallyclaw's verdict: whoever picked sixty knew their business." |
 
-Word count: 133 Narrator words (budget about 137 at 2.5 words/s for 55 s; F4 range 30-60 s). The full corrected chain fits inside 60 s; no extra length needed.
+Word count: 137 Narrator words (budget about 140 at 2.5 words/s for 56 s; F4 range 30-60 s). The full corrected chain fits inside 60 s; no extra length needed.
 
 ## Math strings (exact, rendered from code)
 Verified by running `python3 -I verify.py` (scratchpad, 2026-10-27).
@@ -46,6 +46,7 @@ Verified by running `python3 -I verify.py` (scratchpad, 2026-10-27).
 - `60 ÷ 5 = 12`
 - `60 ÷ 6 = 10`
 - `100 ÷ 3 = 33.33…` (py: 33.333…, remainder 1)
+- `Hours: same split`
 - `Minute hands: late 1500s`
 - `Whoever picked 60 knew their business.`
 
@@ -57,13 +58,14 @@ Verified by running `python3 -I verify.py` (scratchpad, 2026-10-27).
 | 3 | `12 + 12 = 24` (the 24 hours' origin) | Sci Am (as above); idea-bank I-083 corrected chain ("24-hour day from Egypt"); py. Note: these were not yet equal hours; Hipparchus later proposed 24 equal hours (Sci Am). Script doesn't claim they were equal | HIGH |
 | 4 | "The sixty comes from Babylon. Their astronomers counted in sixties." | Sci Am: "The Babylonians made astronomical calculations in the sexagesimal (base 60) system they inherited from the Sumerians"; Appendix A #3 (HIGH legacy). Script does not say Babylon invented it (brand-and-voice §4.4 caveat) | HIGH |
 | 5 | "Greek astronomers borrowed that to cut each degree of a circle into sixty parts, and each part into sixty more." | Sci Am (Ptolemy): "Each degree was divided into 60 parts, each of which was again subdivided into 60 smaller parts"; idea-bank.review I-083 fix | HIGH |
-| 6 | "In Latin, the first small part became the minute. The second became, well, the second." | Sci Am: "partes minutae primae, or first minute, became known simply as the 'minute'"; "partes minutae secundae, or 'second minute,' became known as the second." On-screen uses the singular "pars minuta prima / secunda" (reviewer: confirm singular vs plural form; switch to Sci Am's plural "partes minutae primae / secundae" if in doubt) | HIGH (etymology), MODERATE (exact Latin form on screen) |
-| 7 | Implied: the hour uses the same 60-and-60 split | Present-day definition (1 h = 60 min = 3,600 s; py 60 × 60 = 3600); the script doesn't claim when the split moved from degrees to hours | HIGH |
-| 8 | "Clocks didn't even show minutes until the late fifteen hundreds." | Sci Am: "the first mechanical clocks that displayed minutes appeared near the end of the 16th century" | HIGH |
+| 6 | "In Latin, the first small part became the minute. The second became, well, the second." | Sci Am: "partes minutae primae, or first minute, became known simply as the 'minute'"; "partes minutae secundae, or 'second minute,' became known as the second." On-screen uses the singular "pars minuta prima / secunda" (reviewer: confirm singular vs plural form; switch to Sci Am's plural "partes minutae primae / secundae" if in doubt) | HIGH (reviewer confirmed: Wikipedia "Minute" gives the singular *pars minuta prima* / *secunda*; keep the singular) |
+| 7 | "Later, hours got the same split." / "Hours: same split" (no date given) | Wikipedia "Minute" (via review, 2026-10-27): al-Biruni "first subdivided the hour sexagesimally into minutes, seconds, thirds and fourths in 1000 CE"; Roger Bacon 1267; Sci Am: the hour wasn't commonly understood as 60 minutes until clocks showed minutes; present-day 1 h = 60 min = 3,600 s (py 60 × 60 = 3600) | HIGH (that it came later); no date claimed |
+| 8 | "Clocks didn't show minutes until the late fifteen hundreds." | Sci Am: "the first mechanical clocks that displayed minutes appeared near the end of the 16th century" | HIGH |
 | 9 | "Why sixty? Nobody knows for sure." | Appendix A #3 caveat ("Why 60 was chosen is debated"); brand-and-voice §4.4 | HIGH (that it's debated) |
 | 10 | "Sixty splits evenly by two, three, four, five and six." | py: divisors of 60 = 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60 | HIGH |
-| 11 | "A hundred won't even split into thirds." (evenly, in whole numbers) | py: 100 mod 3 = 1 | HIGH |
+| 11 | "A hundred won't split into thirds." (evenly, in whole numbers) | py: 100 mod 3 = 1 | HIGH |
 | 12 | "Whoever picked sixty knew their business." (joke premise: 60 is convenient; no inventor credited) | brand-and-voice §4.4 calibrated line (reworded, not reused verbatim) | HIGH |
+| 12b | Map visual 6-10 s: stops labelled "Egypt", "Babylon", "Greek astronomers", "Europe's clocks" | Rows 2-8; Ptolemy worked in Alexandria (Roman Egypt), so the Greek stop is a label for the astronomers, not a place pin | HIGH |
 | 13 | "Tallyclaw says he was there." (eyewitness conceit; no fact bent) | brand-and-voice §4.2 | n/a (character device) |
 
 Facts cut: Hipparchus's name and dates (147-127 BCE) and the equal-hours detail (true, Sci Am, but they'd push the script past budget and add a second thread); the Sumerian origin line (kept implicit by "Nobody knows for sure"); 360 degrees.
@@ -104,3 +106,11 @@ None (value video). Corner mark `playmathdragons.com` only.
 - [x] Compliance checklist §A-H passed
 - [ ] Independent accuracy and sense review passed (`marketing/README.md`), results in `review.md`
 - [ ] Justin's sign-off
+
+## Fixes applied (2026-10-27)
+From `review.md` (script gate, PASS WITH FIXES):
+- **Required sense fix:** added "Later, hours got the same split." (no date) before the clock line, with an on-screen "Hours: same split", so the chain reaches the hour and not just the degree. Claim 7 now cites Wikipedia "Minute" (al-Biruni c. 1000 CE; Roger Bacon 1267) and Sci Am.
+- Dropped "even" from "Clocks didn't even show minutes" and "A hundred won't even split into thirds" to stay in budget: 137 words over 56 s (budget about 140).
+- Map stop labelled "Greek astronomers" (not a pin on Greece; Ptolemy worked in Alexandria); map visual added to the claims list (row 12b).
+- Claim 6: singular Latin form confirmed by the reviewer; kept.
+- Not applied: the optional "came by way of Babylon" rewording (+2 words would break the budget; "Nobody knows for sure" already covers the origin debate).

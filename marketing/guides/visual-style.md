@@ -67,6 +67,7 @@ Cinzel and Nunito (plus JetBrains Mono, used in the app for counters) are alread
 ## 6. Math cards
 
 - Dark purple background (Deep Void to Dragon Purple gradient) or a dimmed scene.
+- Use the true minus sign (−, U+2212) and multiplication sign (×), never a hyphen or the letter x.
 - Nunito Bold, large: equations about 120-160 px tall on the 1080-wide canvas, so they read on a small phone.
 - Numbers cream, operators gold. Correct answers glow emerald (emerald on Dragon Purple is about 4.3:1, so use it only at large sizes or as a glow behind cream text); a "common wrong answer" is shown in fire orange and then crossed out.
 - Animate one step at a time. Each step stays on screen long enough to read twice.

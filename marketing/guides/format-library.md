@@ -35,7 +35,7 @@ All formats are **vertical 9:16** unless marked otherwise. Timings are targets, 
   1. 0-1 s: the puzzle is already on screen. Text and the first spoken words address the parent: "Parents, try this with your kid."
   2. 1-8 s: pose it in one or two sentences.
   3. 8-12 s: a visible 3-second thinking beat.
-  4. Final second: "Answer in the next video." Last frame is the puzzle again, so it loops.
+  4. Final second: "Answer in part two." (another video usually posts in between). Last frame is the puzzle again, so it loops.
 - **Part 2 beats:**
   1. 0-2 s: same puzzle, "A very common answer is [wrong answer]." (Don't claim "most people" without a source.)
   2. 2-15 s: why that answer is tempting, then the right answer step by step (math cards).
@@ -117,7 +117,7 @@ All formats are **vertical 9:16** unless marked otherwise. Timings are targets, 
 - **Length:** 20-45 s
 - **Voices:** Narrator
 - **Beats:**
-  1. 0-2 s: the moment ("The first thing testers asked me to change" / "My daughter found a bug…"). Every premise is checked against the app: for example, the games do time answers (Dragon Eggs' falling eggs, Fire Trail's countdown and dragon speed).
+  1. 0-2 s: the moment ("The first thing testers asked me to change" / "My daughter found a bug…"). Every premise is checked against the app: for example, there's no per-question timer, but the games keep a clock running (Dragon Eggs drops eggs on a timer; Fire Trail's dragon moves at a steady per-level speed; Fire Trail's 3-2-1 is only a start countdown).
   2. 2-25 s: the decision and the reasoning, with screen capture or gameplay.
   3. Last few seconds: a soft CTA (or none).
 - **Rules:** true stories only. No code-on-screen walls; the audience is parents. Never a child's face, name or voice.

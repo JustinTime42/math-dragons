@@ -24,15 +24,15 @@ Parents learn the finger trick for 9 × 1 through 9 × 10, and the one-line reas
 | Time | Visual (block + description) | On-screen text | VO (speaker: line) |
 |---|---|---|---|
 | 0-3 s | Hands, overhead: both hands flat, palms down; the left pinky is finger 1, the right pinky is finger 10 (as seen by the camera); finger 7 starts folding | "9 × 7 on your fingers" | Narrator: "Parents, here's nine times seven, on your fingers." |
-| 3-8 s | Hands flat again; small gold numerals 1 to 10 pop above each finger, left to right | "1 2 3 4 5 6 7 8 9 10" | Narrator: "Put both hands flat. Count your fingers from the left, one to ten." |
+| 3-8 s | Hands flat again; small gold numerals 1 to 10 pop above each finger, left to right | "1 2 3 4 5 6 7 8 9 10" | Narrator: "Hands flat. Number the fingers one to ten, from the left." |
 | 8-11 s | Punch-in: finger 7 (right index) folds down | "Fold finger 7" | Narrator: "For nine times seven, fold down finger seven." |
 | 11-15 s | Gold bracket over the 6 fingers left of the fold, cream bracket over the 3 on the right; math card overlay | "6 \| 3" then "9 × 7 = 63" | Narrator: "Six fingers on the left. Three on the right. Sixty-three." |
 | 15-19 s | Hands reset; finger 3 (left middle) folds; brackets 2 and 7 | "9 × 3 = 27" | Narrator: "Nine times three. Fold finger three. Two, then seven. Twenty-seven." |
 | 19-22 s | Quick montage, one fold per beat: 1, 5, 10, with each result card | "Works for 9 × 1 to 9 × 10" | Narrator: "It works from nine times one up to nine times ten." |
-| 22-28 s | Math card: `9 × 7 = 70 − 7 = 63`, the "70" built from seven stacks of ten, one stack trimmed by one | "9 × 7 = 70 − 7 = 63" | Narrator: "Why? Nine is one less than ten. So nine sevens is seventy, minus seven." |
+| 22-28 s | Math card: `9 × 7 = 70 − 7 = 63`. The "70" appears as seven stacks of ten; then 7 ones are taken off the end, so six full tens and 3 ones remain; a final caption beat ties it back to the fingers (6 \| 3) | "9 × 7 = 70 − 7 = 63" then "6 tens + 3 = 63" | Narrator: "Why? Nine is one less than ten. So nine sevens is seventy, minus seven." |
 | 28-30 s | Back to the opening hands with finger 7 folded (loop) | "9 × 7 = 63" | (no VO; the loop runs into "Parents, here's nine times seven") |
 
-Word count: 74 Narrator words (budget about 75 at 2.5 words/s for 30 s; F2 range 20-30 s)
+Word count: 72 Narrator words (budget about 75 at 2.5 words/s for 30 s; F2 range 20-30 s)
 
 Origin beat: **skipped.** No source for where the trick comes from (idea-bank I-020; F2 rule: "the origin is unknown" is itself a claim).
 
@@ -49,6 +49,8 @@ Verified by running `python3 -I verify.py` (scratchpad, 2026-10-27): for n = 1..
 - `9 × 10 = 90` (split `9 | 0`)
 - `Works for 9 × 1 to 9 × 10`
 - `9 × 7 = 70 − 7 = 63`
+- `70 − 7 = 60 + 3 = 63` (the stacks visual: seven tens, take away 7, leaves six tens and 3)
+- `6 tens + 3 = 63`
 
 ## Claims list
 | # | Claim (as written) | Source | Confidence |
@@ -58,6 +60,7 @@ Verified by running `python3 -I verify.py` (scratchpad, 2026-10-27): for n = 1..
 | 3 | "Fold finger three. Two, then seven. Twenty-seven." | py: 9 × 3 = 27, split 2 \| 7 | HIGH |
 | 4 | "It works from nine times one up to nine times ten." (range stated) | py: holds for n = 1..10; 9 × 11 = 99 cannot be shown on ten fingers | HIGH |
 | 5 | "Nine is one less than ten. So nine sevens is seventy, minus seven." | A#47 ("works because 9n = 10n − n"); py | HIGH |
+| 5b | Visual 22-28 s: seven stacks of ten minus 7 ones leaves six tens and 3 ones (= 63, matching the 6 \| 3 on the fingers) | py: 70 − 7 = 63 = 6 × 10 + 3 | HIGH |
 | 6 | Implied: this is a trick, not a replacement for knowing the facts (stated in the description) | A#47 caveat ("party trick, not a substitute for knowing facts") | HIGH |
 | 7 | Hashtag/title "Tricks they didn't teach us" framing: no claim that schools don't teach it | Title avoids that claim | n/a |
 
@@ -96,3 +99,10 @@ None (value video). Corner mark `playmathdragons.com` only.
 - [x] Compliance checklist §A-H passed
 - [ ] Independent accuracy and sense review passed (`marketing/README.md`), results in `review.md`
 - [ ] Justin's sign-off
+
+## Fixes applied (2026-10-27)
+From `review.md` (script gate, PASS WITH FIXES):
+- **Wrong visual fixed (22-28 s):** was "seven stacks of ten, one stack trimmed by one" (that shows 69). Now seven stacks of ten with 7 ones taken off the end, leaving six tens and 3 ones, plus a caption beat `6 tens + 3 = 63` that ties the "why" back to the fingers.
+- Added the visual's math (`70 − 7 = 60 + 3 = 63`, `6 tens + 3 = 63`) to the math strings and the claims list (row 5b).
+- Softened the most count-along-shaped line: "Put both hands flat. Count your fingers from the left, one to ten." became "Hands flat. Number the fingers one to ten, from the left." (a demonstration, not an instruction to the viewer).
+- Word count 74 to 72 (budget 75).

@@ -26,9 +26,9 @@ A parent gets a one-number puzzle to try with their kid tonight (is zero even, o
 | 0-5 s | Math card: big "0" centered; "EVEN" left, "ODD" right, "NEITHER?" below, each pulses as it's spoken | Parents: is 0 even, odd, or neither? | Narrator: Parents, is zero even, odd, or neither? Ask your kid. Then ask yourself. |
 | 5-13 s | Math card: the rule. Six dots split into two equal groups of three (an example that isn't zero), then the "0" returns | Even = 2 equal groups, none left over | Narrator: Use the usual rule: a number is even if it splits into two equal groups, with none left over. |
 | 13-16 s | Thinking beat: the "0" alone, a dragon-fire bar burns down across the bottom of the safe area (no numbers, no countdown voice) | (none) | (silence, music only) |
-| 16-18 s | The opening frame returns exactly (loop) | Answer in the next video | Narrator: Answer in the next video. |
+| 16-18 s | The opening frame returns exactly (loop) | Answer in part two | Narrator: Answer in part two. |
 
-Word count: 37 (budget about 37 for the 15 s of speech; total 18 s with the 3 s thinking beat).
+Word count: 36 (budget about 37 for the 15 s of speech; total 18 s with the 3 s thinking beat). The closing line is "Answer in part two." rather than format-library F1's "Answer in the next video.", because MD-005 posts between the two parts; it stays true whatever goes up in between.
 
 ## Math strings (exact, rendered from code)
 - `0`
@@ -44,11 +44,12 @@ Verified (python, 2026-10-27): `6 % 2 == 0`, `6 == 3 + 3`; `0 % 2 == 0` (the par
 | 1 | "A number is even if it splits into two equal groups, with none left over" (the usual rule, stated as the puzzle's assumption) | Standard definition: Wikipedia "Parity of zero" (fetched 2026-10-27: an even number is an integer multiple of 2); Appendix A #40 | HIGH |
 | 2 | The puzzle has one answer (even), so it is solvable and not rage-bait | Appendix A #40 (HIGH); idea-bank.review §2 (I-016 cleared) | HIGH |
 | 3 | 6 = 3 + 3 (example on the rule card) | py | HIGH |
+| 4 | Hook premise "Ask your kid. Then ask yourself." (adults find it hard too) | Lichtenberg 1972, *The Arithmetic Teacher*, via Wikipedia "Parity of zero" (fetched 2026-10-27): about two thirds of prospective elementary teachers answered "False" to "Zero is an even number"; Appendix A #40 ("many adults and kids hesitate") | MODERATE-HIGH (implied, not stated as a number) |
 
 No app tie-in: Dragon's Feast's "even" category starts at 1 (`n > 0 && n % 2 == 0`, `lib/games/dragons_feast/systems/category_system.dart`), so the app would contradict the answer. Nothing in this video shows or mentions the app.
 
 ## CTA
-None. The puzzle itself is the CTA ("Answer in the next video", content-strategy §6). Corner mark only.
+None. The puzzle itself is the CTA ("Answer in part two"; content-strategy §6). Corner mark only.
 
 ## Copy
 - YouTube title: `Parents: is zero even, odd, or neither? Ask your kid` (52 characters)
@@ -80,8 +81,8 @@ None. The puzzle itself is the CTA ("Answer in the next video", content-strategy
 
 ## Gate checklist (script-standards §9)
 - [x] Hook: content on frame one, three stacked signals, adult address (text and first spoken word: "Parents"), open loop; two alternatives written
-- [x] One idea; follows its format's beats (F1 part 1: puzzle on frame one, pose, 3 s thinking beat, "Answer in the next video", loops)
-- [x] Word count within budget for the target length (37 vs about 37)
+- [x] One idea; follows its format's beats (F1 part 1: puzzle on frame one, pose, 3 s thinking beat, "Answer in part two" in place of F1's "Answer in the next video", loops)
+- [x] Word count within budget for the target length (36 vs about 37)
 - [x] Voice checklist passed (brand §11): addressed to the parent, not the child; zero em-dashes; zero X/Y reframes
 - [x] Every number and equation listed as an exact string
 - [x] Claims list complete, with sources and confidence
@@ -90,3 +91,9 @@ None. The puzzle itself is the CTA ("Answer in the next video", content-strategy
 - [x] Compliance checklist §A-H passed (no count-along; solvable, assumption stated; no app claim; game soundtrack)
 - [ ] Independent accuracy and sense review passed (`marketing/README.md`), results in `review.md`
 - [ ] Justin's sign-off
+
+## Fixes applied (2026-10-27)
+From `review.md` (PASS, optional notes) and the coordinator:
+- Closing line changed from "Answer in the next video." to "Answer in part two." (VO and on-screen text), because MD-005 posts between the parts. This departs from format-library F1's prescribed wording; the guide itself is unchanged (Justin's call whether to update it). Word count 37 to 36.
+- Claims list: added the hook premise (adults hesitate too: Lichtenberg 1972 via Wikipedia).
+- Slot order (review note 2) left as INDEX has it: week 1, post 2. Justin's call.

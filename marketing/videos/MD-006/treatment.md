@@ -47,12 +47,14 @@ Verified (python, 2026-10-27): `0 + 0 == 0`; `0 // 2 == 0` and `0 % 2 == 0`; `li
 | # | Claim (as written) | Source | Confidence |
 |---|---|---|---|
 | 1 | Zero is even | Appendix A #40 (HIGH); Wikipedia "Parity of zero" (fetched 2026-10-27: "zero is an integer multiple of 2, namely 0 × 2, so zero is even") | HIGH |
-| 2 | "A very common answer is neither" | idea-bank.review §2 (I-016 cleared): Wikipedia "Parity of zero" (fetched): UK 7-year-olds, share answering "even" fell from 45% to 32% once "neither", "both" and "don't know" were offered; 1972 study (Lichtenberg), about two thirds of prospective teachers answered "False" to "zero is even"; Appendix A #40 ("many adults and kids hesitate") | MODERATE-HIGH (supports "very common"; never "most people") |
+| 2 | "A very common answer is neither" | idea-bank.review §2 (I-016 cleared): Wikipedia "Parity of zero" (fetched), citing Frobisher (1999): in a 1992 survey of nearly 400 English Year 2 children (ages 6-7), 45% chose "even"; once "neither", "both" and "don't know" were offered, it fell to 32%. Lichtenberg (1972, *The Arithmetic Teacher* 19(7)): about two thirds of prospective elementary teachers answered "False" to "Zero is an even number". Neither source gives the exact share choosing "neither", so the script says "very common"; Appendix A #40 ("many adults and kids hesitate") | MODERATE-HIGH (supports "very common"; never "most people") |
 | 3 | Zero "feels like nothing" (why it's tempting) | Framing of the common error, no factual claim | n/a |
 | 4 | Split zero into two equal groups: zero and zero, none left over | py (`0 + 0 == 0`, `0 % 2 == 0`) | HIGH |
 | 5 | Counting down by twos, 6, 4, 2, 0, zero lands where the evens go | py; Wikipedia "Parity of zero" (zero "is neighbored on both sides by odd numbers") | HIGH |
 | 6 | The rule (two equal groups, none left over) still works for zero | Same definition as MD-004 claim 1 | HIGH |
 | 7 | Optional button: "Zero. Even. Next question." | Restates claim 1 | HIGH |
+| 8 | Description and caption: "the rule your kid already knows proves it" | Same rule as MD-004 (two equal groups, none left over); py `0 % 2 == 0` | HIGH |
+| 9 | Description: "Part 1 is in the Dragon Puzzle playlist" | F1 linking rule; true once MD-004 is in the playlist (check at upload) | HIGH at upload |
 
 Not used: the study percentages on screen (secondary source, and they'd turn a puzzle answer into a survey). No app tie-in (Dragon's Feast's even category starts at 1, `lib/games/dragons_feast/systems/category_system.dart`).
 
@@ -99,3 +101,9 @@ None (value video). Corner mark only.
 - [x] Compliance checklist §A-H passed
 - [ ] Independent accuracy and sense review passed (`marketing/README.md`), results in `review.md`
 - [ ] Justin's sign-off
+
+## Fixes applied (2026-10-27)
+From `review.md` (PASS, claims-list precision only):
+- Claim 2 corrected: Frobisher (1999) survey of nearly 400 English Year 2 children (ages 6-7, 1992), 45% to 32% once "neither" was offered; Lichtenberg (1972, *The Arithmetic Teacher* 19(7)). Both via Wikipedia, which supports "very common" (not "most people").
+- Claims list: added the description/caption line ("the rule your kid already knows proves it") and the playlist pointer.
+- Script, math strings and word count (69) unchanged; parity math rechecked in python.

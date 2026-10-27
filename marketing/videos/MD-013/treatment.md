@@ -54,10 +54,12 @@ Verified by running `python3 -I verify.py` (scratchpad, 2026-10-27): `str(10**10
 | 6 | "Milton called it a googol." | MacTutor; A#21 | HIGH |
 | 7 | "He named a bigger one too, the googolplex." | MacTutor ("The nephew also suggested this name"); Wikipedia references attribute both names to the nephew | HIGH |
 | 8 | "The first idea for it: a one, followed by writing zeros until you get tired." | MacTutor quoting the book: "It was suggested that a googolplex should be 1, followed by writing zeros until you get tired." Script doesn't say who suggested that definition | HIGH |
-| 9 | "It was later pinned down as a one followed by a googol zeros." | MacTutor: "a specific finite number, with so many zeros after the 1 that the number is a googol" | HIGH |
-| 10 | "Google's name? A play on googol." | Wikipedia "Googol": Google is "an intentional misspelling of 'googol' by the company's founders"; A#21 ("Google's name plays on it") | HIGH |
+| 9 | "It was later pinned down as a one followed by a googol zeros." / `googolplex = 10^googol` / `1 followed by a googol zeros` | Standard definition: Wikipedia "Googolplex" (fetched by the reviewer 2026-10-27): 10^googol = 10^(10^100), a 1 followed by a googol zeros. MacTutor's transcription of the book ("so many zeros after the 1 that the number is a googol") reads garbled; cite the standard definition first | HIGH |
+| 10 | "Google's name? A play on googol." | about.google/our-story (primary, via review 2026-10-27): "The name was a play on the mathematical expression for the number 1 followed by 100 zeros"; Wikipedia "Googol": "an intentional misspelling of 'googol' by the company's founders"; A#21 | HIGH |
 | 11 | Year: none stated | idea-bank.review I-089 fix (1920 isn't in the primary source) | n/a |
 | 12 | "Tallyclaw is still jealous he didn't name it." (joke premise: his vanity) | Character device; no fact | n/a |
+| 13 | Speech bubble "Nine. I've named nothing that good." (joke premise: his vanity; "Nine" = Milton's age, row 3) | Character device; age per MacTutor | n/a (joke); HIGH (age) |
+| 14 | Hook B: "Google's name started with a number, and a nine-year-old named it." | Rows 6 and 10; about.google/our-story (via review): "The name was a play on the mathematical expression for the number 1 followed by 100 zeros" | HIGH |
 
 Facts cut: the year (1920; secondary only); the "more than the particles in the observable universe" comparison (Wikipedia citing Sagan; an estimate, not in our verified bank); Google founders' names (unneeded).
 
@@ -77,6 +79,7 @@ None (value video). Corner mark `playmathdragons.com` only.
 - **Google:** text only, no logo or brand colors (`compliance-checklist.md` §F).
 - **Math cards:** Manim; the 100 zeros generated from `str(10**100)` in rows of 20 so they're countable; `10¹⁰⁰` with a true superscript.
 - **Music:** `assets/audio/music/dragon_runes.ogg`, low; `assets/audio/sfx/achievement.wav` on "googol".
+- **Bubble timing (review sense note):** the bubble "Nine. I've named nothing that good." appears only after the VO line "Tallyclaw is still jealous he didn't name it." finishes, so viewers don't read one joke while hearing another.
 - **Cover frame:** 0-5 s, Tallyclaw with the streaming zeros and "Named by a 9-year-old" visible.
 - Title check: "Google Borrowed It" means the name plays on googol (claim 10), not that anything was licensed; fallback title if the reviewer objects: "A 9-Year-Old Named the Googol: The Story for Parents".
 
@@ -98,3 +101,10 @@ None (value video). Corner mark `playmathdragons.com` only.
 - [x] Compliance checklist §A-H passed
 - [ ] Independent accuracy and sense review passed (`marketing/README.md`), results in `review.md`
 - [ ] Justin's sign-off
+
+## Fixes applied (2026-10-27)
+From `review.md` (script gate, PASS WITH FIXES):
+- Claim 9 now cites the standard googolplex definition (Wikipedia "Googolplex": 10^googol, a 1 followed by a googol zeros) ahead of MacTutor's garbled transcription.
+- Claims list additions: row 13 (the speech bubble's joke premise) and row 14 (hook B); claim 10 now also cites Google's own page (about.google/our-story).
+- Production: the speech bubble appears after the matching VO line ends (review sense note about two jokes at once).
+- No script or word-count change (96 words).
