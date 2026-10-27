@@ -54,6 +54,8 @@ Merged to main and pushed (`28d6638`); 613 app tests, analyzer, 11 site tests gr
 - [x] Merge `app/store-links-founding-flag` into `main` and push (this triggers the Codemagic iOS test workflow).
 - [x] Remove the worktree `~/dev/math-dragons-app-links` after merge.
 
+> **Status 2026-10-27:** Justin reported (2026-10-26) a working app in both iOS and Android testing; the TestFlight public link shows "Join the Math Dragons beta" (checked 2026-10-27). Build 1.0.3 (8) is live to testers. Sub-items below not individually confirmed (store URLs, Play feedback URL, contact emails): JUSTIN please confirm. Next build: 1.0.4 (9), built 2026-10-27, not yet released.
+
 ### 7. iOS (JUSTIN)
 - [ ] In Codemagic, start **iOS Release (App Store)** manually. It uploads to TestFlight.
 - [ ] In App Store Connect: Math Dragons, then **App Information**: set **Privacy Policy URL** to `https://playmathdragons.com/privacy`. In the version's page, set **Support URL** to `https://playmathdragons.com/support`.

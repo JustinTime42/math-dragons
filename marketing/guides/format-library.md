@@ -84,7 +84,7 @@ All formats are **vertical 9:16** unless marked otherwise. Timings are targets, 
   4. Final line: a dry button that echoes the opening, so it loops.
 - **Rules:** the eyewitness conceit never changes the facts. Legends are called legends. Every claim comes from the verified trivia bank (research report Appendix A) or passes a fresh accuracy review. Include the inconvenient detail when there is one, so commenters can't say we hid it.
 - **Dependency:** needs the Tallyclaw puppet and voice. Until they exist, F4 runs with still Tallyclaw art and the Narrator, or waits.
-- **Example concept:** Einstein didn't fail math. (He did fail the non-science sections of a university entrance exam at 16; the script says so.)
+- **Example concept:** Einstein didn't fail math. (He did fail the general part of a university entrance exam at 16, while doing very well in math and physics; the script says so. Corrected 2026-10-27: the general part was not purely "non-science".)
 
 ## F5. Parent Playbook Tip
 
