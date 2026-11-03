@@ -36,7 +36,8 @@ Fixes the Dragon Eggs 7 ÷ 2 bug before we film gameplay, and unlocks the first 
 - [ ] Claude records both voice IDs and settings in `marketing/production/voices.md`
 
 ## 6. Tools (~10 min)
-- [ ] `sudo dnf install kdenlive scrcpy` (Fedora) ; Claude installs Manim in a project virtualenv
+- [ ] `sudo dnf install kdenlive scrcpy` (Fedora)
+- [x] `sudo dnf install cairo-devel pango-devel python3-devel` (done 2026-11-03); Manim installed in `marketing/production/.venv`
 
 ## 7. Approvals still open (~30 min reading)
 - [ ] The 14 scripts (`marketing/videos/MD-0NN/treatment.md` + `review.md`): sign the script gate, all at once or flag changes
@@ -44,10 +45,10 @@ Fixes the Dragon Eggs 7 ÷ 2 bug before we film gameplay, and unlocks the first 
 - [ ] Adaptive Phase 2 go-ahead, with Q5 (count only arithmetic facts toward mastery) and Q4 (clean old corrupt history): optional now
 
 ## What Claude does in parallel (no need to wait)
-- Tallyclaw still art (stone variant: neutral, smug, unimpressed, pointing claw) from the style bible, for your approval
-- Manim math cards for the voice-only videos (MD-004, MD-006, MD-007, MD-009, MD-012)
-- The caption script (`marketing/production/captions.py`) and the production folder setup
-- Production plans (Stage 4) for the first week's videos
+- [x] Tallyclaw still art: DONE 2026-11-03, approved, four transparent poses in `marketing/production/tallyclaw/`
+- [x] Manim math cards for MD-004, MD-006, MD-007, MD-009, MD-012: DONE 2026-11-03 (previews in `~/Videos/math-dragons/MD-0NN/math/preview/`); MD-003 and MD-005 cards still to write
+- [x] Caption script and production setup: DONE 2026-11-03 (`marketing/production/README.md`)
+- [x] Stage 4 plans for MD-003..MD-007: DONE 2026-11-03
 
 ## Then: first videos
 Order of production once voice + tools exist: MD-001/MD-002 (join the beta; needs gameplay capture on 1.0.4 and the deployed site), then week 1 (MD-003 Einstein needs Tallyclaw art; MD-004 zero puzzle; MD-005 fingers). Nothing posts until the walkthrough (MD-001) is up, YouTube advanced features are on, and Umami is live.
