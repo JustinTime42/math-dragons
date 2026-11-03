@@ -12,6 +12,7 @@
 
 - 2026-10-26 (Justin): **Phase 1 approved**, which approves interface proposals **I-1, I-2, I-3, I-8**. Other proposals remain proposals.
 - 2026-10-26 (Justin): **Q11 answered: publish each claim as its phase ships** (after merge, release, and the claim's section 9.5 tests pass).
+- 2026-11-03 (Justin): **I-9 approved** (Runes `InvalidEquation` carries the attempted fact), to be built with RUT-4 as a small slice ahead of Phase 4 so claim C1 can ship.
 
 ## 1. Goal
 
