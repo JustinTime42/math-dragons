@@ -48,7 +48,7 @@ Fixes:
 1. Claims list 2: correct the study description (Year 2, ages 6-7, nearly 400, 1992 survey, Frobisher 1999; Lichtenberg 1972 in *The Arithmetic Teacher*). Both are via Wikipedia (a secondary source pointing to the primaries); fine for "very common", which is all the script claims.
 2. Claims list: add the description/caption line (item 8).
 
-Justin sign-off:
+Justin sign-off: 2026-11-03 (script gate approved)
 
 ## Render gate (date, reviewer)
 Verdict:

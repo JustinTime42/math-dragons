@@ -65,7 +65,7 @@ Fixes:
 4. Claims list: add "built by a dad" (description) and Hook B's "3 steps each" text; fix the citation `Operation.*` to `MathOperation.*`.
 5. Optional, only if posted to Facebook: one on-screen line in the 27-36 s beat, "In Facebook? Open in Safari or Chrome", matching the site's in-app-browser banner.
 
-Justin sign-off:
+Justin sign-off: 2026-11-03 (script gate approved)
 
 ## Render gate (date, reviewer)
 Verdict:

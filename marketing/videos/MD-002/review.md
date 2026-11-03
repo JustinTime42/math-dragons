@@ -66,7 +66,7 @@ Fixes:
 4. Claims list: add the description/caption "built by a dad" and Hook B's line; fix `Operation.*` to `MathOperation.*`.
 5. Publish gate (unchanged): LAUNCH-CHECKLIST §7-§9 done, `website/phase-2` deployed, MD-001 live as the related video.
 
-Justin sign-off:
+Justin sign-off: 2026-11-03 (script gate approved)
 
 ## Render gate (date, reviewer)
 Verdict:

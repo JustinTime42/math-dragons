@@ -4,17 +4,17 @@ Production IDs (assigned 2026-10-27 when Justin approved the first batch). Each 
 
 | ID | Idea | Title (working) | Slot | Status |
 |---|---|---|---|---|
-| MD-001 | I-122 | Join the beta walkthrough (horizontal, long-form) | before week 1 | treatment: reviewed + fixes applied, awaiting Justin |
-| MD-002 | I-123 | How to join the beta (vertical Short) | before week 1 | treatment: reviewed + fixes applied, awaiting Justin |
-| MD-003 | I-072 | Einstein didn't fail math | week 1, post 1 | treatment: reviewed + fixes applied, awaiting Justin |
-| MD-004 | I-016 | Is zero even? (puzzle part 1) | week 1, post 2 | treatment: reviewed + fixes applied, awaiting Justin |
-| MD-005 | I-055 | Fingers aren't cheating | week 1, post 3 | treatment: reviewed + fixes applied, awaiting Justin |
-| MD-006 | I-016 | Is zero even? (puzzle part 2, answer) | week 2, post 1 | treatment: reviewed + fixes applied, awaiting Justin |
-| MD-007 | I-041 | Make a ten, decoded | week 2, post 2 | treatment: reviewed + fixes applied, awaiting Justin |
-| MD-008 | I-113 | Three questions to ask before installing a kids' app (promo) | week 2, post 3 | treatment: reviewed + fixes applied, awaiting Justin |
-| MD-009 | I-020 | The 9s finger trick | week 3, post 1 | treatment: reviewed + fixes applied, awaiting Justin |
-| MD-010 | I-083 | Why an hour has 60 minutes | week 3, post 2 | treatment: reviewed + fixes applied, awaiting Justin |
-| MD-011 | I-053 | Math-anxious parents: change how you help | week 3, post 3 | treatment: reviewed + fixes applied, awaiting Justin |
-| MD-012 | I-025 | There are only 55 times-table facts | week 4, post 1 | treatment: reviewed + fixes applied, awaiting Justin |
-| MD-013 | I-089 | A 9-year-old named the googol | week 4, post 2 | treatment: reviewed + fixes applied, awaiting Justin |
-| MD-014 | I-114 | Why I built this (origin story) | week 4, post 3 | treatment: reviewed + fixes applied, awaiting Justin |
+| MD-001 | I-122 | Join the beta walkthrough (horizontal, long-form) | before week 1 | script gate passed 2026-11-03; next: production |
+| MD-002 | I-123 | How to join the beta (vertical Short) | before week 1 | script gate passed 2026-11-03; next: production |
+| MD-003 | I-072 | Einstein didn't fail math | week 1, post 1 | script gate passed 2026-11-03; next: production |
+| MD-004 | I-016 | Is zero even? (puzzle part 1) | week 1, post 2 | script gate passed 2026-11-03; next: production |
+| MD-005 | I-055 | Fingers aren't cheating | week 1, post 3 | script gate passed 2026-11-03; next: production |
+| MD-006 | I-016 | Is zero even? (puzzle part 2, answer) | week 2, post 1 | script gate passed 2026-11-03; next: production |
+| MD-007 | I-041 | Make a ten, decoded | week 2, post 2 | script gate passed 2026-11-03; next: production |
+| MD-008 | I-113 | Three questions to ask before installing a kids' app (promo) | week 2, post 3 | script gate passed 2026-11-03; next: production |
+| MD-009 | I-020 | The 9s finger trick | week 3, post 1 | script gate passed 2026-11-03; next: production |
+| MD-010 | I-083 | Why an hour has 60 minutes | week 3, post 2 | script gate passed 2026-11-03; next: production |
+| MD-011 | I-053 | Math-anxious parents: change how you help | week 3, post 3 | script gate passed 2026-11-03; next: production |
+| MD-012 | I-025 | There are only 55 times-table facts | week 4, post 1 | script gate passed 2026-11-03; next: production |
+| MD-013 | I-089 | A 9-year-old named the googol | week 4, post 2 | script gate passed 2026-11-03; next: production |
+| MD-014 | I-114 | Why I built this (origin story) | week 4, post 3 | script gate passed 2026-11-03; next: production |

@@ -69,7 +69,7 @@ Fixes:
 4. Recommended. 11-19 s VO "a few short" to "six short"; 19-26 s label "Kids new to fingers" to "Kids not using fingers yet" (also on the cover-frame note).
 5. Claims list: record the full Poletti et al. citation (2025, vol 96, doi 10.1111/cdev.14146) and that gains held at the 6-week delayed test.
 
-Justin sign-off:
+Justin sign-off: 2026-11-03 (script gate approved)
 
 ## Render gate (date, reviewer)
 Verdict:

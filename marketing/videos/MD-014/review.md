@@ -69,4 +69,4 @@ Justin sign-off (including the final origin wording and the perk decision):
 Verdict:
 Checked on file:
 Issues:
-Justin sign-off:
+Justin sign-off: 2026-11-03 (script gate approved)

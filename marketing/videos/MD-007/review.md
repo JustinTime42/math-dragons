@@ -51,7 +51,7 @@ Notes (optional):
 2. Claims list 6: add "Table 3.1 lists ten frames" and "28 studies, K-6" with the PDF link.
 3. Decide one minus glyph for all math cards.
 
-Justin sign-off:
+Justin sign-off: 2026-11-03 (script gate approved)
 
 ## Render gate (date, reviewer)
 Verdict:

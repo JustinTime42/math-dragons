@@ -61,7 +61,7 @@ Fixes:
 4. Optional, only with a fetched primary or reputable source for the usual entry age: mention that he sat the exam younger than usual. Otherwise leave it out.
 5. Claims list: add Hook B and the description line; record the Isaacson TIME date (2007-04-05) and that the column's own date is unknown.
 
-Justin sign-off:
+Justin sign-off: 2026-11-03 (script gate approved)
 
 ## Render gate (date, reviewer)
 Verdict:

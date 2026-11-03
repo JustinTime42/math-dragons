@@ -38,7 +38,7 @@ Compliance (§A-H):
 
 Voice (§11): adult address, calm, zero em-dashes, one X/Y reframe (max). PASS.
 
-Justin sign-off:
+Justin sign-off: 2026-11-03 (script gate approved)
 
 ## Render gate (date, reviewer)
 Verdict:

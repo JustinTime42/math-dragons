@@ -29,8 +29,8 @@ Each guide is drafted from the research report, reviewed by Justin, then frozen 
 - [x] Score against rubric; Justin selected the first batch 2026-10-27: MD-001..MD-014 (`videos/INDEX.md`), the 12-slot cycle plus the two join-the-beta pieces
 
 ## Stage 3: Treatments
-- [ ] Treatments for first batch (`videos/MD-###/treatment.md`)
-- [ ] Accuracy and sense review passed + Justin sign-off on each (`videos/MD-###/review.md`)
+- [x] Treatments for first batch (`videos/MD-###/treatment.md`), MD-001..MD-014
+- [x] Accuracy and sense review passed + Justin sign-off on each, 2026-11-03
 
 ## Stage 4: Production plans
 - [ ] Plans for first batch

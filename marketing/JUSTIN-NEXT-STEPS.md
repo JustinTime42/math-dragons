@@ -12,7 +12,7 @@ Fixes the Dragon Eggs 7 ÷ 2 bug before we film gameplay, and unlocks the first 
 
 ## 2. Store settings to confirm (~15 min)
 - [ ] App Store Connect: Privacy Policy URL `https://playmathdragons.com/privacy`, Support URL `https://playmathdragons.com/support`, contact email `support@playmathdragons.com`; TestFlight Test Information: feedback email and privacy URL
-- [ ] Play Console: privacy policy URL; closed-test feedback URL `https://playmathdragons.com/feedback`; contact email
+- [x] (done 2026-11-03) Play Console: privacy policy URL; closed-test feedback URL `https://playmathdragons.com/feedback`; contact email
 - [ ] **Privacy labels** (MD-008 can't publish until these match): Play Data safety = "No data collected", Ads = "No"; App Store Connect App Privacy = "Data Not Collected"
 - [ ] Optional: does the Play 12-tester / 14-day rule apply to this Organization account? (Play Console dashboard)
 
@@ -40,7 +40,7 @@ Fixes the Dragon Eggs 7 ÷ 2 bug before we film gameplay, and unlocks the first 
 - [x] `sudo dnf install cairo-devel pango-devel python3-devel` (done 2026-11-03); Manim installed in `marketing/production/.venv`
 
 ## 7. Approvals still open (~30 min reading)
-- [ ] The 14 scripts (`marketing/videos/MD-0NN/treatment.md` + `review.md`): sign the script gate, all at once or flag changes
+- [x] The 14 scripts: script gate signed off 2026-11-03
 - [ ] The last four guides: `visual-style.md`, `production-pipeline.md`, `metrics-and-learning.md`, `fact-check-protocol.md`
 - [ ] Adaptive Phase 2 go-ahead, with Q5 (count only arithmetic facts toward mastery) and Q4 (clean old corrupt history): optional now
 

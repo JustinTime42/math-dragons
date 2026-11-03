@@ -47,7 +47,7 @@ Notes (not required):
 2. Slot order: the idea-bank review (§4) recommended I-055 (MD-005) before this puzzle; the INDEX keeps the puzzle as post 2. Justin's call; nothing in the script depends on it.
 3. Claims list: add the hook premise (item 4 above).
 
-Justin sign-off:
+Justin sign-off: 2026-11-03 (script gate approved)
 
 ## Render gate (date, reviewer)
 Verdict:
