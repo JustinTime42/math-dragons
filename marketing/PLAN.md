@@ -87,6 +87,8 @@ Branch `app/store-links-founding-flag` (worktree `~/dev/math-dragons-app-links`)
 - [ ] **JUSTIN: does the Play 12-tester/14-day rule apply?** It's for personal accounts created after 2023-11-13; `docs/GOOGLE_PLAY_PUBLISHING.md` says the account is an Organization. Check Play Console.
 - [ ] **Umami on playmathdragons.com** before the first post (approved 2026-10-26): site change + privacy-policy update + accuracy review + deploy; campaign paths must carry a source tag.
 
+- **Script-gate decisions (Justin 2026-11-03, all recommendations approved):** origin line 3 = "the games kids love"; MD-014 without the perk (exact sentence kept as alternate); true minus sign on math cards; week 1 order Einstein, zero puzzle part 1, fingers; puzzle part 1 ends "Answer in part two."
+
 ## Decisions (resolved 2026-10-19, Justin)
 - **Age range: primarily 5-12.** Video copy uses this. Note: `docs/store-listing.md` (6-12) and `docs/VISUAL_DESIGN_GUIDE.md` §1 (7-14+) still differ; flag before the next store-listing edit.
 - **Docs home:** repo `marketing/` (vault MOC links here).

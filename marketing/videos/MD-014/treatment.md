@@ -16,7 +16,7 @@ calendar_hook:
 ## Concept
 In my own words, parents hear why I built Math Dragons: the math apps we tried felt like worksheets in a costume, so I built games where solving the problem is the fun part. Then the facts, then the one CTA.
 
-> **Justin picks the final wording at the script gate.** The default script uses his candidate lines 1 and 2 (lightly trimmed, see "Wording options" below). Candidate 3 is kept as an alternate (reviewer's compliant wording, PENDING JUSTIN). The perk sentence is out of the default (PENDING JUSTIN, see "Perk (alternate block)").
+> **Justin picks the final wording at the script gate.** The default script uses his candidate lines 1 and 2 (lightly trimmed, see "Wording options" below). Candidate 3 is kept as an alternate (reviewer's compliant wording, DECIDED by Justin 2026-11-03 (recommended default kept)). The perk sentence is out of the default (DECIDED by Justin 2026-11-03 (recommended default kept), see "Perk (alternate block)").
 
 ## Hooks
 - A: First frame: Justin's hands at a keyboard, an early dragon sketch on paper beside it. On-screen text: "Why I built a math game". VO (Narrator): "Parents, my daughter was struggling with math facts."
@@ -37,7 +37,7 @@ In my own words, parents hear why I built Math Dragons: the math apps we tried f
 
 Word count: 92 Narrator words (budget about 92 at 2.5 words/s for 37 s; F7 range 20-45 s)
 
-### Perk (alternate block): PENDING JUSTIN
+### Perk (alternate block): DECIDED by Justin 2026-11-03 (recommended default kept)
 Default per the review: **no perk in this video** (the delivery path isn't built, `pages-v1.review` I14 isn't closed, the 8-second CTA broke the 2-5 s rule, and the perk already appears on the site, MD-001 and MD-002). If Justin decides to keep it, swap the 32-37 s row for this one (105 words, about 43 s; set `target_length_s: 43`):
 
 | Time | Visual | On-screen text | VO |
@@ -49,7 +49,7 @@ Never a shortened on-screen paraphrase such as "Full unlock free at launch" (fai
 ### Wording options (Justin chooses at the script gate)
 Default (in the script above): candidate 1's first two sentences, candidate 2's first two sentences, then candidate 1's closing sentence. Changes from Justin's candidates, and why:
 - Candidate 2's last sentence ("I wanted the whole path to feel like a game, with every move a real math problem.") is **dropped from the default**: "every move a real math problem" overstates the app (flying in Fire Trail and moving around the board in Dragon's Feast aren't answers; idea-bank.review I-119). If Justin wants it, use: "I wanted the whole path to feel like a game, with real math at every step that counts." (+19 words, about 45 s; still inside the F7 range.)
-- **Alternate (candidate 3), PENDING JUSTIN:** "I wanted the pull of the games kids love, pointed at something good: a real math workout that feels like playing." (21 words; the reviewer's minimal fix, changing only "kids can't put down", which fails §6.2, to "kids love". Swap it in for the 19-28 s lines.)
+- **Alternate (candidate 3), DECIDED by Justin 2026-11-03 (recommended default kept):** "I wanted the pull of the games kids love, pointed at something good: a real math workout that feels like playing." (21 words; the reviewer's minimal fix, changing only "kids can't put down", which fails §6.2, to "kids love". Swap it in for the 19-28 s lines.)
 
 Optional gated line (not in the default; Phase 1 claim C1, verbatim; **publish only after 1.0.4 (9) is released to testers** and the §9.5 claim tests pass): "Math Dragons keeps track of the math facts your kid misses." (+11 words, would push to about 47 s; cut "Four dragon games." to compensate.)
 
@@ -72,13 +72,13 @@ Optional gated line (not in the default; Phase 1 claim C1, verbatim; **publish o
 | 10 | "No accounts." | §5.2; no auth code or packages | HIGH |
 | 11 | "The app collects no data." | §5.2; no network packages; no Android INTERNET permission in 1.0.3 (8) (`docs/RELEASES.md`) | HIGH |
 | 12 | "It's free during the beta." | §5.2, §5.4 | HIGH |
-| 13 | Perk sentence: **not in the default script** (PENDING JUSTIN; alternate block only). If used: exact §5.4 wording, spoken and as a full text card; never a paraphrase | §5.4; `pages-v1.review.md` I14 (delivery path not built: `FoundingTester.record()` stores an on-device flag only, `lib/main.dart:26`); review rows 13-14 | n/a in default |
+| 13 | Perk sentence: **not in the default script** (DECIDED by Justin 2026-11-03 (recommended default kept); alternate block only). If used: exact §5.4 wording, spoken and as a full text card; never a paraphrase | §5.4; `pages-v1.review.md` I14 (delivery path not built: `FoundingTester.record()` stores an on-device flag only, `lib/main.dart:26`); review rows 13-14 | n/a in default |
 | 14 | URL `playmathdragons.com` | `website/src/config/site.ts` `SITE_URL` | HIGH |
 
 Words avoided per the brief: no "addictive/addicting/hooked", no brain-chemistry or dopamine language, "a clock you're racing" in place of "time pressure", no competitor names, no claim about all apps.
 
 ## CTA
-"It's free during the beta. If you want in, it's playmathdragons.com." (once, after the payoff, last 5 s, spoken and on screen; standard wording per content-strategy §6). Perk version: see the alternate block, PENDING JUSTIN.
+"It's free during the beta. If you want in, it's playmathdragons.com." (once, after the payoff, last 5 s, spoken and on screen; standard wording per content-strategy §6). Perk version: see the alternate block, DECIDED by Justin 2026-11-03 (recommended default kept).
 
 ## Copy
 - YouTube title: Why I Built a Math Game Where Solving Is the Fun Part (53 chars)
@@ -114,7 +114,7 @@ Words avoided per the brief: no "addictive/addicting/hooked", no brain-chemistry
 - [x] Voice checklist passed (`brand-and-voice.md` §11): first person "I"; no banned words in the default script (candidate 3 as supplied fails §6.2 and is flagged)
 - [x] Every number and equation listed as an exact string
 - [x] Claims list complete, with sources and confidence
-- [x] At most one CTA, correctly placed and worded (standard CTA, last 5 s; perk out of the default, PENDING JUSTIN)
+- [x] At most one CTA, correctly placed and worded (standard CTA, last 5 s; perk out of the default, DECIDED by Justin 2026-11-03 (recommended default kept))
 - [x] Titles and copy written to §7
 - [x] Compliance checklist §A-H passed (default script; the gated C1 line is excluded)
 - [ ] Independent accuracy and sense review passed (`marketing/README.md`), results in `review.md`
@@ -122,8 +122,8 @@ Words avoided per the brief: no "addictive/addicting/hooked", no brain-chemistry
 
 ## Fixes applied (2026-10-27)
 From `review.md` (script gate, PASS WITH FIXES):
-- **Perk (PENDING JUSTIN):** applied the reviewer's default. Removed the perk sentence from the VO and the on-screen "Full unlock free at launch" (which failed §5.4). The CTA is back to the standard line in the last 5 s. The exact perk sentence is kept as an alternate block with a full text card, for Justin to choose.
-- **Candidate 3 (PENDING JUSTIN):** the alternate now reads "I wanted the pull of the games kids love, pointed at something good: a real math workout that feels like playing."
+- **Perk (DECIDED by Justin 2026-11-03 (recommended default kept)):** applied the reviewer's default. Removed the perk sentence from the VO and the on-screen "Full unlock free at launch" (which failed §5.4). The CTA is back to the standard line in the last 5 s. The exact perk sentence is kept as an alternate block with a full text card, for Justin to choose.
+- **Candidate 3 (DECIDED by Justin 2026-11-03 (recommended default kept)):** the alternate now reads "I wanted the pull of the games kids love, pointed at something good: a real math workout that feels like playing."
 - Code citations corrected to the installable build 1.0.3 (8), `28d6638`: Fire Trail `fire_trail_flame_game.dart:161-169` (wall hit) and `:232-247` (wrong answer, flame out); Dragon Eggs `:324-334`; `fire_trail_config.dart:34-46`; `egg_spawner.dart:47`; `reward_service.dart:88-90`, `:104-109`; `game_shell.dart:197-217`; `progression_manager.dart:19`, `:51-70`; `app.dart:108-111`.
 - The clock is described accurately: no per-question timer; Fire Trail's dragon moves at a constant per-level speed, and Dragon Eggs spawns eggs on a timer (faster after a wrong answer). The Fire Trail clip must show a mid-world speed.
 - Evolution shown only if reachable on the test profile; never faked.

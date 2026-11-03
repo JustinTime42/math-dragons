@@ -135,7 +135,7 @@ The "why I built it" idea, in Justin's own framing: most math apps are worksheet
 Approved lines (Narrator, first person; use verbatim or near-verbatim):
 1. "Every math app we tried was a worksheet with a costume on. The math was the chore you did to get back to the fun. So I built games where solving the problem is the fun part."
 2. "A real game has risk, a clock you're racing, and a reward that feels earned. A worksheet only has the reward at the end. I wanted the whole path to feel like a game, with every move a real math problem."
-3. "I wanted the pull of the games kids can't put down, pointed at something good: a real math workout that feels like playing."
+3. "I wanted the pull of the games kids love, pointed at something good: a real math workout that feels like playing." (Amended 2026-11-03 with Justin's approval: the earlier "games kids can't put down" conflicted with §6.2.)
 
 Guardrails for this theme: it's Justin's experience ("the ones we tried"), never a claim about all math apps or a named competitor; never "addictive", "hooked", "dopamine" or brain-chemistry language; "a clock you're racing", not "time pressure". The game mechanics these lines describe (risk, the clock, rewards) are checked against the app in each video's accuracy review (first: MD-014). Related core message: §5.3 #2.
 
