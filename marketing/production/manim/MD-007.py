@@ -16,6 +16,7 @@ Scenes (beat -> scene):
 Beats 18-21, 44-48, 48-55 are hands footage / text callouts (see plan.md).
 
 Minus glyph: true minus sign (U+2212) on screen, per Justin 2026-11-03 and visual-style §6.
+"""
 
 from manim import (
     DOWN,
