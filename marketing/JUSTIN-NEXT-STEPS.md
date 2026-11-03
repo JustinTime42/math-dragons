@@ -17,10 +17,10 @@ Fixes the Dragon Eggs 7 ÷ 2 bug before we film gameplay, and unlocks the first 
 - [ ] Optional: does the Play 12-tester / 14-day rule apply to this Organization account? (Play Console dashboard)
 
 ## 3. Website phase 2: launch list + analytics (~45 min)
-- [ ] Cloudflare: SSL/TLS, Edge Certificates, turn on **Always Use HTTPS** (still off)
+- [x] Cloudflare: SSL/TLS, Edge Certificates, turn on **Always Use HTTPS** (verified 301 on 2026-11-03)
 - [ ] Cloudflare: confirm Workers Logs off, no challenge pages / Always Online
-- [ ] Buttondown: create account; sending domain `playmathdragons.com` (add its DNS records in Cloudflare); double opt-in on; **all open/click tracking off**; 30-day cleanup of unconfirmed addresses on; ask support about hard deletion; **hosted signup page off**; postal address in the email footer (P.O. box or business address)
-- [ ] `! cd ~/dev/math-dragons-web2/website && npx wrangler secret put BUTTONDOWN_API_KEY`
+- [ ] Buttondown: account created 2026-11-03, **flagged for additional review by Buttondown (waiting on approval)**; settings done per Justin, except the sending domain DNS (not yet in Cloudflare as of 2026-11-03); sending domain `playmathdragons.com` (add its DNS records in Cloudflare); double opt-in on; **all open/click tracking off**; 30-day cleanup of unconfirmed addresses on; ask support about hard deletion; **hosted signup page off**; postal address in the email footer (P.O. box or business address)
+- [x] `! cd ~/dev/math-dragons-web2/website && npx wrangler secret put BUTTONDOWN_API_KEY` (set 2026-11-03 in a separate terminal; name verified)
 - [ ] Tell Claude → Claude merges `website/phase-2`, deploys **with Umami off**, tests the signup round trip with you, checks no cookies live
 - [ ] Umami Cloud: create the site (free Hobby plan), send Claude the website ID → Claude redeploys with analytics on
 
