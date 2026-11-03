@@ -4,11 +4,11 @@ Ordered by what unblocks the most. Each block says what Claude does once you're 
 
 Status checked 2026-11-03: site live (phase 1); `http://` not yet redirecting to `https://`; 1.0.4 (9) built and pushed but not recorded as released; no Buttondown key set; Kdenlive and scrcpy not installed.
 
-## 1. Release app 1.0.4 (9) to testers (~30 min, mostly waiting)
+## 1. Release app 1.0.4 (9) to testers: DONE 2026-11-03
 Fixes the Dragon Eggs 7 ÷ 2 bug before we film gameplay, and unlocks the first adaptivity claims.
-- [ ] Play Console: Closed testing, new release, upload `~/dev/math-dragons/build/app/outputs/bundle/release/app-release.aab` (1.0.4, versionCode 9), roll out
-- [ ] Codemagic: start **iOS Release (App Store)**; in App Store Connect add build 1.0.4 (9) to the external group (Beta App Review if asked)
-- [ ] Tell Claude when both are live → Claude logs it in `docs/RELEASES.md` (claims C1 and C2-FT become publishable)
+- [x] Play Console: Closed testing, new release, upload `~/dev/math-dragons/build/app/outputs/bundle/release/app-release.aab` (1.0.4, versionCode 9), roll out
+- [x] Codemagic: start **iOS Release (App Store)**; in App Store Connect add build 1.0.4 (9) to the external group (Beta App Review if asked)
+- [x] Tell Claude when both are live → Claude logs it in `docs/RELEASES.md` (claims C1 and C2-FT become publishable)
 
 ## 2. Store settings to confirm (~15 min)
 - [ ] App Store Connect: Privacy Policy URL `https://playmathdragons.com/privacy`, Support URL `https://playmathdragons.com/support`, contact email `support@playmathdragons.com`; TestFlight Test Information: feedback email and privacy URL
