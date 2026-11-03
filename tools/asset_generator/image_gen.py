@@ -1,4 +1,4 @@
-"""OpenAI GPT-Image-1 wrapper for generating game assets with style references."""
+"""OpenAI GPT-Image wrapper (model via IMAGE_MODEL, default gpt-image-2) for generating game assets with style references."""
 
 import base64
 import os
@@ -6,6 +6,9 @@ import time
 from pathlib import Path
 
 from openai import OpenAI
+
+# gpt-image-1 was retired by OpenAI (rejected as of 2026-11-03); override with IMAGE_MODEL.
+IMAGE_MODEL = os.environ.get("IMAGE_MODEL", "gpt-image-2")
 
 
 def _get_client() -> OpenAI:
@@ -30,7 +33,7 @@ def generate_candidates(
     out.mkdir(parents=True, exist_ok=True)
 
     result = client.images.generate(
-        model="gpt-image-1",
+        model=IMAGE_MODEL,
         prompt=prompt,
         n=count,
         size="1024x1024",
@@ -85,7 +88,7 @@ def generate_image(
             generated = []
             for v in range(variations):
                 result = client.images.edit(
-                    model="gpt-image-1",
+                    model=IMAGE_MODEL,
                     image=ref_files,
                     prompt=style_prompt,
                     size=size,
@@ -111,7 +114,7 @@ def generate_image(
     else:
         # No style refs — use generate endpoint (supports n > 1)
         result = client.images.generate(
-            model="gpt-image-1",
+            model=IMAGE_MODEL,
             prompt=prompt,
             n=variations,
             size=size,
