@@ -5,7 +5,7 @@ Treatment: marketing/videos/MD-007/treatment.md. Render with
 
 Scenes (beat -> scene):
     0-4 s    Worksheet        recreated worksheet line on a cream card (our layout)
-    4-9 s    EightPlusSix     8 + 6, then 10 - 8 = 2 small beneath
+    4-9 s    EightPlusSix     8 + 6, then 10 − 8 = 2 small beneath
     9-13 s   SplitSix         the 6 splits into 2 and 4: 6 = 2 + 4
     13-18 s  MakeTen          8 + 2 = 10, then 10 + 4 = 14
     21-26 s  FullChain        8 + 6 = 8 + 2 + 4 = 10 + 4 = 14, one step at a time,
@@ -15,11 +15,7 @@ Scenes (beat -> scene):
     55-56 s  WorksheetFilled  the worksheet line again, blank filled: 8 + 6 = 14
 Beats 18-21, 44-48, 48-55 are hands footage / text callouts (see plan.md).
 
-Minus glyph: the treatment writes `10 - 8 = 2` with an ASCII hyphen (it follows
-the CCSS text; flagged in its "Fixes applied" as Justin's call). It renders
-verbatim here. If Justin picks U+2212, change the treatment first, then this
-string; assert_verbatim keeps the two in step.
-"""
+Minus glyph: true minus sign (U+2212) on screen, per Justin 2026-11-03 and visual-style §6.
 
 from manim import (
     DOWN,
@@ -81,7 +77,7 @@ assert check_equation(TEN_FOUR) == 14
 assert check_equation(CHAIN) == 14
 assert check_equation(ANSWER) == 14
 assert WORKSHEET.endswith(EIGHT_SIX + " = ___") and ANSWER.startswith(EIGHT_SIX + " = ")
-# Ten frame: 8 filled + 2 moved = 10; 6 - 2 = 4 left over; frame is 2 x 5.
+# Ten frame: 8 filled + 2 moved = 10; 6 − 2 = 4 left over; frame is 2 × 5.
 TEN_FRAME_FILLED, TEN_FRAME_SECOND, MOVED = 8, 6, 2
 assert TEN_FRAME_FILLED + MOVED == 10 == 2 * 5
 assert TEN_FRAME_SECOND - MOVED == 4

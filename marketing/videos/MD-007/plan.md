@@ -3,7 +3,7 @@
 Make a ten, decoded (Homework Decoder, F3). 56 s, 1080 × 1920, 30 fps. Treatment: `treatment.md`. Media root: `~/Videos/math-dragons/MD-007/` (paths below are relative to it).
 
 - **Math cards:** `marketing/production/manim/MD-007.py`. Previews in `math/preview/`; masters via `render.py MD-007 -q h` into `math/`.
-- **Minus glyph (open, Justin's call):** the treatment writes `10 - 8 = 2` with an ASCII hyphen (as the CCSS text does); visual-style §6 says to use U+2212. The card renders the treatment verbatim. To switch, change the treatment string first, then the script; the self-check keeps them in step.
+- **Minus glyph:** true minus sign `−` (U+2212) on screen (decided by Justin 2026-11-03).
 - **Gameplay:** none (the app drills facts, it doesn't teach making ten), so nothing to capture on build 1.0.4 (9). **Tallyclaw:** none.
 - **Recreated worksheet:** our own layout and type, no publisher design, no child's name or handwriting.
 
@@ -12,7 +12,7 @@ Make a ten, decoded (Homework Decoder, F3). 56 s, 1080 × 1920, 30 fps. Treatmen
 | 0-4 s | Worksheet line on a cream card: `Make a ten to add: 8 + 6 = ___` | Manim: MD-007.py `Worksheet` | math/Worksheet.mp4 | preview rendered |
 | 0-4 s | Text: "Make a ten?" | Kdenlive title | (in project) | todo |
 | 0-4 s | VO line 1: "Your kid's homework says make a ten. Here's what that means." | ElevenLabs, Narrator | vo/line01.mp3 | todo |
-| 4-9 s | `8 + 6`, then `10 - 8 = 2` small beneath; text "8 needs 2 more to make 10" | Manim: MD-007.py `EightPlusSix`; Kdenlive title | math/EightPlusSix.mp4 | preview rendered |
+| 4-9 s | `8 + 6`, then `10 − 8 = 2` small beneath; text "8 needs 2 more to make 10" | Manim: MD-007.py `EightPlusSix`; Kdenlive title | math/EightPlusSix.mp4 | preview rendered |
 | 4-9 s | VO line 2: "Take eight plus six. Eight is two away from ten." | ElevenLabs, Narrator | vo/line02.mp3 | todo |
 | 9-13 s | The 6 splits into 2 and 4: `6 = 2 + 4` | Manim: MD-007.py `SplitSix` | math/SplitSix.mp4 | preview rendered |
 | 9-13 s | VO line 3: "So split the six into two and four." | ElevenLabs, Narrator | vo/line03.mp3 | todo |
