@@ -25,7 +25,7 @@ Fixes the Dragon Eggs 7 ÷ 2 bug before we film gameplay, and unlocks the first 
 - [x] Umami Cloud site created 2026-11-03; website ID `988e7c61-0c2e-451d-bc4b-55ff6e38f7a4` (Claude sets it in `website/src/config/site.ts` for the SECOND deploy, after the new policy is live)
 
 ## 4. Channels (~30 min)
-- [ ] YouTube: create the channel, handle `@playmathdragons`; channel description written to parents; link `playmathdragons.com`
+- [x] (created 2026-11-03) YouTube: create the channel, handle `@playmathdragons`; channel description written to parents; link `playmathdragons.com`
 - [ ] YouTube: turn on **advanced features** (phone verification; needed for the per-Short related-video link)
 - [ ] Facebook: create the **Math Dragons** Page (username `playmathdragons` if free); website field `playmathdragons.com`
 - [ ] Banner and profile art: Claude can draft from the style bible on request
@@ -36,7 +36,7 @@ Fixes the Dragon Eggs 7 ÷ 2 bug before we film gameplay, and unlocks the first 
 - [ ] Claude records both voice IDs and settings in `marketing/production/voices.md`
 
 ## 6. Tools (~10 min)
-- [ ] `sudo dnf install kdenlive scrcpy` (Fedora)
+- [ ] `sudo dnf install kdenlive` (scrcpy isn't in the Fedora repos: `sudo dnf copr enable zeno/scrcpy && sudo dnf install scrcpy`)
 - [x] `sudo dnf install cairo-devel pango-devel python3-devel` (done 2026-11-03); Manim installed in `marketing/production/.venv`
 
 ## 7. Approvals still open (~30 min reading)
