@@ -1,4 +1,6 @@
 import '../../../core/practice_key.dart';
+import '../../dragon_eggs/models/egg_data.dart' as egg;
+import '../../shared/math_problem.dart';
 import '../models/rune_node_data.dart';
 import '../models/equation_target.dart';
 
@@ -7,8 +9,15 @@ sealed class EquationResult {
   const EquationResult();
 }
 
+/// An invalid chain (spec I-9, rule RU-e).
 class InvalidEquation extends EquationResult {
-  const InvalidEquation();
+  /// Set when the chain is exactly `a op b = c` with a valid fact on the left.
+  final MathFact? attemptedFact;
+
+  /// The `c` the player built for [attemptedFact]; null when that is null.
+  final int? attemptedAnswer;
+
+  const InvalidEquation({this.attemptedFact, this.attemptedAnswer});
 }
 
 class AlreadyFoundEquation extends EquationResult {
@@ -106,14 +115,14 @@ class EquationValidator {
     final lhs = tokens.sublist(0, eqIndex);
     final rhs = tokens.sublist(eqIndex + 1);
 
-    if (lhs.isEmpty || rhs.isEmpty) return const InvalidEquation();
+    if (lhs.isEmpty || rhs.isEmpty) return _invalid(tokens);
 
     // 4. Evaluate both sides (left-to-right, no precedence)
     final lhsValue = _evalExpr(lhs);
     final rhsValue = _evalExpr(rhs);
 
-    if (lhsValue == null || rhsValue == null) return const InvalidEquation();
-    if (lhsValue != rhsValue) return const InvalidEquation();
+    if (lhsValue == null || rhsValue == null) return _invalid(tokens);
+    if (lhsValue != rhsValue) return _invalid(tokens);
 
     // 5. Build canonical form and match against targets
     final canonical = _canonicalForm(lhs, rhs);
@@ -133,6 +142,41 @@ class EquationValidator {
       return const AlreadyFoundEquation();
     }
     return BonusEquation(displayText: tokens.join(' '), canonical: canonical);
+  }
+
+  /// InvalidEquation for [tokens], carrying the attempted fact when the chain
+  /// is exactly `a op b = c` and `a op b` is a valid PracticeKey fact. A
+  /// reversed `c = a op b` chain does not qualify (I-9: fact on the left).
+  static InvalidEquation _invalid(List<String> tokens) {
+    if (tokens.length != 5 || tokens[3] != '=') return const InvalidEquation();
+    final a = int.tryParse(tokens[0]);
+    final op = _factOp(tokens[1]);
+    final b = int.tryParse(tokens[2]);
+    final c = int.tryParse(tokens[4]);
+    if (a == null || op == null || b == null || c == null) {
+      return const InvalidEquation();
+    }
+    final fact = MathFact(left: a, op: op, right: b);
+    if (!PracticeKey.isValid(fact.factKey)) return const InvalidEquation();
+    return InvalidEquation(attemptedFact: fact, attemptedAnswer: c);
+  }
+
+  static egg.MathOp? _factOp(String symbol) {
+    switch (symbol) {
+      case '+':
+        return egg.MathOp.add;
+      case '\u2212': // minus sign
+      case '-':
+        return egg.MathOp.subtract;
+      case '\u00D7': // multiplication sign
+      case '*':
+      case 'x':
+        return egg.MathOp.multiply;
+      case '\u00F7': // division sign
+      case '/':
+        return egg.MathOp.divide;
+    }
+    return null;
   }
 
   /// Evaluate an expression left-to-right without operator precedence.

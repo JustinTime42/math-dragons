@@ -13,6 +13,7 @@
 - 2026-10-26 (Justin): **Phase 1 approved**, which approves interface proposals **I-1, I-2, I-3, I-8**. Other proposals remain proposals.
 - 2026-10-26 (Justin): **Q11 answered: publish each claim as its phase ships** (after merge, release, and the claim's section 9.5 tests pass).
 - 2026-11-03 (Justin): **I-9 approved** (Runes `InvalidEquation` carries the attempted fact), to be built with RUT-4 as a small slice ahead of Phase 4 so claim C1 can ship.
+- 2026-11-03: **I-9 and RUT-4 implemented** on branch `app/runes-miss-tracking` (not yet merged or released). Reversed chains (`c = a op b`) carry no attempted fact, per I-9's "fact on the left"; invalid chains are always `firstAttempt: true` (each chain is its own prompt; RU-f covers only hinted targets). With RUT-4 in place, every C1 test in 9.5 exists and passes; C1 stays unpublished until merge, release and a pass on the release commit (Q11).
 
 ## 1. Goal
 
@@ -592,7 +593,7 @@ Existing tests: `test/games/shared/problem_scheduler_test.dart:53-79` ("prioriti
 ### 9.5 Claim tests (gate for marketing)
 
 A claim is publishable only when its tests pass on the release commit:
-- C1: TR-1 to TR-5, FTT-5, EGT-5, RUT-1, RUT-4, FET-1.
+- C1: TR-1 to TR-5, FTT-5, EGT-5, RUT-1, RUT-4, FET-1. (All implemented as of 2026-11-03; RUT-4 is `test/games/dragon_runes/invalid_chain_test.dart`.)
 - C2-FT: FTT-1, FTT-3, SP-3 (Phase 1 version against `selectBlueprint`).
 - C2: SP-3, SP-4, SP-9, FTT-3, EGT-4, RUT-5.
 - C3: SP-12.
@@ -637,7 +638,9 @@ Focus set, focus-weighted spawns, helper tie-break, rotation (6.3). Session owne
 
 ### Phase 4: Dragon Runes (1.5 days)
 
-Approve I-9. Session-selected families with adjacency `accept`, guaranteed targets, miss attribution from invalid chains, hint policy per Q7. Replace the `selectNext` call at `dragon_runes_game.dart:72-87`. Tests RUT-1 to RUT-5.
+**Status (2026-11-03): I-9 and RUT-4 done ahead of the phase** on branch `app/runes-miss-tracking` (`equation_validator.dart` sets `attemptedFact`/`attemptedAnswer`; `DragonRunesScreen.invalidAnswerEvent` emits the miss with the fact's key; tests in `test/games/dragon_runes/invalid_chain_test.dart`). Full suite 681 tests passing. The rest of Phase 4 (families, targets, hint policy Q7, RUT-2, RUT-3, RUT-5) is not started.
+
+[x] Approve I-9. Session-selected families with adjacency `accept`, guaranteed targets, miss attribution from invalid chains, hint policy per Q7. Replace the `selectNext` call at `dragon_runes_game.dart:72-87`. Tests RUT-1 to RUT-5.
 
 ### Phase 5: Dragon's Feast (2 days)
 

@@ -31,6 +31,38 @@ class DragonRunesScreen extends StatefulWidget {
   final int startingLevel;
   const DragonRunesScreen({super.key, this.startingLevel = 1});
 
+  /// The miss emitted for an invalid chain (spec RU-e, I-9). A chain of
+  /// exactly `a op b = c` with a valid fact on the left is a miss on that
+  /// fact's key; any other invalid chain has `factKey: null` and a `problem`
+  /// that FactTracker cannot normalize into a key, so it records nothing.
+  /// Every chain is its own prompt, so it is always a first attempt.
+  static AnswerGiven invalidAnswerEvent(
+    InvalidEquation result, {
+    required int responseTimeMs,
+  }) {
+    final fact = result.attemptedFact;
+    if (fact == null) {
+      return AnswerGiven(
+        gameId: 'dragon_runes',
+        problem: 'invalid',
+        playerAnswer: 'invalid',
+        correctAnswer: 'unknown',
+        correct: false,
+        responseTimeMs: responseTimeMs,
+      );
+    }
+    return AnswerGiven(
+      gameId: 'dragon_runes',
+      problem: '${fact.left} ${fact.op.symbol} ${fact.right}',
+      playerAnswer: '${result.attemptedAnswer}',
+      correctAnswer: '${fact.result}',
+      correct: false,
+      responseTimeMs: responseTimeMs,
+      factKey: fact.factKey,
+      firstAttempt: true,
+    );
+  }
+
   @override
   State<DragonRunesScreen> createState() => _DragonRunesScreenState();
 }
@@ -171,12 +203,8 @@ class _DragonRunesScreenState extends State<DragonRunesScreen> {
         case InvalidEquation():
           _feedbackMessage = 'Invalid spell!';
           eventBus.emit(
-            AnswerGiven(
-              gameId: 'dragon_runes',
-              problem: 'invalid',
-              playerAnswer: 'invalid',
-              correctAnswer: 'unknown',
-              correct: false,
+            DragonRunesScreen.invalidAnswerEvent(
+              result,
               responseTimeMs: responseTimeMs,
             ),
           );
