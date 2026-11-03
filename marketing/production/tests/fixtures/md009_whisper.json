@@ -1,0 +1,118 @@
+{
+ "text": " Parents, here’s 9 times 7, on your fingers. Six fingers on the left. Three on the right. 63.",
+ "segments": [
+  {
+   "id": 0,
+   "words": [
+    {
+     "word": " Parents,",
+     "start": 0.0,
+     "end": 0.3,
+     "probability": 0.9
+    },
+    {
+     "word": " here’s",
+     "start": 0.35,
+     "end": 0.65,
+     "probability": 0.9
+    },
+    {
+     "word": " 9",
+     "start": 0.7,
+     "end": 1.0,
+     "probability": 0.9
+    },
+    {
+     "word": " times",
+     "start": 1.05,
+     "end": 1.35,
+     "probability": 0.9
+    },
+    {
+     "word": " 7,",
+     "start": 1.4,
+     "end": 1.7,
+     "probability": 0.9
+    },
+    {
+     "word": " on",
+     "start": 1.75,
+     "end": 2.05,
+     "probability": 0.9
+    },
+    {
+     "word": " your",
+     "start": 2.1,
+     "end": 2.4,
+     "probability": 0.9
+    },
+    {
+     "word": " fingers.",
+     "start": 2.45,
+     "end": 2.75,
+     "probability": 0.9
+    },
+    {
+     "word": " Six",
+     "start": 3.5,
+     "end": 3.8,
+     "probability": 0.9
+    },
+    {
+     "word": " fingers",
+     "start": 3.85,
+     "end": 4.15,
+     "probability": 0.9
+    },
+    {
+     "word": " on",
+     "start": 4.2,
+     "end": 4.5,
+     "probability": 0.9
+    },
+    {
+     "word": " the",
+     "start": 4.55,
+     "end": 4.85,
+     "probability": 0.9
+    },
+    {
+     "word": " left.",
+     "start": 4.9,
+     "end": 5.2,
+     "probability": 0.9
+    },
+    {
+     "word": " Three",
+     "start": 5.95,
+     "end": 6.25,
+     "probability": 0.9
+    },
+    {
+     "word": " on",
+     "start": 6.3,
+     "end": 6.6,
+     "probability": 0.9
+    },
+    {
+     "word": " the",
+     "start": 6.65,
+     "end": 6.95,
+     "probability": 0.9
+    },
+    {
+     "word": " right.",
+     "start": 7.0,
+     "end": 7.3,
+     "probability": 0.9
+    },
+    {
+     "word": " 63.",
+     "start": 8.05,
+     "end": 8.35,
+     "probability": 0.9
+    }
+   ]
+  }
+ ]
+}
