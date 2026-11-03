@@ -24,7 +24,7 @@ A parent learns what "make a ten" on their kid's homework means, using the exact
 | Time | Visual (block + description) | On-screen text | VO (speaker: line) |
 |---|---|---|---|
 | 0-4 s | Recreated worksheet line (our layout, Nunito, no publisher design) on a cream card | Make a ten to add: 8 + 6 = ___ | Narrator: Your kid's homework says make a ten. Here's what that means. |
-| 4-9 s | Math card: `8 + 6`; then `10 - 8 = 2` small beneath | 8 + 6 / 8 needs 2 more to make 10 | Narrator: Take eight plus six. Eight is two away from ten. |
+| 4-9 s | Math card: `8 + 6`; then `10 − 8 = 2` small beneath | 8 + 6 / 8 needs 2 more to make 10 | Narrator: Take eight plus six. Eight is two away from ten. |
 | 9-13 s | Math card: the 6 splits into 2 and 4 | 6 = 2 + 4 | Narrator: So split the six into two and four. |
 | 13-18 s | Math card: `8 + 2 = 10`, then `10 + 4 = 14` | 8 + 2 = 10 / 10 + 4 = 14 | Narrator: Eight plus two makes ten. Ten plus four is fourteen. |
 | 18-21 s | Hands (Justin's, overhead) tap the paper | You may already do this | Narrator: You may already do this in your head. |
@@ -40,13 +40,13 @@ Word count: 131 (budget about 135 for 54 s of speech at 2.5 words/s). F3 target 
 ## Math strings (exact, rendered from code)
 - `Make a ten to add: 8 + 6 = ___`
 - `8 + 6`
-- `10 - 8 = 2`
+- `10 − 8 = 2`
 - `6 = 2 + 4`
 - `8 + 2 = 10`
 - `10 + 4 = 14`
 - `8 + 6 = 8 + 2 + 4 = 10 + 4 = 14`
 - `8 + 6 = 14`
-- Ten frame: 8 filled + 2 moved = 10; 6 - 2 = 4 left over
+- Ten frame: 8 filled + 2 moved = 10; 6 − 2 = 4 left over
 - Label: `Common Core 1.OA.C.6, grade 1`
 
 Verified (python, 2026-10-27): `8 + 6 == 14`; `10 - 8 == 2`; `6 == 2 + 4`; `8 + 2 == 10`; `10 + 4 == 14`; `8 + 6 == 8 + 2 + 4 == 10 + 4 == 14` is True; `8 + 2 == 10` and `6 - 2 == 4` (ten frame).
@@ -116,5 +116,5 @@ None (value video). Corner mark only.
 From `review.md` (PASS, optional notes):
 - 33-44 s VO: "pictures like this worked well" became "pictures like this were part of what worked" (the WWC studies tested interventions using representations, not ten-frame pictures alone). The beat is now 29 words in 11 s (2.6 w/s). Word count 128 to 131 (budget about 135).
 - Claim 6: added WWC Table 3.1 (ten frames listed), 28 studies, K-6, and the PDF link. Claims list: added Hook B.
-- Minus glyph: left as the ASCII hyphen (`10 - 8 = 2`, as the CCSS text writes it). MD-002 uses `−` (U+2212). Picking one glyph for all math cards is a visual-style decision for Justin.
+- Minus glyph: true minus sign `−` (U+2212) on screen, per Justin's decision 2026-11-03 and visual-style §6. Picking one glyph for all math cards is a visual-style decision for Justin.
 - Math rechecked in python (`8 + 6 == 8 + 2 + 4 == 10 + 4 == 14`, ten frame 2 × 5 = 10, 10 - 8 = 2, 6 - 2 = 4).

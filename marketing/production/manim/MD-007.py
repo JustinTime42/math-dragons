@@ -63,7 +63,7 @@ VIDEO = "MD-007"
 # Exact strings, copied from the treatment's "Math strings" section.
 WORKSHEET = "Make a ten to add: 8 + 6 = ___"
 EIGHT_SIX = "8 + 6"
-TEN_MINUS = "10 - 8 = 2"
+TEN_MINUS = "10 − 8 = 2"
 SIX_SPLIT = "6 = 2 + 4"
 EIGHT_TWO = "8 + 2 = 10"
 TEN_FOUR = "10 + 4 = 14"
