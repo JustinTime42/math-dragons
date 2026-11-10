@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:math_dragons/l10n/app_localizations.dart';
 import '../theme/dragon_colors.dart';
@@ -24,6 +25,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   late bool _hapticsEnabled;
   late TextEditingController _nameController;
 
+  /// "1.0.4 (9)": the installed version and build number, read from the
+  /// platform so testers can report exactly which build they're on.
+  String? _versionLabel;
+
   @override
   void initState() {
     super.initState();
@@ -33,6 +38,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _musicEnabled = profile.settings.musicEnabled;
     _hapticsEnabled = profile.settings.hapticsEnabled;
     _nameController = TextEditingController(text: profile.dragonName);
+    PackageInfo.fromPlatform().then((info) {
+      if (!mounted) return;
+      setState(() => _versionLabel = '${info.version} (${info.buildNumber})');
+    });
   }
 
   @override
@@ -265,10 +274,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ).textTheme.titleLarge?.copyWith(fontFamily: 'Cinzel'),
                   ),
                   const SizedBox(height: DragonSpacing.xs),
-                  Text(
-                    l10n.version('1.0.0'),
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
+                  if (_versionLabel != null)
+                    Text(
+                      l10n.version(_versionLabel!),
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   const SizedBox(height: DragonSpacing.sm),
                   Text(
                     l10n.aboutDescription,
