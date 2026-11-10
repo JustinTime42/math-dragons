@@ -49,6 +49,7 @@ Dragon-powered math games that are actually fun! A collection of four math mini-
 - [x] **Firestore Security Rules** (Step 10) — User-scoped access with data validation
 - [x] **Parent-gated links** — Settings > For Parents opens playmathdragons.com privacy, feedback and support pages, each behind a parental gate (two-digit multiplication, App Store 1.3 Kids Category rule); `url_launcher` opens the system browser
 - [x] **Founding-tester flag** — beta installs are marked locally (`lib/core/founding_tester.dart`, app_meta box) so beta families can get the paid unlock free at full release; nothing leaves the device
+- [x] **Real version in Settings** — About shows the installed version and build (e.g. `Version 1.0.4 (9)`) via `package_info_plus` (no permissions, no data collected)
 - [x] **No network permission** — release Android manifest declares no `INTERNET` permission (the app makes no network calls)
 - [x] **613 tests** — all passing
 - [x] `flutter analyze` passes clean
